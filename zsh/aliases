@@ -1,0 +1,19 @@
+# npm
+alias n="node"
+alias ni="npm install"
+alias nis="npm install --save"
+alias nisd="npm install --save-dev"
+alias nig="npm install -g"
+alias nl="npm link"
+alias nr="npm run"
+alias nt="npm test"
+alias ns="npm start"
+
+
+# tmux
+alias tl="tmux ls"
+alias ta="tmux attach -t"
+alias tk="tmux kill-session -t"
+alias td="tmux detach"
+alias tnew="echo use tat!!"
+alias tat="new-tmux-from-dir-name"

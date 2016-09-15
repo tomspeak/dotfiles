@@ -1,0 +1,164 @@
+snippet switch
+switch ($1) {
+	case: $2
+		$3
+	default:
+		return $4
+
+		${VISUAL}
+}
+$0
+endsnippet
+
+
+snippet cl
+console.log($1)$0
+endsnippet
+
+snippet ce
+console.error($1)$0
+endsnippet
+
+
+snippet epd
+e.preventDefault()$0
+endsnippet
+
+
+### TESTING
+
+snippet desc
+describe('$1', function () {
+	it('should $2', function ($3) {
+		$0
+	})
+})
+endsnippet
+
+
+snippet it
+it('should $1', function ($2) {
+	$0
+})
+endsnippet
+
+###
+
+
+### ES6
+
+snippet class
+class $1 {
+	$0
+}
+endsnippet
+
+snippet imp
+import $1 from '$2'$0
+endsnippet
+
+snippet impb
+import { $1 $3} from '$2'$0
+endsnippet
+
+snippet f
+$1(($2) => {
+	$0
+})
+endsnippet
+
+snippet fi
+$1(($2) => $3)
+endsnippet
+
+snippet cf
+$1 ($2) {
+	$0
+}
+endsnippet
+
+snippet cfl
+$1 = ($2) => {
+	$0
+}
+endsnippet
+
+snippet const
+export const $1 = '$2'
+endsnippet
+
+###
+
+
+### REACT
+
+snippet rc
+export default class $1 extends Component {
+	render () {
+
+	}
+}
+
+$1.displayName = '$1'
+
+$1.propTypes = {
+
+}
+endsnippet
+
+snippet com
+import React from 'react'
+
+const $1 = ({ $2 }) => {
+	return (
+		$3
+	)
+}
+
+export default $1
+endsnippet
+
+snippet con
+constructor ($1) {
+	$0
+}
+endsnippet
+
+snippet cdu
+componentDidUpdate ($1) {
+	$0
+}
+endsnippet
+
+snippet cwu
+componentWillUpdate ($1) {
+	$0
+}
+endsnippet
+
+snippet ren
+render () {
+	$0
+}
+endsnippet
+
+###
+
+
+### REDUX
+snippet rrc
+export class $1 extends Component {
+	render () {
+
+	}
+}
+
+$1.displayName = '$1'
+
+$1.propTypes = {
+
+}
+
+export default connect()($1)
+endsnippet
+###

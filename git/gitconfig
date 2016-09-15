@@ -1,0 +1,66 @@
+[filter "media"]
+  required = true
+  clean = git media clean %f
+  smudge = git media smudge %f
+[user]
+  email = TomSpeak@users.noreply.github.com
+  name = Tom Speak
+[push]
+  default = simple
+[alias]
+  a = add
+  aa = add .
+  co = checkout
+  ci = commit
+  cim = commit -m
+  ca = commit -a --amend
+  cp = cherry-pick
+  rc = rebase --continue
+  rs = rebase --skip
+  rh = "!f() { git rebase -i HEAD~$1; }; f"
+  p = push
+  pf = push -f
+  pu = push --set-upstream origin
+  d = diff
+  s = status
+  st = status --short --branch
+  b = branch
+  newb = checkout -b
+  plum = pull upstream master
+  rum = pull --rebase upstream master
+  rom = pull --rebase origin master
+  sur = submodule update --remote
+  l = log --pretty=format:"%C(green)%h%C(bold)%d\\ %Creset%s%C(white)\\ [%cn]" --decorate --numstat
+  l1 = log --pretty=oneline
+  fuck = reset HEAD^
+  loc = "!git ls-files | grep src | xargs wc -l"
+[color]
+  ui = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+[credential]
+  helper = osxkeychain
+[filter "hawser"]
+  clean = git hawser clean %f
+  smudge = git hawser smudge %f
+  required = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[core]
+	pager = diff-so-fancy | less --tabs=4 -RFX
+[help]
+  autocorrect = 1

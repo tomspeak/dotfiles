@@ -1,0 +1,65 @@
+ # Path to your oh-my-zsh installation.
+export ZSH=$HOME/.oh-my-zsh
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+export PATH=/usr/local/bin:$PATH
+export PATH=/usr/local/sbin:$PATH
+
+# execute locally installed npm modules
+export PATH="./node_modules/.bin:$PATH"
+
+# put things in ~/.bin into my $PATH
+export PATH="$HOME/.bin:$PATH"
+
+TZ="Europe/London"
+HISTFILE=$HOME/.zhistory
+HISTSIZE=20000
+SAVEHIST=20000
+setopt HIST_IGNORE_SPACE
+HOSTNAME="`hostname`"
+PAGER='less'
+export AUTOENV_FILE_ENTER=".env"
+ENABLE_CORRECTION="true"
+DEFAULT_USER="tomspeak"
+
+GIT_MERGE_AUTOEDIT=no
+export GIT_MERGE_AUTOEDIT
+
+# the one true way
+export EDITOR='vim'
+
+
+# heroku toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+
+# PLUGINS
+zplug "Tarrasch/zsh-autoenv"
+
+zplug "plugins/colorize",   from:oh-my-zsh
+zplug "plugins/git",   from:oh-my-zsh
+zplug "plugins/npm",   from:oh-my-zsh
+zplug "plugins/node",   from:oh-my-zsh
+zplug "plugins/tmux",   from:oh-my-zsh
+zplug "plugins/osx",   from:oh-my-zsh
+
+zplug "frmendes/geometry", use:geometry.zsh-theme
+zplug "zsh-users/zsh-syntax-highlighting", nice:10
+zplug "zsh-users/zsh-autosuggestions", nice:10
+
+PROMPT_GEOMETRY_GIT_TIME=false
+GEOMETRY_COLOR_GIT_DIRTY=9
+GEOMETRY_COLOR_GIT_BRANCH=6
+GEOMETRY_COLOR_EXIT_VALUE=9
+PROMPT_GEOMETRY_GIT_CONFLICTS=true
+GEOMETRY_SYMBOL_EXIT_VALUE="▲"
+
+zplug load
+
+# so autoenv runs all the time, even when you open a tmux split
+cd .
+
+source $ZSH/oh-my-zsh.sh
+source $HOME/dotfiles/zsh/aliases
+source $HOME/dotfiles/zsh/functions

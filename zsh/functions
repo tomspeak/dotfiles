@@ -1,0 +1,7 @@
+function new-tmux-from-dir-name {
+  tmux new-session -As `basename $PWD`
+}
+
+function tj {
+  tmux attach-session -t `tmux list-sessions | sed -E 's/:.*$//' | selecta`
+}
