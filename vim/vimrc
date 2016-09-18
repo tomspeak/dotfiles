@@ -26,6 +26,8 @@ Plugin 'mattn/emmet-vim'
 Plugin 'mxw/vim-jsx'
 Plugin 'nono/vim-handlebars'
 Plugin 'pangloss/vim-javascript'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'reedes/vim-pencil'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdcommenter'
@@ -52,7 +54,7 @@ filetype plugin indent on
 "Colors, etc.
 set t_Co=256
 set background=dark
-colorscheme base16-tomorrow
+colorscheme base16-ashes
 
 "Disable space so we can remap to leader
 nnoremap <SPACE> <Nop>
@@ -242,6 +244,9 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
 
+"JavaScript
+let g:javascript_plugin_jsdoc = 1
+let g:used_javascript_libs = 'underscore,backbone,react,flux,chai,handlebars,jquery,jasmine'
 
 "CamelCaseMotion
 call camelcasemotion#CreateMotionMappings('<leader>')
