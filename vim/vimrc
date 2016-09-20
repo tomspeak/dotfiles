@@ -216,7 +216,7 @@ let g:multi_cursor_next_key='<C-g>'
 
 
 "Airline
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'base16_ashes'
 let g:Powerline_symbols = 'fancy'
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#branch#enabled = 1
