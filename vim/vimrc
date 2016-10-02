@@ -53,8 +53,10 @@ filetype plugin indent on
 
 "Colors, etc.
 set t_Co=256
-set background=dark
-colorscheme base16-ashes
+syntax on
+set background=light
+colorscheme solarized
+
 
 "Disable space so we can remap to leader
 nnoremap <SPACE> <Nop>
@@ -64,7 +66,6 @@ vnoremap <SPACE> <Nop>
 map <SPACE> <leader>
 
 "General
-syntax on
 set ttyfast
 set undolevels=200
 set encoding=utf-8
@@ -216,7 +217,7 @@ let g:multi_cursor_next_key='<C-g>'
 
 
 "Airline
-let g:airline_theme = 'base16_ashes'
+let g:airline_theme = 'base16'
 let g:Powerline_symbols = 'fancy'
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#branch#enabled = 1
