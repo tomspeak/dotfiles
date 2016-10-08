@@ -32,8 +32,10 @@
   sur = submodule update --remote
   l = log --pretty=format:"%C(green)%h%C(bold)%d\\ %Creset%s%C(white)\\ [%cn]" --decorate --numstat
   l1 = log --pretty=oneline
+  lp = log --all --graph --decorate --oneline --simplify-by-decoration
   fuck = reset HEAD^
   loc = "!git ls-files | grep src | xargs wc -l"
+  cstats = shortlog -sn
 [color]
   ui = auto
 [color "branch"]
