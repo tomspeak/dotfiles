@@ -1,5 +1,7 @@
 export DOTFILES="$HOME/dotfiles"
 export ZSH=$HOME/.oh-my-zsh
+export PATH=/usr/local/bin:$PATH
+export PATH=/usr/local/sbin:$PATH
 
 GEOMETRY_SYMBOL_PROMPT="λ"
 GEOMETRY_COLOR_PROMPT=red
@@ -11,8 +13,6 @@ PROMPT_GEOMETRY_GIT_CONFLICTS=true
 
 source $DOTFILES/antibody/antibody.init
 
-export PATH=/usr/local/bin:$PATH
-export PATH=/usr/local/sbin:$PATH
 
 # execute locally installed npm modules
 export PATH="./node_modules/.bin:$PATH"
