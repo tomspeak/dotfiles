@@ -4068,7 +4068,7 @@
 		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
 		hAErATGG
 		</data>
-		<string>322</string>
+		<string>307</string>
 	</array>
 	<key>NSTableView Hidden Columns KeyBingingTable</key>
 	<array/>
@@ -4080,7 +4080,7 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>475 42 1432 368 0 0 1920 1177 </string>
+	<string>475 42 1432 234 0 0 1920 1178 </string>
 	<key>NSWindow Frame Preferences</key>
 	<string>519 711 606 456 0 0 1920 1177 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
@@ -4088,11 +4088,11 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>650 589 620 392 0 0 1920 1177 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>680 621 918 381 0 0 1680 1028 </string>
+	<string>865 533 918 495 0 0 1920 1178 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 46 1916 1132 0 0 1920 1178 </string>
+	<string>1 4 1677 1024 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 13 1678 1015 0 0 1680 1028 </string>
+	<string>0 325 1212 678 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>0 550 730 477 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
@@ -4698,7 +4698,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>DejaVuSansMonoForPowerline 14</string>
+			<string>Sk-Modernist-Mono 16</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -4969,7 +4969,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-09-29T09:29:11Z</date>
+	<date>2016-10-11T11:56:12Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>

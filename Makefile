@@ -41,3 +41,6 @@ tmux_plugins:
 term_info:
 	tic term-config/xterm-256color-italic.terminfo
 	tic -x term-config/tmux-256color.terminfo
+
+antibody:
+	./antibody/install.sh

@@ -95,6 +95,8 @@ set relativenumber
 set number
 set complete+=kspell
 set hidden "allow :cdo to work
+set guitablabel=\[%N\]\ %t\ %M  "buffer shows filename and modified symbol, not full path
+
 
 
 "UI
@@ -222,7 +224,10 @@ let g:airline_theme = 'base16'
 let g:Powerline_symbols = 'fancy'
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':.'
+let g:airline#extensions#tabline#fnamecollapse = 0
 let g:airline_powerline_fonts = 1
+let g:airline_section_b = ''
 let g:airline_section_x = ''
 let g:airline_section_y = ''
 let g:airline_section_z = ''
