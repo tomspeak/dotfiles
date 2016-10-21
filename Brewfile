@@ -1,3 +1,5 @@
+brew 'python'
+
 brew 'antibody'
 brew 'ack'
 brew 'boost'
@@ -14,7 +16,6 @@ brew 'heroku-toolbelt'
 brew 'n'
 brew 'node'
 brew 'postgresql'
-brew 'python'
 brew 'reattach-to-user-namespace'
 brew 'ruby'
 brew 'the_silver_searcher'
