@@ -34,7 +34,7 @@
   l1 = log --pretty=oneline
   lp = log --all --graph --decorate --oneline --simplify-by-decoration
   fuck = reset HEAD^
-  loc = "!git ls-files | grep src assets/js/ | xargs wc -l"
+  loc = "!f(){ git ls-files | egrep \"$1\" | if [ -n \"$2\" ]; then egrep -v \"$2\"; else cat; fi | xargs wc -l; }; f"
   cstats = shortlog -sn
 [color]
   ui = auto
