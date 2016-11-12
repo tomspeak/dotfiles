@@ -64,5 +64,6 @@
 	newHighlight = green bold 22
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
+	excludesfile = /Users/tomspeak/.gitignore_global
 [help]
   autocorrect = 1
