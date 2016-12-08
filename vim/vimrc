@@ -53,6 +53,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'w0ng/vim-hybrid'
 Plugin 'w0rp/ale'
 Plugin 'yssl/QFEnter'
+Plugin 'othree/html5.vim'
 
 call vundle#end()
 filetype plugin indent on
