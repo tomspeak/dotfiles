@@ -50,3 +50,7 @@ cd .
 #source $ZSH/oh-my-zsh.sh
 source $HOME/dotfiles/zsh/aliases
 source $HOME/dotfiles/zsh/functions
+
+export NVM_DIR="/Users/t/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+source <(antibody init)

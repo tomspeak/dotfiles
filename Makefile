@@ -1,4 +1,4 @@
-DIR=/Users/tomspeak/dotfiles
+DIR=/Users/t/dotfiles
 
 all:
 	@echo "Run things individually!"
