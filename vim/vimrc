@@ -54,6 +54,7 @@ Plugin 'w0ng/vim-hybrid'
 Plugin 'w0rp/ale'
 Plugin 'yssl/QFEnter'
 Plugin 'othree/html5.vim'
+Plugin 'garyburd/go-explorer'
 
 call vundle#end()
 filetype plugin indent on
@@ -90,6 +91,7 @@ set smartcase
 set showmatch
 set title
 set autoread
+set autowrite
 set ai
 set si
 set linebreak
@@ -304,6 +306,7 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
 
 "ale linting
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']

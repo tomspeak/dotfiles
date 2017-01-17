@@ -51,6 +51,8 @@ cd .
 source $HOME/dotfiles/zsh/aliases
 source $HOME/dotfiles/zsh/functions
 
+plugins=(git npm osx tmux tig vagrant node)
+
 export NVM_DIR="/Users/t/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 source <(antibody init)
