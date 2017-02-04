@@ -1,9 +1,9 @@
 #### COLOUR
 
-tm_color_active=colour51
+tm_icon="🙊"
+tm_color_active=colour5
 tm_color_inactive=colour241
 tm_color_feature=colour198
-tm_color_music=colour41
 tm_active_border_color=colour51
 
 # separators
@@ -26,7 +26,7 @@ set-option -g status-attr default
 # default window title colors
 set-window-option -g window-status-fg $tm_color_inactive
 set-window-option -g window-status-bg default
-set -g window-status-format "#I #W"
+set -g window-status-format " | #I #W | "
 
 # active window title colors
 set-window-option -g window-status-current-fg $tm_color_active
@@ -48,11 +48,10 @@ set-option -g display-panes-colour $tm_color_inactive
 # clock
 set-window-option -g clock-mode-colour $tm_color_active
 
-tm_tunes="#[fg=$tm_color_music]#(osascript ~/dotfiles/applescripts/tunes.scpt)"
+tm_tunes="#(~/dotfiles/applescripts/itunes-current-track-tmux.sh)"
 
 tm_date="#[fg=$tm_color_inactive] %R %d %b"
-tm_host="#[fg=$tm_color_feature,bold]#h"
-tm_session_name="#[fg=$tm_color_feature,bold]$tm_icon #S"
+tm_session_name="#[fg=$tm_color_feature,bold]$tm_icon  [ #S ]"
 
 set -g status-left $tm_session_name' '
-set -g status-right $tm_tunes' '$tm_date' '$tm_host
+set -g status-right $tm_tunes

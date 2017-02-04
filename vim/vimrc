@@ -16,6 +16,7 @@ Plugin 'junegunn/seoul256.vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'junegunn/vim-emoji'
+Plugin 'alessandroyorba/monrovia'
 
 Plugin 'JulesWang/css.vim'
 Plugin 'ap/vim-css-color'
@@ -67,8 +68,7 @@ filetype plugin indent on
 set t_Co=256
 syntax on
 set background=dark
-colorscheme seoul256
-let g:seoul256_background = 220
+colorscheme 1989
 
 
 
@@ -168,8 +168,6 @@ nnoremap <C-w> :w<CR>
 "bind CTRL-x to save-close
 nnoremap <C-x> :x<CR>
 "
-"search for todos and open quick fix menu
-nnoremap <leader>T :Ag! -i \(FIXME\)\\|\(TODO\)<cr>
 
 "Bind Leaderq to close quickfix window
 noremap <Leader>q :ccl<CR>
@@ -419,6 +417,29 @@ silent! if emoji#available()
   " context of the window that the statusline belongs to.
   set statusline=%!MyStatusLine()
 endif
+
+" ----------------------------------------------------------------------------
+" Todo
+" ----------------------------------------------------------------------------
+function! s:todo() abort
+  let entries = []
+  for cmd in ['git grep -n -e TODO -e FIXME -e XXX 2> /dev/null',
+            \ 'grep -rn -e TODO -e FIXME -e XXX * 2> /dev/null']
+    let lines = split(system(cmd), '\n')
+    if v:shell_error != 0 | continue | endif
+    for line in lines
+      let [fname, lno, text] = matchlist(line, '^\([^:]*\):\([^:]*\):\(.*\)')[1:3]
+      call add(entries, { 'filename': fname, 'lnum': lno, 'text': text })
+    endfor
+    break
+  endfor
+
+  if !empty(entries)
+    call setqflist(entries)
+    copen
+  endif
+endfunction
+command! Todo call s:todo()
 
 
 "--------------
