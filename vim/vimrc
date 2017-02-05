@@ -11,12 +11,10 @@ Plugin 'amix/vim-zenroom2'
 Plugin 'junegunn/goyo.vim'
 Plugin 'reedes/vim-pencil'
 
-
 Plugin 'junegunn/seoul256.vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'junegunn/vim-emoji'
-Plugin 'alessandroyorba/monrovia'
 
 Plugin 'JulesWang/css.vim'
 Plugin 'ap/vim-css-color'
@@ -94,9 +92,9 @@ set ignorecase
 set incsearch
 set smartcase
 set showmatch
-set title
 set autoread
 set autowrite
+set title
 set ai
 set si
 set linebreak
@@ -120,7 +118,7 @@ set splitright
 set numberwidth=5
 set guioptions-=r " disable right scroll in mac vim
 set guioptions-=L "disable left scroll in macvim
-set linespace=2
+set linespace=4
 
 
 "Formatting
@@ -244,27 +242,9 @@ let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_quit_key='<Esc>'
 let g:multi_cursor_next_key='<C-g>'
 
-
-"Airline
-let g:airline_theme = 'base16'
-let g:Powerline_symbols = 'fancy'
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':.'
-let g:airline#extensions#tabline#fnamecollapse = 1
-let g:airline_powerline_fonts = 0
-let g:airline_section_b = ''
-let g:airline_section_x = ''
-let g:airline_section_y = ''
-let g:airline_section_z = ''
-let g:airline_left_sep = ' '
-let g:airline_right_sep = ' '
-
-
 "FZF
 nnoremap <C-p> :Files<cr>
 imap <c-x><c-l> <plug>(fzf-complete-line)
-
 
 "UltiSnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -281,25 +261,21 @@ let g:jsx_ext_required = 0
 "CamelCaseMotion
 call camelcasemotion#CreateMotionMappings('<leader>')
 
-
 "JsDoc
 "Bind Leaderjf to search for 'function
 "Bind leaderj to search for es6 function
 nmap <silent> <Leader>jf ?function<cr>:noh<cr><Plug>(jsdoc)
 nmap <silent> <Leader>j ?=><cr>:noh<cr><Plug>(jsdoc)
-
 let g:jsdoc_allow_input_prompt = 1
 let g:jsdoc_input_description = 1
 let g:jsdoc_enable_es6 = 1
 let g:jsdoc_param_description_separator = ' - '
-
 
 "QFENTER (QuickFix Opening)
 "Replicate Ctrl-P mappings
 let g:qfenter_vopen_map = ['<C-v>']
 let g:qfenter_hopen_map = ['<C-CR>', '<C-s>', '<C-x>']
 let g:qfenter_topen_map = ['<C-t>']
-
 
 "vim-go
 let g:go_highlight_functions = 1
@@ -318,7 +294,7 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \}
 let g:ale_sign_column_always = 1
-
+let g:ale_javascript_eslint_use_global = 1
 hi clear SignColumn
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
@@ -394,7 +370,7 @@ silent! if emoji#available()
     if empty(head)
       return ''
     else
-      return head == 'master' ? emoji#for('crown') : emoji#for('hibiscus').' — ['.head.']'
+      return head == 'master' ? emoji#for('crown') : emoji#for('hibiscus').'['.head.']'
     endif
   endfunction
 
@@ -406,10 +382,9 @@ silent! if emoji#available()
     let ro  = "%{&readonly ? emoji#for('lock') . ' ' : ''}"
     let fug = ' %{S_fugitive()}'
     let sep = ' %= '
-    let pos = ' %l,%c%V '
-    let pct = '   %P   '
+    let pct = '   %P '
 
-    return s:cherry.mode.' %f %<'.mod.ro.sep.fug.pct.s:cherry
+    return s:cherry.mode.' %f %<'.mod.ro.sep.fug.pct
   endfunction
 
   " Note that the "%!" expression is evaluated in the context of the

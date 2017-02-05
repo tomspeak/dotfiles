@@ -13,7 +13,6 @@ PROMPT_GEOMETRY_GIT_CONFLICTS=true
 
 source $DOTFILES/antibody/antibody.init
 
-
 # execute locally installed npm modules
 export PATH="./node_modules/.bin:$PATH"
 
@@ -47,19 +46,18 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 # so autoenv runs all the time, even when you open a tmux split
 cd .
 
-#source $ZSH/oh-my-zsh.sh
+source $ZSH/oh-my-zsh.sh
 source $HOME/dotfiles/zsh/aliases
 source $HOME/dotfiles/zsh/functions
 
 #FZF
 # Setting ag as the default source for fzf
 export FZF_DEFAULT_COMMAND='ag -g ""'
-
-# To apply the command to CTRL-T as well
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 plugins=(git npm osx tmux tig vagrant node)
 
 export NVM_DIR="/Users/t/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
 source <(antibody init)
