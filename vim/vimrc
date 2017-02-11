@@ -86,7 +86,6 @@ set background=light
 let g:seoul256_background = 236
 let g:seoul256_light_background = 254
 colorscheme seoul256-light
-"colorscheme 1989
 
 set ttyfast
 set undolevels=200
@@ -240,7 +239,6 @@ map 'p vi'p
 " PLUGINS
 " ----------------------------------------------------------------------------
 
-" ----------------------------------------------------------------------------
 " NerdTree
 " ----------------------------------------------------------------------------
 map - :NERDTreeToggle<CR>
@@ -248,19 +246,16 @@ nmap <Leader>k :NERDTreeFind<CR>
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeWinSize=30
 
-" ----------------------------------------------------------------------------
 " MultiCursor
 " ----------------------------------------------------------------------------
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_quit_key='<Esc>'
 let g:multi_cursor_next_key='<C-g>'
 
-" ----------------------------------------------------------------------------
 " FZF
 " ----------------------------------------------------------------------------
 nnoremap <C-p> :Files<cr>
 
-" ----------------------------------------------------------------------------
 " UltiSnips
 " ----------------------------------------------------------------------------
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -268,19 +263,16 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
 
-" ----------------------------------------------------------------------------
 " JavaScript
 " ----------------------------------------------------------------------------
 let g:javascript_plugin_jsdoc = 1
 let g:used_javascript_libs = 'underscore,backbone,react,flux,chai,handlebars,jquery,jasmine'
 let g:jsx_ext_required = 0
 
-" ----------------------------------------------------------------------------
 " CamelCaseMotion
 " ----------------------------------------------------------------------------
 call camelcasemotion#CreateMotionMappings('<leader>')
 
-" ----------------------------------------------------------------------------
 " JSDoc
 " ----------------------------------------------------------------------------
 nmap <silent> <Leader>jf ?function<cr>:noh<cr><Plug>(jsdoc)
@@ -290,14 +282,12 @@ let g:jsdoc_input_description = 1
 let g:jsdoc_enable_es6 = 1
 let g:jsdoc_param_description_separator = ' - '
 
-" ----------------------------------------------------------------------------
 " QFEnter (QuickFix Opening )
 " ----------------------------------------------------------------------------
 let g:qfenter_vopen_map = ['<C-v>']
 let g:qfenter_hopen_map = ['<C-CR>', '<C-s>', '<C-x>']
 let g:qfenter_topen_map = ['<C-t>']
 
-" ----------------------------------------------------------------------------
 " go.vim
 " ----------------------------------------------------------------------------
 let g:go_highlight_functions = 1
@@ -308,7 +298,6 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
 
-" ----------------------------------------------------------------------------
 " ale.vim
 " ----------------------------------------------------------------------------
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
@@ -322,7 +311,6 @@ hi clear SignColumn
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 
-" ----------------------------------------------------------------------------
 " goyo.vim + limelight.vim
 " ----------------------------------------------------------------------------
 let g:limelight_paragraph_span = 1
@@ -363,7 +351,6 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 nnoremap <Leader>G :Goyo<CR>
 
-" ----------------------------------------------------------------------------
 " ag.vim
 " ----------------------------------------------------------------------------
 if executable('ag')
@@ -373,7 +360,6 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-" ----------------------------------------------------------------------------
 " STATUS LINE
 " ----------------------------------------------------------------------------
 set statusline=%<[%n]\ %F\ %m%r%y\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}\ %=%-14.(%l,%c%V%)\ %P
@@ -440,13 +426,12 @@ silent! if emoji#available()
   set statusline=%!MyStatusLine()
 endif
 
-" ----------------------------------------------------------------------------
 " Todo
 " ----------------------------------------------------------------------------
 function! s:todo() abort
   let entries = []
-  for cmd in ['git grep -n -e TODO -e FIXME -e XXX 2> /dev/null',
-            \ 'grep -rn -e TODO -e FIXME -e XXX * 2> /dev/null']
+  for cmd in ['git grep -n -e TODO -e todo -e FIXME -e XXX 2> /dev/null',
+            \ 'grep -rn -e TODO -e todo -e FIXME -e XXX * 2> /dev/null']
     let lines = split(system(cmd), '\n')
     if v:shell_error != 0 | continue | endif
     for line in lines
