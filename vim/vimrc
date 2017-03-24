@@ -85,7 +85,8 @@ syntax on
 set background=light
 let g:seoul256_background = 236
 let g:seoul256_light_background = 254
-colorscheme seoul256-light
+"colorscheme seoul256-light
+colorscheme 1989
 
 set ttyfast
 set undolevels=200
@@ -129,6 +130,7 @@ set numberwidth=5
 set guioptions-=r " disable right scroll in mac vim
 set guioptions-=L "disable left scroll in macvim
 set linespace=4
+set cursorline
 
 " ----------------------------------------------------------------------------
 " Formatting
@@ -307,6 +309,7 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \}
 let g:ale_sign_column_always = 1
+let g:ale_javascript_eslint_use_global = 1
 hi clear SignColumn
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
@@ -430,8 +433,8 @@ endif
 " ----------------------------------------------------------------------------
 function! s:todo() abort
   let entries = []
-  for cmd in ['git grep -n -e TODO -e todo -e FIXME -e XXX 2> /dev/null',
-            \ 'grep -rn -e TODO -e todo -e FIXME -e XXX * 2> /dev/null']
+  for cmd in ['git grep -n -i -e TODO -e FIXME -e XXX 2> /dev/null',
+              \ 'grep -rniI -e TODO -e FIXME -e XXX * 2> /dev/null']
     let lines = split(system(cmd), '\n')
     if v:shell_error != 0 | continue | endif
     for line in lines
@@ -447,3 +450,4 @@ function! s:todo() abort
   endif
 endfunction
 command! Todo call s:todo()
+

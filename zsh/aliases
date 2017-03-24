@@ -17,3 +17,8 @@ alias tk="tmux kill-session -t"
 alias td="tmux detach"
 alias tnew="echo use tat!!"
 alias tat="new-tmux-from-dir-name"
+
+
+# docker-compose
+alias docker-clean='docker rmi -f $(docker images -f "dangling=true" -q) && docker volume prune -f'
+alias docker-clean-test='docker rmi $(docker images --filter=reference="test*:latest" -q) -f'
