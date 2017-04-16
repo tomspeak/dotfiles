@@ -302,11 +302,12 @@ let g:go_highlight_extra_types = 1
 
 " ale.vim
 " ----------------------------------------------------------------------------
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-let g:ale_sign_error = emoji#for('red_circle')
-let g:ale_sign_warning = emoji#for('large_orange_diamond')
+let g:ale_statusline_format = [emoji#for('small_red_triangle').'%d', emoji#for('small_orange_diamond').'%d', emoji#for('clap').'хорошо!']
+let g:ale_sign_error = emoji#for('small_red_triangle')
+let g:ale_sign_warning = emoji#for('small_orange_diamond')
 let g:ale_linters = {
-\   'javascript': ['eslint'],
+  \'javascript': ['eslint'],
+  \'html': [''],
 \}
 let g:ale_sign_column_always = 1
 let g:ale_javascript_eslint_use_global = 1
@@ -417,10 +418,10 @@ silent! if emoji#available()
     let mod = '%{S_modified()}'
     let ro  = "%{&readonly ? emoji#for('lock') . ' ' : ''}"
     let fug = ' %{S_fugitive()}'
+    let ale = ' %{ALEGetStatusLine()}'
     let sep = ' %= '
-    let pct = '   %P '
 
-    return s:cherry.mode.' %f %<'.mod.ro.sep.fug.pct
+    return s:cherry.mode.' %f %<'.mod.ro.sep.fug.sep.sep.ale.sep
   endfunction
 
   " Note that the "%!" expression is evaluated in the context of the
@@ -433,8 +434,8 @@ endif
 " ----------------------------------------------------------------------------
 function! s:todo() abort
   let entries = []
-  for cmd in ['git grep -n -i -e TODO -e FIXME -e XXX 2> /dev/null',
-              \ 'grep -rniI -e TODO -e FIXME -e XXX * 2> /dev/null']
+  for cmd in ['git grep -niI -e TODO -e FIXME -e XXX 2> /dev/null',
+            \ 'grep -rniI -e TODO -e FIXME -e XXX * 2> /dev/null']
     let lines = split(system(cmd), '\n')
     if v:shell_error != 0 | continue | endif
     for line in lines
@@ -450,4 +451,3 @@ function! s:todo() abort
   endif
 endfunction
 command! Todo call s:todo()
-
