@@ -55,6 +55,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'mattn/emmet-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'thinca/vim-textobj-function-javascript'
+Plug 'junegunn/vim-slash'
 
 " Documentation / Generation / Code quality of life
 " ----------------------------------------------------------------------------
@@ -70,8 +71,18 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'rking/ag.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+augroup nerd_loader
+  autocmd!
+  autocmd VimEnter * silent! autocmd! FileExplorer
+  autocmd BufEnter,BufNew *
+        \  if isdirectory(expand('<amatch>'))
+        \|   call plug#load('nerdtree')
+        \|   execute 'autocmd! nerd_loader'
+        \| endif
+augroup END
 Plug 'yssl/QFEnter'
+Plug 'justinmk/vim-gtfo'
 
 call plug#end()
 filetype plugin indent on
@@ -88,6 +99,47 @@ let g:seoul256_light_background = 254
 "colorscheme seoul256-light
 colorscheme 1989
 
+set nu
+set autoindent
+set smartindent
+set laststatus=2
+set showcmd
+set backspace=indent,eol,start
+set timeoutlen=500
+set whichwrap=b,s
+set shortmess=aIT
+set hlsearch " CTRL-L / CTRL-R W
+set incsearch
+set hidden
+set ignorecase smartcase
+set wildmenu
+set wildmode=full
+set nojoinspaces
+set autoread
+set grepformat=%f:%l:%c:%m,%f:%l:%m
+set completeopt=menuone,preview
+set nocursorline
+set nrformats=hex
+silent! set cryptmethod=blowfish2
+
+if has('termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+set textwidth=0
+if exists('&colorcolumn')
+  set colorcolumn=80
+endif
+
+" Keep the cursor on the same column
+set nostartofline
+
+if exists('&fixeol')
+  set nofixeol
+endif
+
 set ttyfast
 set undolevels=200
 set encoding=utf-8
@@ -98,11 +150,7 @@ set wildignore+=node_modules/**
 set wildignore+=**/node_modules/**
 set wildignore+=bower_components/**
 set wildignore+=dist/**
-set ignorecase
-set incsearch
-set smartcase
 set showmatch
-set autoread
 set autowrite
 set title
 set ai
@@ -143,7 +191,7 @@ set smartindent
 set smarttab
 set clipboard=unnamed
 
-"Return to last edit position when opening files (You want this!)
+"Return to last edit position when opening files
 autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
@@ -302,7 +350,7 @@ let g:go_highlight_extra_types = 1
 
 " ale.vim
 " ----------------------------------------------------------------------------
-let g:ale_statusline_format = [emoji#for('small_red_triangle').'%d', emoji#for('small_orange_diamond').'%d', emoji#for('clap').'хорошо!']
+let g:ale_statusline_format = [emoji#for('small_red_triangle').'%d', emoji#for('small_orange_diamond').'%d', '']
 let g:ale_sign_error = emoji#for('small_red_triangle')
 let g:ale_sign_warning = emoji#for('small_orange_diamond')
 let g:ale_linters = {
@@ -314,6 +362,10 @@ let g:ale_javascript_eslint_use_global = 1
 hi clear SignColumn
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
+
+" gtfo (open in finder/terminal)
+" ----------------------------------------------------------------------------
+let g:gtfo#terminals = { 'mac': 'iterm' }
 
 " goyo.vim + limelight.vim
 " ----------------------------------------------------------------------------
@@ -464,3 +516,7 @@ function! s:todo() abort
   endif
 endfunction
 command! Todo call s:todo()
+
+" Slash
+" ----------------------------------------------------------------------------
+noremap <plug>(slash-after) zz
