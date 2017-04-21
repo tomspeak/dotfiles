@@ -15,6 +15,7 @@ Plug 'junegunn/limelight.vim'
 
 " Lookin' good
 " ----------------------------------------------------------------------------
+Plug 'sonjapeterson/1989.vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'flazz/vim-colorschemes'
