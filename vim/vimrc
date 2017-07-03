@@ -68,6 +68,7 @@ Plug 'w0rp/ale'
 
 " Utilities
 " ----------------------------------------------------------------------------
+Plug 'sbdchd/neoformat'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -97,8 +98,9 @@ syntax on
 set background=light
 let g:seoul256_background = 236
 let g:seoul256_light_background = 254
-"colorscheme seoul256-light
-colorscheme 1989
+colorscheme seoul256-light
+"colorscheme seoul256
+"colorscheme 1989
 
 set nu
 set autoindent
@@ -131,7 +133,7 @@ endif
 
 set textwidth=0
 if exists('&colorcolumn')
-  set colorcolumn=80
+  set colorcolumn=120
 endif
 
 " Keep the cursor on the same column
@@ -284,6 +286,12 @@ map Y y$
 " paste over easier
 map "p vi"p
 map 'p vi'p
+
+" Disable CTRL-A on tmux or on screen
+if $TERM =~ 'screen'
+  nnoremap <C-a> <nop>
+  nnoremap <Leader><C-a> <C-a>
+endif
 
 
 " ----------------------------------------------------------------------------
