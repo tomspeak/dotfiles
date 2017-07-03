@@ -20,7 +20,7 @@
   rh = "!f() { git rebase -i HEAD~$1; }; f"
   p = push
   pf = push -f
-  pu = "!f() { git push --set-upstream origin $(parse_git_branch); }; f"
+  pu = "!f() { git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`; }; f"
   d = diff
   s = status
   st = status --short --branch
