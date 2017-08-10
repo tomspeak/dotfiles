@@ -207,6 +207,8 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 " ----------------------------------------------------------------------------
 " iTerm/Terminal
+" NORMAL|VISUAL MODE = BLOCK CURSOR
+" INSERT MODE = THIN CURSOR
 " ----------------------------------------------------------------------------
 if exists('$ITERM_PROFILE')
   if exists('$TMUX')
@@ -235,6 +237,8 @@ nmap <c-f> [s1z=<c-o>
 
 "bind CTRL-w to save
 nnoremap <C-w> :w<CR>
+"bind CTRL-q to close
+nnoremap <C-q> :q<CR>
 "bind CTRL-x to save-close
 nnoremap <C-x> :x<CR>
 
@@ -365,9 +369,11 @@ let g:ale_sign_warning = emoji#for('small_orange_diamond')
 let g:ale_linters = {
   \'javascript': ['eslint'],
   \'html': [''],
+  \'scss': ['sass-lint'],
 \}
 let g:ale_sign_column_always = 1
 let g:ale_javascript_eslint_use_global = 1
+let g:ale_lint_delay = 1000
 hi clear SignColumn
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
