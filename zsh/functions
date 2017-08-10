@@ -8,7 +8,7 @@ function tj {
 
 
 function aoj-downloader() {
-  youtube-dl -o "~/Desktop/aoj/%(title)s" "https://players.brightcove.net/4298059952001/default_default/index.html?videoId=$1" --referer "https://www.artofjiujitsu.com"
+  youtube-dl -o "~/Desktop/aoj/%(title)s" "https://view.vzaar.com/$1" --referer "https://www.artofjiujitsu.com"
 }
 
 function aoj() {
