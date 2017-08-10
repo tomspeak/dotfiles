@@ -19,7 +19,7 @@
   rs = rebase --skip
   rh = "!f() { git rebase -i HEAD~$1; }; f"
   p = push
-  pf = push -f
+  pf = push --force-with-lease
   pu = "!f() { git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`; }; f"
   d = diff
   s = status
@@ -53,10 +53,6 @@
   untracked = cyan
 [credential]
   helper = osxkeychain
-[filter "hawser"]
-  clean = git hawser clean %f
-  smudge = git hawser smudge %f
-  required = true
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52
