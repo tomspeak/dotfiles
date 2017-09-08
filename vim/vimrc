@@ -98,9 +98,9 @@ syntax on
 set background=light
 let g:seoul256_background = 236
 let g:seoul256_light_background = 254
-colorscheme seoul256-light
+"colorscheme seoul256-light
 "colorscheme seoul256
-"colorscheme 1989
+colorscheme 1989
 
 set nu
 set autoindent
@@ -318,6 +318,20 @@ let g:multi_cursor_next_key='<C-g>'
 " FZF
 " ----------------------------------------------------------------------------
 nnoremap <C-p> :Files<cr>
+
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 " UltiSnips
 " ----------------------------------------------------------------------------
