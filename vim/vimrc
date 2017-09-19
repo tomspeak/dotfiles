@@ -101,19 +101,21 @@ call plug#end()
 filetype plugin indent on
 
 
+
 " ----------------------------------------------------------------------------
 " General
 " ----------------------------------------------------------------------------
 set t_Co=256
-syntax on
+if !exists('g:syntax_on') " https://stackoverflow.com/a/33380495/1355087
+  syntax enable
+endif
 set background=light
 let g:seoul256_background = 236
 let g:seoul256_light_background = 254
 "colorscheme seoul256-light
-"colorscheme seoul256
 colorscheme 1989
 
-set nu
+set number " line numbers
 set autoindent
 set smartindent
 set laststatus=2
@@ -131,7 +133,9 @@ set wildmode=full
 set nojoinspaces
 set autoread
 set grepformat=%f:%l:%c:%m,%f:%l:%m
-set completeopt=menuone,preview
+set complete-=i "https://medium.com/usevim/set-complete-e76b9f196f0f
+set complete+=kspell
+set completeopt-=preview
 set nocursorline
 set nrformats=hex
 silent! set cryptmethod=blowfish2
@@ -176,8 +180,6 @@ set textwidth=0
 set wrapmargin=0
 set spelllang=en_gb
 set relativenumber
-set number
-set complete+=kspell
 set hidden "allow :cdo to work
 set guitablabel=\[%N\]\ %t\ %M  "buffer shows filename and modified symbol, not full path
 set noshowmode
@@ -207,9 +209,9 @@ set clipboard=unnamed
 
 "Return to last edit position when opening files
 autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal! g`\"" |
+      \ endif
 " Remember info about open buffers on close
 set viminfo^=%
 
