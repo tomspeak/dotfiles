@@ -15,30 +15,28 @@ call plug#begin()
 " Writing
 " ----------------------------------------------------------------------------
 Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 Plug 'reedes/vim-pencil'
 Plug 'reedes/vim-wordy'
-Plug 'junegunn/limelight.vim'
 
 " Lookin' good
 " ----------------------------------------------------------------------------
-Plug 'sonjapeterson/1989.vim'
 Plug 'junegunn/seoul256.vim'
-Plug 'chriskempson/base16-vim'
-Plug 'flazz/vim-colorschemes'
 Plug 'junegunn/vim-emoji'
+Plug 'sonjapeterson/1989.vim'
 
 " Syntax / Language specific
 " ----------------------------------------------------------------------------
 Plug 'JulesWang/css.vim'
 Plug 'ap/vim-css-color'
 Plug 'cakebaker/scss-syntax.vim'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'jparise/vim-graphql'
 Plug 'moll/vim-node'
 Plug 'mxw/vim-jsx'
 Plug 'nono/vim-handlebars'
 Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'jparise/vim-graphql'
 
 " Tim Pope
 " ----------------------------------------------------------------------------
@@ -57,30 +55,30 @@ Plug 'tpope/vim-vinegar'
 " ----------------------------------------------------------------------------
 Plug 'bkad/CamelCaseMotion'
 Plug 'christoomey/vim-sort-motion'
+Plug 'junegunn/vim-slash'
 Plug 'kana/vim-textobj-function'
 Plug 'kana/vim-textobj-user'
 Plug 'mattn/emmet-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'thinca/vim-textobj-function-javascript'
-Plug 'junegunn/vim-slash'
 
 " Documentation / Generation / Code quality of life
 " ----------------------------------------------------------------------------
 Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
-Plug 'heavenshell/vim-jsdoc'
+Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'w0rp/ale'
 
 " Utilities
 " ----------------------------------------------------------------------------
-Plug 'sbdchd/neoformat'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-gtfo'
 Plug 'majutsushi/tagbar', { 'for': 'go', 'on': 'TagbarToggle' }
 Plug 'rking/ag.vim'
+Plug 'yssl/QFEnter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 augroup nerd_loader
   autocmd!
@@ -91,8 +89,13 @@ augroup nerd_loader
         \|   execute 'autocmd! nerd_loader'
         \| endif
 augroup END
-Plug 'yssl/QFEnter'
-Plug 'justinmk/vim-gtfo'
+
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --clang-completer --gocode-completer
+  endif
+endfunction
+Plug 'Valloric/YouCompleteMe', { 'for': 'go', 'do': function('BuildYCM') }
 
 call plug#end()
 filetype plugin indent on
@@ -328,25 +331,31 @@ let g:multi_cursor_next_key='<C-g>'
 nnoremap <C-p> :Files<cr>
 
 let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+      \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
 
 " UltiSnips
 " ----------------------------------------------------------------------------
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsExpandTrigger = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetsDir="~/dotfiles/vim/vim/UltiSnips"
+
+" YouCompleteMe
+" ----------------------------------------------------------------------------
+let g:ycm_max_num_candidates = 10
+let g:ycm_complete_in_strings = 0
 
 " JavaScript
 " ----------------------------------------------------------------------------
@@ -382,6 +391,41 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
+let g:go_list_type="quickfix"
+
+" tagbar.vim
+" ----------------------------------------------------------------------------
+inoremap <F8> <esc>:TagbarToggle<cr>
+nnoremap <F8> :TagbarToggle<cr>
+let g:tagbar_sort = 0
+
+let g:tagbar_type_go = {
+      \ 'ctagstype' : 'go',
+      \ 'kinds'     : [
+      \ 'p:package',
+      \ 'i:imports:1',
+      \ 'c:constants',
+      \ 'v:variables',
+      \ 't:types',
+      \ 'n:interfaces',
+      \ 'w:fields',
+      \ 'e:embedded',
+      \ 'm:methods',
+      \ 'r:constructor',
+      \ 'f:functions'
+      \ ],
+      \ 'sro' : '.',
+      \ 'kind2scope' : {
+      \ 't' : 'ctype',
+      \ 'n' : 'ntype'
+      \ },
+      \ 'scope2kind' : {
+      \ 'ctype' : 't',
+      \ 'ntype' : 'n'
+      \ },
+      \ 'ctagsbin'  : 'gotags',
+      \ 'ctagsargs' : '-sort -silent'
+      \ }
 
 " ale.vim
 " ----------------------------------------------------------------------------
@@ -389,10 +433,10 @@ let g:ale_statusline_format = [emoji#for('small_red_triangle').'%d', emoji#for('
 let g:ale_sign_error = emoji#for('small_red_triangle')
 let g:ale_sign_warning = emoji#for('small_orange_diamond')
 let g:ale_linters = {
-  \'javascript': ['eslint'],
-  \'html': [''],
-  \'scss': ['sass-lint'],
-\}
+      \'javascript': ['eslint'],
+      \'html': [''],
+      \'scss': ['sass-lint'],
+      \}
 let g:ale_sign_column_always = 1
 let g:ale_javascript_eslint_use_global = 1
 let g:ale_lint_delay = 1000
@@ -409,7 +453,7 @@ let g:gtfo#terminals = { 'mac': 'iterm' }
 let g:limelight_paragraph_span = 1
 let g:limelight_priority = -1
 
-function! s:goyo_enter()
+function! s:goyo_enter() abort
   if has('gui_running')
     set fullscreen
     set background=dark
@@ -432,7 +476,7 @@ function! s:goyo_enter()
   hi StatusLine ctermfg=red guifg=red cterm=NONE gui=NONE
 endfunction
 
-function! s:goyo_leave()
+function! s:goyo_leave() abort
   if has('gui_running')
     set nofullscreen
     set background=dark
@@ -470,66 +514,66 @@ endif
 " ----------------------------------------------------------------------------
 set statusline=%<[%n]\ %F\ %m%r%y\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}\ %=%-14.(%l,%c%V%)\ %P
 silent! if emoji#available()
-  let g:currentmode={
-    \ 'n'  : 'NORMAL',
-    \ 'v'  : 'VISUAL',
-    \ 'V'  : 'VISUAL LINE',
-    \ '^V' : 'VISUAL BLOCK',
-    \ 's'  : 'SELECT',
-    \ 'S'  : 'SELECT LINE',
-    \ '^S' : 'SELECT BLOCK',
-    \ 'i'  : 'INSERT',
-    \ 'R'  : 'REPLACE',
-    \ 'Rv' : 'VISUAL REPLACE',
-    \ 'c'  : ' ',
-    \ 'cv' : ' ',
-    \ 'ce' : ' ',
-    \ 'r'  : ' ',
-    \ 'rm' : ' ',
-    \ 'r?' : ' ',
-    \ '!'  : ' ',
-    \ 't'  : ' '
-    \}
+let g:currentmode={
+      \ 'n'  : 'NORMAL',
+      \ 'v'  : 'VISUAL',
+      \ 'V'  : 'VISUAL LINE',
+      \ '^V' : 'VISUAL BLOCK',
+      \ 's'  : 'SELECT',
+      \ 'S'  : 'SELECT LINE',
+      \ '^S' : 'SELECT BLOCK',
+      \ 'i'  : 'INSERT',
+      \ 'R'  : 'REPLACE',
+      \ 'Rv' : 'VISUAL REPLACE',
+      \ 'c'  : ' ',
+      \ 'cv' : ' ',
+      \ 'ce' : ' ',
+      \ 'r'  : ' ',
+      \ 'rm' : ' ',
+      \ 'r?' : ' ',
+      \ '!'  : ' ',
+      \ 't'  : ' '
+      \}
 
-  function! S_modified()
-    if &modified
-      return emoji#for('raising_hand').' '
-    elseif !&modifiable
-      return emoji#for('construction').' '
-    else
-      return ''
-    endif
-  endfunction
+function! S_modified() abort
+  if &modified
+    return emoji#for('raising_hand').' '
+  elseif !&modifiable
+    return emoji#for('construction').' '
+  else
+    return ''
+  endif
+endfunction
 
-  function! S_fugitive()
-    if !exists('g:loaded_fugitive')
-      return ''
-    endif
-    let head = fugitive#head()
-    if empty(head)
-      return ''
-    else
-      return head == 'master' ? emoji#for('crown') : emoji#for('hibiscus').'['.head.']'
-    endif
-  endfunction
+function! S_fugitive() abort
+  if !exists('g:loaded_fugitive')
+    return ''
+  endif
+  let head = fugitive#head()
+  if empty(head)
+    return ''
+  else
+    return head == 'master' ? emoji#for('crown') : emoji#for('hibiscus').'['.head.']'
+  endif
+endfunction
 
-  hi def link User1 TablineFill
-  let s:cherry = emoji#for('cherry_blossom')
-  function! MyStatusLine()
-    let mode = '   | %{toupper(g:currentmode[mode()])} | '
-    let mod = '%{S_modified()}'
-    let ro  = "%{&readonly ? emoji#for('lock') . ' ' : ''}"
-    let fug = ' %{S_fugitive()}'
-    let ale = ' %{ALEGetStatusLine()}'
-    let sep = ' %= '
+hi def link User1 TablineFill
+let s:cherry = emoji#for('cherry_blossom')
+function! MyStatusLine() abort
+  let mode = '   | %{toupper(g:currentmode[mode()])} | '
+  let mod = '%{S_modified()}'
+  let ro  = "%{&readonly ? emoji#for('lock') . ' ' : ''}"
+  let fug = ' %{S_fugitive()}'
+  let ale = ' %{ALEGetStatusLine()}'
+  let sep = ' %= '
 
-    return s:cherry.mode.' %f %<'.mod.ro.sep.fug.sep.sep.ale.sep
-  endfunction
+  return s:cherry.mode.' %f %<'.mod.ro.sep.fug.sep.sep.ale.sep
+endfunction
 
-  " Note that the "%!" expression is evaluated in the context of the
-  " current window and buffer, while %{} items are evaluated in the
-  " context of the window that the statusline belongs to.
-  set statusline=%!MyStatusLine()
+" Note that the "%!" expression is evaluated in the context of the
+" current window and buffer, while %{} items are evaluated in the
+" context of the window that the statusline belongs to.
+set statusline=%!MyStatusLine()
 endif
 
 " Todo
@@ -537,7 +581,7 @@ endif
 function! s:todo() abort
   let entries = []
   for cmd in ['git grep -niI -e TODO -e FIXME -e XXX 2> /dev/null',
-            \ 'grep -rniI -e TODO -e FIXME -e XXX * 2> /dev/null']
+        \ 'grep -rniI -e TODO -e FIXME -e XXX * 2> /dev/null']
     let lines = split(system(cmd), '\n')
     if v:shell_error != 0 | continue | endif
     for line in lines
@@ -553,7 +597,3 @@ function! s:todo() abort
   endif
 endfunction
 command! Todo call s:todo()
-
-" Slash
-" ----------------------------------------------------------------------------
-noremap <plug>(slash-after) zz
