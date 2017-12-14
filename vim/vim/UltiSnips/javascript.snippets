@@ -1,15 +1,14 @@
 snippet switch
 switch ($1) {
-	case: $2
-		$3
-	default:
-		return $4
+case: $2
+      $3
+default:
+	return $4
 
-		${VISUAL}
+	  ${VISUAL}
 }
 $0
 endsnippet
-
 
 snippet cl
 console.log($1)$0
@@ -17,6 +16,10 @@ endsnippet
 
 snippet ce
 console.error($1)$0
+endsnippet
+
+snippet cw
+console.warning($1)$0
 endsnippet
 
 
@@ -29,22 +32,22 @@ endsnippet
 
 snippet t
 test('$1', t => {
-	$0
+  $0
 })
 endsnippet
 
 snippet desc
-describe('$1', function () {
-	it('should $2', function ($3) {
-		$0
-	})
+describe('$1', () => {
+  it('should $2', ($3) => {
+    $0
+  })
 })
 endsnippet
 
 
 snippet it
-it('should $1', function ($2) {
-	$0
+it('should $1', () => {
+  $0
 })
 endsnippet
 
@@ -55,7 +58,7 @@ endsnippet
 
 snippet class
 class $1 {
-	$0
+  $0
 }
 endsnippet
 
@@ -69,7 +72,7 @@ endsnippet
 
 snippet f
 $1(($2) => {
-	$0
+  $0
 })
 endsnippet
 
@@ -79,13 +82,13 @@ endsnippet
 
 snippet cf
 $1 ($2) {
-	$0
+  $0
 }
 endsnippet
 
 snippet cfl
 $1 = ($2) => {
-	$0
+  $0
 }
 endsnippet
 
@@ -102,11 +105,11 @@ snippet rc
 import React, { Component, PropTypes } from 'react'
 
 export default class $1 extends Component {
-	render () {
-		return (
-			$0
-		)
-	}
+  render () {
+    return (
+	$0
+	)
+  }
 }
 
 $1.displayName = '$1'
@@ -120,9 +123,9 @@ snippet rsc
 import React from 'react'
 
 const $1 = ({ $2 }) => {
-	return (
-		$3
-	)
+  return (
+    $3
+  )
 }
 
 export default $1
@@ -130,31 +133,43 @@ endsnippet
 
 snippet con
 constructor ($1) {
-	$0
+  $0
 }
 endsnippet
 
 snippet cdu
 componentDidUpdate ($1) {
-	$0
+  $0
 }
 endsnippet
 
 snippet cdm
 componentDidMount ($1) {
-	$0
+  $0
+}
+endsnippet
+
+snippet cwum
+componentWillUnmount ($1) {
+  $0
 }
 endsnippet
 
 snippet cwu
 componentWillUpdate ($1) {
-	$0
+  $0
+}
+endsnippet
+
+snippet cwrp
+componentWillReceiveProps (nextProps) {
+  $0
 }
 endsnippet
 
 snippet ren
 render () {
-	$0
+  $0
 }
 endsnippet
 
@@ -163,17 +178,18 @@ endsnippet
 
 ### REDUX
 snippet rrc
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 export class $1 extends Component {
-	render () {
-		return (
-			<div>
-				$0
-			</div>
-		)
-	}
+  render () {
+    return (
+      <div>
+	$0
+      </div>
+    )
+  }
 }
 
 $1.displayName = '$1'
@@ -183,12 +199,12 @@ $1.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-
+  $2
 })
 
-const mapDispatchToProps = (dispatch) => ({
-
-})
+const mapDispatchToProps = {
+  $3
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)($1)
 endsnippet
@@ -198,10 +214,66 @@ snippet fc
 import React from 'react'
 
 const $1 = ({ $2 }) => {
-	return (
-		$0
-	)
+  return (
+    $0
+  )
 }
 
 export default $1
+endsnippet
+
+snippet msp
+const mapStateToProps = state => ({
+  $1: $0,
+});
+endsnippet
+
+snippet mdp
+const mapDispatchToProps = {
+  $0,
+}
+endsnippet
+
+snippet pt
+$1.propTypes = {
+  $0,
+}
+endsnippet
+
+snippet module
+/**
+ * TYPES
+ * =====================
+ */
+export const types = {
+  $1: '$1',
+};
+
+/**
+ * ACTIONS
+ * =====================
+ */
+function $2($3) {
+  return $3
+}
+
+export const actions = {
+  $2,
+};
+
+/**
+ * REDUCER
+ * =====================
+ */
+export const initialState = {};
+
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case types.$1:
+      return state;
+
+    default:
+      return state;
+  }
+};$0
 endsnippet

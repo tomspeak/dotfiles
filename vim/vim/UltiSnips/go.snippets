@@ -62,3 +62,13 @@ endsnippet
 snippet pf
 fmt.Printf($1, $2)
 endsnippet
+
+snippet mw
+func $1($2) middleware.Middleware {
+	return func(fn http.HandlerFunc) http.HandlerFunc {
+		return func(w http.ResponseWriter, req *http.Request) {
+			$0
+		}
+	}
+}
+endsnippet
