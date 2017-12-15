@@ -16,6 +16,8 @@ source $DOTFILES/antibody/antibody.init
 # execute locally installed npm modules
 export PATH="./node_modules/.bin:$PATH"
 
+export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
+
 # put things in ~/.bin into my $PATH
 export PATH="$HOME/.bin:$PATH"
 
