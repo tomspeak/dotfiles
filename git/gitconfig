@@ -17,6 +17,7 @@
   cp = cherry-pick
   rc = rebase --continue
   rs = rebase --skip
+  ra = rebase --abort
   rh = "!f() { git rebase -i HEAD~$1; }; f"
   p = push
   pf = push --force-with-lease
