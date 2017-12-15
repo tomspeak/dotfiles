@@ -22,21 +22,15 @@ Plug 'reedes/vim-wordy'
 " Lookin' good
 " ----------------------------------------------------------------------------
 Plug 'junegunn/seoul256.vim'
-Plug 'junegunn/vim-emoji'
 Plug 'sonjapeterson/1989.vim'
+Plug 'junegunn/vim-emoji'
+Plug 'pbrisbin/vim-colors-off'
 
 " Syntax / Language specific
 " ----------------------------------------------------------------------------
-Plug 'JulesWang/css.vim'
 Plug 'ap/vim-css-color'
-Plug 'cakebaker/scss-syntax.vim'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plug 'jparise/vim-graphql'
-Plug 'moll/vim-node'
-Plug 'mxw/vim-jsx'
-Plug 'nono/vim-handlebars'
-Plug 'othree/html5.vim'
-Plug 'pangloss/vim-javascript'
+Plug 'sheerun/vim-polyglot'
 
 " Tim Pope
 " ----------------------------------------------------------------------------
@@ -61,6 +55,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'mattn/emmet-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'thinca/vim-textobj-function-javascript'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Documentation / Generation / Code quality of life
 " ----------------------------------------------------------------------------
@@ -92,10 +87,10 @@ augroup END
 
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
-    !./install.py --clang-completer --gocode-completer
+    !./install.py --clang-completer --gocode-completer --js-completer
   endif
 endfunction
-Plug 'Valloric/YouCompleteMe', { 'for': 'go', 'do': function('BuildYCM') }
+Plug 'Valloric/YouCompleteMe', { 'for': ['go', 'typescript'], 'do': function('BuildYCM') }
 
 call plug#end()
 filetype plugin indent on
@@ -112,8 +107,8 @@ endif
 set background=light
 let g:seoul256_background = 236
 let g:seoul256_light_background = 254
-"colorscheme seoul256-light
-colorscheme 1989
+colorscheme seoul256-light
+"colorscheme 1989
 
 set number " line numbers
 set autoindent
@@ -148,7 +143,7 @@ endif
 
 set textwidth=0
 if exists('&colorcolumn')
-  set colorcolumn=120
+  set colorcolumn=100
 endif
 
 " Keep the cursor on the same column
@@ -168,6 +163,7 @@ set wildignore+=node_modules/**
 set wildignore+=**/node_modules/**
 set wildignore+=bower_components/**
 set wildignore+=dist/**
+set wildignore+=static/js/**
 set showmatch
 set autowrite
 set title
@@ -330,6 +326,11 @@ let g:multi_cursor_next_key='<C-g>'
 
 " FZF
 " ----------------------------------------------------------------------------
+" Hide statusline of terminal buffer
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
 nnoremap <C-p> :Files<cr>
 
 let g:fzf_colors =
@@ -340,6 +341,7 @@ let g:fzf_colors =
       \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
       \ 'hl+':     ['fg', 'Statement'],
       \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Ignore'],
       \ 'prompt':  ['fg', 'Conditional'],
       \ 'pointer': ['fg', 'Exception'],
       \ 'marker':  ['fg', 'Keyword'],
@@ -371,8 +373,6 @@ call camelcasemotion#CreateMotionMappings('<leader>')
 
 " JSDoc
 " ----------------------------------------------------------------------------
-nmap <silent> <Leader>jf ?function<cr>:noh<cr><Plug>(jsdoc)
-nmap <silent> <Leader>j ?=><cr>:noh<cr><Plug>(jsdoc)
 let g:jsdoc_allow_input_prompt = 1
 let g:jsdoc_input_description = 1
 let g:jsdoc_enable_es6 = 1
@@ -439,9 +439,16 @@ let g:ale_linters = {
       \'html': [''],
       \'scss': ['sass-lint'],
       \}
+"let g:ale_fixers = {
+"\   'javascript': ['prettier'],
+"\   'scss': ['prettier'],
+"\}
+"let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
+"let g:ale_fix_on_save = 1
 let g:ale_sign_column_always = 1
-let g:ale_javascript_eslint_use_global = 1
 let g:ale_lint_delay = 1000
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
 hi clear SignColumn
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
