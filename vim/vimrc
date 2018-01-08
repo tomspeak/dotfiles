@@ -49,13 +49,13 @@ Plug 'tpope/vim-vinegar'
 " ----------------------------------------------------------------------------
 Plug 'bkad/CamelCaseMotion'
 Plug 'christoomey/vim-sort-motion'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/vim-slash'
 Plug 'kana/vim-textobj-function'
 Plug 'kana/vim-textobj-user'
 Plug 'mattn/emmet-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'thinca/vim-textobj-function-javascript'
-Plug 'christoomey/vim-tmux-navigator'
 
 " Documentation / Generation / Code quality of life
 " ----------------------------------------------------------------------------
@@ -71,10 +71,10 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-gtfo'
-Plug 'majutsushi/tagbar', { 'for': 'go', 'on': 'TagbarToggle' }
+Plug 'majutsushi/tagbar', { 'for': ['javascript', 'typescript', 'go'], 'on': 'TagbarToggle' }
 Plug 'rking/ag.vim'
-Plug 'yssl/QFEnter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'yssl/QFEnter'
 augroup nerd_loader
   autocmd!
   autocmd VimEnter * silent! autocmd! FileExplorer
@@ -91,6 +91,7 @@ function! BuildYCM(info)
   endif
 endfunction
 Plug 'Valloric/YouCompleteMe', { 'for': ['go', 'typescript'], 'do': function('BuildYCM') }
+Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'typescript'], 'do':'npm install' }
 
 call plug#end()
 filetype plugin indent on
