@@ -59,7 +59,7 @@ Plug 'kana/vim-textobj-function'
 Plug 'kana/vim-textobj-user'
 Plug 'mattn/emmet-vim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'thinca/vim-textobj-function-javascript'
+Plug 'junegunn/vim-slash'
 
 " Documentation / Generation / Code quality of life
 " ----------------------------------------------------------------------------
@@ -100,7 +100,7 @@ Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'typescript'], 'do':'npm ins
 call plug#end()
 filetype plugin indent on
 
-
+packadd! matchit "https://github.com/mhinz/vim-galore#matchit
 
 " ----------------------------------------------------------------------------
 " General
