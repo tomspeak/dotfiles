@@ -601,10 +601,9 @@ function! MyStatusLine() abort
   let mod = '%{S_modified()}'
   let ro  = "%{&readonly ? emoji#for('lock') . ' ' : ''}"
   let fug = ' %{S_fugitive()}'
-  let ale = ' %{ALEGetStatusLine()}'
   let sep = ' %= '
 
-  return s:cherry.mode.' %f %<'.mod.ro.sep.fug.sep.sep.ale.sep
+  return s:cherry.mode.' %f %<'.mod.ro.sep.fug.sep.sep.sep
 endfunction
 
 " Note that the "%!" expression is evaluated in the context of the
