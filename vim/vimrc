@@ -25,6 +25,9 @@ Plug 'junegunn/seoul256.vim'
 Plug 'sonjapeterson/1989.vim'
 Plug 'junegunn/vim-emoji'
 Plug 'pbrisbin/vim-colors-off'
+Plug 'altercation/vim-colors-solarized'
+Plug 'cocopon/iceberg.vim'
+Plug 'tomspeak/vim-colors-paramount'
 
 " Syntax / Language specific
 " ----------------------------------------------------------------------------
@@ -108,8 +111,10 @@ endif
 set background=light
 let g:seoul256_background = 236
 let g:seoul256_light_background = 254
-colorscheme seoul256-light
+"colorscheme seoul256-light
 "colorscheme 1989
+"colorscheme solarized
+colorscheme paramount
 
 set number " line numbers
 set autoindent
@@ -607,3 +612,16 @@ function! s:todo() abort
   endif
 endfunction
 command! Todo call s:todo()
+
+
+function! s:ToggleColorScheme() abort
+  let current_colorscheme = g:colors_name
+  if current_colorscheme == "paramount"
+    colorscheme seoul256-light
+  else
+    colorscheme paramount
+  endif
+
+  set background=light
+endfunction
+map <silent> <F9> :call <SID>ToggleColorScheme()<CR>
