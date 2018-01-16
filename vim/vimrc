@@ -34,6 +34,7 @@ Plug 'tomspeak/vim-colors-paramount'
 Plug 'ap/vim-css-color'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'sheerun/vim-polyglot'
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 
 " Tim Pope
 " ----------------------------------------------------------------------------
@@ -278,6 +279,10 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
+"Make
+inoremap <F5> <esc>:Make<cr>
+nnoremap <F5> :Make<cr>
+
 "Binds arrow keys to window resize
 nmap <Left>  :3wincmd <<cr>
 nmap <Right> :3wincmd ><cr>
@@ -437,11 +442,11 @@ let g:tagbar_type_go = {
 
 " ale.vim
 " ----------------------------------------------------------------------------
-let g:ale_statusline_format = [emoji#for('small_red_triangle').'%d', emoji#for('small_orange_diamond').'%d', '']
 let g:ale_sign_error = emoji#for('small_red_triangle')
 let g:ale_sign_warning = emoji#for('small_orange_diamond')
 let g:ale_linters = {
       \'javascript': ['eslint'],
+      \'typescript': [''],
       \'html': [''],
       \'scss': ['sass-lint'],
       \}
@@ -524,6 +529,23 @@ if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+
+" typescript-vim
+" ----------------------------------------------------------------------------
+let g:typescript_indent_disable = 1
+"Make the QuickFix window automatically appear if :make has any errors.
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
+
+" vim-slash
+" ----------------------------------------------------------------------------
+if has('timers') && !has('nvim')
+  noremap <expr> <plug>(slash-after) slash#blink(2, 50)
+endif
+
+" tern
+" ----------------------------------------------------------------------------
+nnoremap td :TernDef<CR>
 
 " STATUS LINE
 " ----------------------------------------------------------------------------
