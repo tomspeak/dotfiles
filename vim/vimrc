@@ -21,19 +21,18 @@ Plug 'reedes/vim-wordy'
 
 " Lookin' good
 " ----------------------------------------------------------------------------
+Plug 'altercation/vim-colors-solarized'
 Plug 'junegunn/seoul256.vim'
-Plug 'sonjapeterson/1989.vim'
 Plug 'junegunn/vim-emoji'
 Plug 'pbrisbin/vim-colors-off'
-Plug 'altercation/vim-colors-solarized'
-Plug 'cocopon/iceberg.vim'
-Plug 'tomspeak/vim-colors-paramount'
+Plug 'sonjapeterson/1989.vim'
+Plug 'sonph/onehalf', { 'rtp': 'vim/' }
 
 " Syntax / Language specific
 " ----------------------------------------------------------------------------
 Plug 'ap/vim-css-color'
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'sheerun/vim-polyglot'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 
 " Tim Pope
@@ -55,11 +54,11 @@ Plug 'bkad/CamelCaseMotion'
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/vim-slash'
+Plug 'junegunn/vim-slash'
 Plug 'kana/vim-textobj-function'
 Plug 'kana/vim-textobj-user'
 Plug 'mattn/emmet-vim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'junegunn/vim-slash'
 
 " Documentation / Generation / Code quality of life
 " ----------------------------------------------------------------------------
@@ -74,7 +73,6 @@ Plug 'w0rp/ale'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-gtfo'
 Plug 'majutsushi/tagbar', { 'for': ['javascript', 'typescript', 'go'], 'on': 'TagbarToggle' }
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -114,8 +112,7 @@ let g:seoul256_background = 236
 let g:seoul256_light_background = 254
 "colorscheme seoul256-light
 "colorscheme 1989
-"colorscheme solarized
-colorscheme paramount
+colorscheme onehalflight
 
 set number " line numbers
 set autoindent
@@ -170,7 +167,6 @@ set wildignore+=node_modules/**
 set wildignore+=**/node_modules/**
 set wildignore+=bower_components/**
 set wildignore+=dist/**
-set wildignore+=static/js/**
 set showmatch
 set autowrite
 set title
@@ -186,7 +182,7 @@ set relativenumber
 set hidden "allow :cdo to work
 set guitablabel=\[%N\]\ %t\ %M  "buffer shows filename and modified symbol, not full path
 set noshowmode
-set fillchars-=vert:\| | set fillchars+=vert:\
+set fillchars=vert:\ ,stl:\ ,stlnc:\
 set splitbelow
 set splitright
 
@@ -258,6 +254,10 @@ nnoremap <C-q> :q<CR>
 "bind CTRL-x to save-close
 nnoremap <C-x> :x<CR>
 
+"We all do it.
+nmap :W :w
+nmap :Q :q
+
 "Bind Leaderq to close quickfix window
 noremap <Leader>q :ccl<CR>
 "Bind LeaderQ to focus the quickfix window
@@ -297,10 +297,6 @@ nnoremap <S-Tab> <C-W>W
 "the register - essentially, overwrite and do nothing else.
 vmap r "_dP
 
-"We all do it.
-nmap :W :w
-nmap :Q :q
-
 "Return - insert normal mode line break
 nmap <Return> :normal O<CR>
 
@@ -325,7 +321,6 @@ endif
 " NerdTree
 " ----------------------------------------------------------------------------
 map - :NERDTreeToggle<CR>
-nmap <Leader>k :NERDTreeFind<CR>
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeWinSize=30
 
@@ -411,7 +406,6 @@ let g:go_list_type="quickfix"
 inoremap <F8> <esc>:TagbarToggle<cr>
 nnoremap <F8> :TagbarToggle<cr>
 let g:tagbar_sort = 0
-
 let g:tagbar_type_go = {
       \ 'ctagstype' : 'go',
       \ 'kinds'     : [
@@ -450,12 +444,14 @@ let g:ale_linters = {
       \'html': [''],
       \'scss': ['sass-lint'],
       \}
-"let g:ale_fixers = {
-"\   'javascript': ['prettier'],
-"\   'scss': ['prettier'],
-"\}
-"let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
-"let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+\   'markdown': ['prettier'],
+\   'javascript': ['prettier'],
+\   'scss': ['prettier'],
+\}
+let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
+let g:ale_fix_on_save = 1
 let g:ale_sign_column_always = 1
 let g:ale_lint_delay = 1000
 let g:ale_set_loclist = 0
@@ -463,10 +459,6 @@ let g:ale_set_quickfix = 1
 hi clear SignColumn
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
-
-" gtfo (open in finder/terminal)
-" ----------------------------------------------------------------------------
-let g:gtfo#terminals = { 'mac': 'iterm' }
 
 " goyo.vim + limelight.vim
 " ----------------------------------------------------------------------------
@@ -603,7 +595,7 @@ function! MyStatusLine() abort
   let fug = ' %{S_fugitive()}'
   let sep = ' %= '
 
-  return s:cherry.mode.' %f %<'.mod.ro.sep.fug.sep.sep.sep
+  return mode.' %f %<'.mod.ro.sep.fug.sep.sep.sep
 endfunction
 
 " Note that the "%!" expression is evaluated in the context of the
@@ -634,15 +626,22 @@ function! s:todo() abort
 endfunction
 command! Todo call s:todo()
 
-
+" Colour Schemes
+" ----------------------------------------------------------------------------
 function! s:ToggleColorScheme() abort
   let current_colorscheme = g:colors_name
-  if current_colorscheme == "paramount"
-    colorscheme seoul256-light
+  if current_colorscheme == "onehalflight"
+    colorscheme onehalfdark
+    set background=dark
   else
-    colorscheme paramount
+    colorscheme onehalflight
+    set background=light
   endif
-
-  set background=light
 endfunction
 map <silent> <F9> :call <SID>ToggleColorScheme()<CR>
+
+function! s:SynGroup() abort
+    let l:s = synID(line('.'), col('.'), 1)
+    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfunction
+map <silent> <Leader>hg :call <SID>SynGroup()<CR>
