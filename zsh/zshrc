@@ -3,8 +3,7 @@ export ZSH=$HOME/.oh-my-zsh
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 
-GEOMETRY_SYMBOL_PROMPT="λ"
-GEOMETRY_COLOR_PROMPT=red
+GEOMETRY_SYMBOL_PROMPT="❍"
 PROMPT_GEOMETRY_GIT_TIME=true
 GEOMETRY_COLOR_GIT_DIRTY=9
 GEOMETRY_COLOR_GIT_BRANCH=6
@@ -27,8 +26,10 @@ setopt HIST_IGNORE_SPACE
 HOSTNAME="`hostname`"
 PAGER='less'
 export AUTOENV_FILE_ENTER=".env"
-ENABLE_CORRECTION="true"
 DEFAULT_USER="tomspeak"
+unsetopt correct
+unsetopt correctall
+DISABLE_CORRECTION="true"
 
 GIT_MERGE_AUTOEDIT=no
 export GIT_MERGE_AUTOEDIT
