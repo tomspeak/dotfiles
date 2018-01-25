@@ -1,5 +1,4 @@
 #### COLOUR
-
 tm_icon=""
 tm_color_active=colour5
 tm_color_inactive=colour241
@@ -16,9 +15,9 @@ set -g status-left-length 150
 set -g status-right-length 150
 set -g status-interval 5
 
+set-option -g status-position bottom
 
 # default statusbar colors
-# set-option -g status-bg colour0
 set-option -g status-fg $tm_color_active
 set-option -g status-bg default
 set-option -g status-attr default
