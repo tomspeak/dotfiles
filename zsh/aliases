@@ -9,16 +9,21 @@ alias nr="npm run"
 alias nt="npm test"
 alias ns="npm start"
 
+# yarn
+alias y="yarn "
+alias yi="yarn install"
+alias yig="yarn global install"
+alias ya="yarn add"
+alias yr="yarn remove"
+alias ys="yarn start"
+alias ycc="yarn cache clean"
+alias yh="yarn help"
+alias yo="yarn outdated"
+alias yui="yarn upgrade-interactive"
 
 # tmux
 alias tl="tmux ls"
 alias ta="tmux attach -t"
 alias tk="tmux kill-session -t"
 alias td="tmux detach"
-alias tnew="echo use tat!!"
 alias tat="new-tmux-from-dir-name"
-
-
-# docker-compose
-alias docker-clean='docker rmi -f $(docker images -f "dangling=true" -q) && docker volume prune -f'
-alias docker-clean-test='docker rmi $(docker images --filter=reference="test*:latest" -q) -f'

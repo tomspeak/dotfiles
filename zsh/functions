@@ -2,11 +2,6 @@ function new-tmux-from-dir-name {
   tmux new-session -As `basename $PWD`
 }
 
-function tj {
-  tmux attach-session -t `tmux list-sessions | sed -E 's/:.*$//' | selecta`
-}
-
-
 function aoj-downloader() {
   youtube-dl -o "~/Desktop/aoj/%(title)s" "https://view.vzaar.com/$1" --referer "https://www.artofjiujitsu.com"
 }
