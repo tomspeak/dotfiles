@@ -19,6 +19,7 @@
   rs = rebase --skip
   ra = rebase --abort
   rh = "!f() { git rebase -i HEAD~$1; }; f"
+  rr = rebase -i --root
   p = push
   pf = push --force-with-lease
   pu = "!f() { git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`; }; f"

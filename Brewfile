@@ -3,6 +3,7 @@ brew 'ruby'
 brew 'n'
 brew 'yarn'
 brew 'go'
+brew 'dep'
 
 brew 'ack'
 brew 'antibody'
