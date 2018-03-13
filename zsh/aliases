@@ -28,3 +28,10 @@ alias ta="tmux attach -t"
 alias tk="tmux kill-session -t"
 alias td="tmux detach"
 alias tat="new-tmux-from-dir-name"
+
+#exa
+alias l="exa -l -a"
+alias ls="echo '-----------Use l, not ls-------'"
+
+#macos
+alias afk="open -a /System/Library/CoreServices/ScreenSaverEngine.app"

@@ -3,16 +3,7 @@ export ZSH=$HOME/.oh-my-zsh
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 
-GEOMETRY_SYMBOL_PROMPT="❍ "
-GEOMETRY_COLOR_PROMPT="black"
-PROMPT_GEOMETRY_GIT_TIME=false
-PROMPT_GEOMETRY_RPROMPT_ASYNC=true
-GEOMETRY_COLOR_GIT_DIRTY=9
-GEOMETRY_COLOR_GIT_BRANCH=6
-GEOMETRY_COLOR_EXIT_VALUE=9
-PROMPT_GEOMETRY_GIT_CONFLICTS=true
-
-source $DOTFILES/antibody/antibody.init
+PURE_PROMPT_SYMBOL="❍ "
 
 # execute locally installed npm modules
 export PATH="./node_modules/.bin:$PATH"
@@ -38,6 +29,7 @@ export GIT_MERGE_AUTOEDIT
 
 # the one true way
 export EDITOR='vim'
+export VEDITOR='code'
 
 # heroku toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -52,6 +44,7 @@ cd .
 source $ZSH/oh-my-zsh.sh
 source $HOME/dotfiles/zsh/aliases
 source $HOME/dotfiles/zsh/functions
+source ~/.zsh_plugins.sh
 
 #FZF
 # Setting ag as the default source for fzf

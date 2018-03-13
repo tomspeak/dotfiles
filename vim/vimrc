@@ -66,6 +66,7 @@ Plug 'SirVer/ultisnips'
 Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'w0rp/ale'
+Plug 'airblade/vim-gitgutter'
 
 " Utilities
 " ----------------------------------------------------------------------------
@@ -93,7 +94,7 @@ function! BuildYCM(info)
     !./install.py --clang-completer --gocode-completer --js-completer
   endif
 endfunction
-Plug 'Valloric/YouCompleteMe', { 'for': ['go', 'typescript'], 'do': function('BuildYCM') }
+Plug 'Valloric/YouCompleteMe', { 'for': ['go', 'typescript', 'javascript'], 'do': function('BuildYCM') }
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'typescript'], 'do':'npm install' }
 
 call plug#end()
@@ -105,12 +106,12 @@ packadd! matchit "https://github.com/mhinz/vim-galore#matchit
 " General
 " ----------------------------------------------------------------------------
 set t_Co=256
+set t_ut=
 if !exists('g:syntax_on') " https://stackoverflow.com/a/33380495/1355087
   syntax enable
 endif
 let g:seoul256_background = 236
-let g:seoul256_light_background = 253
-set background=light
+let g:seoul257_light_background = 253
 colorscheme seoul256-light
 "colorscheme 1989
 
@@ -132,9 +133,8 @@ set wildmode=full
 set nojoinspaces
 set autoread
 set grepformat=%f:%l:%c:%m,%f:%l:%m
-set complete-=i "https://medium.com/usevim/set-complete-e76b9f196f0f
-set complete+=kspell
-set completeopt-=preview
+set complete=.,w,b,u,t,kspell
+set completeopt=longest,menuone
 set nocursorline
 set nrformats=hex
 silent! set cryptmethod=blowfish2
@@ -143,6 +143,10 @@ if has('termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
+endif
+
+if has('mouse')
+  set mouse=a
 endif
 
 set textwidth=0
@@ -313,6 +317,8 @@ if $TERM =~ 'screen'
   nnoremap <Leader><C-a> <C-a>
 endif
 
+"disable the command window, that annoying nuisance.
+nnoremap q: :q
 
 " ----------------------------------------------------------------------------
 " PLUGINS
@@ -445,16 +451,18 @@ let g:ale_linters = {
       \'javascript': ['eslint'],
       \'typescript': [''],
       \'html': [''],
-      \'scss': ['sass-lint'],
+      \'scss': ['sasslint'],
       \}
 let g:ale_fixers = {
 \   'markdown': ['prettier'],
+\   'html': ['prettier'],
 \   'javascript': ['prettier'],
 \   'json': ['prettier'],
 \   'css': ['prettier'],
 \   'scss': ['prettier']
 \}
 let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_javascript_eslint_use_global = 1
 let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
 let g:ale_fix_on_save = 1
 let g:ale_sign_column_always = 1
@@ -464,6 +472,8 @@ let g:ale_set_quickfix = 0
 hi clear SignColumn
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
+
+let g:javascript_plugin_flow = 1
 
 " goyo.vim + limelight.vim
 " ----------------------------------------------------------------------------

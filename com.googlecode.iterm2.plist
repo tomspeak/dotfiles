@@ -9747,14 +9747,16 @@
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>659 121 901 291 0 0 1680 1028 </string>
+	<key>NSWindow Frame SUStatusFrame</key>
+	<string>817 773 400 129 0 0 1680 1028 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>492 304 700 622 0 0 1680 1028 </string>
+	<string>372 192 700 622 0 0 1440 878 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>181 104 606 469 0 0 1920 1178 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>554 553 796 473 0 0 1680 1028 </string>
+	<string>704 742 916 394 0 0 1920 1178 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>4 0 1676 1028 0 0 1680 1028 </string>
+	<string>4 0 1916 1178 0 0 1920 1178 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -10036,7 +10038,7 @@
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
-			<real>1.1334243222891567</real>
+			<real>1.0236492846385543</real>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
@@ -10378,7 +10380,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Monaco 16</string>
+			<string>Monaco 15</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -10837,7 +10839,7 @@
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
-			<real>1.076171875</real>
+			<real>1.0613998964608435</real>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
@@ -11172,7 +11174,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Monaco 16</string>
+			<string>Monaco 15</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -11445,7 +11447,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-02-08T20:07:00Z</date>
+	<date>2018-02-21T09:39:28Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -11513,7 +11515,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.6beta1</string>
+	<string>3.1.6beta3</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>3</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

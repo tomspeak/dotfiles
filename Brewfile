@@ -14,6 +14,7 @@ brew 'curl'
 brew 'diff-so-fancy'
 brew 'docker'
 brew 'editorconfig'
+brew 'exa'
 brew 'ffmpeg'
 brew 'fzf'
 brew 'git'
@@ -31,7 +32,6 @@ brew 'vim'
 brew 'wget'
 brew 'youtube-dl'
 brew 'zsh'
-
 
 tap 'caskroom/cask'
 
