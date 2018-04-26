@@ -27,6 +27,7 @@ Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/vim-emoji'
 Plug 'pbrisbin/vim-colors-off'
 Plug 'sonjapeterson/1989.vim'
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 
 " Syntax / Language specific
 " ----------------------------------------------------------------------------
@@ -105,14 +106,15 @@ packadd! matchit "https://github.com/mhinz/vim-galore#matchit
 " ----------------------------------------------------------------------------
 " General
 " ----------------------------------------------------------------------------
-set t_Co=256
-set t_ut=
 if !exists('g:syntax_on') " https://stackoverflow.com/a/33380495/1355087
   syntax enable
 endif
 let g:seoul256_background = 236
-let g:seoul257_light_background = 253
-colorscheme seoul256-light
+let g:seoul256_light_background = 253
+"colorscheme seoul256-light
+set background=light
+colorscheme solarized
+"colorscheme challenger_deep
 "colorscheme 1989
 
 set number " line numbers
@@ -142,7 +144,6 @@ silent! set cryptmethod=blowfish2
 if has('termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
 endif
 
 if has('mouse')
@@ -457,6 +458,7 @@ let g:ale_fixers = {
 \   'markdown': ['prettier'],
 \   'html': ['prettier'],
 \   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
 \   'json': ['prettier'],
 \   'css': ['prettier'],
 \   'scss': ['prettier']

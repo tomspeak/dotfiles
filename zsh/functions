@@ -1,5 +1,5 @@
 function new-tmux-from-dir-name {
-  tmux -2 -u new-session -As `basename $PWD`
+  tmux -u new-session -As `basename $PWD`
 }
 
 function aoj-downloader() {
