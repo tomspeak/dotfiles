@@ -3,6 +3,8 @@
 tags
 .tags
 node_modules/
+.tern-port/
+.tern-port
 .tern-port.json
 .tern-project.json
 .tern-config.json
