@@ -28,15 +28,15 @@ GIT_MERGE_AUTOEDIT=no
 export GIT_MERGE_AUTOEDIT
 
 # the one true way
-export EDITOR='vim'
+export EDITOR='nvim'
 export VEDITOR='code'
-export TERM=xterm-256color
+#export TERM=xterm-256color
 
 # heroku toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
 export GOROOT=/usr/local/opt/go/libexec
-export GOPATH=$HOME/Sites/go
+export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # so autoenv runs all the time, even when you open a tmux split

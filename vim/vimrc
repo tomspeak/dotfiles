@@ -5,10 +5,17 @@ filetype off
 " Plugs
 " ----------------------------------------------------------------------------
 " https://github.com/junegunn/vim-plug/wiki/faq#automatic-installation
+if has('nvim')
+  if empty(glob("~/.local/share/nvim/site/autoload/plug.vim"))
+    silent! execute '!curl -fsSLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * silent! PlugInstall
+  endif
+else
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source ~/.vimrc
+endif
 endif
 call plug#begin()
 
@@ -18,24 +25,22 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'reedes/vim-pencil'
 Plug 'reedes/vim-wordy'
-Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
 
 " Lookin' good
 " ----------------------------------------------------------------------------
 Plug 'altercation/vim-colors-solarized'
+Plug 'andreypopp/vim-colors-plain'
 Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/vim-emoji'
-Plug 'pbrisbin/vim-colors-off'
 Plug 'sonjapeterson/1989.vim'
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 
 " Syntax / Language specific
 " ----------------------------------------------------------------------------
 Plug 'ap/vim-css-color'
-Plug 'sheerun/vim-polyglot'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-
+Plug 'sheerun/vim-polyglot'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 " Tim Pope
 " ----------------------------------------------------------------------------
@@ -62,23 +67,21 @@ Plug 'terryma/vim-multiple-cursors'
 
 " Documentation / Generation / Code quality of life
 " ----------------------------------------------------------------------------
-Plug 'jiangmiao/auto-pairs'
-Plug 'SirVer/ultisnips'
+Plug 'airblade/vim-gitgutter'
 Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
+Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'w0rp/ale'
-Plug 'airblade/vim-gitgutter'
 
 " Utilities
 " ----------------------------------------------------------------------------
-Plug 'junegunn/vim-github-dashboard'
-Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'jremmen/vim-ripgrep'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar', { 'for': ['javascript', 'typescript', 'go'], 'on': 'TagbarToggle' }
-Plug 'jremmen/vim-ripgrep'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'yssl/QFEnter'
 augroup nerd_loader
   autocmd!
@@ -90,18 +93,32 @@ augroup nerd_loader
         \| endif
 augroup END
 
-function! BuildYCM(info)
-  if a:info.status == 'installed' || a:info.force
-    !./install.py --clang-completer --gocode-completer --js-completer
-  endif
-endfunction
-Plug 'Valloric/YouCompleteMe', { 'for': ['go', 'typescript', 'javascript'], 'do': function('BuildYCM') }
-Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'typescript'], 'do':'npm install' }
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#enable_smart_case = 1
+
+  Plug 'Shougo/neosnippet.vim'
+  Plug 'Shougo/neosnippet-snippets'
+
+  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+
+  Plug 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
+endif
+
+if !has('nvim')
+  Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'typescript'], 'do':'npm install' }
+endif
 
 call plug#end()
 filetype plugin indent on
 
-packadd! matchit "https://github.com/mhinz/vim-galore#matchit
+if !has('nvim')
+  packadd! matchit "https://github.com/mhinz/vim-galore#matchit
+endif
 
 " ----------------------------------------------------------------------------
 " General
@@ -111,13 +128,15 @@ if !exists('g:syntax_on') " https://stackoverflow.com/a/33380495/1355087
 endif
 let g:seoul256_background = 236
 let g:seoul256_light_background = 253
-"colorscheme seoul256-light
-set background=light
-colorscheme solarized
-"colorscheme challenger_deep
-"colorscheme 1989
+set background=dark
+colorscheme plain
+colorscheme seoul256
+"colorscheme solarized
+
+let &t_ut=''
 
 set number " line numbers
+set termguicolors
 set autoindent
 set smartindent
 set laststatus=2
@@ -188,6 +207,7 @@ set hidden "allow :cdo to work
 set guitablabel=\[%N\]\ %t\ %M  "buffer shows filename and modified symbol, not full path
 set noshowmode
 set fillchars=""
+hi! EndOfBuffer guifg=bg "remove ~ gutter when file is too short for screen
 set splitbelow
 set splitright
 
@@ -246,6 +266,9 @@ vnoremap <SPACE> <Nop>
 "& <leader>cc function
 map <SPACE> <leader>
 
+"Map leader to :Rg prompt
+nnoremap \ :Rg<SPACE>
+
 "CTRL-F to find and move to the next spelling error
 "Then take the first substitution, if we do not like it
 "<ESC>u will redo the replacement, but keep the mispelt word.
@@ -268,21 +291,12 @@ noremap <Leader>q :ccl<CR>
 "Bind LeaderQ to focus the quickfix window
 noremap <Leader>Q :copen<CR>
 
-"bind \ to globally search for the entered term
-nnoremap \ :Rg<SPACE>
-
 "bind K to grep word under cursor
 nnoremap K :Rg "\b<C-R><C-W>\b"<CR><ENTER>:cw<CR>
 
 "Disable esc from breaking modes
 inoremap <C-c> <NOP>
 vnoremap <C-c> <NOP>
-
-"Disable arrow keys, those dirty devils
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
 
 "Make
 inoremap <F5> <esc>:Make<cr>
@@ -363,19 +377,6 @@ let g:fzf_colors =
       \ 'spinner': ['fg', 'Label'],
       \ 'header':  ['fg', 'Comment'] }
 
-" UltiSnips
-" ----------------------------------------------------------------------------
-let g:UltiSnipsExpandTrigger = '<C-j>'
-let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetsDir="~/dotfiles/vim/vim/UltiSnips"
-
-" YouCompleteMe
-" ----------------------------------------------------------------------------
-let g:ycm_max_num_candidates = 10
-let g:ycm_complete_in_strings = 0
-
 " JavaScript
 " ----------------------------------------------------------------------------
 let g:javascript_plugin_jsdoc = 1
@@ -409,7 +410,19 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
+let g:go_auto_type_info = 1
 let g:go_list_type="quickfix"
+let g:go_fmt_command = "goimports"
+let g:go_addtags_transform = "snakecase"
+let g:go_snippet_engine = "neosnippet"
+
+" emmet-vim
+" ----------------------------------------------------------------------------
+let g:user_emmet_settings = {
+\  'javascript.jsx' : {
+\      'extends' : 'jsx',
+\  },
+\}
 
 " tagbar.vim
 " ----------------------------------------------------------------------------
@@ -446,8 +459,8 @@ let g:tagbar_type_go = {
 
 " ale.vim
 " ----------------------------------------------------------------------------
-let g:ale_sign_error = emoji#for('small_red_triangle')
-let g:ale_sign_warning = emoji#for('small_orange_diamond')
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
 let g:ale_linters = {
       \'javascript': ['eslint'],
       \'typescript': [''],
@@ -457,6 +470,7 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \   'markdown': ['prettier'],
 \   'html': ['prettier'],
+\   'gohtmltmpl': ['prettier'],
 \   'javascript': ['prettier'],
 \   'typescript': ['prettier'],
 \   'json': ['prettier'],
@@ -474,7 +488,8 @@ let g:ale_set_quickfix = 0
 hi clear SignColumn
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
-
+hi ALEErrorSign guifg=#DF8C8C
+hi ALEWarningSign guifg=#F2C38F
 let g:javascript_plugin_flow = 1
 
 " goyo.vim + limelight.vim
@@ -536,9 +551,6 @@ if executable('rg')
   set grepprg=rg\ --vimgrep
 endif
 
-" typescript-vim
-" ----------------------------------------------------------------------------
-let g:typescript_indent_disable = 1
 "Make the QuickFix window automatically appear if :make has any errors.
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
@@ -553,69 +565,132 @@ endif
 " ----------------------------------------------------------------------------
 nnoremap td :TernDef<CR>
 
+" deoplete
+" ----------------------------------------------------------------------------
+" Disable deoplete when in multi cursor mode
+function! Multiple_cursors_before()
+    let b:deoplete_disable_auto_complete = 1
+endfunction
+function! Multiple_cursors_after()
+    let b:deoplete_disable_auto_complete = 0
+endfunction
+
+imap <expr><TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ neosnippet#expandable_or_jumpable() ?
+      \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+let g:deoplete#sources = {}
+call deoplete#custom#source('_',
+            \ 'disabled_syntaxes', ['Comment', 'String'])
+
+let g:deoplete#sources.javascript = ['LanguageClient']
+let g:deoplete#sources.sh = ['LanguageClient']
+let g:deoplete#sources.vim = ['Vim']
+
+let g:deoplete#enable_refresh_always = 0
+let g:deoplete#enable_camel_case = 1
+let g:deoplete#skip_chars = ['(', ')', '<', '>']
+let g:deoplete#tag#cache_limit_size = 800000
+let g:deoplete#file#enable_buffer_path = 1
+
+let g:deoplete#sources#ternjs#timeout = 3
+let g:deoplete#sources#ternjs#types = 1
+let g:deoplete#sources#ternjs#docs = 1
+
+let g:deoplete#omni#functions = get(g:, 'deoplete#omni#functions', {})
+let g:deoplete#omni#functions.css = 'csscomplete#CompleteCSS'
+let g:deoplete#omni#functions.html = 'htmlcomplete#CompleteTags'
+let g:deoplete#omni#functions.markdown = 'htmlcomplete#CompleteTags'
+
+let g:deoplete#omni_patterns = get(g:, 'deoplete#omni_patterns', {})
+let g:deoplete#omni_patterns.html = '<[^>]*'
+
+let g:deoplete#omni#input_patterns = get(g:, 'deoplete#omni#input_patterns', {})
+let g:deoplete#omni#input_patterns.xml = '<[^>]*'
+let g:deoplete#omni#input_patterns.md = '<[^>]*'
+let g:deoplete#omni#input_patterns.css  = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+let g:deoplete#omni#input_patterns.scss = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+let g:deoplete#omni#input_patterns.sass = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+
+" neosnippet
+" ----------------------------------------------------------------------------
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+let g:neosnippet#enable_completed_snippet = 1
+
+" Language Servers
+" ----------------------------------------------------------------------------
+let g:LanguageClient_autoStart = 1
+
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'sh': ['bash-language-server', 'start'],
+    \ }
+
 " STATUS LINE
 " ----------------------------------------------------------------------------
-set statusline=%<[%n]\ %F\ %m%r%y\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}\ %=%-14.(%l,%c%V%)\ %P
-silent! if emoji#available()
-let g:currentmode={
-      \ 'n'  : 'NORMAL',
-      \ 'v'  : 'VISUAL',
-      \ 'V'  : 'VISUAL LINE',
-      \ '^V' : 'VISUAL BLOCK',
-      \ 's'  : 'SELECT',
-      \ 'S'  : 'SELECT LINE',
-      \ '^S' : 'SELECT BLOCK',
-      \ 'i'  : 'INSERT',
-      \ 'R'  : 'REPLACE',
-      \ 'Rv' : 'VISUAL REPLACE',
-      \ 'c'  : ' ',
-      \ 'cv' : ' ',
-      \ 'ce' : ' ',
-      \ 'r'  : ' ',
-      \ 'rm' : ' ',
-      \ 'r?' : ' ',
-      \ '!'  : ' ',
-      \ 't'  : ' '
-      \}
+if has('statusline')
 
-function! S_modified() abort
-  if &modified
-    return emoji#for('raising_hand').' '
-  elseif !&modifiable
-    return emoji#for('construction').' '
-  else
-    return ''
-  endif
-endfunction
+  function! ALEWarnings() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+    return l:counts.total == 0 ? '' : printf('  ⁕ %d ', all_non_errors)
+  endfunction
 
-function! S_fugitive() abort
-  if !exists('g:loaded_fugitive')
-    return ''
-  endif
-  let head = fugitive#head()
-  if empty(head)
-    return ''
-  else
-    return head == 'master' ? emoji#for('crown') : emoji#for('hibiscus').'['.head.']'
-  endif
-endfunction
+  function! ALEErrors() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+    return l:counts.total == 0 ? '' : printf(' ⁕ %d ', all_errors)
+  endfunction
 
-hi def link User1 TablineFill
-let s:cherry = emoji#for('cherry_blossom')
-function! MyStatusLine() abort
-  let mode = '   | %{toupper(g:currentmode[mode()])} | '
-  let mod = '%{S_modified()}'
-  let ro  = "%{&readonly ? emoji#for('lock') . ' ' : ''}"
-  let fug = ' %{S_fugitive()}'
-  let sep = ' %= '
+  function! ALEStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
 
-  return mode.' %f %<'.mod.ro.sep.fug.sep.sep.sep
-endfunction
+    return l:counts.total == 0 ? '⁕' : ''
+  endfunction
 
-" Note that the "%!" expression is evaluated in the context of the
-" current window and buffer, while %{} items are evaluated in the
-" context of the window that the statusline belongs to.
-set statusline=%!MyStatusLine()
+  function! S_modified() abort
+    if &modified
+      return emoji#for('raising_hand').' '
+    elseif !&modifiable
+      return emoji#for('construction').' '
+    else
+      return ''
+    endif
+  endfunction
+
+  function! S_fugitive() abort
+    if !exists('g:loaded_fugitive')
+      return ''
+    endif
+    let head = fugitive#head()
+    if empty(head)
+      return ''
+    else
+      return head == 'master' ? emoji#for('crown') : emoji#for('hibiscus').'['.head.']'
+    endif
+  endfunction
+
+  let sep = '  '
+
+  set laststatus=2
+  set statusline=%<%f
+  set statusline+=%w%h%{sep}
+
+  set statusline+=%{S_modified()}%{sep}
+  set statusline+=%{S_fugitive()}%{sep}
+
+  set statusline+=\%=\%#StatusLineOk#%{ALEStatus()}
+  set statusline+=\%#StatusLineError#%{ALEErrors()}
+  set statusline+=\%#StatusLineWarning#%{ALEWarnings()}
 endif
 
 " Todo
@@ -639,23 +714,3 @@ function! s:todo() abort
   endif
 endfunction
 command! Todo call s:todo()
-
-" Colour Schemes
-" ----------------------------------------------------------------------------
-function! s:ToggleColorScheme() abort
-  let current_colorscheme = g:colors_name
-  if current_colorscheme == "seoul256"
-    colorscheme seoul256-light
-    set background=light
-  else
-    colorscheme seoul256
-    set background=dark
-  endif
-endfunction
-map <silent> <F9> :call <SID>ToggleColorScheme()<CR>
-
-function! s:SynGroup() abort
-    let l:s = synID(line('.'), col('.'), 1)
-    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
-endfunction
-map <silent> <Leader>hg :call <SID>SynGroup()<CR>
