@@ -3,7 +3,7 @@ function new-tmux-from-dir-name {
 }
 
 function aoj-downloader() {
-  youtube-dl -o "~/Desktop/aoj/%(title)s" "https://view.vzaar.com/$1" --referer "https://www.artofjiujitsu.com"
+  youtube-dl -o "~/Documents/AOJ/%(title)s" "https://view.vzaar.com/$1" --referer "https://www.artofjiujitsu.com"
 }
 
 function aoj() {

@@ -11,11 +11,11 @@ if has('nvim')
     autocmd VimEnter * silent! PlugInstall
   endif
 else
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source ~/.vimrc
-endif
+  if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+          \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source ~/.vimrc
+  endif
 endif
 call plug#begin()
 
@@ -33,14 +33,16 @@ Plug 'andreypopp/vim-colors-plain'
 Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/vim-emoji'
 Plug 'sonjapeterson/1989.vim'
+Plug 'Lokaltog/vim-monotone'
+
 
 " Syntax / Language specific
 " ----------------------------------------------------------------------------
 Plug 'ap/vim-css-color'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'sheerun/vim-polyglot'
-Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'HerringtonDarkholme/yats.vim' "typescript syntax
+Plug 'shmup/vim-sql-syntax'
 
 " Tim Pope
 " ----------------------------------------------------------------------------
@@ -67,7 +69,6 @@ Plug 'terryma/vim-multiple-cursors'
 
 " Documentation / Generation / Code quality of life
 " ----------------------------------------------------------------------------
-Plug 'airblade/vim-gitgutter'
 Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
@@ -94,23 +95,21 @@ augroup nerd_loader
 augroup END
 
 if has('nvim')
+  Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
   let g:deoplete#enable_at_startup = 1
   let g:deoplete#enable_smart_case = 1
 
-  Plug 'Shougo/neosnippet.vim'
-  Plug 'Shougo/neosnippet-snippets'
+  let g:python_host_prog  = '/usr/local/bin/python'
+  let g:python3_host_prog = '/usr/local/bin/python3'
 
-  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+  Plug 'Shougo/neosnippet.vim'
 
   Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ }
-endif
-
-if !has('nvim')
-  Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'typescript'], 'do':'npm install' }
+        \ 'branch': 'next',
+        \ 'do': 'bash install.sh',
+        \ }
 endif
 
 call plug#end()
@@ -128,10 +127,8 @@ if !exists('g:syntax_on') " https://stackoverflow.com/a/33380495/1355087
 endif
 let g:seoul256_background = 236
 let g:seoul256_light_background = 253
-set background=dark
-colorscheme plain
-colorscheme seoul256
-"colorscheme solarized
+set background=light
+colorscheme seoul256-light
 
 let &t_ut=''
 
@@ -358,7 +355,7 @@ let g:multi_cursor_quit_key='<Esc>'
 " Hide statusline of terminal buffer
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 nnoremap <C-p> :Files<cr>
 
@@ -380,8 +377,8 @@ let g:fzf_colors =
 " JavaScript
 " ----------------------------------------------------------------------------
 let g:javascript_plugin_jsdoc = 1
-let g:used_javascript_libs = 'underscore,backbone,react,flux,chai,handlebars,jquery,jasmine'
-let g:jsx_ext_required = 0
+let g:used_javascript_libs = 'underscore,backbone,react,flux,chai,handlebars,jquery,jasmine,ramda'
+let g:jsx_ext_required = 1
 
 " CamelCaseMotion
 " ----------------------------------------------------------------------------
@@ -419,10 +416,12 @@ let g:go_snippet_engine = "neosnippet"
 " emmet-vim
 " ----------------------------------------------------------------------------
 let g:user_emmet_settings = {
-\  'javascript.jsx' : {
-\      'extends' : 'jsx',
-\  },
-\}
+      \  'javascript.jsx' : {
+      \      'extends' : 'jsx',
+      \  },
+      \}
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
 
 " tagbar.vim
 " ----------------------------------------------------------------------------
@@ -463,23 +462,25 @@ let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '⚠'
 let g:ale_linters = {
       \'javascript': ['eslint'],
-      \'typescript': [''],
+      \'javascript.jsx': ['eslint'],
+      \'typescript': ['tslint'],
       \'html': [''],
       \'scss': ['sasslint'],
       \}
 let g:ale_fixers = {
-\   'markdown': ['prettier'],
-\   'html': ['prettier'],
-\   'gohtmltmpl': ['prettier'],
-\   'javascript': ['prettier'],
-\   'typescript': ['prettier'],
-\   'json': ['prettier'],
-\   'css': ['prettier'],
-\   'scss': ['prettier']
-\}
+      \   'markdown': ['prettier'],
+      \   'html': ['prettier'],
+      \   'javascript': ['prettier'],
+      \   'javascript.jsx': ['prettier'],
+      \   'typescript': ['prettier'],
+      \   'json': ['prettier'],
+      \   'css': ['prettier'],
+      \   'scss': ['prettier']
+      \}
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_javascript_eslint_use_global = 1
 let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
+let g:ale_typescript_tsserver_use_global = 1
 let g:ale_fix_on_save = 1
 let g:ale_sign_column_always = 1
 let g:ale_lint_delay = 1000
@@ -490,7 +491,6 @@ highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 hi ALEErrorSign guifg=#DF8C8C
 hi ALEWarningSign guifg=#F2C38F
-let g:javascript_plugin_flow = 1
 
 " goyo.vim + limelight.vim
 " ----------------------------------------------------------------------------
@@ -557,22 +557,24 @@ autocmd QuickFixCmdPost    l* nested lwindow
 
 " vim-slash
 " ----------------------------------------------------------------------------
-if has('timers') && !has('nvim')
+if has('timers')
   noremap <expr> <plug>(slash-after) slash#blink(2, 50)
 endif
 
-" tern
+" nvim-typescript
 " ----------------------------------------------------------------------------
-nnoremap td :TernDef<CR>
+let g:nvim_typescript#max_completion_detail = 100
+let g:nvim_typescript#type_info_on_hold = 1
+let g:nvim_typescript#signature_complete = 1
 
 " deoplete
 " ----------------------------------------------------------------------------
 " Disable deoplete when in multi cursor mode
 function! Multiple_cursors_before()
-    let b:deoplete_disable_auto_complete = 1
+  let b:deoplete_disable_auto_complete = 1
 endfunction
 function! Multiple_cursors_after()
-    let b:deoplete_disable_auto_complete = 0
+  let b:deoplete_disable_auto_complete = 0
 endfunction
 
 imap <expr><TAB>
@@ -584,11 +586,7 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 
 let g:deoplete#sources = {}
 call deoplete#custom#source('_',
-            \ 'disabled_syntaxes', ['Comment', 'String'])
-
-let g:deoplete#sources.javascript = ['LanguageClient']
-let g:deoplete#sources.sh = ['LanguageClient']
-let g:deoplete#sources.vim = ['Vim']
+      \ 'disabled_syntaxes', ['Comment', 'String'])
 
 let g:deoplete#enable_refresh_always = 0
 let g:deoplete#enable_camel_case = 1
@@ -596,24 +594,9 @@ let g:deoplete#skip_chars = ['(', ')', '<', '>']
 let g:deoplete#tag#cache_limit_size = 800000
 let g:deoplete#file#enable_buffer_path = 1
 
-let g:deoplete#sources#ternjs#timeout = 3
-let g:deoplete#sources#ternjs#types = 1
-let g:deoplete#sources#ternjs#docs = 1
-
-let g:deoplete#omni#functions = get(g:, 'deoplete#omni#functions', {})
-let g:deoplete#omni#functions.css = 'csscomplete#CompleteCSS'
-let g:deoplete#omni#functions.html = 'htmlcomplete#CompleteTags'
-let g:deoplete#omni#functions.markdown = 'htmlcomplete#CompleteTags'
-
 let g:deoplete#omni_patterns = get(g:, 'deoplete#omni_patterns', {})
 let g:deoplete#omni_patterns.html = '<[^>]*'
 
-let g:deoplete#omni#input_patterns = get(g:, 'deoplete#omni#input_patterns', {})
-let g:deoplete#omni#input_patterns.xml = '<[^>]*'
-let g:deoplete#omni#input_patterns.md = '<[^>]*'
-let g:deoplete#omni#input_patterns.css  = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-let g:deoplete#omni#input_patterns.scss = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-let g:deoplete#omni#input_patterns.sass = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
 
 " neosnippet
 " ----------------------------------------------------------------------------
@@ -621,20 +604,30 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 let g:neosnippet#enable_completed_snippet = 1
+let g:neosnippet#disable_runtime_snippets = {
+      \   '_' : 1,
+      \ }
+let g:neosnippet#scope_aliases = {}
+let g:neosnippet#scope_aliases['javascript'] = 'javascript,javascript.jsx'
+let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
 
-" Language Servers
+" LanguageClient
 " ----------------------------------------------------------------------------
 let g:LanguageClient_autoStart = 1
-
+let g:LanguageClient_serverCommands = {}
 let g:LanguageClient_serverCommands = {
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'sh': ['bash-language-server', 'start'],
-    \ }
+      \ 'go': ['go-langserver'],
+      \ 'javascript': ['javascript-typescript-stdio'],
+      \ 'javascript.jsx': ['javascript-typescript-stdio'],
+      \ }
+
+nnoremap <silent> th :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> td :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> tr :call LanguageClient#textDocument_rename()<CR>
 
 " STATUS LINE
 " ----------------------------------------------------------------------------
 if has('statusline')
-
   function! ALEWarnings() abort
     let l:counts = ale#statusline#Count(bufnr(''))
     let l:all_errors = l:counts.error + l:counts.style_error

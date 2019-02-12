@@ -3,8 +3,8 @@
   clean = git media clean %f
   smudge = git media smudge %f
 [user]
-  email = TomSpeak@users.noreply.github.com
-  name = Tom Speak
+	email = TomSpeak@users.noreply.github.com
+	name = Tom Speak
 [push]
   default = simple
 [alias]
@@ -68,3 +68,8 @@
   autocorrect = 1
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
