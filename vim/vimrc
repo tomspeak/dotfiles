@@ -34,6 +34,8 @@ Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/vim-emoji'
 Plug 'sonjapeterson/1989.vim'
 Plug 'Lokaltog/vim-monotone'
+Plug 'morhetz/gruvbox'
+Plug 'tomspeak/vim-colors-paramount'
 
 
 " Syntax / Language specific
@@ -43,12 +45,19 @@ Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'sheerun/vim-polyglot'
 Plug 'HerringtonDarkholme/yats.vim' "typescript syntax
 Plug 'shmup/vim-sql-syntax'
+Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install()} }
+Plug 'leafgarland/typescript-vim', {'for': ['typescript', 'typescript.tsx']}
+Plug 'ianks/vim-tsx', { 'for': 'typescript.tsx' }
+Plug 'jxnblk/vim-mdx-js'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'neoclide/vim-jsx-improve'
 
 " Tim Pope
 " ----------------------------------------------------------------------------
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-sensible'
@@ -76,7 +85,6 @@ Plug 'w0rp/ale'
 
 " Utilities
 " ----------------------------------------------------------------------------
-Plug 'editorconfig/editorconfig-vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -95,21 +103,7 @@ augroup nerd_loader
 augroup END
 
 if has('nvim')
-  Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#enable_smart_case = 1
-
-  let g:python_host_prog  = '/usr/local/bin/python'
-  let g:python3_host_prog = '/usr/local/bin/python3'
-
   Plug 'Shougo/neosnippet.vim'
-
-  Plug 'autozimu/LanguageClient-neovim', {
-        \ 'branch': 'next',
-        \ 'do': 'bash install.sh',
-        \ }
 endif
 
 call plug#end()
@@ -128,7 +122,8 @@ endif
 let g:seoul256_background = 236
 let g:seoul256_light_background = 253
 set background=light
-colorscheme seoul256-light
+colorscheme paramount
+let g:gruvbox_contrast_light = 'medium'
 
 let &t_ut=''
 
@@ -145,6 +140,8 @@ set shortmess=aIT
 set hlsearch " CTRL-L / CTRL-R W
 set incsearch
 set hidden
+set shortmess=aFc "https://github.com/neoclide/coc.nvim/issues/338#issuecomment-453981204
+set cmdheight=1
 set ignorecase smartcase
 set wildmenu
 set wildmode=full
@@ -207,8 +204,9 @@ set fillchars=""
 hi! EndOfBuffer guifg=bg "remove ~ gutter when file is too short for screen
 set splitbelow
 set splitright
+set updatetime=300 "make coc.vim show errors faster
 
-" ----------------------------------------------------------------------------
+"----------------------------------------------------------------------------
 " UI
 " ----------------------------------------------------------------------------
 set numberwidth=5
@@ -216,8 +214,9 @@ set guioptions-=r " disable right scroll in mac vim
 set guioptions-=L "disable left scroll in macvim
 set linespace=4
 set cursorline
+set cmdheight=2 "so coc.vim properly shows errors
 
-" ----------------------------------------------------------------------------
+"----------------------------------------------------------------------------
 " Formatting
 " ----------------------------------------------------------------------------
 set expandtab
@@ -458,14 +457,13 @@ let g:tagbar_type_go = {
 
 " ale.vim
 " ----------------------------------------------------------------------------
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
 let g:ale_linters = {
       \'javascript': ['eslint'],
       \'javascript.jsx': ['eslint'],
-      \'typescript': ['tslint'],
-      \'html': [''],
-      \'scss': ['sasslint'],
+      \'typescript': ['eslint', 'tslint'],
+      \'typescript.tsx': ['eslint', 'tslint'],
+      \'html': [],
+      \'scss': [],
       \}
 let g:ale_fixers = {
       \   'markdown': ['prettier'],
@@ -473,19 +471,22 @@ let g:ale_fixers = {
       \   'javascript': ['prettier'],
       \   'javascript.jsx': ['prettier'],
       \   'typescript': ['prettier'],
+      \   'typescript.jsx': ['prettier'],
       \   'json': ['prettier'],
       \   'css': ['prettier'],
       \   'scss': ['prettier']
       \}
-let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_javascript_eslint_use_global = 1
-let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
 let g:ale_typescript_tsserver_use_global = 1
 let g:ale_fix_on_save = 1
 let g:ale_sign_column_always = 1
 let g:ale_lint_delay = 1000
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 hi clear SignColumn
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
@@ -567,37 +568,6 @@ let g:nvim_typescript#max_completion_detail = 100
 let g:nvim_typescript#type_info_on_hold = 1
 let g:nvim_typescript#signature_complete = 1
 
-" deoplete
-" ----------------------------------------------------------------------------
-" Disable deoplete when in multi cursor mode
-function! Multiple_cursors_before()
-  let b:deoplete_disable_auto_complete = 1
-endfunction
-function! Multiple_cursors_after()
-  let b:deoplete_disable_auto_complete = 0
-endfunction
-
-imap <expr><TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ neosnippet#expandable_or_jumpable() ?
-      \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-let g:deoplete#sources = {}
-call deoplete#custom#source('_',
-      \ 'disabled_syntaxes', ['Comment', 'String'])
-
-let g:deoplete#enable_refresh_always = 0
-let g:deoplete#enable_camel_case = 1
-let g:deoplete#skip_chars = ['(', ')', '<', '>']
-let g:deoplete#tag#cache_limit_size = 800000
-let g:deoplete#file#enable_buffer_path = 1
-
-let g:deoplete#omni_patterns = get(g:, 'deoplete#omni_patterns', {})
-let g:deoplete#omni_patterns.html = '<[^>]*'
-
-
 " neosnippet
 " ----------------------------------------------------------------------------
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -610,20 +580,6 @@ let g:neosnippet#disable_runtime_snippets = {
 let g:neosnippet#scope_aliases = {}
 let g:neosnippet#scope_aliases['javascript'] = 'javascript,javascript.jsx'
 let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
-
-" LanguageClient
-" ----------------------------------------------------------------------------
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_serverCommands = {}
-let g:LanguageClient_serverCommands = {
-      \ 'go': ['go-langserver'],
-      \ 'javascript': ['javascript-typescript-stdio'],
-      \ 'javascript.jsx': ['javascript-typescript-stdio'],
-      \ }
-
-nnoremap <silent> th :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> td :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> tr :call LanguageClient#textDocument_rename()<CR>
 
 " STATUS LINE
 " ----------------------------------------------------------------------------
@@ -707,3 +663,70 @@ function! s:todo() abort
   endif
 endfunction
 command! Todo call s:todo()
+
+
+
+" coc.vim
+"
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> for trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gh <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+augroup mygroup
+  autocmd!
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+let g:lightline = {
+      \ 'colorscheme': 'seoul256',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ],
+      \   'right': [ [ ],
+      \              [ ],
+      \              [ ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status'
+      \ },
+      \ }

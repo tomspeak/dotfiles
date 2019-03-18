@@ -1,7 +1,8 @@
 snippet console-log
 alias cl
 options head
-  console.log(${0:TARGET});
+  console.log(${1:TARGET});
+  ${0}
 
 snippet console-error
 alias ce
@@ -16,3 +17,10 @@ alias try
   } catch(e) {
     ${2: error}
   }
+
+snippet styled-component
+alias sc
+options head
+  export const ${1: name} = styled.${2: type}\`
+    ${0}
+  \`;
