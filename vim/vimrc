@@ -414,13 +414,15 @@ let g:go_snippet_engine = "neosnippet"
 
 " emmet-vim
 " ----------------------------------------------------------------------------
-let g:user_emmet_settings = {
-      \  'javascript.jsx' : {
-      \      'extends' : 'jsx',
-      \  },
-      \}
-let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+"let g:user_emmet_settings = {
+      "\  'javascript.jsx' : {
+      "\      'extends' : 'jsx',
+      "\  },
+      "\  'typescript.tsx' : {
+      "\      'extends' : 'jsx',
+      "\  },
+      "\}
+"let g:user_emmet_install_global = 0
 
 " tagbar.vim
 " ----------------------------------------------------------------------------

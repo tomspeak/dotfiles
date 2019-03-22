@@ -15,3 +15,4 @@ _site/
 .env
 .venv
 .idea/
+.projections.json
