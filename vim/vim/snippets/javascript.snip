@@ -22,5 +22,38 @@ snippet styled-component
 alias sc
 options head
   export const ${1: name} = styled.${2: type}\`
-    ${0}
+    ${3:TARGET}
   \`;
+
+
+snippet react-functional
+alias rfc
+options head
+  import * as React from 'react';
+
+  interface Props {};
+
+  const ${1: component} = ({}: Props) => {
+    return (
+      <h1>Hello World</h1>
+    );
+  }
+
+  export default $1
+
+
+snippet i
+alias import
+options head
+  import ${1: file} from '${2: package}';
+
+snippet ia
+alias import-as
+options head
+  import * as ${1: file} from '${2: package}';
+
+snippet ir
+alias import-react
+options head
+  import * as React from 'react';
+

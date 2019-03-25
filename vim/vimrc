@@ -36,6 +36,10 @@ Plug 'sonjapeterson/1989.vim'
 Plug 'Lokaltog/vim-monotone'
 Plug 'morhetz/gruvbox'
 Plug 'tomspeak/vim-colors-paramount'
+if exists('##TextYankPost')
+  Plug 'machakann/vim-highlightedyank'
+  let g:highlightedyank_highlight_duration = 400
+endif
 
 
 " Syntax / Language specific
@@ -52,6 +56,7 @@ Plug 'jxnblk/vim-mdx-js'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'neoclide/vim-jsx-improve'
 
+
 " Tim Pope
 " ----------------------------------------------------------------------------
 Plug 'tpope/vim-dispatch'
@@ -64,6 +69,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-eunuch'
 
 " Movement
 " ----------------------------------------------------------------------------
@@ -338,6 +344,7 @@ nnoremap q: :q
 " NerdTree
 " ----------------------------------------------------------------------------
 map - :NERDTreeToggle<CR>
+map _ :NERDTreeFind %<CR>
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeWinSize=30
 
@@ -563,6 +570,15 @@ autocmd QuickFixCmdPost    l* nested lwindow
 if has('timers')
   noremap <expr> <plug>(slash-after) slash#blink(2, 50)
 endif
+
+" php
+" ----------------------------------------------------------------------------
+augroup PHP
+  autocmd!
+  autocmd FileType php setlocal iskeyword+=$
+augroup end
+
+let g:php_var_selector_is_identifier = 1
 
 " nvim-typescript
 " ----------------------------------------------------------------------------
