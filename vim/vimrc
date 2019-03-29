@@ -40,12 +40,12 @@ if exists('##TextYankPost')
   Plug 'machakann/vim-highlightedyank'
   let g:highlightedyank_highlight_duration = 400
 endif
+Plug 'RRethy/vim-hexokinase'
+Plug 'nightsense/cosmic_latte'
 
 
 " Syntax / Language specific
 " ----------------------------------------------------------------------------
-Plug 'ap/vim-css-color'
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'sheerun/vim-polyglot'
 Plug 'HerringtonDarkholme/yats.vim' "typescript syntax
 Plug 'shmup/vim-sql-syntax'
@@ -91,6 +91,7 @@ Plug 'w0rp/ale'
 
 " Utilities
 " ----------------------------------------------------------------------------
+Plug 'janko/vim-test'
 Plug 'jremmen/vim-ripgrep'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -128,10 +129,15 @@ endif
 let g:seoul256_background = 236
 let g:seoul256_light_background = 253
 set background=light
-colorscheme paramount
+"colorscheme paramount
+colorscheme cosmic_latte
 let g:gruvbox_contrast_light = 'medium'
 
 let &t_ut=''
+
+" allows local vimrc files to be loaded, but only allows secure commands
+set exrc
+set secure
 
 set number " line numbers
 set termguicolors
@@ -337,16 +343,35 @@ endif
 "disable the command window, that annoying nuisance.
 nnoremap q: :q
 
-" ----------------------------------------------------------------------------
+"easily edit .vimrc
+nmap <Leader>ev :tabedit ~/dotfiles/vim/vimrc<CR>
+
+"easily source .vimrc
+nmap <Leader>sv :source ~/dotfiles/vim/vimrc<CR>
+
+"easily edit snippets
+nmap <Leader>es :tabedit ~/dotfiles/vim/vim/snippets/<CR>
+nnoremap <leader>rs :call neosnippet#variables#set_snippets({})<CR>
+
+"----------------------------------------------------------------------------
 " PLUGINS
 " ----------------------------------------------------------------------------
 
 " NerdTree
 " ----------------------------------------------------------------------------
 map - :NERDTreeToggle<CR>
-map _ :NERDTreeFind %<CR>
+map _ :call ToggleNERDTreeFind()<CR>
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeWinSize=30
+
+function! ToggleNERDTreeFind()
+    if !g:NERDTree.IsOpen()
+        execute ':NERDTreeToggle'
+        execute ':NERDTreeFind %'
+    else
+        execute ':NERDTreeFind %'
+    endif
+endfunction
 
 " MultiCursor
 " ----------------------------------------------------------------------------
@@ -355,6 +380,18 @@ let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
+
+
+" vim-test
+" ----------------------------------------------------------------------------
+let test#strategy = "neovim"
+let test#neovim#term_position = "vertical"
+
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
 
 " FZF
 " ----------------------------------------------------------------------------
@@ -571,6 +608,12 @@ if has('timers')
   noremap <expr> <plug>(slash-after) slash#blink(2, 50)
 endif
 
+" vim-hexokinase
+" ----------------------------------------------------------------------------
+let g:Hexokinase_highlighters = ['virtual']
+let g:Hexokinase_refreshEvents = ['BufWritePost']
+let g:Hexokinase_ftAutoload = ['css', 'html', 'blade', 'scss', 'less', 'typescript', 'typescript.tsx', 'javascript', 'javascript.jsx']
+
 " php
 " ----------------------------------------------------------------------------
 augroup PHP
@@ -642,7 +685,7 @@ if has('statusline')
     if empty(head)
       return ''
     else
-      return head == 'master' ? emoji#for('crown') : emoji#for('hibiscus').'['.head.']'
+      return head == 'master' ? emoji#for('crown') : emoji#for('hibiscus').' ['.head.']'
     endif
   endfunction
 

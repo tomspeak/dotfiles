@@ -1,3 +1,10 @@
+snippet console-group
+alias cg
+options head
+  console.group(${1});
+    console.log(${0});
+  console.groupEnd();
+
 snippet console-log
 alias cl
 options head
@@ -57,3 +64,16 @@ alias import-react
 options head
   import * as React from 'react';
 
+snippet desc
+alias describe-test
+options head
+  describe('${1: description}', () => {
+    ${0}
+  });
+
+snippet t
+alias test
+options head
+  test('${1: description}', () => {
+    ${0}
+  });
