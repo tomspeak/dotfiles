@@ -40,7 +40,6 @@ if exists('##TextYankPost')
   Plug 'machakann/vim-highlightedyank'
   let g:highlightedyank_highlight_duration = 400
 endif
-Plug 'RRethy/vim-hexokinase'
 Plug 'nightsense/cosmic_latte'
 
 
