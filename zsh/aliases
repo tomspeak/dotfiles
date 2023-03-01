@@ -29,9 +29,22 @@ alias tk="tmux kill-session -t"
 alias td="tmux detach"
 alias tat="new-tmux-from-dir-name"
 
-#exa
-alias l="exa -l -a"
-alias ls="echo '-----------Use l, not ls-------'"
-
 #macos
 alias afk="open -a /System/Library/CoreServices/ScreenSaverEngine.app"
+
+#laravel
+alias a="php artisan"
+alias af="php artisan migrate:fresh && php artisan db:seed"
+function artisanMake() { php artisan make:$@ }
+alias am="artisanMake"
+alias al="php artisan list"
+alias aq="php artisan queue:work"
+alias at="php artisan test"
+alias atink="php artisan tinker"
+
+#composer
+alias c="composer"
+alias ci="composer install"
+alias cr="composer require"
+alias crd="composer require --dev"
+

@@ -1,7 +1,6 @@
 ZSH_DISABLE_COMPFIX=true
 
-autoload -U promptinit; promptinit
-prompt pure
+eval "$(starship init zsh)"
 
 export DOTFILES="$HOME/dotfiles"
 export ZSH=$HOME/.oh-my-zsh
@@ -15,7 +14,7 @@ export PATH="./node_modules/.bin:$PATH"
 # put things in ~/.bin into my $PATH
 export PATH="$HOME/.bin:$PATH"
 
-plugins=(zsh-autosuggestions git npm osx tmux tig vagrant node colored-man-pages docker fzf laravel yarn)
+plugins=(git npm macos tmux tig vagrant node colored-man-pages docker fzf laravel yarn)
 
 TZ="Europe/London"
 HISTFILE=$HOME/.zhistory
@@ -36,7 +35,7 @@ export GIT_MERGE_AUTOEDIT
 # the one true way
 export EDITOR='nvim'
 export VEDITOR='code'
-#export TERM=xterm-256color
+export TERM=xterm-kitty
 
 # heroku toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -56,4 +55,3 @@ source $HOME/dotfiles/zsh/functions
 # Setting ag as the default source for fzf
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-

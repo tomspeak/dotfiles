@@ -129,7 +129,7 @@ if !exists('g:syntax_on') " https://stackoverflow.com/a/33380495/1355087
 endif
 let g:seoul256_background = 236
 let g:seoul256_light_background = 253
-set background=light
+set background=dark
 "colorscheme paramount
 colorscheme cosmic_latte
 let g:gruvbox_contrast_light = 'medium'

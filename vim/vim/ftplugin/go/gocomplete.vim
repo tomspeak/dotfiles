@@ -1,1 +1,0 @@
-/Users/t/.config/nvim/plugged/gocode/vim/ftplugin/go/gocomplete.vim
