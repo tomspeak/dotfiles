@@ -1,9 +1,0 @@
-caarlos0/open-pr kind:path
-caarlos0/zsh-mkc
-felixr/docker-zsh-completion
-mafredri/zsh-async
-zsh-users/zsh-autosuggestions
-zsh-users/zsh-completions
-
-sindresorhus/pure
-zsh-users/zsh-syntax-highlighting
