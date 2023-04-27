@@ -18,12 +18,6 @@ map("n", "<Right>", ":3wincmd ><CR>", { noremap = true })
 map("n", "<Up>", ":3wincmd +<CR>", { noremap = true })
 map("n", "<Down>", ":3wincmd -<CR>", { noremap = true })
 
--- Move between windows with CTRL-HJKL
-map("n", "<C-h>", "<C-w>h", { noremap = true })
-map("n", "<C-j>", "<C-w>j", { noremap = true })
-map("n", "<C-k>", "<C-w>k", { noremap = true })
-map("n", "<C-l>", "<C-w>l", { noremap = true })
-
 -- Close quickfix window
 map("n", "<leader>q", ":ccl<CR>", { noremap = true })
 
@@ -49,7 +43,13 @@ map("n", "-", [[<Cmd>NvimTreeToggle<CR>]], { noremap = true })
 map("n", "_", [[<Cmd>NvimTreeFindFile<CR>]], { noremap = true })
 
 -- Navigator
+-- Move between windows with CTRL-HJKL
 map("n", "<C-h>", [[<CMD>NavigatorLeft<CR>]], { noremap = true })
 map("n", "<C-l>", [[<CMD>NavigatorRight<CR>]], { noremap = true })
 map("n", "<C-k>", [[<CMD>NavigatorUp<CR>]], { noremap = true })
 map("n", "<C-j>", [[<CMD>NavigatorDown<CR>]], { noremap = true })
+
+-- Copilot
+vim.cmd([[imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")]])
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_filetypes = { xml = false, markdown = false }

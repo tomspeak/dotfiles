@@ -40,6 +40,7 @@ return require("packer").startup(function()
 	use({ "nvim-lualine/lualine.nvim", requires = { "j-hui/fidget.nvim" } })
 	use("L3MON4D3/LuaSnip")
 	use("saadparwaiz1/cmp_luasnip")
+	use("github/copilot.vim")
 
 	-- Helpers
 	use("windwp/nvim-autopairs")

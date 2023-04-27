@@ -81,6 +81,7 @@ cmp.setup({
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = true,
 		}),
+		["<C-e>"] = cmp.mapping.abort(),
 	},
 	sources = {
 		{ name = "luasnip" },

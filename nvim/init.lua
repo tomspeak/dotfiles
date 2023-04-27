@@ -2,7 +2,6 @@ require("plugins")
 require("autocmd")
 require("settings")
 require("commands")
-require("mappings")
 require("lsp")
 require("snippets")
 
@@ -17,3 +16,5 @@ require("_autopairs")
 require("_Comment")
 require("_null-ls")
 require("_fidget")
+
+require("mappings")
