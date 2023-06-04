@@ -6,6 +6,7 @@ require("lsp")
 require("snippets")
 
 -- Plugin Configs
+require("_ts-autotag")
 require("_navigator")
 require("_cmp")
 require("_treesitter")
@@ -18,3 +19,4 @@ require("_null-ls")
 require("_fidget")
 
 require("mappings")
+

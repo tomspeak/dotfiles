@@ -3,14 +3,17 @@ local cmd = vim.api.nvim_command
 
 vim.cmd([[syntax enable]])
 
-require("catppuccin").setup({
-	background = { -- :h background
-		light = "latte",
-		dark = "frappe",
-	},
-})
-vim.cmd("colorscheme catppuccin")
-opt.background = "light"
+-- require("catppuccin").setup({
+-- 	background = { -- :h background
+-- 		light = "latte",
+-- 		dark = "frappe",
+-- 	},
+-- })
+-- vim.cmd("colorscheme catppuccin")
+-- opt.background = "light"
+
+require('github-theme').setup()
+vim.cmd("colorscheme github_light_tritanopia")
 
 opt.termguicolors = true
 opt.tabstop = 2

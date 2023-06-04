@@ -1,11 +1,27 @@
 local treesitter = require("nvim-treesitter.configs")
 
-treesitter.setup({
+local options = {
+	ensure_installed = {
+		'lua',
+		'vim',
+		'go',
+		'toml',
+		'yaml',
+		'css',
+		'tsx',
+		'typescript',
+		'html',
+		'json',
+		'zig',
+		'rust',
+		'markdown'
+	},
 	highlight = {
 		enable = true,
 	},
 	autotag = {
 		enable = true,
+		filetypes = { 'html', 'tsx', 'xml', 'markdown' }
 	},
 	context_commentstring = {
 		enable = true,
@@ -20,4 +36,7 @@ treesitter.setup({
 			},
 		},
 	},
-})
+}
+
+treesitter.setup(options)
+require('nvim-ts-autotag').setup()

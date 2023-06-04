@@ -26,8 +26,8 @@ return require("packer").startup(function()
 	-- 	"jesseleite/nvim-noirbuddy",
 	-- 	requires = { "tjdevries/colorbuddy.nvim", branch = "dev" }
 	-- }
-
 	use({ "catppuccin/nvim", as = "catppuccin" })
+	use({ 'projekt0n/github-nvim-theme' })
 
 	-- Core Utility
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
@@ -40,13 +40,13 @@ return require("packer").startup(function()
 	use({ "nvim-lualine/lualine.nvim", requires = { "j-hui/fidget.nvim" } })
 	use("L3MON4D3/LuaSnip")
 	use("saadparwaiz1/cmp_luasnip")
-	use("github/copilot.vim")
 
 	-- Helpers
 	use("windwp/nvim-autopairs")
 	use("JoosepAlviste/nvim-ts-context-commentstring")
 	use("numToStr/Comment.nvim")
 	use("numToStr/Navigator.nvim")
+	use("RRethy/vim-illuminate")
 
 	-- T POPE
 	use("tpope/vim-surround")
@@ -54,5 +54,5 @@ return require("packer").startup(function()
 	use("tpope/vim-sleuth")
 
 	-- Languages
-	use("windwp/nvim-ts-autotag")
+	use { "windwp/nvim-ts-autotag" }
 end)
