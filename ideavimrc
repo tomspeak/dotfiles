@@ -1,0 +1,45 @@
+set ideajoin
+set surround
+set easymotion
+set NERDTree
+
+set incsearch
+set ignorecase
+set smartcase
+set idearefactormode=keep
+set number relativenumber
+
+set clipboard+=unnamed
+set clipboard+=ideaput
+
+let mapleader = " "
+
+" system clipboard
+vmap <leader>y "+y
+vmap <leader>d "+d
+nmap <leader>y "+yy
+nmap <leader>p "+p
+nmap <leader>P "+P
+vmap <leader>p "+p
+vmap <leader>P "+P
+
+" Move around windows
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <TAB> :action NextTab<CR>
+nnoremap <s-TAB> :action PreviousTab<CR>
+
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap <leader>r :action Refactorings.QuickListPopupAction<CR>
+
+nnoremap <c-t> :action ActivateTerminalToolWindow<CR>
+nnoremap <c-v> :action SplitVertically<CR>
+nnoremap <c-x> :action SplitHorizontally<CR>
+
+nnoremap <c-f> :action FindInPath<CR>
+
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
+
