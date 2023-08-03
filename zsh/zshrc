@@ -1,3 +1,4 @@
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
 ZSH_DISABLE_COMPFIX=true
 
 eval "$(starship init zsh)"
@@ -14,7 +15,9 @@ export PATH="./node_modules/.bin:$PATH"
 # put things in ~/.bin into my $PATH
 export PATH="$HOME/.bin:$PATH"
 
-plugins=(git npm macos tmux tig vagrant node colored-man-pages docker fzf laravel yarn)
+# Go
+export GOPRIVATE="github.com/BeReal-App"
+export PATH="${HOME}/go/bin:${PATH}"
 
 TZ="Europe/London"
 HISTFILE=$HOME/.zhistory

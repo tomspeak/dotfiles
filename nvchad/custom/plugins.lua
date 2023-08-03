@@ -191,8 +191,12 @@ local plugins = {
 		end,
 	},
 
-	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-
+	{
+		"shaun-mathew/Chameleon.nvim",
+		config = function()
+			require("chameleon").setup()
+		end,
+	},
 	-- {
 	--   "nvim-neotest/neotest",
 	--   ft = "go",
