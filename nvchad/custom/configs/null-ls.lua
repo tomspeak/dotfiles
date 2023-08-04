@@ -14,12 +14,15 @@ local sources = {
 	f.goimports,
 	f.buf,
 	f.eslint_d,
+	f.yamlfmt,
+	f.shfmt,
 
 	l.shellcheck,
 	l.buf,
 	l.yamllint,
 	l.eslint_d,
 	l.golangci_lint,
+	l.jsonlint,
 }
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})

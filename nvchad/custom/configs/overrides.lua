@@ -54,26 +54,34 @@ M.mason = {
 		"lua-language-server",
 		"stylua",
 
+		"prettierd",
+		"eslint_d",
+
 		-- web dev stuff
 		"css-lsp",
 		"html-lsp",
 		"typescript-language-server",
-		"prettier",
 		"eslint-lsp",
 		"jsonlint",
 		"json-lsp",
 		"yaml-language-server",
+		"tailwindcss-language-server",
 
 		"rust-analyzer",
 
 		-- go
 		"gopls",
+		"gofumpt",
 		"goimports",
 		"golines",
 		"gomodifytags",
 		"impl",
 		"iferr",
 		"staticcheck",
+
+		"shellcheck",
+		"shfmt",
+		"yamlfmt",
 	},
 
 	ui = {
