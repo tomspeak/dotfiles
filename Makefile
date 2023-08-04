@@ -17,7 +17,7 @@ symlinks:
 	@ln -sf $(DIR)/git/gitignore_global ~/.gitignore_global
 	@ln -sf $(DIR)/bin ~/.bin
 	@ln -sf $(DIR)/npmrc/npmrc ~/.npmrc
-	@ln -sf $(DIR)/nvim/custom ~/.config/nvim/lua/
+	@ln -sf $(DIR)/nvchad/custom ~/.config/nvim/lua/
 	@ln -sf $(DIR)/kitty ~/.config
 	@ln -sf $(DIR)/karabiner ~/.config
 	@ln -sf $(DIR)/starship.toml ~/.config
