@@ -12,6 +12,8 @@ set number relativenumber
 set clipboard+=unnamed
 set clipboard+=ideaput
 
+set scrolloff=999
+
 let mapleader = " "
 
 " system clipboard
