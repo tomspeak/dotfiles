@@ -3,7 +3,7 @@
   clean = git media clean %f
   smudge = git media smudge %f
 [user]
-	email = TomSpeak@users.noreply.github.com
+	email = tom@bere.al
 	name = Tom Speak
 [push]
   default = simple
@@ -28,9 +28,9 @@
   st = status --short --branch
   b = branch
   newb = checkout -b
-  plum = pull upstream master
-  rum = pull --rebase upstream master
-  rom = pull --rebase origin master
+  plum = pull upstream main
+  rum = pull --rebase upstream main
+  rom = pull --rebase origin main
   sur = submodule update --remote
   l = log --pretty=format:"%C(green)%h%C(bold)%d\\ %Creset%s%C(white)\\ [%cn]" --decorate --numstat
   l1 = log --pretty=oneline

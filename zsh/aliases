@@ -48,3 +48,12 @@ alias ci="composer install"
 alias cr="composer require"
 alias crd="composer require --dev"
 
+#kube
+alias k="kubectl"
+function kw() {
+  kubectl get pod -n bereal-prod -l app=$@ -w
+}
+alias kw="kw"
+alias kp="kubectl config use-context gke_backend-core-prod_us-central1_prod-usc1-94ar"
+alias kd="kubectl config use-context gke_backend-core-dev_us-central1_dev-usc1-fdqg"
+alias kfchat="pod_name=\$(kubectl get pods -n chat | grep 'chat-moderation-grpc-api' | awk '{print \$1}'); if [ -z \"\$pod_name\" ]; then echo 'Pod not found.'; else kubectl port-forward \"\$pod_name\" -n chat 9999:8080; fi"
