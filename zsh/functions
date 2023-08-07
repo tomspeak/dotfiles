@@ -1,14 +1,3 @@
 function new-tmux-from-dir-name {
   tmux -u new-session -As `basename $PWD`
 }
-
-function aoj-downloader() {
-  youtube-dl -o "~/Documents/AOJ/%(title)s" "https://view.vzaar.com/$1" --referer "https://www.artofjiujitsu.com"
-}
-
-function aoj() {
-  for var in "$@"
-    do
-      aoj-downloader $var
-    done
-}

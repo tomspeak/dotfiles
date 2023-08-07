@@ -13,13 +13,8 @@ source /Users/t/google-cloud-sdk/path.zsh.inc
 
 # execute locally installed npm modules
 export PATH="./node_modules/.bin:$PATH"
-# export GOPATH="$HOME/go"
 # put things in ~/.bin into my $PATH
 export PATH="$HOME/.bin:$PATH"
-
-# Go
-export GOPRIVATE="github.com/BeReal-App"
-export PATH="${HOME}/go/bin:${PATH}"
 
 TZ="Europe/London"
 HISTFILE=$HOME/.zhistory
@@ -66,3 +61,5 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+[ -f $HOME/dotfiles/work ] && source $HOME/dotfiles/zsh/work
