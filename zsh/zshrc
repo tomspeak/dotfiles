@@ -8,8 +8,6 @@ export ZSH=$HOME/.oh-my-zsh
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export PATH=~/.composer/vendor/bin:$PATH
-source /Users/t/google-cloud-sdk/completion.zsh.inc
-source /Users/t/google-cloud-sdk/path.zsh.inc
 
 # execute locally installed npm modules
 export PATH="./node_modules/.bin:$PATH"

@@ -16,6 +16,7 @@ local sources = {
 	f.eslint_d,
 	f.yamlfmt,
 	f.shfmt,
+	f.pint,
 
 	l.shellcheck,
 	l.buf,
@@ -23,6 +24,7 @@ local sources = {
 	l.eslint_d,
 	l.golangci_lint,
 	l.jsonlint,
+	l.phpstan,
 }
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
@@ -30,6 +32,7 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup({
 	debug = true,
 	sources = sources,
+	temp_dir = "/tmp/null-ls/",
 	on_attach = function(client, bufnr)
 		if client.supports_method("textDocument/formatting") then
 			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
