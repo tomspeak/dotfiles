@@ -48,3 +48,11 @@ alias ci="composer install"
 alias cr="composer require"
 alias crd="composer require --dev"
 
+# Zellij
+alias z="zellij";
+alias t="zellij-runner";
+alias tls="zellij list-sessions";
+alias ta="zellij attach ";
+alias tk="zellij kill-session ";
+alias tka="zellij kill-all-sessions";
+alias tt="zellij --session generic --layout terminal";
