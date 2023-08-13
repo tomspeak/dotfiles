@@ -114,20 +114,8 @@ M.nvimtree = {
 		highlight_git = true,
 		icons = {
 			show = {
-				git = true,
-			},
-			glyphs = {
-				git = {
-					unstaged = "",
-					-- unstaged = "",
-					staged = "",
-					unmerged = "",
-					renamed = "➜",
-					-- untracked = "",
-					untracked = "",
-					deleted = "",
-					ignored = "◌",
-				},
+				git = false,
+				file = false,
 			},
 		},
 	},

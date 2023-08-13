@@ -10,7 +10,9 @@ hlchunk.setup({
 		support_filetypes = {
 			"*.ts",
 			"*.js",
-			-- "*.json",
+			"*.json",
+			"*.rs",
+			"*.go",
 			"*.lua",
 			"*.vue",
 		},
