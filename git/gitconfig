@@ -39,7 +39,7 @@
   fuck = reset HEAD^
   loc = "!f(){ git ls-files | egrep \"$1\" | if [ -n \"$2\" ]; then egrep -v \"$2\"; else cat; fi | xargs wc -l; }; f"
   cstats = shortlog -sn
-  pr = "!f(){ git pu && git open-pr }"
+  pr = "!f(){ git pu && gh pr create --web; }; f"
 [color]
   ui = auto
 [color "branch"]
