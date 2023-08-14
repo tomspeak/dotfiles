@@ -27,6 +27,7 @@
   s = status
   st = status --short --branch
   b = branch
+  br = "!f() { git branch --sort=-committerdate | fzf --header 'Checkout Recent Branch' --preview 'git diff --color=always {1}' --pointer='>' | xargs git checkout; }; f"
   newb = checkout -b
   plum = pull upstream main
   rum = pull --rebase upstream main
@@ -62,8 +63,19 @@
 	newNormal = green bold
 	newHighlight = green bold 22
 [core]
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta
 	excludesfile = /Users/t/.gitignore_global
+  blame = delta
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+  line-numbers = true
+  side-by-side = true
+[merge]
+  conflictstyle = diff3 
+[diff]
+    colorMoved = default
 [help]
   autocorrect = 1
 [url "git@github.com:"]
