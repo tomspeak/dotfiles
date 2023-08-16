@@ -49,8 +49,22 @@ M.ui = {
 		icons = true,
 		selected_item_bg = "simple",
 		lspkind_text = true,
-		style = "atom", -- default/flat_light/flat_dark/atom/atom_colored
+		style = "atom_colored", -- default/flat_light/flat_dark/atom/atom_colored
 	},
+
+	nvdash = {
+		load_on_startup = true,
+
+		header = {
+			"“And when he came to,                                         ",
+			"  he was flat on his back on the beach in the freezing sand,  ",
+			"  and it was raining out of a low sky,                        ",
+			"  and the tide was way out.”                                  ",
+		},
+		buttons = {},
+	},
+
+	cheatsheet = { theme = "grid" }, -- simple/grid
 }
 
 M.plugins = "custom.plugins"

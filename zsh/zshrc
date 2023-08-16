@@ -60,4 +60,4 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-[ -f $HOME/dotfiles/work ] && source $HOME/dotfiles/zsh/work
+[ -f $HOME/dotfiles/zsh/work ] && source $HOME/dotfiles/zsh/work
