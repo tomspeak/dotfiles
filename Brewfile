@@ -20,8 +20,6 @@ brew 'youtube-dl'
 brew 'zellij'
 brew 'zsh'
 
-tap 'caskroom/cask'
-
 cask 'bartender'
 cask 'bettertouchtool'
 cask 'dropbox'
