@@ -54,6 +54,7 @@ local plugins = {
 		end,
 	},
 
+	-- the god, tpope
 	{
 		"tpope/vim-surround",
 		lazy = false,
@@ -65,6 +66,18 @@ local plugins = {
 	{
 		"tpope/vim-sleuth",
 		lazy = false,
+	},
+	{
+		"tpope/vim-fugitive",
+		event = "VeryLazy",
+	},
+
+	{
+		"tpope/vim-rhubarb",
+		event = "VeryLazy",
+		dependencies = {
+			"tpope/vim-fugitive",
+		},
 	},
 
 	-- autoclose tags in html, jsx only
@@ -188,19 +201,6 @@ local plugins = {
 		config = function()
 			require("chameleon").setup()
 		end,
-	},
-
-	{
-		"tpope/vim-fugitive",
-		event = "VeryLazy",
-	},
-
-	{
-		"tpope/vim-rhubarb",
-		event = "VeryLazy",
-		dependencies = {
-			"tpope/vim-fugitive",
-		},
 	},
 
 	-- {
