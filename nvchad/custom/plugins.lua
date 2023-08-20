@@ -92,7 +92,7 @@ local plugins = {
 			local auto_dark_mode = require("auto-dark-mode")
 
 			auto_dark_mode.setup({
-				update_interval = 30000,
+				update_interval = 10000,
 				set_dark_mode = function()
 					vim.g.nvchad_theme = "monochrome"
 					require("base46").load_all_highlights()
@@ -184,18 +184,23 @@ local plugins = {
 	},
 
 	{
-		"almo7aya/openingh.nvim",
-		cmd = "OpenInGHFile",
-		config = function()
-			require("almo7aya/openingh.nvim").setup()
-		end,
-	},
-
-	{
 		"shaun-mathew/Chameleon.nvim",
 		config = function()
 			require("chameleon").setup()
 		end,
+	},
+
+	{
+		"tpope/vim-fugitive",
+		event = "VeryLazy",
+	},
+
+	{
+		"tpope/vim-rhubarb",
+		event = "VeryLazy",
+		dependencies = {
+			"tpope/vim-fugitive",
+		},
 	},
 
 	-- {
