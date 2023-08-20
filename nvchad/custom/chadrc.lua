@@ -6,7 +6,7 @@ local highlights = require("custom.highlights")
 
 M.ui = {
 	theme = "penumbra_light",
-	theme_toggle = { "penumbra_light", "penumbra_light" },
+	theme_toggle = { "monochrome", "penumbra_light" },
 	transparency = false,
 
 	hl_override = highlights.override,
