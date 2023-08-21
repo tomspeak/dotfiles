@@ -1,13 +1,18 @@
 local opt = vim.opt
 local cmd = vim.api.nvim_command
--- local autocmd = vim.api.nvim_create_autocmd
+local api = vim.api
 
--- Auto resize panes when resizing nvim window
--- autocmd("VimResized", {
---   pattern = "*",
---   command = "tabdo wincmd =",
--- })
---
+-- Enable spell checking for certain file types
+api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = { "*.txt", "*.md", "*.tex" },
+	callback = function()
+		vim.opt.spell = true
+		vim.opt.spelllang = "en"
+	end,
+})
+
+-- resize neovim split when terminal is resized
+cmd("autocmd VimResized * wincmd =")
 
 opt.title = true
 opt.titlestring = "%t%( %M%)" -- title, modified

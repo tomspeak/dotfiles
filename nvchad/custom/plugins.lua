@@ -220,10 +220,10 @@ local plugins = {
 		event = "LspAttach",
 		opts = {
 			text = {
-				spinner = "pipe", -- animation shown when tasks are ongoing
-				done = "+", -- character shown when all tasks are complete
-				commenced = "Started", -- message shown when task starts
-				completed = "Completed", -- message shown when task completes
+				spinner = "pipe",
+				done = "+",
+				commenced = "Started",
+				completed = "Completed",
 			},
 		},
 	},
@@ -231,19 +231,20 @@ local plugins = {
 	{
 		"mfussenegger/nvim-dap",
 		dependencies = {
-			{
-				"rcarriga/nvim-dap-ui",
-				dependencies = { "theHamsta/nvim-dap-virtual-text", config = true },
-			},
+			{ "theHamsta/nvim-dap-virtual-text", config = true },
+			{ "rcarriga/nvim-dap-ui", config = true },
+			{ "leoluz/nvim-dap-go", config = true, ft = "go" },
+			"folke/neodev.nvim",
 		},
 		config = function()
-			require("custom.configs.dap")
+			local dapui = require("dapui")
+			local virtual_text = require("nvim-dap-virtual-text")
+			local dap_go = require("dap-go")
+
+			dapui.setup()
+			virtual_text.setup()
+			dap_go.setup()
 		end,
-	},
-	{
-		"leoluz/nvim-dap-go",
-		ft = "go",
-		config = true,
 	},
 }
 

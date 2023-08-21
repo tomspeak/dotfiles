@@ -9,13 +9,9 @@ vim.diagnostic.config({
 	},
 }, neotest_ns)
 
-print("hello world!!!!!!")
-
 require("neotest").setup({
 	adapters = {
-		require("neotest-go")({
-			args = { "-count=1", "-coverprofile coverage.out", "-covermode=count" },
-		}),
+		require("neotest-go"),
 		require("neotest-jest")({
 			jestCommand = "npm test --",
 			env = { CI = true },
@@ -49,6 +45,11 @@ require("neotest").setup({
 	output = {
 		enabled = true,
 		open_on_run = true,
+	},
+	quickfix = {
+		open = function()
+			vim.cmd("Trouble quickfix")
+		end,
 	},
 	run = {
 		enabled = true,
