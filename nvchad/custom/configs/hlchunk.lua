@@ -15,6 +15,10 @@ hlchunk.setup({
 			"*.go",
 			"*.lua",
 			"*.vue",
+			"*.rs",
+			"*.php",
+			"*.yaml",
+			"*.toml",
 		},
 		chars = {
 			horizontal_line = "─",
@@ -38,6 +42,7 @@ hlchunk.setup({
 			vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Whitespace")), "fg", "gui"),
 		},
 		exclude_filetype = {
+			git = true,
 			nvdash = true,
 			nvcheatsheet = true,
 			terminal = true,

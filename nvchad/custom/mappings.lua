@@ -19,6 +19,17 @@ M.lspconfig = {
 	},
 }
 
+M.test = {
+	n = {
+		["<leader>nt"] = {
+			function()
+				require("neotest").run.run(vim.fn.expand("%"))
+			end,
+			"󰤑 Run neotest",
+		},
+	},
+}
+
 -- more keybinds!
 
 return M
