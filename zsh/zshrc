@@ -35,7 +35,7 @@ export EDITOR='nvim'
 export VEDITOR='code'
 export TERM=xterm-kitty
 
-plugins=(git npm macos tmux tig vagrant node colored-man-pages docker fzf laravel yarn zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git npm macos tmux tig vagrant node colored-man-pages docker fzf laravel yarn fancy-ctrl-z zsh-autosuggestions zsh-syntax-highlighting)
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[alias]='fg=118,bold'
 ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'

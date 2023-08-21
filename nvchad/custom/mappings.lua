@@ -6,6 +6,7 @@ M.general = {
 		[";"] = { ":", "enter command mode", opts = { nowait = true } },
 		["-"] = { "<cmd> NvimTreeToggle <CR>", "NvimTree Toggle" },
 		["_"] = { "<cmd> NvimTreeFindFile <CR>", "NvimTree Toggle" },
+		["<leader>q"] = { ":q<CR>", "Close window" },
 	},
 }
 
