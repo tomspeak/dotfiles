@@ -213,6 +213,38 @@ local plugins = {
 			require("custom.configs.neotest")
 		end,
 	},
+
+	{
+		"j-hui/fidget.nvim",
+		tag = "legacy",
+		event = "LspAttach",
+		opts = {
+			text = {
+				spinner = "pipe", -- animation shown when tasks are ongoing
+				done = "+", -- character shown when all tasks are complete
+				commenced = "Started", -- message shown when task starts
+				completed = "Completed", -- message shown when task completes
+			},
+		},
+	},
+
+	{
+		"mfussenegger/nvim-dap",
+		dependencies = {
+			{
+				"rcarriga/nvim-dap-ui",
+				dependencies = { "theHamsta/nvim-dap-virtual-text", config = true },
+			},
+		},
+		config = function()
+			require("custom.configs.dap")
+		end,
+	},
+	{
+		"leoluz/nvim-dap-go",
+		ft = "go",
+		config = true,
+	},
 }
 
 return plugins

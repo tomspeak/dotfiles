@@ -78,6 +78,7 @@ M.mason = {
 		"gomodifytags",
 		"impl",
 		"iferr",
+		"delve",
 		"staticcheck",
 
 		"shellcheck",
