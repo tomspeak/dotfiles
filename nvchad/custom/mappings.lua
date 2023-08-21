@@ -21,54 +21,47 @@ M.lspconfig = {
 
 M.test = {
 	n = {
-		{
-			"<leader>tt",
+		["<leader>tt"] = {
 			function()
 				require("neotest").run.run(vim.fn.expand("%"))
 			end,
-			desc = "Run File",
+			"Run File",
 		},
-		{
-			"<leader>tT",
+		["<leader>tT"] = {
 			function()
 				require("neotest").run.run(vim.loop.cwd())
 			end,
-			desc = "Run All Test Files",
+			"Run All Test Files",
 		},
-		{
-			"<leader>tr",
+		["<leader>tr"] = {
 			function()
 				require("neotest").run.run()
 			end,
-			desc = "Run Nearest",
+			"Run Nearest",
 		},
-		{
-			"<leader>ts",
+		["<leader>ts"] = {
 			function()
 				require("neotest").summary.toggle()
 			end,
-			desc = "Toggle Summary",
+			"Toggle Summary",
 		},
-		{
-			"<leader>to",
+		["<leader>to"] = {
 			function()
 				require("neotest").output.open({ enter = true, auto_close = true })
 			end,
-			desc = "Show Output",
+			"Show Output",
 		},
-		{
-			"<leader>tO",
+		["<leader>tO"] = {
 			function()
 				require("neotest").output_panel.toggle()
 			end,
-			desc = "Toggle Output Panel",
+			"Toggle Output Panel",
 		},
-		{
-			"<leader>tS",
+		["<leader>tS"] = {
 			function()
 				require("neotest").run.stop()
 			end,
-			desc = "Stop",
+			"Test Stop",
 		},
 	},
 }
