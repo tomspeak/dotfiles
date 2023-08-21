@@ -197,10 +197,8 @@ local plugins = {
 	},
 
 	{
-		"shaun-mathew/Chameleon.nvim",
-		config = function()
-			require("chameleon").setup()
-		end,
+		"christoomey/vim-tmux-navigator",
+		event = "VeryLazy",
 	},
 
 	-- {
