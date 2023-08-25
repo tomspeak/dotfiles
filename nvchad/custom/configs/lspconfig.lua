@@ -4,7 +4,7 @@ local lspconfig = require("lspconfig")
 local util = require("lspconfig/util")
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "tsserver", "bufls", "bashls", "jsonls", "yamlls", "phpactor" }
+local servers = { "html", "cssls", "bufls", "bashls", "jsonls", "yamlls", "phpactor" }
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
@@ -12,6 +12,14 @@ for _, lsp in ipairs(servers) do
 		capabilities = capabilities,
 	})
 end
+
+lspconfig.tsserver.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	settings = {
+		single_file_support = false,
+	},
+})
 
 lspconfig.lua_ls.setup({
 	on_attach = on_attach,

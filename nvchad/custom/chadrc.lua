@@ -5,8 +5,8 @@ local M = {}
 local highlights = require("custom.highlights")
 
 M.ui = {
-	theme = "penumbra_light",
-	theme_toggle = { "penumbra_light", "penumbra_light" },
+	theme = "aquarium",
+	theme_toggle = { "aquarium", "aquarium" },
 	transparency = false,
 
 	hl_override = highlights.override,

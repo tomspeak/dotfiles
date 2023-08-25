@@ -1,5 +1,7 @@
 palette = "catppuccin_latte"
 
+command_timeout = 5000
+
 [openstack]
 disabled = true
 

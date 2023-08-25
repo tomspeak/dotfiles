@@ -14,6 +14,7 @@ symlinks:
 	@ln -sf $(DIR)/kitty ~/.config
 	@ln -sf $(DIR)/karabiner ~/.config
 	@ln -sf $(DIR)/starship.toml ~/.config
+	@ln -sf $(DIR)/ghostty ~/.config
 
 install_ohmyzsh:
 	./scripts/install_oh_my_zsh.sh
