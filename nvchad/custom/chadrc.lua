@@ -1,4 +1,4 @@
----@type ChadrcConfig
+---@class ChadrcConfig
 local M = {}
 
 -- Path to overriding theme and highlights files
@@ -8,6 +8,18 @@ M.ui = {
 	theme = "monochrome",
 	theme_toggle = { "monochrome", "monochrome" },
 	transparency = false,
+
+	telescope = { style = "bordered" },
+
+	extended_integrations = {
+		"dap",
+		"hop",
+		"rainbowdelimiters",
+		"codeactionmenu",
+		"todo",
+		"trouble",
+		"notify",
+	},
 
 	hl_override = highlights.override,
 	hl_add = highlights.add,
@@ -64,7 +76,33 @@ M.ui = {
 		buttons = {},
 	},
 
-	cheatsheet = { theme = "grid" }, -- simple/grid
+	cheatsheet = { theme = "grid" },
+}
+
+M.settings = {
+	cc_size = "130",
+	so_size = 10,
+
+	-- Blacklisted files where cc and so must be disabled
+	blacklist = {
+		"NvimTree",
+		"nvdash",
+		"nvcheatsheet",
+		"terminal",
+		"Trouble",
+		"help",
+	},
+}
+
+M.gitsigns = {
+	signs = {
+		add = { text = " " },
+		change = { text = " " },
+		delete = { text = " " },
+		topdelete = { text = " " },
+		changedelete = { text = " " },
+		untracked = { text = " " },
+	},
 }
 
 M.plugins = "custom.plugins"
