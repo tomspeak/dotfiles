@@ -2,8 +2,6 @@ local opt = vim.opt
 local cmd = vim.api.nvim_command
 local api = vim.api
 
-vim.g.nvim_tree_disable_netrw = 0
-
 -- Enable spell checking for certain file types
 api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = { "*.txt", "*.md", "*.tex" },

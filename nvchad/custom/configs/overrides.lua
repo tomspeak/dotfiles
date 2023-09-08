@@ -95,6 +95,10 @@ M.mason = {
 }
 
 M.nvimtree = {
+	-- don't disable netwr, we need it for :GBrowse (rhubarb/fugitive)
+	disable_netrw = false,
+	hijack_netrw = false,
+
 	view = {
 		side = "left",
 		signcolumn = "no",
