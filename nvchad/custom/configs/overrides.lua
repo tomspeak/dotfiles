@@ -55,14 +55,13 @@ M.mason = {
 		"lua-language-server",
 		"stylua",
 
+		-- web dev stuff
 		"prettierd",
 		"eslint_d",
-
-		-- web dev stuff
+		"eslint-lsp",
 		"css-lsp",
 		"html-lsp",
 		"typescript-language-server",
-		"eslint-lsp",
 		"jsonlint",
 		"json-lsp",
 		"yaml-language-server",
@@ -130,6 +129,15 @@ M.nvimtree = {
 }
 
 M.telescope = {
+	extensions_list = { "themes", "terms", "fzf" },
+	extensions = {
+		fzf = {
+			fuzzy = true,
+			override_generic_sorter = true,
+			override_file_sorter = true,
+			case_mode = "smart_case",
+		},
+	},
 	defaults = {
 		vimgrep_arguments = {
 			"rg",
@@ -144,10 +152,13 @@ M.telescope = {
 		path_display = { "truncate" },
 		defaults = {
 			file_ignore_patterns = {
+				"build",
+				"dist",
 				"node_modules",
 				".docker",
 				".git",
 				"yarn.lock",
+				"package-lock.json",
 				"go.sum",
 				"go.mod",
 				"tags",

@@ -56,6 +56,7 @@ require("neotest").setup({
 	},
 	status = {
 		enabled = true,
+		virtual_text = true,
 	},
 	strategies = {
 		integrated = {

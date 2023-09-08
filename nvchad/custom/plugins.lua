@@ -42,6 +42,13 @@ local plugins = {
 
 	{
 		"nvim-telescope/telescope.nvim",
+		dependencies = {
+
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = "make",
+			},
+		},
 		opts = overrides.telescope,
 	},
 
@@ -160,6 +167,15 @@ local plugins = {
 	},
 
 	{
+		"folke/todo-comments.nvim",
+		cmd = { "TodoQuickFix", "TodoTrouble", "TodoTelescope" },
+		event = { "BufReadPost", "BufNewFile" },
+		config = function()
+			require("todo-comments").setup()
+		end,
+	},
+
+	{
 		"rust-lang/rust.vim",
 		ft = "rust",
 		init = function()
@@ -245,6 +261,21 @@ local plugins = {
 			virtual_text.setup()
 			dap_go.setup()
 		end,
+	},
+
+	{
+		"ray-x/go.nvim",
+		ft = { "go", "gomod", "gosum", "gowork" },
+		dependencies = {
+			{
+				"ray-x/guihua.lua",
+				build = "cd lua/fzy && make",
+			},
+		},
+		config = function()
+			require("custom.configs.go")
+		end,
+		build = ':lua require("go.install").update_all_sync()',
 	},
 }
 

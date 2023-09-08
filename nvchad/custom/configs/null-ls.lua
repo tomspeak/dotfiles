@@ -5,7 +5,8 @@ if not present then
 end
 
 local f = null_ls.builtins.formatting
-local l = null_ls.builtins.diagnostics
+local d = null_ls.builtins.diagnostics
+local ca = null_ls.builtins.code_actions
 
 local sources = {
 	f.prettierd,
@@ -18,13 +19,15 @@ local sources = {
 	f.shfmt,
 	f.pint,
 
-	l.shellcheck,
-	l.buf,
-	l.yamllint,
-	l.eslint_d,
-	l.golangci_lint,
-	l.jsonlint,
-	l.phpstan,
+	d.shellcheck,
+	d.buf,
+	d.yamllint,
+	d.eslint_d,
+	--l.golangci_lint,
+	d.jsonlint,
+	d.phpstan,
+
+	ca.eslint_d,
 }
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})

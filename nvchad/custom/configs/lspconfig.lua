@@ -59,9 +59,21 @@ lspconfig.gopls.setup({
 	root_dir = util.root_pattern("go.work", "go.mod", ".git"),
 	settings = {
 		completeUnimported = true,
-		usePlaceholders = true,
+		vulncheck = "Imports",
 		analyses = {
+			nilness = true,
+			shadow = true,
 			unusedparams = true,
+			unusewrites = true,
 		},
+		staticcheck = true,
+		codelenses = {
+			references = true,
+			test = true,
+			tidy = true,
+			upgrade_dependency = true,
+			generate = true,
+		},
+		gofumpt = true,
 	},
 })
