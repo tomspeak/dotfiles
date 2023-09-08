@@ -24,6 +24,7 @@ M.treesitter = {
 		"yaml",
 		"json",
 		"proto",
+		"php",
 	},
 	indent = {
 		enable = true,
@@ -55,18 +56,15 @@ M.mason = {
 		"lua-language-server",
 		"stylua",
 
-		-- web dev stuff
+		-- web dev
 		"prettierd",
-		"eslint_d",
 		"eslint-lsp",
 		"css-lsp",
 		"html-lsp",
 		"typescript-language-server",
-		"jsonlint",
-		"json-lsp",
-		"yaml-language-server",
 		"tailwindcss-language-server",
 
+		-- rust
 		"rust-analyzer",
 
 		-- go
@@ -80,9 +78,13 @@ M.mason = {
 		"delve",
 		"staticcheck",
 
+		-- shell/config files
 		"shellcheck",
 		"shfmt",
 		"yamlfmt",
+		"yaml-language-server",
+		"jsonlint",
+		"json-lsp",
 	},
 
 	ui = {

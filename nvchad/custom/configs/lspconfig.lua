@@ -5,7 +5,7 @@ local lspconfig = require("lspconfig")
 local util = require("lspconfig/util")
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "bufls", "bashls", "jsonls", "yamlls", "phpactor" }
+local servers = { "html", "cssls", "bufls", "bashls", "jsonls", "yamlls", "phpactor", "eslint" }
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
@@ -15,10 +15,19 @@ for _, lsp in ipairs(servers) do
 end
 
 lspconfig.tsserver.setup({
-	on_attach = on_attach,
+	on_attach = function(client, bufnr)
+		client.resolved_capabilities.document_formatting = false
+		client.resolved_capabilities.document_range_formatting = false
+		on_attach(client, bufnr)
+	end,
 	capabilities = capabilities,
+	root_dir = util.root_pattern(".git", "package.json"),
 	settings = {
-		single_file_support = false,
+		single_file_support = true,
+		preferences = {
+			importModuleSpecifierPreference = "non-relative",
+			upddateImportsOnFileMove = "always",
+		},
 	},
 })
 
@@ -28,25 +37,27 @@ lspconfig.lua_ls.setup({
 	settings = {
 		Lua = {
 			runtime = {
-				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
 				version = "LuaJIT",
 			},
 			diagnostics = {
-				-- Get the language server to recognize the `vim` global
 				globals = { "use", "vim" },
 			},
-			workspace = {
-				-- Make the server aware of Neovim runtime files
-				library = vim.api.nvim_get_runtime_file("", true),
-			},
-			-- Enable ls hints
 			hint = {
 				enable = true,
 				setType = true,
 			},
-			-- Do not send telemetry data containing a randomized but unique identifier
 			telemetry = {
 				enable = false,
+			},
+			workspace = {
+				library = {
+					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+					[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+					[vim.fn.stdpath("data") .. "/lazy/ui/nvchad_types"] = true,
+					[vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
+				},
+				maxPreload = 100000,
+				preloadFileSize = 10000,
 			},
 		},
 	},
@@ -72,7 +83,7 @@ lspconfig.gopls.setup({
 			references = true,
 			test = true,
 			tidy = true,
-			upgrade_dependency = true,
+			upgrade_dependency = false,
 			generate = true,
 		},
 		gofumpt = true,

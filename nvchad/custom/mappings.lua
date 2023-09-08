@@ -7,6 +7,8 @@ M.general = {
 		["-"] = { "<cmd> NvimTreeToggle <CR>", "NvimTree Toggle" },
 		["_"] = { "<cmd> NvimTreeFindFile <CR>", "NvimTree Toggle" },
 		["<leader>q"] = { ":q<CR>", "Close window" },
+		["<A-Up>"] = { "<CMD>m .-2<CR>==", "󰜸 Move line up" },
+		["<A-Down>"] = { "<CMD>m .+1<CR>==", "󰜯 Move line down" },
 	},
 }
 
@@ -63,6 +65,12 @@ M.test = {
 			end,
 			"Test Stop",
 		},
+	},
+}
+
+M.nullls = {
+	n = {
+		["<leader>ef"] = { "<cmd> EslintFixAll <CR>:w<CR>", "Eslint Fix All" },
 	},
 }
 
