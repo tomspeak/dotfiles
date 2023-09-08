@@ -6,7 +6,6 @@ end
 
 local f = null_ls.builtins.formatting
 local d = null_ls.builtins.diagnostics
-local ca = null_ls.builtins.code_actions
 
 local sources = {
 	f.prettierd,
@@ -23,11 +22,9 @@ local sources = {
 	d.buf,
 	d.yamllint,
 	d.eslint_d,
-	--l.golangci_lint,
+	d.golangci_lint,
 	d.jsonlint,
 	d.phpstan,
-
-	ca.eslint_d,
 }
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
