@@ -37,9 +37,11 @@ export VEDITOR='code'
 
 plugins=(git npm macos tmux tig vagrant node colored-man-pages docker fzf laravel yarn fancy-ctrl-z zsh-autosuggestions zsh-syntax-highlighting)
 typeset -A ZSH_HIGHLIGHT_STYLES
+# https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md
 ZSH_HIGHLIGHT_STYLES[alias]='fg=113'
 ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'
 ZSH_HIGHLIGHT_STYLES[globbing]='none'
+ZSH_HIGHLIGHT_STYLES[unknown-token]='none'
 
 # so autoenv runs all the time, even when you open a tmux split
 cd .
