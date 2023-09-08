@@ -1,7 +1,3 @@
-background = 1d2021
-foreground= ffffff
-cursor-color = 444444
-
 font-size = 18
 font-thicken = true
 font-family = "BerkeleyMono-Regular"
@@ -18,30 +14,43 @@ keybind = super+left_bracket=previous_tab
 
 confirm-close-surface = false
 
-# Colors can be changed by setting the 16 colors of `palette`, which each color
-# being defined as regular and bold.
-#
+background = #14141e
+foreground = #e6e6e8
+
+selection-background = #e6e6e8
+selection-foreground = #14141e
+
+cursor-color = #444444
+cursor-text  = #14141e
+
 # black
-palette = 0=#1d2021
-palette = 8=#7c6f64
+palette = 0=#14141e
+palette = 8=#545c5e
+
 # red
-palette = 1=#cc241d
-palette = 9=#fb4934
+palette = 1=#e84c58
+palette = 9=#e84c58
+
 # green
-palette = 2=#98971a
-palette = 10=#b8bb26
+palette = 2=#35BF88
+palette = 10=#7CF083
+
 # yellow
-palette = 3=#d79921
-palette = 11=#fabd2f
+palette = 3=#dbac66
+palette = 11=#eed891
+
 # blue
-palette = 4=#458588
-palette = 12=#83a598
-# purple
-palette = 5=#b16286
-palette = 13=#d3869b
-# aqua
-palette = 6=#689d6a
-palette = 14=#8ec07c
+palette = 4=#4ca6e8
+palette = 12=#53859d
+
+# magenta
+palette = 5=#c79af4
+palette = 13=#cea2ca
+
+# cyan
+palette = 6=#6bd9db
+palette = 14=#4d9391
+
 # white
-palette = 7=#a89984
-palette = 15=#fbf1c7
+palette = 7=#e6e6e8
+palette = 15=#bebec4
