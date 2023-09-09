@@ -28,6 +28,9 @@ M.ui = {
 		theme = "minimal",
 		separator_style = "block",
 		overriden_modules = function(modules)
+			modules[1] = (function()
+				return ""
+			end)()
 			modules[5] = (function()
 				return ""
 			end)()
