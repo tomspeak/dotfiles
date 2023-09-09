@@ -221,6 +221,7 @@ local plugins = {
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-neotest/neotest-go",
 			"haydenmeade/neotest-jest",
+			"rouge8/neotest-rust",
 		},
 		config = function()
 			require("custom.configs.neotest")
@@ -250,6 +251,7 @@ local plugins = {
 			"folke/neodev.nvim",
 		},
 		config = function()
+			local dap = require("dap")
 			local dapui = require("dapui")
 			local virtual_text = require("nvim-dap-virtual-text")
 			local dap_go = require("dap-go")
@@ -257,6 +259,16 @@ local plugins = {
 			dapui.setup()
 			virtual_text.setup()
 			dap_go.setup()
+
+			dap.listeners.after.event_initialized["dapui_config"] = function()
+				dapui.open()
+			end
+			dap.listeners.before.event_terminated["dapui_config"] = function()
+				dapui.close()
+			end
+			dap.listeners.before.event_exited["dapui_config"] = function()
+				dapui.close()
+			end
 		end,
 	},
 

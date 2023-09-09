@@ -25,6 +25,7 @@ M.treesitter = {
 		"json",
 		"proto",
 		"php",
+		"zig",
 	},
 	indent = {
 		enable = true,
@@ -66,6 +67,7 @@ M.mason = {
 
 		-- rust
 		"rust-analyzer",
+		"codelldb",
 
 		-- go
 		"gopls",
@@ -77,6 +79,8 @@ M.mason = {
 		"iferr",
 		"delve",
 		"staticcheck",
+
+		"zls",
 
 		-- shell/config files
 		"shellcheck",
