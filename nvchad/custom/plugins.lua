@@ -3,6 +3,11 @@ local overrides = require("custom.configs.overrides")
 ---@type NvPluginSpec[]
 local plugins = {
 	{
+		"lewis6991/gitsigns.nvim",
+		enabled = false,
+	},
+
+	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			-- format & linting
@@ -185,10 +190,10 @@ local plugins = {
 
 	{
 		"simrat39/rust-tools.nvim",
-		ft = "rust",
+		ft = { "rs", "rust" },
 		dependencies = "neovim/nvim-lspconfig",
-		opt = function()
-			return require("configs.rust-tools")
+		opts = function()
+			return require("custom.configs.rust-tools")
 		end,
 		config = function(_, opts)
 			require("rust-tools").setup(opts)
@@ -197,10 +202,9 @@ local plugins = {
 
 	{
 		"saecki/crates.nvim",
-		ft = { "rust", "toml" },
-		config = function(_, opts)
-			local crates = require("crates")
-			crates.setup(opts)
+		event = { "BufRead Cargo.toml" },
+		config = function()
+			require("crates").setup({})
 		end,
 	},
 

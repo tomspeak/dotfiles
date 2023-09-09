@@ -11,6 +11,7 @@ for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
 		on_attach = on_attach,
 		capabilities = capabilities,
+		flags = { debounce_text_changes = 150 },
 	})
 end
 
@@ -21,6 +22,7 @@ lspconfig.tsserver.setup({
 		on_attach(client, bufnr)
 	end,
 	capabilities = capabilities,
+	flags = { debounce_text_changes = 150 },
 	root_dir = util.root_pattern(".git", "package.json"),
 	settings = {
 		single_file_support = true,
@@ -34,6 +36,7 @@ lspconfig.tsserver.setup({
 lspconfig.lua_ls.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
+	flags = { debounce_text_changes = 150 },
 	settings = {
 		Lua = {
 			runtime = {
@@ -66,6 +69,7 @@ lspconfig.lua_ls.setup({
 lspconfig.gopls.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
+	flags = { debounce_text_changes = 150 },
 	cmd = { "gopls" },
 	filetypes = { "go", "gomod", "gowork", "gotmpl" },
 	root_dir = util.root_pattern("go.work", "go.mod", ".git"),
