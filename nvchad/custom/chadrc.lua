@@ -5,8 +5,8 @@ local M = {}
 local highlights = require("custom.highlights")
 
 M.ui = {
-	theme = "chadracula",
-	theme_toggle = { "chadracula", "chadracula" },
+	theme = "gruvchad",
+	theme_toggle = { "gruvchad", "gruvchad" },
 	transparency = false,
 
 	telescope = { style = "bordered" },

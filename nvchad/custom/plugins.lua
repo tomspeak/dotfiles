@@ -62,15 +62,15 @@ local plugins = {
 	-- the god, tpope
 	{
 		"tpope/vim-surround",
-		lazy = false,
+		event = "VeryLazy",
 	},
 	{
 		"tpope/vim-repeat",
-		lazy = false,
+		event = "VeryLazy",
 	},
 	{
 		"tpope/vim-sleuth",
-		lazy = false,
+		event = "VeryLazy",
 	},
 	{
 		"tpope/vim-fugitive",
@@ -151,7 +151,6 @@ local plugins = {
 		end,
 		dependencies = {
 			{ "nvim-tree/nvim-web-devicons" },
-			--Please make sure you install markdown and markdown_inline parser
 			{ "nvim-treesitter/nvim-treesitter" },
 		},
 	},
@@ -244,6 +243,7 @@ local plugins = {
 
 	{
 		"mfussenegger/nvim-dap",
+		event = "VeryLazy",
 		dependencies = {
 			{ "theHamsta/nvim-dap-virtual-text", config = true },
 			{ "rcarriga/nvim-dap-ui", config = true },
