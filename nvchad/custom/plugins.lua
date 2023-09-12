@@ -4,7 +4,7 @@ local overrides = require("custom.configs.overrides")
 local plugins = {
 	{
 		"lewis6991/gitsigns.nvim",
-		enabled = false,
+		opts = overrides.gitsigns,
 	},
 
 	{

@@ -216,4 +216,15 @@ M.cmp = {
 	end,
 }
 
+M.gitsigns = {
+	signcolumn = false, -- Toggle with `:Gitsigns toggle_signs`
+	numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
+	linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+	word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+	watch_gitdir = {
+		follow_files = true,
+	},
+	update_debounce = 500,
+}
+
 return M
