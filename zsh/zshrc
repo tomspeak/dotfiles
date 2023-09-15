@@ -33,7 +33,7 @@ export GIT_MERGE_AUTOEDIT
 # the one true way
 export EDITOR='nvim'
 export VEDITOR='code'
-export TERM=xterm-256color
+#export TERM=xterm-256color
 
 plugins=(git npm macos tmux tig vagrant node colored-man-pages docker fzf laravel yarn fancy-ctrl-z zsh-autosuggestions zsh-syntax-highlighting)
 typeset -A ZSH_HIGHLIGHT_STYLES

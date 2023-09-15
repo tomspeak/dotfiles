@@ -16,6 +16,7 @@ local sources = {
 	f.yamlfmt,
 	f.shfmt,
 	f.pint,
+	f.taplo,
 
 	d.shellcheck,
 	d.buf,

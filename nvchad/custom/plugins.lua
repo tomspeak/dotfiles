@@ -3,6 +3,10 @@ local overrides = require("custom.configs.overrides")
 ---@type NvPluginSpec[]
 local plugins = {
 	{
+		"NvChad/nvterm",
+		enabled = false,
+	},
+	{
 		"lewis6991/gitsigns.nvim",
 		opts = overrides.gitsigns,
 	},
@@ -142,7 +146,7 @@ local plugins = {
 
 				lightbulb = {
 					enable = true,
-					enable_in_insert = true,
+					enable_in_insert = false,
 					sign = false,
 					sign_priority = 40,
 					virtual_text = true,
