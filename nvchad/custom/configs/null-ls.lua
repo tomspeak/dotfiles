@@ -8,7 +8,22 @@ local f = null_ls.builtins.formatting
 local d = null_ls.builtins.diagnostics
 
 local sources = {
-	f.prettierd,
+	-- f.prettierd.with({
+	-- 	condition = function(utils)
+	-- 		return utils.has_file({
+	-- 			".prettierrc",
+	-- 			".prettierrc.json",
+	-- 			".prettierrc.yml",
+	-- 			".prettierrc.yaml",
+	-- 			".prettierrc.json5",
+	-- 			".prettierrc.js",
+	-- 			".prettierrc.cjs",
+	-- 			".prettierrc.toml",
+	-- 			"prettier.config.js",
+	-- 			"prettier.config.cjs",
+	-- 		})
+	-- 	end,
+	-- }),
 	f.stylua,
 	f.gofumpt,
 	f.goimports,

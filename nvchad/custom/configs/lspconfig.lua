@@ -5,7 +5,7 @@ local lspconfig = require("lspconfig")
 local util = require("lspconfig/util")
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "bufls", "bashls", "jsonls", "yamlls", "phpactor", "eslint", "zls", "taplo" }
+local servers = { "html", "cssls", "bufls", "bashls", "jsonls", "yamlls", "phpactor", "zls", "taplo" }
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
@@ -14,6 +14,19 @@ for _, lsp in ipairs(servers) do
 		flags = { debounce_text_changes = 150 },
 	})
 end
+
+lspconfig.eslint.setup({
+	settings = {
+		packageManager = "yarn",
+	},
+	on_attach = function(client, bufnr)
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			buffer = bufnr,
+			command = "EslintFixAll",
+		})
+		on_attach(client, bufnr)
+	end,
+})
 
 lspconfig.tsserver.setup({
 	on_attach = function(client, bufnr)
