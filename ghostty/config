@@ -6,6 +6,7 @@ font-family-italic = "BerkeleyMono-Italic"
 font-family-bold-italic = "BerkeleyMono-BoldItalic"
 
 macos-non-native-fullscreen = true
+window-decoration = false
 macos-option-as-alt = true
 
 # Does not work - https://github.com/mitchellh/ghostty/issues/327

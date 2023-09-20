@@ -11,7 +11,7 @@ for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
 		on_attach = on_attach,
 		capabilities = capabilities,
-		flags = { debounce_text_changes = 150 },
+		flags = { debounce_text_changes = 150, inlay_hints = true },
 	})
 end
 
