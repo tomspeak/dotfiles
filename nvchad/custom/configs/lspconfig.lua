@@ -5,13 +5,13 @@ local lspconfig = require("lspconfig")
 local util = require("lspconfig/util")
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "bufls", "bashls", "jsonls", "yamlls", "phpactor", "zls", "taplo" }
+local servers = { "html", "cssls", "bufls", "bashls", "jsonls", "phpactor", "zls", "taplo" }
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
 		on_attach = on_attach,
 		capabilities = capabilities,
-		flags = { debounce_text_changes = 150, inlay_hints = true },
+		flags = { debounce_text_changes = 150 },
 	})
 end
 
@@ -30,6 +30,9 @@ lspconfig.eslint.setup({
 
 lspconfig.tsserver.setup({
 	on_attach = function(client, bufnr)
+		if client.server_capabilities.inlayHintProvider then
+			vim.lsp.inlay_hint(bufnr, true)
+		end
 		client.resolved_capabilities.document_formatting = false
 		client.resolved_capabilities.document_range_formatting = false
 		on_attach(client, bufnr)
