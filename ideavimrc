@@ -45,3 +45,4 @@ nnoremap <c-f> :action FindInPath<CR>
 
 nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
 
+nnoremap <leader>x :bd<CR>

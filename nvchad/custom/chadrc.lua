@@ -5,8 +5,8 @@ local M = {}
 local highlights = require("custom.highlights")
 
 M.ui = {
-	theme = "monochrome",
-	theme_toggle = { "monochrome", "monochrome" },
+	theme = "blossom_light",
+	theme_toggle = { "blossom_light", "blossom_light" },
 	transparency = false,
 
 	telescope = { style = "bordered" },
@@ -54,6 +54,9 @@ M.ui = {
 
 	tabufline = {
 		overriden_modules = function(modules)
+			modules[1] = (function()
+				return ""
+			end)()
 			modules[4] = (function()
 				return ""
 			end)()

@@ -40,6 +40,14 @@ local plugins = {
 	},
 
 	{
+		"stevearc/conform.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("custom.configs.conform")
+		end,
+	},
+
+	{
 		"nvim-treesitter/nvim-treesitter",
 		opts = overrides.treesitter,
 	},
@@ -289,6 +297,7 @@ local plugins = {
 			require("custom.configs.go")
 		end,
 		build = ':lua require("go.install").update_all_sync()',
+		enabled = false,
 	},
 }
 

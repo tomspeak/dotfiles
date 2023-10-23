@@ -2,6 +2,11 @@ palette = "catppuccin_latte"
 
 command_timeout = 5000
 
+
+[kubernetes]
+disabled = false
+format = 'k[(\($context\))](pink) '
+
 [openstack]
 disabled = true
 

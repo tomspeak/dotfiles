@@ -106,7 +106,8 @@ M.nvimtree = {
 	hijack_netrw = false,
 
 	view = {
-		side = "left",
+		width = 50,
+		side = "right",
 		signcolumn = "no",
 	},
 
