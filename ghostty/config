@@ -21,42 +21,43 @@ foreground = #e6e6e8
 selection-background = #e6e6e8
 selection-foreground = #14141e
 
-cursor-color = #444444
 cursor-text  = #14141e
-
-# nord colors
-foreground=#D8DEE9
-background=#2E3440
 cursor-color=#81A1C1
 
-# black
-palette = 0=#3B4252
-palette = 8=#4C566A
+background = #1E1E1E
+foreground = #C0CAF5
 
-# red
-palette = 1=#BF616A
-palette = 9=#BF616A
+selection-background = #F5E0DC
+selection-foreground = #1E1E2E
 
-# green
-palette = 2=#A3BE8C
-palette = 10=#A3BE8C
+# Black
+palette = 0=#545C7E
+palette = 8=#545C7E
 
-# yellow
-palette = 3=#EBCB8B
-palette = 11=#EBCB8B
+# Red
+palette = 1=#B2555B
+palette = 9=#B2555B
 
-# blue
-palette = 4=#81A1C1
-palette = 12=#81A1C1
+# Green
+palette = 2=#A6E3A1
+palette = 10=#A6E3A1
 
-# magenta
-palette = 5=#B48EAD
-palette = 13=#B48EAD
+# Yellow
+palette = 3=#FF9E64
+palette = 11=#E0AF68
 
-# cyan
-palette = 6=#88C0D0
-palette = 14=#8FBCBB
+# Blue
+palette = 4=#6A92D7
+palette = 12=#6A92D7
 
-# white
-palette = 7=#E5E9F0
-palette = 15=#B48EAD
+# Magenta
+palette = 5=#BB9AF7
+palette = 13=#BB9AF7
+
+# Cyan
+palette = 6=#7CCDFD
+palette = 14=#7CCDFD
+
+# White
+palette = 7=#C0CAF5
+palette = 15=#C0CAF5
