@@ -7,6 +7,10 @@ local plugins = {
 		enabled = false,
 	},
 	{
+		"NvChad/term",
+		enabled = false,
+	},
+	{
 		"lewis6991/gitsigns.nvim",
 		opts = overrides.gitsigns,
 	},
@@ -62,7 +66,6 @@ local plugins = {
 		opts = overrides.telescope,
 	},
 
-	-- Install a plugin
 	{
 		"max397574/better-escape.nvim",
 		event = "InsertEnter",
@@ -124,11 +127,11 @@ local plugins = {
 			auto_dark_mode.setup({
 				update_interval = 10000,
 				set_dark_mode = function()
-					vim.g.nvchad_theme = "monochrome"
+					require("nvconfig").ui.theme = "monochrome"
 					require("base46").load_all_highlights()
 				end,
 				set_light_mode = function()
-					vim.g.nvchad_theme = "penumbra_light"
+					require("nvconfig").ui.theme = "nano-light"
 					require("base46").load_all_highlights()
 				end,
 			})
@@ -153,7 +156,7 @@ local plugins = {
 				},
 
 				lightbulb = {
-					enable = true,
+					enable = false,
 					enable_in_insert = false,
 					sign = false,
 					sign_priority = 40,
@@ -251,37 +254,6 @@ local plugins = {
 				completed = "Completed",
 			},
 		},
-	},
-
-	{
-		"mfussenegger/nvim-dap",
-		event = "VeryLazy",
-		dependencies = {
-			{ "theHamsta/nvim-dap-virtual-text", config = true },
-			{ "rcarriga/nvim-dap-ui", config = true },
-			{ "leoluz/nvim-dap-go", config = true, ft = "go" },
-			"folke/neodev.nvim",
-		},
-		config = function()
-			local dap = require("dap")
-			local dapui = require("dapui")
-			local virtual_text = require("nvim-dap-virtual-text")
-			local dap_go = require("dap-go")
-
-			dapui.setup()
-			virtual_text.setup()
-			dap_go.setup()
-
-			dap.listeners.after.event_initialized["dapui_config"] = function()
-				dapui.open()
-			end
-			dap.listeners.before.event_terminated["dapui_config"] = function()
-				dapui.close()
-			end
-			dap.listeners.before.event_exited["dapui_config"] = function()
-				dapui.close()
-			end
-		end,
 	},
 
 	{

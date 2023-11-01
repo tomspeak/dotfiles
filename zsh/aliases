@@ -56,3 +56,6 @@ alias tls="zellij list-sessions";
 #alias tk="zellij kill-session ";
 alias tka="zellij kill-all-sessions";
 alias tt="zellij --session generic --layout terminal";
+
+# NvChad
+alias nv2='NVIM_APPNAME="nvchad2" nvim'

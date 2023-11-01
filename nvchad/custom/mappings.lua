@@ -15,6 +15,12 @@ M.general = {
 		["<leader>q"] = { ":q<CR>", "Close window" },
 		["<A-Up>"] = { "<CMD>m .-2<CR>==", "󰜸 Move line up" },
 		["<A-Down>"] = { "<CMD>m .+1<CR>==", "󰜯 Move line down" },
+		["<leader>rH"] = {
+			function()
+				require("base46").load_all_highlights()
+			end,
+			"Reload Highlights",
+		},
 	},
 }
 

@@ -1,12 +1,16 @@
 ---@class ChadrcConfig
 local M = {}
 
+M.options = {
+	nvchad_branch = "v3.0",
+}
+
 -- Path to overriding theme and highlights files
 local highlights = require("custom.highlights")
 
 M.ui = {
-	theme = "blossom_light",
-	theme_toggle = { "blossom_light", "blossom_light" },
+	theme = "nano-light",
+	theme_toggle = { "nano-light", "nano-light" },
 	transparency = false,
 
 	telescope = { style = "bordered" },
@@ -67,7 +71,7 @@ M.ui = {
 		icons = true,
 		selected_item_bg = "simple",
 		lspkind_text = true,
-		style = "atom_colored", -- default/flat_light/flat_dark/atom/atom_colored
+		style = "flat_light", -- default/flat_light/flat_dark/atom/atom_colored
 	},
 
 	nvdash = {
