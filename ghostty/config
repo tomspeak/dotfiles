@@ -12,6 +12,7 @@ font-thicken = false
 #font-family-italic = "BerkeleyMono-Italic"
 #font-family-bold-italic = "BerkeleyMono-BoldItalic"
 font-family = Zed Mono
+font-family = "Zed Mono"
 
 macos-non-native-fullscreen = true
 #window-decoration = false
