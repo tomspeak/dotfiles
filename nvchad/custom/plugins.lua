@@ -6,10 +6,12 @@ local plugins = {
 		"NvChad/nvterm",
 		enabled = false,
 	},
+
 	{
 		"NvChad/term",
 		enabled = false,
 	},
+
 	{
 		"lewis6991/gitsigns.nvim",
 		opts = overrides.gitsigns,
@@ -20,9 +22,9 @@ local plugins = {
 		dependencies = {
 			-- format & linting
 			{
-				"jose-elias-alvarez/null-ls.nvim",
+				"nvimtools/none-ls.nvim",
 				config = function()
-					require("custom.configs.null-ls")
+					require("custom.configs.none-ls")
 				end,
 			},
 		},
@@ -41,6 +43,13 @@ local plugins = {
 	{
 		"williamboman/mason.nvim",
 		opts = overrides.mason,
+	},
+
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		opts = {
+			scope = { show_start = false },
+		},
 	},
 
 	{
@@ -271,6 +280,26 @@ local plugins = {
 		build = ':lua require("go.install").update_all_sync()',
 		enabled = false,
 	},
+
+	{
+		'stevearc/aerial.nvim',
+		config = function ()
+			 require('aerial').setup {
+          keymaps = {
+            ["j"] = "actions.down_and_scroll",
+            ["k"] = "actions.up_and_scroll",
+          },
+          autojump = true,
+          backends = {
+            ['_']  = {"treesitter", "lsp", "markdown", "man"},
+            python = {"treesitter"},
+            rust   = {"lsp"},
+            scala = {"lsp"},
+          },
+      }
+		end,
+		cmd = { "AerialOpen", "AerialToggle"},
+	}
 }
 
 return plugins

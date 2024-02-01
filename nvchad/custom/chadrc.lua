@@ -9,8 +9,8 @@ M.options = {
 local highlights = require("custom.highlights")
 
 M.ui = {
-	theme = "nano-light",
-	theme_toggle = { "nano-light", "nano-light" },
+	theme = "nord",
+	theme_toggle = { "nord", "nord" },
 	transparency = false,
 
 	telescope = { style = "bordered" },

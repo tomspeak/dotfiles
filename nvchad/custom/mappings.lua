@@ -9,9 +9,17 @@ M.disabled = {
 
 M.general = {
 	n = {
+		["<leader>X"] = {
+			function()
+				require("nvchad.tabufline").closeOtherBufs()
+			end,
+			"Close all buffers except active one",
+			opts = { nowait = true },
+		},
 		[";"] = { ":", "enter command mode", opts = { nowait = true } },
 		["-"] = { "<cmd> NvimTreeToggle <CR>", "NvimTree Toggle" },
 		["_"] = { "<cmd> NvimTreeFindFile <CR>", "NvimTree Toggle" },
+		["<C-->"] = { "<cmd> AerialToggle <CR>", "Aerial Toggle" },
 		["<leader>q"] = { ":q<CR>", "Close window" },
 		["<A-Up>"] = { "<CMD>m .-2<CR>==", "󰜸 Move line up" },
 		["<A-Down>"] = { "<CMD>m .+1<CR>==", "󰜯 Move line down" },
@@ -29,6 +37,10 @@ M.lspconfig = {
 		["<leader>ca"] = {
 			"<cmd>Lspsaga code_action<CR>",
 			"Lspsaga code action",
+		},
+		["gp"] = {
+			"<cmd>Lspsaga peek_definition<CR>",
+			"Lspsaga peek definition",
 		},
 	},
 }

@@ -20,5 +20,3 @@ local options = {
 		lsp_fallback = false,
 	},
 }
-
-require("conform").setup(options)

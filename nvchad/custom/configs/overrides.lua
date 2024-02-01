@@ -20,6 +20,7 @@ M.treesitter = {
 		"gomod",
 		"gowork",
 		"gosum",
+		"python",
 		"toml",
 		"yaml",
 		"json",
@@ -89,6 +90,8 @@ M.mason = {
 		"yaml-language-server",
 		"jsonlint",
 		"json-lsp",
+		"tflint",
+		"terraform-ls",
 	},
 
 	ui = {
@@ -186,8 +189,8 @@ M.cmp = {
 	sources = {
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
-		--	{ name = "buffer" },
-		{ name = "nvim_lua" },
+		-- { name = "buffer" },
+		-- { name = "nvim_lua" },
 		{ name = "path" },
 	},
 
@@ -195,6 +198,10 @@ M.cmp = {
 		ghost_text = {
 			hl_group = "Comment",
 		},
+	},
+
+	performance = {
+		max_view_entries = 10,
 	},
 
 	matching = {

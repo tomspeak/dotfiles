@@ -1,12 +1,20 @@
 font-size = 18
-font-thicken = true
-font-family = "BerkeleyMono-Regular"
-font-family-bold = "BerkeleyMono-Bold"
-font-family-italic = "BerkeleyMono-Italic"
-font-family-bold-italic = "BerkeleyMono-BoldItalic"
+font-thicken = false
+#font-family = Berkeley Mono
+#font-family = JetBrains Mono
+#font-family = Fira Code
+#font-family = Monaco
+#font-family = SF Mono
+#font-family = IBM Plex Mono
+#font-family = Monaspace Argon
+#font-family = "BerkeleyMono-Regular"
+#font-family-bold = "BerkeleyMono-Bold"
+#font-family-italic = "BerkeleyMono-Italic"
+#font-family-bold-italic = "BerkeleyMono-BoldItalic"
+font-family = Zed Mono
 
 macos-non-native-fullscreen = true
-window-decoration = false
+#window-decoration = false
 macos-option-as-alt = true
 
 # Does not work - https://github.com/mitchellh/ghostty/issues/327
@@ -15,49 +23,5 @@ keybind = super+left_bracket=previous_tab
 
 confirm-close-surface = false
 
-background = #14141e
-foreground = #e6e6e8
-
-selection-background = #e6e6e8
-selection-foreground = #14141e
-
-cursor-text  = #14141e
-cursor-color=#81A1C1
-
-background = #1E1E1E
-foreground = #C0CAF5
-
-selection-background = #F5E0DC
-selection-foreground = #1E1E2E
-
-# Black
-palette = 0=#545C7E
-palette = 8=#545C7E
-
-# Red
-palette = 1=#B2555B
-palette = 9=#B2555B
-
-# Green
-palette = 2=#A6E3A1
-palette = 10=#A6E3A1
-
-# Yellow
-palette = 3=#FF9E64
-palette = 11=#E0AF68
-
-# Blue
-palette = 4=#6A92D7
-palette = 12=#6A92D7
-
-# Magenta
-palette = 5=#BB9AF7
-palette = 13=#BB9AF7
-
-# Cyan
-palette = 6=#7CCDFD
-palette = 14=#7CCDFD
-
-# White
-palette = 7=#C0CAF5
-palette = 15=#C0CAF5
+theme = OneHalfLight
+#theme = rose-pine-dawn

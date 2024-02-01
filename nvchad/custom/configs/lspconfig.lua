@@ -5,7 +5,7 @@ local lspconfig = require("lspconfig")
 local util = require("lspconfig/util")
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "bufls", "bashls", "jsonls", "phpactor", "zls", "taplo" }
+local servers = { "html", "cssls", "bufls", "bashls", "jsonls", "phpactor", "zls", "taplo", "terraformls" }
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
@@ -41,7 +41,6 @@ lspconfig.tsserver.setup({
 	flags = { debounce_text_changes = 150 },
 	root_dir = util.root_pattern(".git", "package.json"),
 	settings = {
-		single_file_support = true,
 		preferences = {
 			importModuleSpecifierPreference = "non-relative",
 			upddateImportsOnFileMove = "always",
