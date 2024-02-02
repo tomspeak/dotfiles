@@ -17,6 +17,7 @@ symlinks:
 	@ln -sf $(DIR)/ghostty ~/.config
 	@ln -sf $(DIR)/yabai/.yabairc ~/.yabairc
 	@ln -sf $(DIR)/spacebar ~/.config/
+	@ln -sf $(DIR)/nvim/** ~/.config/kickstart/lua/custom/
 
 install_ohmyzsh:
 	./scripts/install_oh_my_zsh.sh
