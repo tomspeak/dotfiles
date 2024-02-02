@@ -196,6 +196,7 @@ require('lazy').setup({
         -- For major updates, this must be adjusted manually.
         version = '^1.0.0',
       },
+      { 'nvim-telescope/telescope-ui-select.nvim' },
     },
   },
 
@@ -336,6 +337,26 @@ require('telescope').setup {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
       },
+      n = { ['q'] = require('telescope.actions').close },
+    },
+    selection_caret = '  ',
+    entry_prefix = '  ',
+    initial_mode = 'insert',
+    selection_strategy = 'reset',
+    sorting_strategy = 'ascending',
+    layout_strategy = 'horizontal',
+    layout_config = {
+      horizontal = {
+        prompt_position = 'top',
+        preview_width = 0.55,
+        results_width = 0.8,
+      },
+      vertical = {
+        mirror = false,
+      },
+      width = 0.87,
+      height = 0.80,
+      preview_cutoff = 120,
     },
     vimgrep_arguments = {
       'rg',
@@ -348,21 +369,29 @@ require('telescope').setup {
       '--trim', -- add this value
     },
     path_display = { 'truncate' },
-    defaults = {
-      file_ignore_patterns = {
-        'build',
-        'dist',
-        'node_modules',
-        '.docker',
-        '.git',
-        'yarn.lock',
-        'package-lock.json',
-        'go.sum',
-        'go.mod',
-        'tags',
-        'mocks',
-      },
+    file_ignore_patterns = {
+      'build',
+      'dist',
+      'node_modules',
+      '.docker',
+      '.git',
+      'yarn.lock',
+      'package-lock.json',
+      'go.sum',
+      'go.mod',
+      'tags',
+      'mocks',
     },
+    file_sorter = require('telescope.sorters').get_fuzzy_file,
+    generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
+    winblend = 0,
+    border = {},
+    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+    color_devicons = true,
+    set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+    file_previewer = require('telescope.previewers').vim_buffer_cat.new,
+    grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
+    qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
   },
   pickers = {
     find_files = {
@@ -376,47 +405,22 @@ require('telescope').setup {
       previewer = false,
     },
   },
+  extensions = {
+    live_grep_args = {
+      auto_quoting = true, -- enable/disable auto-quoting
+      mappings = { -- extend mappings
+        i = {
+          ['<C-k>'] = require('telescope-live-grep-args.actions').quote_prompt(),
+        },
+      },
+    },
+  },
 }
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 pcall(require('telescope').load_extension, 'live_grep_args')
-
--- Telescope live_grep in git root
--- Function to find the git root directory based on the current buffer's path
-local function find_git_root()
-  -- Use the current buffer's path as the starting point for the git search
-  local current_file = vim.api.nvim_buf_get_name(0)
-  local current_dir
-  local cwd = vim.fn.getcwd()
-  -- If the buffer is not associated with a file, return nil
-  if current_file == '' then
-    current_dir = cwd
-  else
-    -- Extract the directory from the current file's path
-    current_dir = vim.fn.fnamemodify(current_file, ':h')
-  end
-
-  -- Find the Git root directory from the current file's path
-  local git_root = vim.fn.systemlist('git -C ' .. vim.fn.escape(current_dir, ' ') .. ' rev-parse --show-toplevel')[1]
-  if vim.v.shell_error ~= 0 then
-    print 'Not a git repository. Searching on current working directory'
-    return cwd
-  end
-  return git_root
-end
-
--- Custom live_grep function to search in git root
-local function live_grep_git_root()
-  local git_root = find_git_root()
-  if git_root then
-    require('telescope.builtin').live_grep {
-      search_dirs = { git_root },
-    }
-  end
-end
-
-vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
+pcall(require('telescope').load_extension, 'ui-select')
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
@@ -442,7 +446,6 @@ vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { des
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope').extensions.live_grep_args.live_grep_args, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 
@@ -737,14 +740,53 @@ local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
+local border = {
+  '╭',
+  '─',
+  '╮',
+  '│',
+  '╯',
+  '─',
+  '╰',
+  '│',
+}
+
 cmp.setup {
+  enabled = function()
+    -- disable completion in telescope
+    local context = require 'cmp.config.context'
+    local buftype = vim.api.nvim_buf_get_option(0, 'buftype')
+    if buftype == 'prompt' then
+      return false
+    end
+    -- keep command mode completion enabled when cursor is in a comment
+    if vim.api.nvim_get_mode().mode == 'c' then
+      return true
+    else
+      return not context.in_treesitter_capture 'comment' and not context.in_syntax_group 'Comment'
+    end
+  end,
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
   },
+  performance = {
+    max_view_entries = 10,
+  },
+  matching = {
+    disallow_fuzzy_matching = true,
+    disallow_fullfuzzy_matching = true,
+    disallow_partial_fuzzy_matching = true,
+    disallow_partial_matching = false,
+    disallow_prefix_unmatching = true,
+  },
   completion = {
     completeopt = 'menu,menuone,noinsert',
+  },
+  window = {
+    completion = cmp.config.window.bordered { scrollbar = false, winhighlight = 'Normal:CmpPmenu,Search:None', side_padding = 1, border = border },
+    documentation = cmp.config.window.bordered { scrollbar = false, winhighlight = 'Normal:CmpPmenu,Search:None', side_padding = 1, border = border },
   },
   mapping = cmp.mapping.preset.insert {
     ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -784,7 +826,9 @@ cmp.setup {
 
 local wk = require 'which-key'
 
-wk.register {
+wk.register({
+  ['<Esc>'] = { '<cmd> noh <CR>', 'Clear highlights' },
+
   ['-'] = { '<cmd> NvimTreeToggle <CR>', 'NvimTree Toggle' },
   ['_'] = { '<cmd> NvimTreeFindFile <CR>', 'NvimTree Toggle' },
 
@@ -796,7 +840,45 @@ wk.register {
   ['<C-l>'] = { '<C-w>l', 'Window right' },
   ['<C-j>'] = { '<C-w>j', 'Window down' },
   ['<C-k>'] = { '<C-w>k', 'Window up' },
-}
+
+  ['<tab>'] = {
+    '<cmd> BufferLineCycleNext <CR>',
+    'Goto next buffer',
+  },
+
+  ['<S-tab>'] = {
+    '<cmd> BufferLineCyclePrev <CR>',
+    'Goto prev buffer',
+  },
+
+  -- close current buffer
+  ['<leader>x'] = {
+    '<cmd> bd <CR>',
+    'Close buffer',
+  },
+
+  -- close all other buffers
+  ['<leader>X'] = {
+    '<cmd> BufferLineCloseOthers <CR>',
+    'Close buffer',
+  },
+
+  -- Comment out
+  ['<leader>/'] = {
+    function()
+      require('Comment.api').toggle.linewise.current()
+    end,
+    'Toggle comment',
+  },
+}, { mode = 'n' })
+
+wk.register({
+  -- Comment out visual
+  ['<leader>/'] = {
+    "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+    'Toggle comment',
+  },
+}, { mode = 'v' })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
