@@ -15,7 +15,8 @@ font-family = Zed Mono
 font-family = "Zed Mono"
 
 macos-non-native-fullscreen = true
-#window-decoration = false
+window-decoration = false
+window-theme = dark
 macos-option-as-alt = true
 
 # Does not work - https://github.com/mitchellh/ghostty/issues/327

@@ -17,52 +17,33 @@ vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure plugins ]]
 require('lazy').setup({
-  'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
-  'tpope/vim-repeat',
-  'tpope/vim-sleuth',
+  { 'tpope/vim-fugitive', event = 'VeryLazy' },
+  { 'tpope/vim-rhubarb', event = 'VeryLazy' },
+  { 'tpope/vim-repeat', event = 'VeryLazy' },
+  { 'tpope/vim-sleuth', event = 'VeryLazy' },
 
-  -- NOTE: This is where your plugins related to LSP can be installed.
-  --  The configuration is done below. Search for lspconfig to find it below.
   {
-    -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
-    dependencies = {
-      -- Automatically install LSPs to stdpath for neovim
-      { 'williamboman/mason.nvim', config = true },
-      'williamboman/mason-lspconfig.nvim',
-
-      -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
-
-      -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
-    },
+    event = { 'BufReadPre', 'BufNewFile' },
+    cmd = 'LspInfo',
   },
-
-  {
-    -- Autocompletion
-    'hrsh7th/nvim-cmp',
-    dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
-      'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip',
-
-      -- Adds LSP completion capabilities
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path',
-
-      -- Adds a number of user-friendly snippets
-      'rafamadriz/friendly-snippets',
-    },
-  },
+  { 'williamboman/mason.nvim', config = true, cmd = { 'Mason', 'MasonInstall', 'MasonInstallAll', 'MasonUpdate' } },
+  { 'williamboman/mason-lspconfig.nvim', cmd = { 'LspInstall', 'LspUninstall' } },
+  { 'j-hui/fidget.nvim', opts = {}, event = 'LspAttach' },
+  { 'folke/neodev.nvim', event = 'VeryLazy' },
+  { 'hrsh7th/nvim-cmp', event = 'InsertEnter' },
+  { 'L3MON4D3/LuaSnip', event = 'InsertEnter' },
+  { 'saadparwaiz1/cmp_luasnip', event = 'InsertEnter' },
+  { 'hrsh7th/cmp-nvim-lsp', event = 'InsertEnter' },
+  { 'hrsh7th/cmp-path', event = 'InsertEnter' },
+  { 'rafamadriz/friendly-snippets', event = 'InsertEnter' },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim', keys = { '<leader>' }, opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
+    event = 'BufReadPost',
     opts = {
       -- See `:help gitsigns.txt`
       signs = {
@@ -117,6 +98,7 @@ require('lazy').setup({
 
   {
     'ronisbr/nano-theme.nvim',
+    enabled = false,
     priority = 1000,
     lazy = false,
     init = function()
@@ -125,9 +107,20 @@ require('lazy').setup({
   },
 
   {
-    -- Set lualine as statusline
+    'mcchrish/zenbones.nvim',
+    priority = 1000,
+    lazy = false,
+    dependencies = {
+      'rktjmp/lush.nvim',
+    },
+    init = function()
+      vim.cmd 'colorscheme zenbones'
+    end,
+  },
+
+  {
     'nvim-lualine/lualine.nvim',
-    -- See `:help lualine.txt`
+    event = 'VeryLazy',
     opts = {
       options = {
         icons_enabled = false,
@@ -145,10 +138,24 @@ require('lazy').setup({
   },
 
   {
-    -- Add indentation guides even on blank lines
+    'echasnovski/mini.starter',
+    version = '*',
+    priority = 1000,
+    opts = {
+      header = table.concat({
+        '“And when he came to,                                         ',
+        ' he was flat on his back on the beach in the freezing sand,  ',
+        ' and it was raining out of a low sky,                        ',
+        ' and the tide was way out.”                                  ',
+      }, '\n'),
+      items = { name = '', action = '', section = '' },
+      footer = '',
+    },
+  },
+
+  {
     'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help ibl`
+    event = 'BufReadPost',
     main = 'ibl',
     opts = {
       scope = {
@@ -157,15 +164,15 @@ require('lazy').setup({
     },
   },
 
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim', event = { 'BufReadPost', 'BufNewFile' }, opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
+    lazy = false,
     branch = '0.1.x',
     dependencies = {
-      'nvim-lua/plenary.nvim',
+      { 'nvim-lua/plenary.nvim', event = 'VeryLazy' },
       {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'make',
@@ -184,6 +191,8 @@ require('lazy').setup({
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    event = { 'BufReadPre', 'BufNewFile' },
+    cmd = { 'TSUpdate', 'TSInstall' },
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
