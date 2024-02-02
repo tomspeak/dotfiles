@@ -21,7 +21,7 @@ return {
 
     filters = {
       dotfiles = false,
-      custom = { 'node_modules' },
+      custom = { 'node_modules', '.DS_STORE' },
     },
 
     renderer = {
