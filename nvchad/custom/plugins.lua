@@ -282,24 +282,24 @@ local plugins = {
 	},
 
 	{
-		'stevearc/aerial.nvim',
-		config = function ()
-			 require('aerial').setup {
-          keymaps = {
-            ["j"] = "actions.down_and_scroll",
-            ["k"] = "actions.up_and_scroll",
-          },
-          autojump = true,
-          backends = {
-            ['_']  = {"treesitter", "lsp", "markdown", "man"},
-            python = {"treesitter"},
-            rust   = {"lsp"},
-            scala = {"lsp"},
-          },
-      }
+		"stevearc/aerial.nvim",
+		config = function()
+			require("aerial").setup({
+				keymaps = {
+					["j"] = "actions.down_and_scroll",
+					["k"] = "actions.up_and_scroll",
+				},
+				autojump = true,
+				backends = {
+					["_"] = { "treesitter", "lsp", "markdown", "man" },
+					python = { "treesitter" },
+					rust = { "lsp" },
+					scala = { "lsp" },
+				},
+			})
 		end,
-		cmd = { "AerialOpen", "AerialToggle"},
-	}
+		cmd = { "AerialOpen", "AerialToggle" },
+	},
 }
 
 return plugins

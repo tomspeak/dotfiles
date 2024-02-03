@@ -21,6 +21,12 @@ require('lazy').setup({
   { 'tpope/vim-rhubarb', event = 'VeryLazy' },
   { 'tpope/vim-repeat', event = 'VeryLazy' },
   { 'tpope/vim-sleuth', event = 'VeryLazy' },
+  {
+    'kylechui/nvim-surround',
+    version = '*',
+    event = { 'BufReadPost', 'BufNewFile' },
+    opts = {},
+  },
 
   {
     'neovim/nvim-lspconfig',
