@@ -128,11 +128,17 @@ require('lazy').setup({
     'nvim-lualine/lualine.nvim',
     event = 'VeryLazy',
     opts = {
+      extensions = {
+        'fugitive',
+        'lazy',
+      },
       options = {
         icons_enabled = false,
         theme = 'auto',
         component_separators = '|',
         section_separators = '',
+        disabled_filetypes = { 'NvimTree' },
+        globalstatus = true,
       },
       sections = {
         lualine_b = { 'branch', 'diff' },
@@ -294,16 +300,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
-})
+require 'autocmds'
 
 -- [[ Configure Telescope ]]
 require('telescope').setup {
@@ -793,6 +790,7 @@ local wk = require 'which-key'
 
 wk.register({
   ['<Esc>'] = { '<cmd> noh <CR>', 'Clear highlights' },
+  [';'] = { ':', 'enter command mode', opts = { nowait = true } },
 
   ['-'] = { '<cmd> NvimTreeToggle <CR>', 'NvimTree Toggle' },
   ['_'] = { '<cmd> NvimTreeFindFile <CR>', 'NvimTree Toggle' },
