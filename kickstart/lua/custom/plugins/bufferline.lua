@@ -7,6 +7,10 @@ return {
       mode = 'buffers',
       diagnostics = 'nvim_lsp',
       always_show_bufferline = true,
+      modified_icon = '*',
+      close_icon = '',
+      show_buffer_close_icons = false,
+
       offsets = {
         { filetype = 'NvimTree', text = '', highlight = 'Directory', separator = true },
       },

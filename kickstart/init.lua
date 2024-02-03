@@ -51,13 +51,15 @@ require('lazy').setup({
     'lewis6991/gitsigns.nvim',
     event = 'BufReadPost',
     opts = {
-      -- See `:help gitsigns.txt`
       signs = {
         add = { text = '+' },
         change = { text = '~' },
         delete = { text = '_' },
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
+      },
+      current_line_blame_opts = {
+        delay = 100,
       },
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
@@ -844,4 +846,7 @@ wk.register({
 }, { mode = 'v' })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
+--
+--
+--
 -- vim: ts=2 sts=2 sw=2 et
