@@ -156,13 +156,14 @@ require('lazy').setup({
     version = '*',
     priority = 1000,
     opts = {
+      evaluate_single = true,
       header = table.concat({
         '“And when he came to,                                         ',
         ' he was flat on his back on the beach in the freezing sand,  ',
         ' and it was raining out of a low sky,                        ',
         ' and the tide was way out.”                                  ',
       }, '\n'),
-      items = { name = '', action = '', section = '' },
+      items = { name = '', action = ':NvimTreeOpen', section = '' },
       footer = '',
     },
   },
@@ -846,7 +847,4 @@ wk.register({
 }, { mode = 'v' })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
---
---
---
 -- vim: ts=2 sts=2 sw=2 et
