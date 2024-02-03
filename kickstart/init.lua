@@ -156,7 +156,6 @@ require('lazy').setup({
     version = '*',
     priority = 1000,
     opts = {
-      evaluate_single = true,
       header = table.concat({
         '“And when he came to,                                         ',
         ' he was flat on his back on the beach in the freezing sand,  ',
