@@ -23,7 +23,7 @@
   p = push
   pf = push --force-with-lease
   pu = "!f() { git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`; }; f"
-  d = diff
+  d = diff --color-words
   s = status
   st = status --short --branch
   b = branch
