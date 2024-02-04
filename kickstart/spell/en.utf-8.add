@@ -11,3 +11,7 @@ toUppercase
 auth
 #eponds
 CORS
+microtasks
+async
+macrotask
+microtask

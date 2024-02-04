@@ -138,7 +138,7 @@ require('lazy').setup({
         icons_enabled = false,
         theme = 'auto',
         component_separators = '|',
-        section_separators = '',
+        section_separators = { left = '█', right = '█' },
         disabled_filetypes = { 'NvimTree' },
         globalstatus = true,
       },
@@ -227,9 +227,6 @@ vim.wo.number = true
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
--- Enable break indent
-vim.o.breakindent = true
-
 -- Save undo history
 vim.o.undofile = true
 
@@ -246,9 +243,6 @@ vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
-
--- NOTE: You should make sure your terminal supports this
-vim.o.termguicolors = true
 
 vim.o.title = true
 vim.o.titlestring = '%t%( %M%)' -- title, modified
@@ -282,6 +276,14 @@ vim.opt.fillchars = {
   foldsep = '│',
   foldclose = '▸',
 }
+
+-- Set tabs to 2 spaces
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.expandtab = true
+
+-- Enable smart indenting (see https://stackoverflow.com/questions/1204149/smart-wrap-in-vim)
+vim.opt.breakindent = true
 
 -- disable nvim intro
 vim.opt.shortmess:append 'sI'
@@ -582,7 +584,11 @@ require('which-key').register({
 
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
-require('mason').setup()
+require('mason').setup {
+  ui = {
+    border = 'rounded',
+  },
+}
 require('mason-lspconfig').setup()
 
 -- Setup neovim lua configuration
@@ -606,7 +612,15 @@ local servers = {
   cssls = {},
   html = {},
   tailwindcss = {},
-  rust_analyzer = {},
+  rust_analyzer = {
+    settings = {
+      checkOnSave = {
+        allFeatures = true,
+        command = 'clippy',
+        extraArgs = { '--no-deps' },
+      },
+    },
+  },
   gopls = {},
   yamlls = {},
   jsonls = {},
@@ -622,7 +636,7 @@ mason_lspconfig.setup {
 
 mason_lspconfig.setup_handlers {
   function(server_name)
-    lspconfig[server_name].setup {
+    require('lspconfig')[server_name].setup {
       capabilities = capabilities,
       on_attach = on_attach,
       settings = servers[server_name],
@@ -781,10 +795,13 @@ cmp.setup {
       end
     end, { 'i', 's' }),
   },
+  experimental = {
+    ghost_text = true,
+  },
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-    { name = 'path' },
+    { name = 'luasnip', max_item_count = 3 },
+    { name = 'path', max_item_count = 3 },
   },
 }
 
@@ -834,6 +851,12 @@ wk.register({
       require('Comment.api').toggle.linewise.current()
     end,
     'Toggle comment',
+  },
+
+  -- Open link under cursor https://speak.sh
+  ['gx'] = {
+    '<cmd> sil !open <cWORD><cr>',
+    'Open link under cursor',
   },
 }, { mode = 'n' })
 
