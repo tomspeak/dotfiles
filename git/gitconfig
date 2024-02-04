@@ -62,16 +62,6 @@
 	oldHighlight = red bold 52
 	newNormal = green bold
 	newHighlight = green bold 22
-[core]
-	pager = delta
-	excludesfile = /Users/t/.gitignore_global
-  blame = delta
-[interactive]
-  diffFilter = delta --color-only
-[delta]
-  navigate = true
-  line-numbers = true
-  side-by-side = true
 [merge]
   conflictstyle = diff3 
 [diff]
