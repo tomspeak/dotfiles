@@ -106,7 +106,7 @@ require('lazy').setup({
 
   {
     'ronisbr/nano-theme.nvim',
-    enabled = false,
+    enabled = true,
     priority = 1000,
     lazy = false,
     init = function()
@@ -117,6 +117,7 @@ require('lazy').setup({
   {
     'mcchrish/zenbones.nvim',
     priority = 1000,
+    enabled = false,
     lazy = false,
     dependencies = {
       'rktjmp/lush.nvim',
@@ -143,6 +144,12 @@ require('lazy').setup({
         globalstatus = true,
       },
       sections = {
+        lualine_c = {
+          {
+            'filename',
+            path = 1, -- Relative path
+          },
+        },
         lualine_b = { 'branch', 'diff' },
         lualine_x = {},
         lualine_y = {},
