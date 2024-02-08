@@ -12,12 +12,13 @@ font-thicken = false
 #font-family-italic = "BerkeleyMono-Italic"
 #font-family-bold-italic = "BerkeleyMono-BoldItalic"
 font-family = Zed Mono
-font-family = "Zed Mono"
 
 macos-non-native-fullscreen = true
+macos-titlebar-tabs = false
+macos-option-as-alt = true
 window-decoration = false
 window-theme = dark
-macos-option-as-alt = true
+
 
 # Does not work - https://github.com/mitchellh/ghostty/issues/327
 keybind = super+right_bracket=next_tab
