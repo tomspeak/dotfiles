@@ -134,6 +134,7 @@ require('lazy').setup({
       extensions = {
         'fugitive',
         'lazy',
+        'trouble',
       },
       options = {
         icons_enabled = false,
@@ -144,16 +145,22 @@ require('lazy').setup({
         globalstatus = true,
       },
       sections = {
+        lualine_a = {
+          {
+            'mode',
+            icons_enabled = false,
+          },
+        },
+        lualine_b = { 'branch', 'diff', 'fugitive' },
         lualine_c = {
           {
             'filename',
             path = 1, -- Relative path
           },
         },
-        lualine_b = { 'branch', 'diff' },
-        lualine_x = {},
+        lualine_x = { 'lazy' },
         lualine_y = {},
-        lualine_z = { 'diagnostics' },
+        lualine_z = { 'diagnostics', 'trouble' },
       },
     },
   },
@@ -206,6 +213,7 @@ require('lazy').setup({
         version = '^1.0.0',
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
+      { 'nvim-telescope/telescope-github.nvim' },
     },
   },
 
@@ -405,6 +413,7 @@ require('telescope').setup {
 pcall(require('telescope').load_extension, 'fzf')
 pcall(require('telescope').load_extension, 'live_grep_args')
 pcall(require('telescope').load_extension, 'ui-select')
+pcall(require('telescope').load_extension, 'gh')
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
@@ -570,6 +579,8 @@ local on_attach = function(_, bufnr)
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+  nmap('gvd', '<cmd>vsplit | lua vim.lsp.buf.definition()<cr>', '[G]oto [V]ertical [D]efinition')
 end
 
 -- document existing key chains
