@@ -15,6 +15,19 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local function border(hl_name)
+  return {
+    { '┌', hl_name },
+    { '─', hl_name },
+    { '┐', hl_name },
+    { '│', hl_name },
+    { '┘', hl_name },
+    { '─', hl_name },
+    { '└', hl_name },
+    { '│', hl_name },
+  }
+end
+
 -- [[ Configure plugins ]]
 require('lazy').setup({
   { 'tpope/vim-fugitive', event = 'VeryLazy' },
@@ -285,7 +298,7 @@ vim.opt.fillchars = {
   vert = '│',
   fold = '⠀',
   eob = ' ', -- suppress ~ at EndOfBuffer
-  --diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
+  diff = '⣿',
   msgsep = '‾',
   foldopen = '▾',
   foldsep = '│',
@@ -676,25 +689,25 @@ lspconfig.eslint.setup {
   end,
 }
 
-lspconfig.tsserver.setup {
-  on_attach = function(client, bufnr)
-    if client.server_capabilities.inlayHintProvider then
-      vim.lsp.inlay_hint(bufnr, true)
-    end
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
-    on_attach(client, bufnr)
-  end,
-  capabilities = capabilities,
-  flags = { debounce_text_changes = 150 },
-  root_dir = lspconfig.util.root_pattern('.git', 'package.json'),
-  settings = {
-    preferences = {
-      importModuleSpecifierPreference = 'non-relative',
-      upddateImportsOnFileMove = 'always',
-    },
-  },
-}
+-- lspconfig.tsserver.setup {
+--   on_attach = function(client, bufnr)
+--     if client.server_capabilities.inlayHintProvider then
+--       vim.lsp.inlay_hint(bufnr, true)
+--     end
+--     client.resolved_capabilities.document_formatting = false
+--     client.resolved_capabilities.document_range_formatting = false
+--     on_attach(client, bufnr)
+--   end,
+--   capabilities = capabilities,
+--   flags = { debounce_text_changes = 150 },
+--   root_dir = lspconfig.util.root_pattern('.git', 'package.json'),
+--   settings = {
+--     preferences = {
+--       importModuleSpecifierPreference = 'non-relative',
+--       upddateImportsOnFileMove = 'always',
+--     },
+--   },
+-- }
 
 lspconfig.lua_ls.setup {
   on_attach = on_attach,
@@ -729,23 +742,20 @@ lspconfig.lua_ls.setup {
   },
 }
 
+-- To instead override globally
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or border 'FloatBorder'
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
-
-local border = {
-  '╭',
-  '─',
-  '╮',
-  '│',
-  '╯',
-  '─',
-  '╰',
-  '│',
-}
 
 cmp.setup {
   enabled = function()
@@ -781,8 +791,18 @@ cmp.setup {
     completeopt = 'menu,menuone,noinsert',
   },
   window = {
-    completion = cmp.config.window.bordered { scrollbar = false, winhighlight = 'Normal:CmpPmenu,Search:None', side_padding = 1, border = border },
-    documentation = cmp.config.window.bordered { scrollbar = false, winhighlight = 'Normal:CmpPmenu,Search:None', side_padding = 1, border = border },
+    completion = cmp.config.window.bordered {
+      scrollbar = false,
+      winhighlight = 'Normal:CmpPmenu,Search:None',
+      side_padding = 1,
+      border = border 'CmpMenuBorder',
+    },
+    documentation = cmp.config.window.bordered {
+      scrollbar = false,
+      winhighlight = 'Normal:CmpPmenu,Search:None',
+      side_padding = 1,
+      border = border 'CmpDocBorder',
+    },
   },
   mapping = cmp.mapping.preset.insert {
     ['<C-n>'] = cmp.mapping.select_next_item(),
