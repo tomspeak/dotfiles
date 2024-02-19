@@ -63,11 +63,14 @@
 	newNormal = green bold
 	newHighlight = green bold 22
 [merge]
-  conflictstyle = diff3 
+	conflictstyle = zdiff3
 [diff]
     colorMoved = default
+	algorithm = histogram
+	submodule = log
+	context = 10
 [help]
-  autocorrect = 1
+	autocorrect = 10
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [filter "lfs"]
@@ -75,3 +78,22 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[init]
+	defaultBranch = main
+[commit]
+	verbose = true
+[rerere]
+	enabled = true
+[status]
+	submoduleSummary = true
+[submodule]
+	resurce = true
+[branch]
+	sort = -committerdate
+[fetch]
+	prune = true
+	prunetags = true
+[log]
+	date = iso
+[rebase]
+	updateRefs = true
