@@ -118,8 +118,20 @@ require('lazy').setup({
   },
 
   {
-    'ronisbr/nano-theme.nvim',
+    'aktersnurra/no-clown-fiesta.nvim',
     enabled = true,
+    priority = 1000,
+    lazy = false,
+    config = function()
+      print 'hello'
+      require('no-clown-fiesta').setup {}
+      vim.cmd 'colorscheme no-clown-fiesta'
+    end,
+  },
+
+  {
+    'ronisbr/nano-theme.nvim',
+    enabled = false,
     priority = 1000,
     lazy = false,
     init = function()
@@ -242,9 +254,15 @@ require('lazy').setup({
   },
 
   { import = 'custom.plugins' },
-}, {})
+}, { install = {
+  colorscheme = { 'no-clown-fiesta' },
+}, ui = {
+  border = 'rounded',
+} })
 
 -- [[ Setting options ]]
+
+vim.cmd [[colorscheme no-clown-fiesta]]
 
 -- Set highlight on search
 vim.o.hlsearch = false
