@@ -123,8 +123,9 @@ require('lazy').setup({
     priority = 1000,
     lazy = false,
     config = function()
-      print 'hello'
-      require('no-clown-fiesta').setup {}
+      require('no-clown-fiesta').setup {
+        transparent = true,
+      }
       vim.cmd 'colorscheme no-clown-fiesta'
     end,
   },
@@ -170,12 +171,7 @@ require('lazy').setup({
         globalstatus = true,
       },
       sections = {
-        lualine_a = {
-          {
-            'mode',
-            icons_enabled = false,
-          },
-        },
+        lualine_a = {},
         lualine_b = { 'branch', 'diff', 'fugitive' },
         lualine_c = {
           {
@@ -293,6 +289,7 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.title = true
 vim.o.titlestring = '%t%( %M%)' -- title, modified
 vim.o.termguicolors = true
+vim.o.t_Co = 256
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.updatetime = 250
