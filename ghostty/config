@@ -26,5 +26,45 @@ keybind = super+left_bracket=previous_tab
 
 confirm-close-surface = false
 
-theme = OneHalfLight
+#theme = OneHalfLight
 #theme = rose-pine-dawn
+foreground = #FFFFFF
+background = #151515
+selection-foreground = #FFFFFF
+selection-background = #373737
+
+# Cursor colors
+cursor-color = #ffffff
+cursor-text = #1e1e1e
+
+# black
+palette = 0=#202020
+palette = 8=#555555
+
+# red
+palette = 1=#AC4142
+palette = 9=#AC4142
+
+# green
+palette = 2=#88afa2
+palette = 10=#90A959
+
+# yellow
+palette = 3=#F4BF75
+palette = 11=#F4BF75
+
+# blue
+palette = 4=#A5D6FF
+palette = 12=#7E97AB
+
+# magenta
+palette = 5=#AA759F
+palette = 13=#AA759F
+
+# cyan
+palette = 6=#75B5AA
+palette = 14=#75B5AA
+
+# white
+palette = 7=#D0D0D0
+palette = 15=#E1E1E1
