@@ -1,5 +1,4 @@
 # npm
-alias n="node"
 alias ni="npm install"
 alias nis="npm install --save"
 alias nisd="npm install --save-dev"
@@ -48,14 +47,5 @@ alias ci="composer install"
 alias cr="composer require"
 alias crd="composer require --dev"
 
-# Zellij
-alias z="zellij";
-alias zt="zellij-runner";
-alias tls="zellij list-sessions";
-#alias ta="zellij attach ";
-#alias tk="zellij kill-session ";
-alias tka="zellij kill-all-sessions";
-alias tt="zellij --session generic --layout terminal";
-
-# NvChad
-alias nv='NVIM_APPNAME="nvchad" nvim'
+alias n='NVIM_APPNAME="kickstart" nvim'
+alias nvim='NVIM_APPNAME="kickstart" nvim'
