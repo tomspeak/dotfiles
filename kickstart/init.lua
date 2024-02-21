@@ -123,10 +123,11 @@ require('lazy').setup({
     priority = 1000,
     lazy = false,
     config = function()
-      require('no-clown-fiesta').setup {
+      local p = require 'no-clown-fiesta'
+      p.setup {
         transparent = true,
       }
-      vim.cmd 'colorscheme no-clown-fiesta'
+      p.load()
     end,
   },
 
