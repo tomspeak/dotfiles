@@ -119,40 +119,37 @@ require('lazy').setup({
 
   {
     'aktersnurra/no-clown-fiesta.nvim',
-    enabled = true,
     priority = 1000,
     lazy = false,
     config = function()
-      local p = require 'no-clown-fiesta'
-      p.setup {
+      local theme = require 'no-clown-fiesta'
+      theme.setup {
         transparent = true,
       }
-      p.load()
+      theme.load()
     end,
   },
 
-  {
-    'ronisbr/nano-theme.nvim',
-    enabled = false,
-    priority = 1000,
-    lazy = false,
-    init = function()
-      vim.cmd 'colorscheme nano-theme'
-    end,
-  },
-
-  {
-    'mcchrish/zenbones.nvim',
-    priority = 1000,
-    enabled = false,
-    lazy = false,
-    dependencies = {
-      'rktjmp/lush.nvim',
-    },
-    init = function()
-      vim.cmd 'colorscheme zenbones'
-    end,
-  },
+  -- {
+  --   'ronisbr/nano-theme.nvim',
+  --   priority = 1000,
+  --   lazy = false,
+  --   init = function()
+  --     vim.cmd 'colorscheme nano-theme'
+  --   end,
+  -- },
+  --
+  -- {
+  --   'mcchrish/zenbones.nvim',
+  --   priority = 1000,
+  --   lazy = false,
+  --   dependencies = {
+  --     'rktjmp/lush.nvim',
+  --   },
+  --   init = function()
+  --     vim.cmd 'colorscheme zenbones'
+  --   end,
+  -- },
 
   {
     'nvim-lualine/lualine.nvim',
@@ -259,8 +256,6 @@ require('lazy').setup({
 
 -- [[ Setting options ]]
 
-vim.cmd [[colorscheme no-clown-fiesta]]
-
 -- Set highlight on search
 vim.o.hlsearch = false
 
@@ -289,7 +284,6 @@ vim.o.completeopt = 'menuone,noselect'
 
 vim.o.title = true
 vim.o.titlestring = '%t%( %M%)' -- title, modified
-vim.o.termguicolors = true
 vim.o.t_Co = 256
 vim.o.number = true
 vim.o.relativenumber = true
