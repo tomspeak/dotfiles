@@ -118,15 +118,19 @@ require('lazy').setup({
   },
 
   {
-    'aktersnurra/no-clown-fiesta.nvim',
-    priority = 1000,
+
+    'neanias/everforest-nvim',
+    version = false,
     lazy = false,
+    priority = 1000,
     config = function()
-      local theme = require 'no-clown-fiesta'
-      theme.setup {
-        transparent = true,
+      require('everforest').setup {
+        background = 'hard',
+        transparent_background_level = 1,
+        diagnostic_text_highlight = true,
       }
-      theme.load()
+      vim.cmd [[colorscheme everforest]]
+      vim.o.background = 'dark'
     end,
   },
 
@@ -458,6 +462,7 @@ local function telescope_live_grep_open_files()
 end
 vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
 vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
+vim.keymap.set('n', '<leader>sb', require('telescope.builtin').buffers, { desc = '[S]earch [B]uffers' })
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
