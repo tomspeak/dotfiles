@@ -3,6 +3,7 @@ return {
   lazy = true,
   event = { 'BufReadPre', 'BufNewFile' },
   opts = {
+    notify_on_error = false,
     formatters_by_ft = {
       lua = { 'stylua' },
       rust = { 'rustfmt' },

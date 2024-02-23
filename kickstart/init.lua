@@ -30,7 +30,7 @@ end
 
 -- [[ Configure plugins ]]
 require('lazy').setup({
-  { 'tpope/vim-fugitive', event = 'VeryLazy' },
+  { 'tpope/vim-fugitive', cmd = 'G' },
   { 'tpope/vim-rhubarb', event = 'VeryLazy' },
   { 'tpope/vim-repeat', event = 'VeryLazy' },
   { 'tpope/vim-sleuth', event = 'VeryLazy' },
@@ -57,10 +57,25 @@ require('lazy').setup({
   { 'hrsh7th/cmp-path', event = 'InsertEnter' },
   { 'rafamadriz/friendly-snippets', event = 'InsertEnter' },
 
-  -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', keys = { '<leader>' }, opts = {} },
   {
-    -- Adds git related signs to the gutter, as well as utilities for managing changes
+    'folke/which-key.nvim',
+    keys = { '<leader>' },
+    config = function()
+      local wk = require 'which-key'
+      wk.setup()
+      wk.register {
+        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
+        ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+        ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
+        ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
+        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+        ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
+        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+      }
+    end,
+  },
+  {
     'lewis6991/gitsigns.nvim',
     event = 'BufReadPost',
     opts = {
@@ -191,6 +206,7 @@ require('lazy').setup({
   {
     'echasnovski/mini.starter',
     version = '*',
+    lazy = false,
     priority = 1000,
     opts = {
       header = table.concat({
@@ -217,10 +233,9 @@ require('lazy').setup({
 
   { 'numToStr/Comment.nvim', event = { 'BufReadPost', 'BufNewFile' }, opts = {} },
 
-  -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
-    lazy = false,
+    event = 'VeryLazy',
     branch = '0.1.x',
     dependencies = {
       { 'nvim-lua/plenary.nvim', event = 'VeryLazy' },
@@ -246,15 +261,17 @@ require('lazy').setup({
     event = { 'BufReadPre', 'BufNewFile' },
     cmd = { 'TSUpdate', 'TSInstall' },
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
+      {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        event = { 'BufReadPre', 'BufNewFile' },
+        cmd = { 'TSUpdate', 'TSInstall' },
+      },
     },
     build = ':TSUpdate',
   },
 
   { import = 'custom.plugins' },
-}, { install = {
-  colorscheme = { 'no-clown-fiesta' },
-}, ui = {
+}, { ui = {
   border = 'rounded',
 } })
 
@@ -264,7 +281,8 @@ require('lazy').setup({
 vim.o.hlsearch = false
 
 -- Make line numbers default
-vim.wo.number = true
+vim.opt.number = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -277,8 +295,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Keep signcolumn on by default
-vim.wo.signcolumn = 'yes'
-vim.o.signcolumn = 'yes'
+vim.opt.signcolumn = 'yes'
 
 -- Decrease update time
 vim.o.updatetime = 250
@@ -290,13 +307,11 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.title = true
 vim.o.titlestring = '%t%( %M%)' -- title, modified
 vim.o.t_Co = 256
-vim.o.number = true
-vim.o.relativenumber = true
 vim.o.updatetime = 250
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 -- vim.o.wildignore:append("*/node_modules/*")
-vim.o.inccommand = 'nosplit'
+vim.o.inccommand = 'split'
 vim.o.incsearch = true
 vim.o.hlsearch = true
 vim.o.cursorline = true
@@ -308,7 +323,6 @@ vim.o.backspace = 'indent,eol,start' -- make backspace work as expected
 vim.o.swapfile = false -- disable the .swp files vim creates
 vim.o.splitright = true -- open horizontal splits to the right
 vim.o.splitbelow = true -- open vertical splits below
-vim.o.cursorline = true
 vim.opt.fillchars = {
   vert = '│',
   fold = '⠀',
@@ -612,23 +626,6 @@ local on_attach = function(_, bufnr)
   nmap('gvd', '<cmd>vsplit | lua vim.lsp.buf.definition()<cr>', '[G]oto [V]ertical [D]efinition')
 end
 
--- document existing key chains
-require('which-key').register {
-  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-  ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
-  ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-}
--- register which-key VISUAL mode
--- required for visual <leader>hs (hunk stage) to work
-require('which-key').register({
-  ['<leader>'] = { name = 'VISUAL <leader>' },
-  ['<leader>h'] = { 'Git [H]unk' },
-}, { mode = 'v' })
-
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
 require('mason').setup {
@@ -860,6 +857,16 @@ cmp.setup {
 }
 
 local wk = require 'which-key'
+wk.register({
+  -- TODO: add keybinding/command for this :windo diffthis
+  ['<leader>'] = { name = 'VISUAL <leader>' },
+  ['<leader>h'] = { 'Git [H]unk' },
+  -- Comment out visual
+  ['<leader>/'] = {
+    "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+    'Toggle comment',
+  },
+}, { mode = 'v' })
 
 wk.register({
   ['<Esc>'] = { '<cmd> noh <CR>', 'Clear highlights' },
@@ -913,14 +920,3 @@ wk.register({
     'Open link under cursor',
   },
 }, { mode = 'n' })
-
-wk.register({
-  -- Comment out visual
-  ['<leader>/'] = {
-    "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-    'Toggle comment',
-  },
-}, { mode = 'v' })
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et

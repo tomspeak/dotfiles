@@ -3,8 +3,7 @@ return {
   priority = 1000,
   lazy = false,
   enabled = false,
-
-  config = {
+  opts = {
     update_interval = 30000,
     set_dark_mode = function()
       vim.api.nvim_set_option('background', 'dark')
