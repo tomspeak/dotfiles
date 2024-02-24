@@ -677,6 +677,7 @@ local servers = {
   gopls = {},
   yamlls = {},
   jsonls = {},
+  bashls = {},
   terraformls = {},
 }
 
