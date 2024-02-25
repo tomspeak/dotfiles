@@ -74,9 +74,9 @@ truncation_length = 8
 style = "semibold overlay0"
 
 [character]
-success_symbol = "[λ](crust)"
-error_symbol = "[λ](pink)"
-vimcmd_symbol = "[λ](crust)"
+success_symbol = "[Λ](crust)"
+error_symbol = "[Λ](pink)"
+vimcmd_symbol = "[Λ](crust)"
 
 [git_branch]
 format = "[$branch]($style)"
