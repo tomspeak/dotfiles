@@ -11,7 +11,6 @@ symlinks:
 	@ln -sf $(DIR)/git/gitconfig ~/.gitconfig
 	@ln -sf $(DIR)/git/gitignore_global ~/.gitignore_global
 	@ln -sf $(DIR)/kickstart/ ~/.config/nvim/
-	@ln -sf $(DIR)/kitty ~/.config
 	@ln -sf $(DIR)/karabiner ~/.config
 	@ln -sf $(DIR)/starship.toml ~/.config
 	@ln -sf $(DIR)/ghostty ~/.config
@@ -28,7 +27,3 @@ install_brews:
 
 tmux_plugins:
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-term_info:
-	tic term-config/xterm-256color-italic.terminfo
-	tic -x term-config/tmux-256color.terminfo

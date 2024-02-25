@@ -1,5 +1,4 @@
 brew 'curl'
-brew 'diff-so-fancy'
 brew 'docker'
 brew 'exa'
 brew 'fd'
@@ -17,7 +16,6 @@ brew 'tree-sitter'
 brew 'neovim'
 brew 'wget'
 brew 'youtube-dl'
-brew 'zellij'
 brew 'zsh'
 
 cask 'bartender'
