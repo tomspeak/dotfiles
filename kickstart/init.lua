@@ -1,3 +1,6 @@
+local borders = require 'utils.borders'
+local icons = require 'utils.icons'
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -30,7 +33,11 @@ end
 
 -- [[ Configure plugins ]]
 require('lazy').setup({
-  { 'tpope/vim-fugitive', cmd = 'G' },
+  {
+    'tpope/vim-fugitive',
+    cmd = { 'G', 'GBrowse' },
+    keys = { { '<leader>gg', '<cmd>G <CR>', desc = 'Git status' } },
+  },
   { 'tpope/vim-rhubarb', event = 'VeryLazy' },
   { 'tpope/vim-repeat', event = 'VeryLazy' },
   { 'tpope/vim-sleuth', event = 'VeryLazy' },
@@ -79,14 +86,22 @@ require('lazy').setup({
     'lewis6991/gitsigns.nvim',
     event = 'BufReadPost',
     opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
+      preview_config = {
+        border = 'solid',
+        style = 'minimal',
       },
+      signs = {
+        add = { text = icons.GitSignAdd },
+        untracked = { text = icons.GitSignUntracked },
+        change = { text = icons.GitSignChange },
+        delete = { text = icons.GitSignDelete },
+        topdelete = { text = icons.GitSignTopdelete },
+        changedelete = { text = icons.GitSignChangedelete },
+      },
+      current_line_blame = false,
       current_line_blame_opts = {
+        virt_text = true,
+        virt_text_pos = 'eol',
         delay = 100,
       },
       on_attach = function(bufnr)
@@ -271,14 +286,13 @@ require('lazy').setup({
   },
 
   { import = 'custom.plugins' },
-}, {  install = { colorscheme = { "dragon" } }, ui = {
+}, { install = { colorscheme = { 'dragon' } }, ui = {
   border = 'rounded',
 } })
 
 -- [[ Setting options ]]
 
 vim.cmd.colorscheme 'dragon'
-vim.opt.termguicolors = true
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -309,7 +323,8 @@ vim.o.completeopt = 'menuone,noselect'
 
 vim.o.title = true
 vim.o.titlestring = '%t%( %M%)' -- title, modified
-vim.o.t_Co = 256
+
+-- vim.o.t_Co = 256
 vim.o.updatetime = 250
 vim.o.timeout = true
 vim.o.timeoutlen = 300
@@ -342,11 +357,23 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 
+vim.opt.cmdheight = 1
+
 -- Enable smart indenting (see https://stackoverflow.com/questions/1204149/smart-wrap-in-vim)
 vim.opt.breakindent = true
 
 -- disable nvim intro
 vim.opt.shortmess:append 'sI'
+
+-- Disable plugins shipped with neovim
+vim.g.loaded_2html_plugin = 0
+vim.g.loaded_gzip = 0
+vim.g.loaded_matchit = 0
+vim.g.loaded_tar = 0
+vim.g.loaded_tarPlugin = 0
+vim.g.loaded_tutor_mode_plugin = 0
+vim.g.loaded_zip = 0
+vim.g.loaded_zipPlugin = 0
 
 -- [[ Basic Keymaps ]]
 
@@ -423,7 +450,7 @@ require('telescope').setup {
     generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
     winblend = 0,
     border = {},
-    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+    borderchars = borders.rounded,
     color_devicons = true,
     set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
     file_previewer = require('telescope.previewers').vim_buffer_cat.new,
