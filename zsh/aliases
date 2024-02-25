@@ -47,5 +47,4 @@ alias ci="composer install"
 alias cr="composer require"
 alias crd="composer require --dev"
 
-alias n='NVIM_APPNAME="kickstart" nvim'
-alias nvim='NVIM_APPNAME="kickstart" nvim'
+alias n='nvim'

@@ -132,22 +132,22 @@ require('lazy').setup({
     },
   },
 
-  {
-
-    'neanias/everforest-nvim',
-    version = false,
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('everforest').setup {
-        background = 'hard',
-        transparent_background_level = 1,
-        diagnostic_text_highlight = true,
-      }
-      vim.cmd [[colorscheme everforest]]
-      vim.o.background = 'dark'
-    end,
-  },
+  -- {
+  --
+  --   'neanias/everforest-nvim',
+  --   version = false,
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require('everforest').setup {
+  --       background = 'hard',
+  --       transparent_background_level = 1,
+  --       diagnostic_text_highlight = true,
+  --     }
+  --     vim.cmd [[colorscheme everforest]]
+  --     vim.o.background = 'dark'
+  --   end,
+  -- },
 
   -- {
   --   'ronisbr/nano-theme.nvim',
@@ -271,11 +271,14 @@ require('lazy').setup({
   },
 
   { import = 'custom.plugins' },
-}, { ui = {
+}, {  install = { colorscheme = { "dragon" } }, ui = {
   border = 'rounded',
 } })
 
 -- [[ Setting options ]]
+
+vim.cmd.colorscheme 'dragon'
+vim.opt.termguicolors = true
 
 -- Set highlight on search
 vim.o.hlsearch = false
