@@ -1,0 +1,6 @@
+[submodule "kickstart/bekaboo-nvim"]
+	path = kickstart/bekaboo-nvim
+	url = https://github.com/Bekaboo/nvim
+[submodule "kickstart/isaksamsten-nvim"]
+	path = kickstart/isaksamsten-nvim
+	url = https://github.com/isaksamsten/nvim-config
