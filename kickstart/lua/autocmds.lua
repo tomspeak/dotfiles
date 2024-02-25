@@ -29,3 +29,18 @@ vim.api.nvim_create_autocmd('VimResized', {
   command = 'wincmd =',
   desc = 'Auto-resize windows on terminal buffer resize.',
 })
+
+vim.api.nvim_create_augroup('Git', {})
+
+vim.api.nvim_create_autocmd('BufEnter', {
+  desc = 'Automatically go into insert mode + spellcheck for commit messages',
+  pattern = 'COMMIT_EDITMSG',
+  callback = function()
+    vim.wo.spell = true
+    vim.api.nvim_win_set_cursor(0, { 1, 0 })
+    if vim.fn.getline(1) == '' then
+      vim.cmd 'startinsert!'
+    end
+  end,
+  group = 'Git',
+})
