@@ -10,7 +10,7 @@ symlinks:
 	@ln -sf $(DIR)/tmux/theme.sh ~/.tmux/theme.sh
 	@ln -sf $(DIR)/git/gitconfig ~/.gitconfig
 	@ln -sf $(DIR)/git/gitignore_global ~/.gitignore_global
-	@ln -sf $(DIR)/kickstart/ ~/.config/nvim/
+	@ln -sf $(DIR)/nvim/ ~/.config/nvim/
 	@ln -sf $(DIR)/karabiner ~/.config
 	@ln -sf $(DIR)/starship.toml ~/.config
 	@ln -sf $(DIR)/ghostty ~/.config
