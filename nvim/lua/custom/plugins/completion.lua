@@ -167,8 +167,8 @@ return {
       -- },
       sources = {
         { name = 'nvim_lsp' },
-        { name = 'luasnip', max_item_count = 3 },
-        { name = 'path', max_item_count = 3 },
+        { name = 'luasnip', max_item_count = 2 },
+        { name = 'path', max_item_count = 2 },
       },
     }
   end,

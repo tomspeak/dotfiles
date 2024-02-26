@@ -129,6 +129,8 @@ return {
             callback = vim.lsp.buf.clear_references,
           })
         end
+
+        vim.lsp.inlay_hint.enable(event.buf, true)
       end,
     })
 
@@ -149,18 +151,12 @@ return {
     --  - settings (table): Override the default settings passed when initializing the server.
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
+      rust_analyzer = function()
+        return true
+      end,
       cssls = {},
       html = {},
       tailwindcss = {},
-      rust_analyzer = {
-        settings = {
-          checkOnSave = {
-            allFeatures = true,
-            command = 'clippy',
-            extraArgs = { '--no-deps' },
-          },
-        },
-      },
       gopls = {},
       yamlls = {},
       jsonls = {},
@@ -240,6 +236,14 @@ return {
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {}),
           }
+        end,
+        -- Because we use rustacean.nvim which handles LSP for us, we only want
+        -- Mason to install the rust-analyzer, but not *actually* load it.
+        ['rust_analyzer'] = function()
+          return true
+        end,
+        ['tsserver'] = function()
+          return true
         end,
       },
     }
