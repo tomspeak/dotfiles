@@ -18,6 +18,7 @@ return {
     'williamboman/mason-lspconfig.nvim',
     { 'j-hui/fidget.nvim', opts = {} },
   },
+  event = { 'LspAttach' },
   config = function()
     -- Brief Aside: **What is LSP?**
     --

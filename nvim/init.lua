@@ -20,9 +20,9 @@ require('lazy').setup({
     opts = {},
   },
   { 'folke/neodev.nvim', event = 'VeryLazy' },
-  { 'folke/todo-comments.nvim', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  { 'folke/todo-comments.nvim', event = 'VeryLazy', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
   { import = 'custom.plugins' },
-}, { install = { colorscheme = { 'dragon' } }, ui = {
+}, { install = { colorscheme = { 'quiet' } }, ui = {
   border = 'rounded',
 } })

@@ -2,7 +2,8 @@ local borders = require 'utils.borders'
 
 return {
   'nvim-telescope/telescope.nvim',
-  event = 'VeryLazy',
+  cmd = { 'Telescope' },
+  keys = { '<leader>' },
   branch = '0.1.x',
   dependencies = {
     { 'nvim-lua/plenary.nvim', event = 'VeryLazy' },

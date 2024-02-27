@@ -1,7 +1,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.cmd.colorscheme 'dragon'
+vim.cmd.colorscheme 'quiet'
 
 -- Set highlight on search
 vim.o.hlsearch = false
