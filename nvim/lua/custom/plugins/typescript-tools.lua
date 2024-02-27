@@ -1,5 +1,5 @@
 return {
-  { 'dmmulroy/ts-error-translator.nvim', opts = {} },
+  { 'dmmulroy/ts-error-translator.nvim' },
 
   {
     'pmizio/typescript-tools.nvim',

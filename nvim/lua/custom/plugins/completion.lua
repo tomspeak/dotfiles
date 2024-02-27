@@ -46,7 +46,12 @@ return {
     -- See `:help cmp`
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
-    luasnip.config.setup {}
+    luasnip.config.setup {
+      history = true, --keep around last snippet local to jump back
+      enable_autosnippets = true,
+      updateevents = 'TextChanged,TextChangedI', --update changes as you type
+    }
+    require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/lua/snippets/' }
 
     cmp.setup {
       snippet = {
