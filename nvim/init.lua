@@ -11,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({
+require('lazy').setup {
   { 'numToStr/Comment.nvim', event = { 'BufReadPost', 'BufNewFile' }, opts = {} },
   {
     'kylechui/nvim-surround',
@@ -20,9 +20,12 @@ require('lazy').setup({
     opts = {},
   },
   { 'folke/neodev.nvim', event = 'VeryLazy' },
-  { 'folke/todo-comments.nvim', event = 'VeryLazy', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  {
+    'folke/todo-comments.nvim',
+    event = { 'BufReadPost', 'BufNewFile' },
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = { signs = false },
+  },
 
   { import = 'custom.plugins' },
-}, { install = { colorscheme = { 'quiet' } }, ui = {
-  border = 'rounded',
-} })
+}

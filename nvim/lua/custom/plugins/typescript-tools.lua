@@ -1,5 +1,9 @@
 return {
-  { 'dmmulroy/ts-error-translator.nvim' },
+  {
+    'dmmulroy/ts-error-translator.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
+    ft = { 'typescript', 'typescriptreact' },
+  },
 
   {
     'pmizio/typescript-tools.nvim',
