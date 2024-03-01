@@ -1,6 +1,22 @@
 return {
   {
+    'f-person/auto-dark-mode.nvim',
+    priority = 1000,
+    lazy = false,
+    opts = {
+      update_interval = 30000,
+      set_dark_mode = function()
+        vim.api.nvim_set_option('background', 'dark')
+        vim.cmd.colorscheme 'carbonfox'
+      end,
+      set_light_mode = function()
+        vim.api.nvim_set_option('background', 'light')
+        vim.cmd.colorscheme 'dayfox'
+      end,
+    },
+  },
 
+  {
     'neanias/everforest-nvim',
     enabled = false,
     version = false,
@@ -38,5 +54,26 @@ return {
     init = function()
       vim.cmd 'colorscheme zenbones'
     end,
+  },
+
+  {
+    'sainnhe/gruvbox-material',
+    enabled = false,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.g.gruvbox_material_background = 'hard'
+      vim.g.gruvbox_material_enable_italic = 1
+      vim.g.gruvbox_material_palette = 'original'
+      vim.cmd.colorscheme 'gruvbox-material'
+    end,
+  },
+
+  {
+    'EdenEast/nightfox.nvim',
+    enabled = true,
+    lazy = false,
+    priority = 1000,
+    opts = {},
   },
 }
