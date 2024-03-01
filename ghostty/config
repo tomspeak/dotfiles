@@ -26,15 +26,20 @@ keybind = super+left_bracket=previous_tab
 
 confirm-close-surface = false
 
+theme = catppuccin-latte
 #theme = OneHalfLight
 #theme = rose-pine-dawn
+
 foreground = #FFFFFF
 background = #151515
 selection-foreground = #FFFFFF
 selection-background = #373737
 
 # Cursor colors
-cursor-color = #ffffff
+#cursor-color = #ffffff
+# this is a mid point between 2 themes while toggling dark/light mode is
+# not supported https://meyerweb.com/eric/tools/color-blend/#643F61:CCFF66:10:hex
+cursor-color = #939663
 cursor-text = #1e1e1e
 
 # black
@@ -68,3 +73,4 @@ palette = 14=#75B5AA
 # white
 palette = 7=#D0D0D0
 palette = 15=#E1E1E1
+
