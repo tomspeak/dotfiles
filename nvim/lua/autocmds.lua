@@ -1,9 +1,5 @@
--- local opt = vim.opt
--- local cmd = vim.api.nvim_command
-local api = vim.api
-
 -- Enable spell checking for certain file types
-api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   group = vim.api.nvim_create_augroup('edit_text', { clear = true }),
   pattern = { '*.txt', '*.md', '*.tex', '*.mdx', '*.rst', 'txt', 'gitcommit' },
   desc = 'Enable spell checking and text wrapping for certain filetypes',

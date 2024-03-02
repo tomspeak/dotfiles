@@ -6,7 +6,7 @@ return {
   keys = { '<leader>' },
   branch = '0.1.x',
   dependencies = {
-    { 'nvim-lua/plenary.nvim', event = 'VeryLazy' },
+    { 'nvim-lua/plenary.nvim' },
     {
       'nvim-telescope/telescope-fzf-native.nvim',
       build = 'make',

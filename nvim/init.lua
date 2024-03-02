@@ -12,24 +12,6 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
-  {
-    'numToStr/Comment.nvim',
-    event = { 'BufReadPost', 'BufNewFile' },
-    opts = {},
-  },
-  {
-    'kylechui/nvim-surround',
-    version = '*',
-    event = { 'BufReadPost', 'BufNewFile' },
-    opts = {},
-  },
   { 'folke/neodev.nvim', event = 'VeryLazy' },
-  {
-    'folke/todo-comments.nvim',
-    event = { 'BufReadPost', 'BufNewFile' },
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = { signs = false },
-  },
-
   { import = 'custom.plugins' },
 }
