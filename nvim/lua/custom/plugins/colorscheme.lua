@@ -68,6 +68,7 @@ return {
       vim.g.gruvbox_material_enable_bold = 1
       vim.g.gruvbox_material_palette = 'material'
       vim.g.gruvbox_material_float_style = 'dim'
+      vim.g.gruvbox_material_transparent_background = 2
       vim.cmd.colorscheme 'gruvbox-material'
     end,
   },
