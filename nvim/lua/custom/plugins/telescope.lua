@@ -19,7 +19,6 @@ return {
       version = '^1.0.0',
     },
     { 'nvim-telescope/telescope-ui-select.nvim' },
-    { 'nvim-telescope/telescope-github.nvim' },
   },
   config = function()
     require('telescope').setup {

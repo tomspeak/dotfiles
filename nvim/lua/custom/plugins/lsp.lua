@@ -19,6 +19,7 @@ return {
     { 'j-hui/fidget.nvim', opts = {} },
   },
   event = { 'LspAttach' },
+  cmd = { 'Mason' },
   config = function()
     -- Brief Aside: **What is LSP?**
     --
