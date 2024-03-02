@@ -15,3 +15,11 @@ microtasks
 async
 macrotask
 microtask
+typeof
+typeof
+args
+typeof
+proto
+Prototypal
+V8
+preventDefault

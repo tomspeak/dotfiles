@@ -29,3 +29,7 @@ vim.keymap.set('n', '_', '<cmd> NvimTreeFindFile <CR>', { desc = 'Nvimtree Find 
 vim.keymap.set('n', '<C-->', '<cmd> AerialToggle <CR>', { desc = 'Aerial Toggle' })
 vim.keymap.set('n', '<tab>', '<cmd> BufferLineCycleNext <CR>', { desc = 'Goto next buffer' })
 vim.keymap.set('n', '<S-tab>', '<cmd> BufferLineCyclePrev <CR>', { desc = 'Goto prev buffer' })
+
+-- Search/Replace under current word
+vim.keymap.set('n', '<leader>ss', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set('v', '<leader>ss', [[:%s///gI<Left><Left><Left><Left>]])

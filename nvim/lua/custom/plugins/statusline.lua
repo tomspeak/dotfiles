@@ -6,10 +6,13 @@ return {
       'fugitive',
       'lazy',
       'trouble',
+      'aerial',
+      'quickfix',
+      'nvim-dap-ui',
     },
     options = {
       icons_enabled = false,
-      theme = 'auto',
+      theme = 'gruvbox-material',
       component_separators = '|',
       section_separators = { left = '█', right = '█' },
       disabled_filetypes = { 'NvimTree' },
@@ -17,7 +20,7 @@ return {
     },
     sections = {
       lualine_a = {},
-      lualine_b = { 'branch', 'diff', 'fugitive' },
+      lualine_b = { 'branch', 'diff' },
       lualine_c = {
         {
           'filename',
@@ -26,7 +29,7 @@ return {
       },
       lualine_x = { 'lazy' },
       lualine_y = {},
-      lualine_z = { 'diagnostics', 'trouble' },
+      lualine_z = { 'diagnostics' },
     },
   },
 }

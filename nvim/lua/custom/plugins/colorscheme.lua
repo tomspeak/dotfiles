@@ -7,11 +7,11 @@ return {
       update_interval = 30000,
       set_dark_mode = function()
         vim.api.nvim_set_option('background', 'dark')
-        vim.cmd.colorscheme 'carbonfox'
+        -- vim.cmd.colorscheme 'gruvbox-material'
       end,
       set_light_mode = function()
         vim.api.nvim_set_option('background', 'light')
-        vim.cmd.colorscheme 'dayfox'
+        -- vim.cmd.colorscheme 'gruvbox-material'
       end,
     },
   },
@@ -58,20 +58,23 @@ return {
 
   {
     'sainnhe/gruvbox-material',
-    enabled = false,
+    enabled = true,
     lazy = false,
     priority = 1000,
     config = function()
+      vim.g.gruvbox_material_better_performance = 1
       vim.g.gruvbox_material_background = 'hard'
       vim.g.gruvbox_material_enable_italic = 1
-      vim.g.gruvbox_material_palette = 'original'
+      vim.g.gruvbox_material_enable_bold = 1
+      vim.g.gruvbox_material_palette = 'material'
+      vim.g.gruvbox_material_float_style = 'dim'
       vim.cmd.colorscheme 'gruvbox-material'
     end,
   },
 
   {
     'EdenEast/nightfox.nvim',
-    enabled = true,
+    enabled = false,
     lazy = false,
     priority = 1000,
     opts = {},

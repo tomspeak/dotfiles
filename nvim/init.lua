@@ -12,7 +12,11 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
-  { 'numToStr/Comment.nvim', event = { 'BufReadPost', 'BufNewFile' }, opts = {} },
+  {
+    'numToStr/Comment.nvim',
+    event = { 'BufReadPost', 'BufNewFile' },
+    opts = {},
+  },
   {
     'kylechui/nvim-surround',
     version = '*',
