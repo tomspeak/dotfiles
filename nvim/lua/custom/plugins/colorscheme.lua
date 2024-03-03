@@ -7,10 +7,13 @@ return {
       update_interval = 30000,
       set_dark_mode = function()
         vim.api.nvim_set_option('background', 'dark')
+        vim.g.gruvbox_material_transparent_background = 2
+
         -- vim.cmd.colorscheme 'gruvbox-material'
       end,
       set_light_mode = function()
         vim.api.nvim_set_option('background', 'light')
+        vim.g.gruvbox_material_transparent_background = 0
         -- vim.cmd.colorscheme 'gruvbox-material'
       end,
     },
@@ -68,7 +71,6 @@ return {
       vim.g.gruvbox_material_enable_bold = 1
       vim.g.gruvbox_material_palette = 'material'
       vim.g.gruvbox_material_float_style = 'dim'
-      vim.g.gruvbox_material_transparent_background = 2
       vim.cmd.colorscheme 'gruvbox-material'
     end,
   },

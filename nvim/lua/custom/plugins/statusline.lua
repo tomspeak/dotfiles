@@ -1,3 +1,12 @@
+local diagnostics = {
+  'diagnostics',
+  sources = { 'nvim_diagnostic' },
+  sections = { 'error', 'warn', 'info', 'hint' },
+  colored = false,
+  update_in_insert = false,
+  always_visible = false,
+}
+
 return {
   'nvim-lualine/lualine.nvim',
   event = { 'BufReadPost', 'BufNewFile' },
@@ -29,7 +38,7 @@ return {
       },
       lualine_x = { 'lazy' },
       lualine_y = {},
-      lualine_z = { 'diagnostics' },
+      lualine_z = { diagnostics },
     },
   },
 }
