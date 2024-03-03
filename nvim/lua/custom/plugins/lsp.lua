@@ -17,6 +17,7 @@ return {
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
     { 'j-hui/fidget.nvim', opts = {} },
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
   },
   event = { 'LspAttach' },
   cmd = { 'Mason' },
@@ -219,6 +220,12 @@ return {
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
       'stylua',
+      'taplo',
+      'prettierd',
+      'gofumpt',
+      'goimports',
+      'shfmt',
+      'buf',
     })
 
     require('mason-lspconfig').setup {
@@ -246,5 +253,7 @@ return {
         end,
       },
     }
+
+    require('mason-tool-installer').setup { ensure_installed = ensure_installed }
   end,
 }
