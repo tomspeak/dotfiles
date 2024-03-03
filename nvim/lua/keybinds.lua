@@ -22,13 +22,14 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 vim.keymap.set('n', '<Esc>', '<cmd> noh <CR>', { desc = 'Clear highlights' })
 vim.keymap.set('n', ';', ':', { desc = 'Enter command mode', nowait = true })
+vim.keymap.set('v', ';', ':', { desc = 'Enter command mode', nowait = true })
 vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = 'Close window' })
 vim.keymap.set('n', '<leader>x', '<cmd> bd <CR>', { desc = 'Close buffer' })
 vim.keymap.set('n', '<leader>X', '<cmd> BufferLineCloseOthers <CR>', { desc = 'Close all other buffers' })
 
 -- NvimTree
-vim.keymap.set('n', '-', '<cmd> NvimTreeToggle <CR>', { desc = 'Nvimtree Toggle', nowait = true })
 vim.keymap.set('n', '_', '<cmd> NvimTreeFindFile <CR>', { desc = 'Nvimtree Find File', nowait = true })
+vim.keymap.set('n', '-', '<cmd> NvimTreeToggle <CR>', { desc = 'Nvimtree Toggle', nowait = true })
 -- Aerial
 vim.keymap.set('n', '<C-->', '<cmd> AerialToggle <CR>', { desc = 'Aerial Toggle' })
 -- BufferLine
@@ -44,8 +45,23 @@ vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
 
 -- Move lines of text up/down
-vim.keymap.set('v', '<M-j>', ':m .+1<CR>==', { noremap = true, silent = true })
-vim.keymap.set('v', '<M-k>', ':m .-2<CR>==', { noremap = true, silent = true })
+vim.keymap.set('n', '<A-j>', ':m .+1<CR>==')
+vim.keymap.set('n', '<A-k>', ':m .-2<CR>==')
+vim.keymap.set('i', '<A-j>', '<Esc>:m .+1<CR>==gi')
+vim.keymap.set('i', '<A-k>', '<Esc>:m .-2<CR>==gi')
+vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv")
 
 -- Retain what we pasted instead of writing it to the register
 vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true })
+
+-- Vertical split
+vim.keymap.set('n', '<Leader>v', vim.cmd.vsplit, { silent = true })
+
+-- Quicker macro playback
+vim.keymap.set('n', 'Q', '@qj')
+vim.keymap.set('x', 'Q', ':norm @q<CR>')
+
+-- Quickly append semicolon or comma
+vim.keymap.set('i', ';;', '<Esc>A;<Esc>')
+vim.keymap.set('i', ',,', '<Esc>A,<Esc>')

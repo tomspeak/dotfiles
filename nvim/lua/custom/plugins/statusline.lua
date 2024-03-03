@@ -18,10 +18,11 @@ return {
       'aerial',
       'quickfix',
       'nvim-dap-ui',
+      'toggleterm',
     },
     options = {
       icons_enabled = false,
-      theme = 'gruvbox-material',
+      theme = 'auto',
       component_separators = '|',
       section_separators = { left = '█', right = '█' },
       disabled_filetypes = { 'NvimTree' },

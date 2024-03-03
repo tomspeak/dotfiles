@@ -12,6 +12,5 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
-  { 'folke/neodev.nvim', event = 'VeryLazy' },
   { import = 'custom.plugins' },
 }

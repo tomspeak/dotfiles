@@ -13,5 +13,4 @@ rbenv/version
 rbenv/versions
 vim/vim/autoload/plug.vim.old
 bundle/cache
-.luarc.json
 zsh/work
