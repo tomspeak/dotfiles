@@ -1,8 +1,7 @@
-local borders = require 'utils.borders'
-
 return {
   'akinsho/toggleterm.nvim',
   version = 'v2.*',
+  keys = { '`' },
   opts = {
     open_mapping = [[`]],
     direction = 'float',
