@@ -53,7 +53,7 @@ vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv")
 
 -- Retain what we pasted instead of writing it to the register
-vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true })
+-- vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true })
 
 -- Vertical split
 vim.keymap.set('n', '<Leader>v', vim.cmd.vsplit, { silent = true })
@@ -61,7 +61,3 @@ vim.keymap.set('n', '<Leader>v', vim.cmd.vsplit, { silent = true })
 -- Quicker macro playback
 vim.keymap.set('n', 'Q', '@qj')
 vim.keymap.set('x', 'Q', ':norm @q<CR>')
-
--- Quickly append semicolon or comma
-vim.keymap.set('i', ';;', '<Esc>A;<Esc>')
-vim.keymap.set('i', ',,', '<Esc>A,<Esc>')
