@@ -5,6 +5,8 @@
 [user]
 	email = tom@bere.al
 	name = Tom Speak
+[core]
+  editor = nvim
 [push]
   default = simple
 [alias]
@@ -33,7 +35,7 @@
   rum = pull --rebase upstream main
   rom = pull --rebase origin main
   sur = submodule update --remote
-  l = log --pretty=format:"%C(green)%h%C(bold)%d\\ %Creset%s%C(white)\\ [%cn]" --decorate --numstat
+  l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --date=relative
   l1 = log --pretty=oneline
   lp = log --all --graph --decorate --oneline --simplify-by-decoration
   fuck = reset HEAD^
@@ -65,7 +67,7 @@
 [merge]
 	conflictstyle = zdiff3
 [diff]
-    colorMoved = default
+  colorMoved = default
 	algorithm = histogram
 	submodule = log
 	context = 10
@@ -87,7 +89,7 @@
 [status]
 	submoduleSummary = true
 [submodule]
-	resurce = true
+	recurse = true
 [branch]
 	sort = -committerdate
 [fetch]

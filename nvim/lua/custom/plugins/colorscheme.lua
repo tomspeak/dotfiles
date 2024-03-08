@@ -6,14 +6,13 @@ return {
     opts = {
       update_interval = 30000,
       set_dark_mode = function()
-        vim.api.nvim_set_option('background', 'dark')
-        vim.g.gruvbox_material_transparent_background = 2
-
+        vim.opt.background = 'dark'
+        -- vim.g.gruvbox_material_transparent_background = 2
         -- vim.cmd.colorscheme 'gruvbox-material'
       end,
       set_light_mode = function()
-        vim.api.nvim_set_option('background', 'light')
-        vim.g.gruvbox_material_transparent_background = 0
+        vim.opt.background = 'light'
+        -- vim.g.gruvbox_material_transparent_background = 0
         -- vim.cmd.colorscheme 'gruvbox-material'
       end,
     },
@@ -47,6 +46,26 @@ return {
   },
 
   {
+    'nyoom-engineering/oxocarbon.nvim',
+    enabled = false,
+    priority = 1000,
+    lazy = false,
+    init = function()
+      vim.cmd.colorscheme 'oxocarbon'
+    end,
+  },
+
+  {
+    'p00f/alabaster.nvim',
+    enabled = true,
+    priority = 1000,
+    lazy = false,
+    init = function()
+      vim.cmd.colorscheme 'alabaster'
+    end,
+  },
+
+  {
     'mcchrish/zenbones.nvim',
     enabled = false,
     priority = 1000,
@@ -61,7 +80,7 @@ return {
 
   {
     'sainnhe/gruvbox-material',
-    enabled = true,
+    enabled = false,
     lazy = false,
     priority = 1000,
     config = function()
