@@ -90,6 +90,7 @@ return {
       rust_analyzer = function()
         return true
       end,
+      clangd = {},
       cssls = {},
       html = {},
       tailwindcss = {},
@@ -163,6 +164,7 @@ return {
       'goimports',
       'shfmt',
       'buf',
+      'clang-format',
     })
 
     require('mason-lspconfig').setup {
