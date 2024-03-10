@@ -6,7 +6,7 @@ local t = ls.text_node
 local i = ls.insert_node
 
 ls.add_snippets('rust', {
-  s('hello', {
+  s('bye', {
     t "println!('hello world')",
   }),
 })

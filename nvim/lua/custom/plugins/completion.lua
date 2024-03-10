@@ -35,12 +35,6 @@ return {
     --  into multiple repos for maintenance purposes.
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
-
-    -- If you want to add a bunch of pre-configured snippets,
-    --    you can use this plugin to help you. It even has snippets
-    --    for various frameworks/libraries/etc. but you will have to
-    --    set up the ones that are useful for you.
-    -- 'rafamadriz/friendly-snippets',
   },
   config = function()
     -- See `:help cmp`
@@ -51,7 +45,7 @@ return {
       enable_autosnippets = true,
       updateevents = 'TextChanged,TextChangedI', --update changes as you type
     }
-    require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/lua/snippets/' }
+    require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/lua/luasnippets/' }
 
     cmp.setup {
       snippet = {
@@ -176,5 +170,9 @@ return {
         { name = 'path', max_item_count = 2 },
       },
     }
+
+    vim.api.nvim_create_user_command('LuaSnipEdit', function(_)
+      require('luasnip.loaders').edit_snippet_files()
+    end, {})
   end,
 }
