@@ -7,13 +7,17 @@ return {
       update_interval = 30000,
       set_dark_mode = function()
         vim.opt.background = 'dark'
+        vim.cmd.colorscheme 'cockatoo'
         -- vim.g.gruvbox_material_transparent_background = 2
         -- vim.cmd.colorscheme 'gruvbox-material'
+        -- vim.cmd.colorscheme 'nordfox'
       end,
       set_light_mode = function()
         vim.opt.background = 'light'
+        -- vim.cmd.colorscheme 'nano'
         -- vim.g.gruvbox_material_transparent_background = 0
         -- vim.cmd.colorscheme 'gruvbox-material'
+        -- vim.cmd.colorscheme 'dayfox'
       end,
     },
   },
@@ -57,7 +61,7 @@ return {
 
   {
     'p00f/alabaster.nvim',
-    enabled = true,
+    enabled = false,
     priority = 1000,
     lazy = false,
     init = function()
@@ -96,9 +100,19 @@ return {
 
   {
     'EdenEast/nightfox.nvim',
-    enabled = false,
+    enabled = true,
     lazy = false,
     priority = 1000,
     opts = {},
+  },
+
+  {
+    'Verf/deepwhite.nvim',
+    enabled = false,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'deepwhite'
+    end,
   },
 }
