@@ -7,13 +7,15 @@ return {
       update_interval = 30000,
       set_dark_mode = function()
         vim.opt.background = 'dark'
-        vim.cmd.colorscheme 'cockatoo'
+        vim.cmd.colorscheme 'oxocarbon'
+        -- vim.cmd.colorscheme 'cockatoo'
         -- vim.g.gruvbox_material_transparent_background = 2
         -- vim.cmd.colorscheme 'gruvbox-material'
         -- vim.cmd.colorscheme 'nordfox'
       end,
       set_light_mode = function()
         vim.opt.background = 'light'
+        vim.cmd.colorscheme 'oxocarbon'
         -- vim.cmd.colorscheme 'nano'
         -- vim.g.gruvbox_material_transparent_background = 0
         -- vim.cmd.colorscheme 'gruvbox-material'
@@ -51,11 +53,11 @@ return {
 
   {
     'nyoom-engineering/oxocarbon.nvim',
-    enabled = false,
+    enabled = true,
     priority = 1000,
     lazy = false,
     init = function()
-      vim.cmd.colorscheme 'oxocarbon'
+      -- vim.cmd.colorscheme 'oxocarbon'
     end,
   },
 
