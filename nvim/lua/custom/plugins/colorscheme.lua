@@ -7,7 +7,7 @@ return {
       update_interval = 30000,
       set_dark_mode = function()
         vim.opt.background = 'dark'
-        vim.cmd.colorscheme 'oxocarbon'
+        -- vim.cmd.colorscheme 'oxocarbon'
         -- vim.cmd.colorscheme 'cockatoo'
         -- vim.g.gruvbox_material_transparent_background = 2
         -- vim.cmd.colorscheme 'gruvbox-material'
@@ -15,7 +15,7 @@ return {
       end,
       set_light_mode = function()
         vim.opt.background = 'light'
-        vim.cmd.colorscheme 'oxocarbon'
+        -- vim.cmd.colorscheme 'deepwhite'
         -- vim.cmd.colorscheme 'nano'
         -- vim.g.gruvbox_material_transparent_background = 0
         -- vim.cmd.colorscheme 'gruvbox-material'
@@ -26,29 +26,26 @@ return {
 
   {
     'neanias/everforest-nvim',
-    enabled = false,
+    enabled = true,
     version = false,
     lazy = false,
     priority = 1000,
     config = function()
       require('everforest').setup {
-        background = 'hard',
+        background = 'light',
         transparent_background_level = 1,
         diagnostic_text_highlight = true,
       }
       vim.cmd [[colorscheme everforest]]
-      vim.o.background = 'dark'
+      vim.o.background = 'light'
     end,
   },
 
   {
     'ronisbr/nano-theme.nvim',
-    enabled = false,
+    enabled = true,
     priority = 1000,
     lazy = false,
-    init = function()
-      vim.cmd 'colorscheme nano-theme'
-    end,
   },
 
   {
@@ -56,37 +53,28 @@ return {
     enabled = true,
     priority = 1000,
     lazy = false,
-    init = function()
-      -- vim.cmd.colorscheme 'oxocarbon'
-    end,
   },
 
   {
     'p00f/alabaster.nvim',
-    enabled = false,
+    enabled = true,
     priority = 1000,
     lazy = false,
-    init = function()
-      vim.cmd.colorscheme 'alabaster'
-    end,
   },
 
   {
     'mcchrish/zenbones.nvim',
-    enabled = false,
+    enabled = true,
     priority = 1000,
     lazy = false,
     dependencies = {
       'rktjmp/lush.nvim',
     },
-    init = function()
-      vim.cmd 'colorscheme zenbones'
-    end,
   },
 
   {
     'sainnhe/gruvbox-material',
-    enabled = false,
+    enabled = true,
     lazy = false,
     priority = 1000,
     config = function()
@@ -113,8 +101,5 @@ return {
     enabled = false,
     lazy = false,
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'deepwhite'
-    end,
   },
 }

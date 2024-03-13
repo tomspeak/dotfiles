@@ -22,6 +22,7 @@ return {
         diagnostics = 'nvim_lsp',
         always_show_bufferline = true,
         modified_icon = '*',
+        show_close_icon = false,
         close_icon = '',
         show_buffer_close_icons = false,
         offsets = {
