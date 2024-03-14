@@ -32,14 +32,12 @@ vim.api.nvim_create_autocmd('BufEnter', {
   desc = 'Automatically go into insert mode + spellcheck for commit messages',
   pattern = 'COMMIT_EDITMSG',
   callback = function()
-    vim.wo.spell = true
+    vim.opt.spell = true
 
     -- Check if the buffer is empty (e.g., a new commit message)
     -- This checks for both an empty first line and if the buffer's line count is 1
-    if vim.fn.getline(1) == '' and vim.api.nvim_buf_line_count(0) == 1 then
-      -- Move cursor to the first line and first column
-      vim.api.nvim_win_set_cursor(0, { 1, 0 })
-      -- Enter insert mode automatically
+    vim.api.nvim_win_set_cursor(0, { 1, 0 })
+    if vim.fn.getline(1) == '' then
       vim.cmd 'startinsert!'
     end
   end,
