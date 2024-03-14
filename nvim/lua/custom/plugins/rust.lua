@@ -1,10 +1,5 @@
 return {
   {
-    'mrcjkb/rustaceanvim',
-    version = '^4',
-    ft = { 'rust' },
-  },
-  {
     'Saecki/crates.nvim',
     event = { 'BufRead Cargo.toml' },
     init = function()
