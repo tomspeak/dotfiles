@@ -10,13 +10,13 @@ return {
         -- vim.cmd.colorscheme 'oxocarbon'
         -- vim.cmd.colorscheme 'cockatoo'
         -- vim.g.gruvbox_material_transparent_background = 2
-        -- vim.cmd.colorscheme 'gruvbox-material'
+        vim.cmd.colorscheme 'gruvbox-material'
         -- vim.cmd.colorscheme 'nordfox'
       end,
       set_light_mode = function()
         vim.opt.background = 'light'
         -- vim.cmd.colorscheme 'deepwhite'
-        -- vim.cmd.colorscheme 'nano'
+        vim.cmd.colorscheme 'nano-theme'
         -- vim.g.gruvbox_material_transparent_background = 0
         -- vim.cmd.colorscheme 'gruvbox-material'
         -- vim.cmd.colorscheme 'dayfox'
