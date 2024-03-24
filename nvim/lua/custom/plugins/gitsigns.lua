@@ -9,12 +9,12 @@ return {
       style = 'minimal',
     },
     signs = {
-      add = { text = icons.GitSignAdd },
-      untracked = { text = icons.GitSignUntracked },
-      change = { text = icons.GitSignChange },
-      delete = { text = icons.GitSignDelete },
-      topdelete = { text = icons.GitSignTopdelete },
-      changedelete = { text = icons.GitSignChangedelete },
+      add = { text = icons.ui.GitSignAdd },
+      untracked = { text = icons.ui.GitSignUntracked },
+      change = { text = icons.ui.GitSignChange },
+      delete = { text = icons.ui.GitSignDelete },
+      topdelete = { text = icons.ui.GitSignTopdelete },
+      changedelete = { text = icons.ui.GitSignChangedelete },
     },
     current_line_blame = false,
     current_line_blame_opts = {
@@ -57,6 +57,9 @@ return {
       map('n', '<leader>gb', function()
         gs.blame_line { full = false }
       end, { desc = 'git blame line' })
+      map('n', '<leader>gB', function()
+        gs.blame_line { full = true }
+      end, { desc = 'git blame line full' })
 
       -- Toggles
       map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'toggle git blame line' })

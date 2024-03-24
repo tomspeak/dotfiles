@@ -1,8 +1,8 @@
 return {
   {
     'tpope/vim-fugitive',
-    cmd = { 'G', 'GBrowse' },
-    keys = { { '<leader>gg', '<cmd>G <CR>', desc = 'Git status' } },
+    cmd = { 'G', 'Git', 'Gdiffsplit', 'Gclog', 'GcLog', 'Gread' },
+    keys = { { '<leader>gg', ':vert G<CR>', desc = 'Git status' } },
     dependencies = {
       'tpope/vim-rhubarb',
     },
