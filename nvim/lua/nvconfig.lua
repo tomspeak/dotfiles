@@ -6,8 +6,9 @@ M.ui = {
   hl_add = {},
   hl_override = {},
   changed_themes = {},
-  theme_toggle = { 'gruvchad', 'gruvbox_light' },
-  theme = 'flexoki-light', -- default theme
+  theme_toggle = { 'me', 'me' },
+  -- theme = 'me',
+  theme = 'nano-light',
   transparency = false,
 
   cmp = {
