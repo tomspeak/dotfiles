@@ -2,15 +2,23 @@
 vim.cmd.hi 'clear'
 vim.g.colors_name = 'asdf'
 
--- Palette {{{
 local c_fg
 local c_bg
+local c_red
+local c_dragonBg2
+local c_dragonBg3
+local c_dragonBg4
+local c_dragonBg5
+local c_dragonFg0
+local c_dragonFg1
+local c_dragonFg2
+local c_dragonAsh
 
 if vim.go.bg == 'dark' then
   c_fg = '#ffffff'
   c_bg = '#1b1b1b'
 
-  -- c_autumnYellow = '#dca561'
+  -- c_yellow = '#dca561'
   -- c_dragonAsh = '#626462'
   -- c_dragonBg0 = '#0d0c0c'
   -- c_dragonBg1 = '#181616'
@@ -18,549 +26,503 @@ if vim.go.bg == 'dark' then
   -- c_dragonBg3 = '#282727'
   -- c_dragonBg4 = '#393836'
   -- c_dragonBg5 = '#625e5a'
-  -- c_dragonBlue0 = '#658594'
-  -- c_dragonBlue1 = '#8ba4b0'
+  -- c_blue = '#658594'
+  -- c_blue = '#8ba4b0'
   -- c_dragonGray0 = '#a6a69c'
   -- c_dragonGray1 = '#9e9b93'
   -- c_dragonGreen0 = '#87a987'
-  -- c_dragonGreen1 = '#8a9a7b'
-  -- c_dragonRed = '#c4746e'
+  -- c_green = '#8a9a7b'
+  -- c_red = '#c4746e'
 else
   c_fg = '#1b1b1b'
   c_bg = '#ffffff'
 
-  -- c_dragonAsh = '#a0a0a0'
-  -- c_dragonBg0 = '#f9f9f9'
-  -- c_dragonBg1 = '#ffffff'
-  -- c_dragonBg2 = '#efefef'
-  -- c_dragonBg3 = '#e8e8e8'
-  -- c_dragonBg4 = '#d8d8d8'
-  -- c_dragonBg5 = '#b0b0b0'
-  -- c_dragonPink = '#a292a3'
-  -- c_dragonRed = '#b23b34'
-  -- c_dragonViolet = '#373e50'
-  -- c_dragonFg0 = '#1b1b1b'
-  -- c_dragonFg1 = '#303030'
-  -- c_dragonFg2 = '#787878'
-  -- c_katanaGray = '#717c7c'
-  -- c_waveRed = '#e46876'
-  -- c_winterBlue = '#d4d4f0'
-  -- c_winterGreen = '#d5dcd2'
-  -- c_winterRed = '#e6c2c7'
-  -- c_winterYellow = '#e2dcd4'
-end
--- stylua: ignore end
+  c_accent = '#e8e8e8'
 
--- Terminal colors {{{
+  c_green = '#d5dcd2'
+  c_red = '#e6c2c7'
+  c_yellow = '#fdfd96'
+  c_blue = '#d4d4f0'
+
+  c_dragonAsh = '#a0a0a0'
+  -- c_dragonBg0 = '#f9f9f9'
+  c_dragonBg1 = '#ffffff'
+  c_dragonBg2 = '#efefef'
+  c_dragonBg3 = '#e8e8e8'
+  c_dragonBg4 = '#d8d8d8'
+  c_dragonBg5 = '#b0b0b0'
+  -- c_red = '#a292a3'
+  -- c_dragonViolet = '#373e50'
+  c_dragonFg0 = '#1b1b1b'
+  c_dragonFg1 = '#303030'
+  c_dragonFg2 = '#787878'
+  -- c_katanaGray = '#717c7c'
+end
+
+-- M.base_30 = {
+--   deep_black = "#263238",
+--   white = "#37474F",
+--   darker_black = "#f7f7f7",
+--   black = "#FFFfff", --  nvim bg
+--   black2 = "#ECEFF1",
+--   one_bg = "#ebebeb", -- real bg of onedark
+--   one_bg2 = "#e0e0e0",
+--   one_bg3 = "#d4d4d4",
+--   grey = "#c4c4c4",
+--   grey_fg = "#b5b5b5",
+--   grey_fg2 = "#a3a3a3",
+--   light_grey = "#848484",
+--   faded_grey = "#8497a0",
+--   pink = "#AB47BC",
+--   pmenu_bg = "#673AB7",
+-- }
+-- stylua: ignore end
+--
+
+-- Terminal colors
 -- stylua: ignore start
 if vim.go.bg == 'dark' then
   vim.g.terminal_color_0  = c_bg
-  vim.g.terminal_color_1  = c_dragonRed
-  vim.g.terminal_color_2  = c_dragonGreen1
-  vim.g.terminal_color_3  = c_carpYellow
-  vim.g.terminal_color_4  = c_dragonBlue1
-  vim.g.terminal_color_5  = c_dragonPink
-  vim.g.terminal_color_6  = c_dragonAqua
-  vim.g.terminal_color_7  = c_dragonFg1
-  vim.g.terminal_color_8  = c_dragonBg4
-  vim.g.terminal_color_9  = c_waveRed
-  vim.g.terminal_color_10 = c_dragonGreen0
-  vim.g.terminal_color_11 = c_autumnYellow
-  vim.g.terminal_color_12 = c_springBlue
-  vim.g.terminal_color_13 = c_springViolet
-  vim.g.terminal_color_14 = c_waveAqua1
-  vim.g.terminal_color_15 = c_dragonFg0
-  vim.g.terminal_color_16 = c_dragonOrange0
-  vim.g.terminal_color_17 = c_dragonOrange1
+  vim.g.terminal_color_1  = c_bg
+  vim.g.terminal_color_2  = c_accent
+  vim.g.terminal_color_3  = c_green
+  vim.g.terminal_color_4  = c_fg
+  vim.g.terminal_color_5  = c_accent
+  vim.g.terminal_color_6  = c_fg
+  vim.g.terminal_color_7  = c_fg
+  vim.g.terminal_color_8  = c_fg
+  vim.g.terminal_color_9  = c_fg
+  vim.g.terminal_color_10 = c_fg
+  vim.g.terminal_color_11 = c_fg
+  vim.g.terminal_color_12 = c_fg
+  vim.g.terminal_color_13 = c_fg
+  vim.g.terminal_color_14 = c_fg
+  vim.g.terminal_color_15 = c_fg
 else
   vim.g.terminal_color_0  = c_bg
-  vim.g.terminal_color_1  = c_dragonRed
-  vim.g.terminal_color_2  = c_dragonGreen1
-  vim.g.terminal_color_3  = c_autumnYellow
-  vim.g.terminal_color_4  = c_dragonBlue1
-  vim.g.terminal_color_5  = c_springViolet
-  vim.g.terminal_color_6  = c_dragonAqua
-  vim.g.terminal_color_7  = c_dragonBg5
-  vim.g.terminal_color_8  = c_dragonBg3
-  vim.g.terminal_color_9  = c_waveRed
-  vim.g.terminal_color_10 = c_dragonGreen0
-  vim.g.terminal_color_11 = c_carpYellow
-  vim.g.terminal_color_12 = c_springBlue
-  vim.g.terminal_color_13 = c_sumiInk6
-  vim.g.terminal_color_14 = c_waveAqua1
-  vim.g.terminal_color_15 = c_dragonFg0
-  vim.g.terminal_color_16 = c_dragonOrange0
-  vim.g.terminal_color_17 = c_dragonOrange1
+  vim.g.terminal_color_1  = c_bg
+  vim.g.terminal_color_2  = c_accent
+  vim.g.terminal_color_3  = c_green
+  vim.g.terminal_color_4  = c_fg
+  vim.g.terminal_color_5  = c_accent
+  vim.g.terminal_color_6  = c_fg
+  vim.g.terminal_color_7  = c_fg
+  vim.g.terminal_color_8  = c_fg
+  vim.g.terminal_color_9  = c_fg
+  vim.g.terminal_color_10 = c_fg
+  vim.g.terminal_color_11 = c_fg
+  vim.g.terminal_color_12 = c_fg
+  vim.g.terminal_color_13 = c_fg
+  vim.g.terminal_color_14 = c_fg
+  vim.g.terminal_color_15 = c_fg
 end
 -- stylua: ignore end
---- }}}
 
-local hlgroups = {}
--- Highlight groups
--- local hlgroups = {
---   -- UI {{{2
---   ColorColumn = { bg = c_dragonBg2 },
---   Conceal = { bold = true, fg = c_dragonGray2 },
---   CurSearch = { link = 'IncSearch' },
---   Cursor = { bg = c_dragonFg0, fg = c_dragonBg1 },
---   CursorColumn = { link = 'CursorLine' },
---   CursorIM = { link = 'Cursor' },
---   CursorLine = { bg = c_dragonBg2 },
---   CursorLineNr = { fg = c_dragonGray0, bold = true },
---   DebugPC = { bg = c_winterRed },
---   DiffAdd = { bg = c_winterGreen },
---   DiffChange = { bg = c_winterBlue },
---   DiffDelete = { fg = c_dragonBg4 },
---   DiffText = { bg = c_sumiInk6 },
---   Directory = { fg = c_dragonBlue1 },
---   EndOfBuffer = { fg = c_dragonBg1 },
---   ErrorMsg = { fg = c_lotusRed1 },
---   FloatBorder = { fg = c_dragonBg3, bg = c_dragonBg3 },
---   FloatFooter = { bg = c_dragonBg3, fg = c_dragonBg5 },
---   FloatTitle = { bg = c_dragonBg3, fg = c_dragonGray2, bold = true },
---   FoldColumn = { fg = c_dragonBg5 },
---   Folded = { bg = c_dragonBg2, fg = c_lotusGray },
---   Ignore = { link = 'NonText' },
---   IncSearch = { bg = c_carpYellow, fg = c_waveBlue0 },
---   LineNr = { fg = c_dragonBg5 },
---   MatchParen = { bg = c_dragonBg4 },
---   ModeMsg = { fg = c_dragonFg2, bold = true },
---   MoreMsg = { fg = c_dragonBlue0 },
---   MsgArea = { fg = c_dragonFg1 },
---   MsgSeparator = { bg = c_dragonBg1 },
---   NonText = { fg = c_dragonBg5 },
---   Normal = { bg = c_dragonBg1, fg = c_dragonFg0 },
---   NormalFloat = { bg = c_dragonBg3, fg = c_dragonFg1 },
---   NormalNC = { link = 'Normal' },
---   Pmenu = { bg = c_dragonBg3, fg = c_dragonFg1 },
---   PmenuSbar = { bg = c_dragonBg4 },
---   PmenuSel = { bg = c_dragonBg4, fg = 'NONE' },
---   PmenuThumb = { bg = c_dragonBg5 },
---   PmenuBorder = { link = 'FloatBorder' },
---   Question = { link = 'MoreMsg' },
---   QuickFixLine = { bg = c_dragonBg3 },
---   Search = { bg = c_dragonBg4 },
---   SignColumn = { fg = c_dragonGray2 },
---   SpellBad = { undercurl = true, sp = c_dragonRed },
---   SpellCap = { undercurl = true },
---   SpellLocal = { undercurl = true },
---   SpellRare = { undercurl = true },
---   StatusLine = { bg = c_dragonBg3, fg = c_dragonFg1 },
---   StatusLineNC = { bg = c_dragonBg3, fg = c_dragonBg5 },
---   StatusColumnSeparator = { fg = c_dragonBg3, nocombine = true, bg = c_dragonBg1 },
---   Substitute = { bg = c_autumnRed, fg = c_dragonFg0 },
---   TabLine = { link = 'StatusLineNC' },
---   TabLineFill = { link = 'Normal' },
---   TabLineSel = { link = 'StatusLine' },
---   TermCursor = { fg = c_dragonBg1, bg = c_dragonRed },
---   TermCursorNC = { fg = c_dragonBg1, bg = c_dragonAsh },
---   Title = { bold = true, fg = c_dragonBlue1 },
---   Underlined = { fg = c_dragonTeal, underline = true },
---   VertSplit = { link = 'WinSeparator' },
---   Visual = { bg = c_dragonBg4 },
---   VisualNOS = { link = 'Visual' },
---   WarningMsg = { fg = c_roninYellow },
---   Whitespace = { fg = c_dragonBg4 },
---   WildMenu = { link = 'Pmenu' },
---   WinBar = { bg = 'NONE', fg = c_dragonFg1 },
---   WinBarNC = { link = 'WinBar' },
---   WinSeparator = { fg = c_dragonBg4 },
---   lCursor = { link = 'Cursor' },
---   -- }}}2
---
---   -- Syntax {{{2
---   Boolean = { fg = c_dragonOrange0, bold = true },
---   Character = { link = 'String' },
---   Comment = { fg = c_dragonAsh },
---   Constant = { fg = c_dragonOrange0 },
---   Delimiter = { fg = c_dragonGray1 },
---   Error = { fg = c_lotusRed1 },
---   Exception = { fg = c_dragonRed },
---   Float = { link = 'Number' },
---   Function = { fg = c_dragonBlue1 },
---   Identifier = { fg = c_dragonFg0 },
---   Keyword = { fg = c_dragonViolet },
---   Number = { fg = c_dragonPink },
---   Operator = { fg = c_dragonRed },
---   PreProc = { fg = c_dragonRed },
---   Special = { fg = c_dragonTeal },
---   SpecialKey = { fg = c_dragonGray2 },
---   Statement = { fg = c_dragonViolet },
---   String = { fg = c_dragonGreen1 },
---   Todo = { fg = c_dragonBg0, bg = c_dragonBlue0, bold = true },
---   Type = { fg = c_dragonAqua },
---   -- }}}2
---
---   -- Treesitter syntax {{{2
---   ['@attribute'] = { link = 'Constant' },
---   ['@constructor'] = { fg = c_dragonTeal },
---   ['@constructor.lua'] = { fg = c_dragonViolet },
---   ['@keyword.exception'] = { bold = true, fg = c_dragonRed },
---   ['@keyword.import'] = { link = 'PreProc' },
---   ['@keyword.luap'] = { link = '@string.regexp' },
---   ['@keyword.operator'] = { bold = true, fg = c_dragonRed },
---   ['@keyword.return'] = { fg = c_dragonRed, italic = true },
---   ['@module'] = { fg = c_dragonOrange0 },
---   ['@operator'] = { link = 'Operator' },
---   ['@variable.parameter'] = { fg = c_dragonGray0 },
---   ['@punctuation.bracket'] = { fg = c_dragonGray1 },
---   ['@punctuation.delimiter'] = { fg = c_dragonGray1 },
---   ['@markup.list'] = { fg = c_dragonTeal },
---   ['@string.escape'] = { fg = c_dragonOrange0 },
---   ['@string.regexp'] = { fg = c_dragonOrange0 },
---   ['@markup.link.label.symbol'] = { fg = c_dragonFg0 },
---   ['@tag.attribute'] = { fg = c_dragonFg0 },
---   ['@tag.delimiter'] = { fg = c_dragonGray1 },
---   ['@comment.error'] = { bg = c_lotusRed1, fg = c_dragonFg0, bold = true },
---   ['@diff.plug'] = { fg = c_autumnGreen },
---   ['@diff.minus'] = { fg = c_autumnRed },
---   ['@markup.emphasis'] = { italic = true },
---   ['@markup.environment'] = { link = 'Keyword' },
---   ['@markup.environment.name'] = { link = 'String' },
---   ['@markup.raw'] = { link = 'String' },
---   ['@comment.info'] = { bg = c_waveAqua0, fg = c_waveBlue0, bold = true },
---   ['@markup.quote'] = { link = '@variable.parameter' },
---   ['@markup.strong'] = { bold = true },
---   ['@markup.heading'] = { link = 'Function' },
---   ['@markup.heading.1.markdown'] = { fg = c_dragonRed },
---   ['@markup.heading.2.markdown'] = { fg = c_dragonRed },
---   ['@markup.heading.3.markdown'] = { fg = c_dragonRed },
---   ['@markup.heading.4.markdown'] = { fg = c_dragonRed },
---   ['@markup.heading.5.markdown'] = { fg = c_dragonRed },
---   ['@markup.heading.6.markdown'] = { fg = c_dragonRed },
---   ['@markup.heading.1.marker.markdown'] = { link = 'Delimiter' },
---   ['@markup.heading.2.marker.markdown'] = { link = 'Delimiter' },
---   ['@markup.heading.3.marker.markdown'] = { link = 'Delimiter' },
---   ['@markup.heading.4.marker.markdown'] = { link = 'Delimiter' },
---   ['@markup.heading.5.marker.markdown'] = { link = 'Delimiter' },
---   ['@markup.heading.6.marker.markdown'] = { link = 'Delimiter' },
---   ['@comment.todo.checked'] = { fg = c_dragonAsh },
---   ['@comment.todo.unchecked'] = { fg = c_dragonRed },
---   ['@markup.link.label.markdown_inline'] = { link = 'htmlLink' },
---   ['@markup.link.url.markdown_inline'] = { link = 'htmlString' },
---   ['@comment.warning'] = { bg = c_roninYellow, fg = c_waveBlue0, bold = true },
---   ['@variable'] = { fg = c_dragonFg0 },
---   ['@variable.builtin'] = { fg = c_dragonRed, italic = true },
---   -- }}}
---
---   -- LSP semantic {{{2
---   ['@lsp.mod.readonly'] = { link = 'Constant' },
---   ['@lsp.mod.typeHint'] = { link = 'Type' },
---   ['@lsp.type.builtinConstant'] = { link = '@constant.builtin' },
---   ['@lsp.type.comment'] = { fg = 'NONE' },
---   ['@lsp.type.macro'] = { fg = c_dragonPink },
---   ['@lsp.type.magicFunction'] = { link = '@function.builtin' },
---   ['@lsp.type.method'] = { link = '@function.method' },
---   ['@lsp.type.namespace'] = { link = '@module' },
---   ['@lsp.type.parameter'] = { link = '@variable.parameter' },
---   ['@lsp.type.selfParameter'] = { link = '@variable.builtin' },
---   ['@lsp.type.variable'] = { fg = 'NONE' },
---   ['@lsp.typemod.function.builtin'] = { link = '@function.builtin' },
---   ['@lsp.typemod.function.defaultLibrary'] = { link = '@function.builtin' },
---   ['@lsp.typemod.function.readonly'] = { bold = true, fg = c_dragonBlue1 },
---   ['@lsp.typemod.keyword.documentation'] = { link = 'Special' },
---   ['@lsp.typemod.method.defaultLibrary'] = { link = '@function.builtin' },
---   ['@lsp.typemod.operator.controlFlow'] = { link = '@keyword.exception' },
---   ['@lsp.typemod.operator.injected'] = { link = 'Operator' },
---   ['@lsp.typemod.string.injected'] = { link = 'String' },
---   ['@lsp.typemod.variable.defaultLibrary'] = { link = 'Special' },
---   ['@lsp.typemod.variable.global'] = { link = 'Constant' },
---   ['@lsp.typemod.variable.injected'] = { link = '@variable' },
---   ['@lsp.typemod.variable.static'] = { link = 'Constant' },
---   -- }}}
---
---   -- LSP {{{2
---   LspCodeLens = { fg = c_dragonAsh },
---   LspInfoBorder = { link = 'FloatBorder' },
---   LspReferenceRead = { link = 'LspReferenceText' },
---   LspReferenceText = { bg = c_winterYellow },
---   LspReferenceWrite = { bg = c_winterYellow },
---   LspSignatureActiveParameter = { fg = c_roninYellow },
---   -- }}}
---
---   -- Diagnostic {{{2
---   DiagnosticError = { fg = c_dragonRed },
---   DiagnosticHint = { fg = c_dragonAqua },
---   DiagnosticInfo = { fg = c_dragonBlue1 },
---   DiagnosticOk = { fg = c_dragonGreen1 },
---   DiagnosticWarn = { fg = c_carpYellow },
---   DiagnosticFloatingError = { fg = c_dragonRed },
---   DiagnosticFloatingWarn = { fg = c_carpYellow },
---   DiagnosticFloatingInfo = { fg = c_dragonBlue1 },
---   DiagnosticFloatingHint = { fg = c_dragonAqua },
---   DiagnosticFloatingOk = { fg = c_dragonGreen1 },
---   DiagnosticFloatingSuffix = { fg = c_dragonFg2 },
---   DiagnosticSignError = { fg = c_dragonRed },
---   DiagnosticSignHint = { fg = c_dragonAqua },
---   DiagnosticSignInfo = { fg = c_dragonBlue1 },
---   DiagnosticSignWarn = { fg = c_carpYellow },
---   DiagnosticUnderlineError = { sp = c_dragonRed, undercurl = true },
---   DiagnosticUnderlineHint = { sp = c_dragonAqua, undercurl = true },
---   DiagnosticUnderlineInfo = { sp = c_dragonBlue1, undercurl = true },
---   DiagnosticUnderlineWarn = { sp = c_carpYellow, undercurl = true },
---   DiagnosticVirtualTextError = { bg = c_winterRed, fg = c_dragonRed },
---   DiagnosticVirtualTextHint = { bg = c_winterGreen, fg = c_dragonAqua },
---   DiagnosticVirtualTextInfo = { bg = c_winterBlue, fg = c_dragonBlue1 },
---   DiagnosticVirtualTextWarn = { bg = c_winterYellow, fg = c_carpYellow },
---   -- }}}
---
---   -- Filetype {{{2
---   -- Git
---   gitHash = { fg = c_dragonAsh },
---
---   -- Sh/Bash
---   bashSpecialVariables = { link = 'Constant' },
---   shAstQuote = { link = 'Constant' },
---   shCaseEsac = { link = 'Operator' },
---   shDeref = { link = 'Special' },
---   shDerefSimple = { link = 'shDerefVar' },
---   shDerefVar = { link = 'Constant' },
---   shNoQuote = { link = 'shAstQuote' },
---   shQuote = { link = 'String' },
---   shTestOpr = { link = 'Operator' },
---
---   -- HTML
---   htmlBold = { bold = true },
---   htmlBoldItalic = { bold = true, italic = true },
---   htmlH1 = { fg = c_dragonRed, bold = true },
---   htmlH2 = { fg = c_dragonRed, bold = true },
---   htmlH3 = { fg = c_dragonRed, bold = true },
---   htmlH4 = { fg = c_dragonRed, bold = true },
---   htmlH5 = { fg = c_dragonRed, bold = true },
---   htmlH6 = { fg = c_dragonRed, bold = true },
---   htmlItalic = { italic = true },
---   htmlLink = { fg = c_lotusBlue, underline = true },
---   htmlSpecialChar = { link = 'SpecialChar' },
---   htmlSpecialTagName = { fg = c_dragonViolet },
---   htmlString = { fg = c_dragonAsh },
---   htmlTagName = { link = 'Tag' },
---   htmlTitle = { link = 'Title' },
---
---   -- Markdown
---   markdownBold = { bold = true },
---   markdownBoldItalic = { bold = true, italic = true },
---   markdownCode = { fg = c_dragonGreen1 },
---   markdownCodeBlock = { fg = c_dragonGreen1 },
---   markdownError = { link = 'NONE' },
---   markdownEscape = { fg = 'NONE' },
---   markdownH1 = { link = 'htmlH1' },
---   markdownH2 = { link = 'htmlH2' },
---   markdownH3 = { link = 'htmlH3' },
---   markdownH4 = { link = 'htmlH4' },
---   markdownH5 = { link = 'htmlH5' },
---   markdownH6 = { link = 'htmlH6' },
---   markdownListMarker = { fg = c_autumnYellow },
---
---   -- Checkhealth
---   healthError = { fg = c_lotusRed0 },
---   healthSuccess = { fg = c_springGreen },
---   healthWarning = { fg = c_roninYellow },
---   helpHeader = { link = 'Title' },
---   helpSectionDelim = { link = 'Title' },
---
---   -- Qf
---   qfFileName = { link = 'Directory' },
---   qfLineNr = { link = 'lineNr' },
---   -- }}}
---
---   -- Plugins {{{2
---   -- nvim-cmp
---   CmpCompletion = { link = 'Pmenu' },
---   CmpCompletionBorder = { link = 'FloatBorder' },
---   CmpCompletionSbar = { link = 'PmenuSbar' },
---   CmpCompletionSel = { bg = c_waveBlue1, fg = 'NONE' },
---   CmpCompletionThumb = { link = 'PmenuThumb' },
---   CmpDocumentation = { link = 'NormalFloat' },
---   CmpDocumentationBorder = { link = 'FloatBorder' },
---   CmpItemAbbr = { fg = c_dragonFg2 },
---   CmpItemAbbrDeprecated = { fg = c_dragonAsh, strikethrough = true },
---   CmpItemAbbrMatch = { fg = c_dragonRed },
---   CmpItemAbbrMatchFuzzy = { link = 'CmpItemAbbrMatch' },
---   CmpItemKindClass = { link = 'Type' },
---   CmpItemKindConstant = { link = 'Constant' },
---   CmpItemKindConstructor = { link = '@constructor' },
---   CmpItemKindCopilot = { link = 'String' },
---   CmpItemKindDefault = { fg = c_katanaGray },
---   CmpItemKindEnum = { link = 'Type' },
---   CmpItemKindEnumMember = { link = 'Constant' },
---   CmpItemKindField = { link = '@variable.member' },
---   CmpItemKindFile = { link = 'Directory' },
---   CmpItemKindFolder = { link = 'Directory' },
---   CmpItemKindFunction = { link = 'Function' },
---   CmpItemKindInterface = { link = 'Type' },
---   CmpItemKindKeyword = { link = '@keyword' },
---   CmpItemKindMethod = { link = 'Function' },
---   CmpItemKindModule = { link = '@keyword.import' },
---   CmpItemKindOperator = { link = 'Operator' },
---   CmpItemKindProperty = { link = '@property' },
---   CmpItemKindReference = { link = 'Type' },
---   CmpItemKindSnippet = { fg = c_dragonTeal },
---   CmpItemKindStruct = { link = 'Type' },
---   CmpItemKindText = { fg = c_dragonFg2 },
---   CmpItemKindTypeParameter = { link = 'Type' },
---   CmpItemKindValue = { link = 'String' },
---   CmpItemKindVariable = { fg = c_lotusRed2 },
---   CmpItemMenu = { fg = c_dragonAsh },
---
---   -- gitsigns
---   GitSignsAdd = { fg = c_autumnGreen },
---   GitSignsChange = { fg = c_carpYellow },
---   GitSignsDelete = { fg = c_lotusRed0 },
---   GitSignsDeletePreview = { bg = c_winterRed },
---
---   -- fugitive
---   DiffAdded = { fg = c_autumnGreen },
---   DiffChanged = { fg = c_autumnYellow },
---   DiffDeleted = { fg = c_autumnRed },
---   DiffNewFile = { fg = c_autumnGreen },
---   DiffOldFile = { fg = c_autumnRed },
---   DiffRemoved = { fg = c_autumnRed },
---   fugitiveHash = { link = 'gitHash' },
---   fugitiveHeader = { link = 'Title' },
---   fugitiveStagedModifier = { fg = c_autumnGreen },
---   fugitiveUnstagedModifier = { fg = c_autumnYellow },
---   fugitiveUntrackedModifier = { fg = c_dragonAqua },
---
---   -- telescope
---   TelescopeMatching = { fg = c_dragonRed, bold = true },
---   TelescopeNormal = { fg = c_dragonFg2, bg = c_dragonBg3 },
---   TelescopePreviewNormal = { bg = c_dragonBg2 },
---   TelescopePreviewBorder = { fg = c_dragonBg2, bg = c_dragonBg2 },
---   TelescopeBorder = { bg = c_dragonBg3, fg = c_dragonBg3 },
---   TelescopePromptNormal = { bg = c_dragonBg3 },
---   TelescopePromptBorder = { fg = c_dragonBg3, bg = c_dragonBg3 },
---   TelescopeResultsClass = { link = 'Structure' },
---   TelescopeResultsField = { link = '@keyword.member' },
---   TelescopeResultsMethod = { link = 'Function' },
---   TelescopeResultsStruct = { link = 'Structure' },
---   TelescopeResultsVariable = { link = '@variable' },
---   TelescopeSelection = { link = 'CursorLine' },
---   TelescopeSelectionCaret = { link = 'CursorLineNr' },
---   TelescopeTitle = { fg = c_dragonRed },
---
---   IndentBlanklineChar = { fg = c_dragonBg3 },
---   IndentBlanklineSpaceChar = { link = 'IndentBlanklineChar' },
---   IndentBlanklineSpaceCharBlankline = { link = 'IndentBlanklineChar' },
---
---   MiniIndentscopeSymbol = { link = 'IndentBlanklineChar' },
---
---   MiniFilesBorder = { link = 'FloatBorder' },
---   MiniFilesBorderModified = { link = 'FloatBorder' },
---   MiniFilesTitleFocused = { fg = c_autumnGreen, bg = c_dragonBg3 },
---   MiniFilesTitle = { fg = c_dragonBlue0, bg = c_dragonBg3 },
---   MiniFilesNormal = { fg = c_dragonFg0, bg = c_dragonBg3 },
---   -- MiniFilesFile = { fg = a.fg, bg = a.float },
---   -- MiniFilesDirectory = { fg = b.blue, bg = a.float },
---   MiniFilesCursorLine = { fg = 'none', bg = c_dragonBg3 },
---
---   -- nvim-dap-ui
---   DebugBreakpoint = { fg = c_dragonRed },
---   DebugBreakpointLine = { fg = c_dragonRed },
---   DebugStopped = { fg = c_carpYellow },
---   DebugStoppedLine = { fg = c_carpYellow },
---   DebugLogPoint = { fg = c_dragonBlue0 },
---   DebugLogPointLine = { fg = c_dragonBlue0 },
---
---   DapUIBreakpointsCurrentLine = { bold = true, fg = c_dragonFg0 },
---   DapUIBreakpointsDisabledLine = { link = 'Comment' },
---   DapUIBreakpointsInfo = { fg = c_dragonBlue0 },
---   DapUIBreakpointsPath = { link = 'Directory' },
---   DapUIDecoration = { fg = c_sumiInk6 },
---   DapUIFloatBorder = { link = 'FloatBorder' },
---   DapUILineNumber = { fg = c_dragonTeal },
---   DapUIModifiedValue = { bold = true, fg = c_dragonTeal },
---   DapUIPlayPause = { fg = c_dragonGreen1 },
---   DapUIRestart = { fg = c_dragonGreen1 },
---   DapUIScope = { link = 'Special' },
---   DapUISource = { fg = c_dragonRed },
---   DapUIStepBack = { fg = c_dragonTeal },
---   DapUIStepInto = { fg = c_dragonTeal },
---   DapUIStepOut = { fg = c_dragonTeal },
---   DapUIStepOver = { fg = c_dragonTeal },
---   DapUIStop = { fg = c_lotusRed0 },
---   DapUIStoppedThread = { fg = c_dragonTeal },
---   DapUIThread = { fg = c_dragonFg0 },
---   DapUIType = { link = 'Type' },
---   DapUIUnavailable = { fg = c_dragonAsh },
---   DapUIWatchesEmpty = { fg = c_lotusRed0 },
---   DapUIWatchesError = { fg = c_lotusRed0 },
---   DapUIWatchesValue = { fg = c_dragonFg0 },
---
---   -- lazy.nvimo
---   LazyProgressTodo = { fg = c_dragonBg5 },
---
---   -- -- statusline
---   -- StatusLineGitAdded = { bg = c_dragonBg3, fg = c_dragonGreen1 },
---   -- StatusLineGitChanged = { bg = c_dragonBg3, fg = c_carpYellow },
---   -- StatusLineGitRemoved = { bg = c_dragonBg3, fg = c_dragonRed },
---   -- StatusLineHeader = { bg = c_dragonBg5, fg = c_dragonFg1 },
---   -- StatusLineHeaderModified = { bg = c_dragonRed, fg = c_dragonBg1 },
---
---   -- -- glance.nvim
---   -- GlanceBorderTop = { fg = c_dragonBg3 },
---   -- GlanceIndent = { link = "None" },
---   -- GlanceListBorderBottom = { link = "GlanceBorderTop" },
---   -- GlanceListCount = { bg = c_dragonPink, fg = c_dragonBg1 },
---   -- GlanceListCursorLine = { bg = c_dragonBg4 },
---   -- GlanceListMatch = { bg = c_dragonBg5 },
---   -- GlanceListNormal = { bg = c_dragonBg3, fg = c_dragonFg0 },
---   -- GlancePreviewBorderBottom = { link = "GlanceBorderTop" },
---   -- GlancePreviewNormal = { bg = c_dragonBg2, fg = c_dragonFg0 },
---   -- GlanceWinBarFilename = { bg = c_dragonBg3, fg = c_dragonFg1 },
---   -- GlanceWinBarFilepath = { bg = c_dragonBg3, fg = c_dragonAsh },
---   -- GlanceWinBarTitle = { bg = c_dragonBg3, fg = c_dragonFg1, bold = true },
---   -- }}}
--- }
+local hlgroups = {
+  -- UI
+  ColorColumn = { bg = c_fg },
+  Conceal = { bold = true, fg = c_fg },
+  CurSearch = { link = 'IncSearch' },
+  Cursor = { bg = c_bg, fg = c_fg },
+  CursorColumn = { link = 'CursorLine' },
+  CursorIM = { link = 'Cursor' },
+  CursorLine = { bg = c_accent },
+  CursorLineNr = { fg = c_fg, bold = true },
+  DebugPC = { bg = c_fg },
+  DiffAdd = { bg = c_fg },
+  DiffChange = { bg = c_fg },
+  DiffDelete = { fg = c_fg },
+  DiffText = { bg = c_fg },
+  Directory = { fg = c_fg },
+  EndOfBuffer = { fg = c_fg },
+  ErrorMsg = { fg = c_fg },
+  FloatBorder = { fg = c_fg, bg = c_fg },
+  FloatFooter = { bg = c_fg, fg = c_fg },
+  FloatTitle = { bg = c_fg, fg = c_fg, bold = true },
+  FoldColumn = { fg = c_dragonBg5 },
+  Folded = { bg = c_dragonBg2, fg = c_lotusGray },
+  Ignore = { link = 'NonText' },
+  IncSearch = { bg = c_yellow, fg = c_blue },
+  LineNr = { fg = c_dragonBg5 },
+  MatchParen = { bg = c_dragonBg4 },
+  ModeMsg = { fg = c_dragonFg2, bold = true },
+  MoreMsg = { fg = c_blue },
+  MsgArea = { fg = c_dragonFg1 },
+  MsgSeparator = { bg = c_dragonBg1 },
+  NonText = { fg = c_dragonBg5 },
+  Normal = { bg = c_dragonBg1, fg = c_dragonFg0 },
+  NormalFloat = { bg = c_dragonBg3, fg = c_dragonFg1 },
+  NormalNC = { link = 'Normal' },
+  Pmenu = { bg = c_dragonBg3, fg = c_dragonFg1 },
+  PmenuSbar = { bg = c_dragonBg4 },
+  PmenuSel = { bg = c_dragonBg4, fg = 'NONE' },
+  PmenuThumb = { bg = c_dragonBg5 },
+  PmenuBorder = { link = 'FloatBorder' },
+  Question = { link = 'MoreMsg' },
+  QuickFixLine = { bg = c_dragonBg3 },
+  Search = { bg = c_dragonBg4 },
+  SignColumn = { fg = c_dragonGray2 },
+  SpellBad = { undercurl = true, sp = c_red },
+  SpellCap = { undercurl = true },
+  SpellLocal = { undercurl = true },
+  SpellRare = { undercurl = true },
+  StatusLine = { bg = c_dragonBg3, fg = c_dragonFg1 },
+  StatusLineNC = { bg = c_dragonBg3, fg = c_dragonBg5 },
+  StatusColumnSeparator = { fg = c_dragonBg3, nocombine = true, bg = c_dragonBg1 },
+  Substitute = { bg = c_red, fg = c_dragonFg0 },
+  TabLine = { link = 'StatusLineNC' },
+  TabLineFill = { link = 'Normal' },
+  TabLineSel = { link = 'StatusLine' },
+  TermCursor = { fg = c_dragonBg1, bg = c_red },
+  TermCursorNC = { fg = c_dragonBg1, bg = c_dragonAsh },
+  Title = { bold = true, fg = c_blue },
+  Underlined = { fg = c_blue, underline = true },
+  VertSplit = { link = 'WinSeparator' },
+  Visual = { bg = c_dragonBg4 },
+  VisualNOS = { link = 'Visual' },
+  WarningMsg = { fg = c_yellow },
+  Whitespace = { fg = c_dragonBg4 },
+  WildMenu = { link = 'Pmenu' },
+  WinBar = { bg = 'NONE', fg = c_dragonFg1 },
+  WinBarNC = { link = 'WinBar' },
+  WinSeparator = { fg = c_dragonBg4 },
+  lCursor = { link = 'Cursor' },
+
+  -- Syntax
+  Boolean = { fg = c_dragonOrange0, bold = true },
+  Character = { link = 'String' },
+  Comment = { fg = c_green },
+  Constant = { fg = c_dragonOrange0 },
+  Delimiter = { fg = c_dragonGray1 },
+  Error = { fg = c_red },
+  Exception = { fg = c_red },
+  Float = { link = 'Number' },
+  Function = { fg = c_blue },
+  Identifier = { fg = c_dragonFg0 },
+  Keyword = { fg = c_dragonViolet },
+  Number = { fg = c_red },
+  Operator = { fg = c_red },
+  PreProc = { fg = c_red },
+  Special = { fg = c_blue },
+  SpecialKey = { fg = c_dragonGray2 },
+  Statement = { fg = c_dragonViolet },
+  String = { fg = c_green },
+  Todo = { fg = c_dragonBg0, bg = c_blue, bold = true },
+  Type = { fg = c_blue },
+
+  -- Treesitter syntax
+  ['@attribute'] = { link = 'Constant' },
+  ['@constructor'] = { fg = c_blue },
+  ['@constructor.lua'] = { fg = c_dragonViolet },
+  ['@keyword.exception'] = { bold = true, fg = c_red },
+  ['@keyword.import'] = { link = 'PreProc' },
+  ['@keyword.luap'] = { link = '@string.regexp' },
+  ['@keyword.operator'] = { bold = true, fg = c_red },
+  ['@keyword.return'] = { fg = c_red, italic = true },
+  ['@module'] = { fg = c_dragonOrange0 },
+  ['@operator'] = { link = 'Operator' },
+  ['@variable.parameter'] = { fg = c_dragonGray0 },
+  ['@punctuation.bracket'] = { fg = c_dragonGray1 },
+  ['@punctuation.delimiter'] = { fg = c_dragonGray1 },
+  ['@markup.list'] = { fg = c_blue },
+  ['@string.escape'] = { fg = c_dragonOrange0 },
+  ['@string.regexp'] = { fg = c_dragonOrange0 },
+  ['@markup.link.label.symbol'] = { fg = c_dragonFg0 },
+  ['@tag.attribute'] = { fg = c_dragonFg0 },
+  ['@tag.delimiter'] = { fg = c_dragonGray1 },
+  ['@comment.error'] = { bg = c_red, fg = c_dragonFg0, bold = true },
+  ['@diff.plug'] = { fg = c_green },
+  ['@diff.minus'] = { fg = c_red },
+  ['@markup.emphasis'] = { italic = true },
+  ['@markup.environment'] = { link = 'Keyword' },
+  ['@markup.environment.name'] = { link = 'String' },
+  ['@markup.raw'] = { link = 'String' },
+  ['@comment.info'] = { bg = c_waveAqua0, fg = c_blue, bold = true },
+  ['@markup.quote'] = { link = '@variable.parameter' },
+  ['@markup.strong'] = { bold = true },
+  ['@markup.heading'] = { link = 'Function' },
+  ['@markup.heading.1.markdown'] = { fg = c_red },
+  ['@markup.heading.2.markdown'] = { fg = c_red },
+  ['@markup.heading.3.markdown'] = { fg = c_red },
+  ['@markup.heading.4.markdown'] = { fg = c_red },
+  ['@markup.heading.5.markdown'] = { fg = c_red },
+  ['@markup.heading.6.markdown'] = { fg = c_red },
+  ['@markup.heading.1.marker.markdown'] = { link = 'Delimiter' },
+  ['@markup.heading.2.marker.markdown'] = { link = 'Delimiter' },
+  ['@markup.heading.3.marker.markdown'] = { link = 'Delimiter' },
+  ['@markup.heading.4.marker.markdown'] = { link = 'Delimiter' },
+  ['@markup.heading.5.marker.markdown'] = { link = 'Delimiter' },
+  ['@markup.heading.6.marker.markdown'] = { link = 'Delimiter' },
+  ['@comment.todo.checked'] = { fg = c_dragonAsh },
+  ['@comment.todo.unchecked'] = { fg = c_red },
+  ['@markup.link.label.markdown_inline'] = { link = 'htmlLink' },
+  ['@markup.link.url.markdown_inline'] = { link = 'htmlString' },
+  ['@comment.warning'] = { bg = c_yellow, fg = c_blue, bold = true },
+  ['@variable'] = { fg = c_dragonFg0 },
+  ['@variable.builtin'] = { fg = c_red, italic = true },
+
+  -- LSP semantic
+  ['@lsp.mod.readonly'] = { link = 'Constant' },
+  ['@lsp.mod.typeHint'] = { link = 'Type' },
+  ['@lsp.type.builtinConstant'] = { link = '@constant.builtin' },
+  ['@lsp.type.comment'] = { fg = 'NONE' },
+  ['@lsp.type.macro'] = { fg = c_red },
+  ['@lsp.type.magicFunction'] = { link = '@function.builtin' },
+  ['@lsp.type.method'] = { link = '@function.method' },
+  ['@lsp.type.namespace'] = { link = '@module' },
+  ['@lsp.type.parameter'] = { link = '@variable.parameter' },
+  ['@lsp.type.selfParameter'] = { link = '@variable.builtin' },
+  ['@lsp.type.variable'] = { fg = 'NONE' },
+  ['@lsp.typemod.function.builtin'] = { link = '@function.builtin' },
+  ['@lsp.typemod.function.defaultLibrary'] = { link = '@function.builtin' },
+  ['@lsp.typemod.function.readonly'] = { bold = true, fg = c_blue },
+  ['@lsp.typemod.keyword.documentation'] = { link = 'Special' },
+  ['@lsp.typemod.method.defaultLibrary'] = { link = '@function.builtin' },
+  ['@lsp.typemod.operator.controlFlow'] = { link = '@keyword.exception' },
+  ['@lsp.typemod.operator.injected'] = { link = 'Operator' },
+  ['@lsp.typemod.string.injected'] = { link = 'String' },
+  ['@lsp.typemod.variable.defaultLibrary'] = { link = 'Special' },
+  ['@lsp.typemod.variable.global'] = { link = 'Constant' },
+  ['@lsp.typemod.variable.injected'] = { link = '@variable' },
+  ['@lsp.typemod.variable.static'] = { link = 'Constant' },
+
+  -- LSP
+  LspCodeLens = { fg = c_dragonAsh },
+  LspInfoBorder = { link = 'FloatBorder' },
+  LspReferenceRead = { link = 'LspReferenceText' },
+  LspReferenceText = { bg = c_yellow },
+  LspReferenceWrite = { bg = c_yellow },
+  LspSignatureActiveParameter = { fg = c_yellow },
+
+  -- Diagnostic
+  DiagnosticError = { fg = c_red },
+  DiagnosticHint = { fg = c_blue },
+  DiagnosticInfo = { fg = c_blue },
+  DiagnosticOk = { fg = c_green },
+  DiagnosticWarn = { fg = c_yellow },
+  DiagnosticFloatingError = { fg = c_red },
+  DiagnosticFloatingWarn = { fg = c_yellow },
+  DiagnosticFloatingInfo = { fg = c_blue },
+  DiagnosticFloatingHint = { fg = c_blue },
+  DiagnosticFloatingOk = { fg = c_green },
+  DiagnosticFloatingSuffix = { fg = c_dragonFg2 },
+  DiagnosticSignError = { fg = c_red },
+  DiagnosticSignHint = { fg = c_blue },
+  DiagnosticSignInfo = { fg = c_blue },
+  DiagnosticSignWarn = { fg = c_yellow },
+  DiagnosticUnderlineError = { sp = c_red, undercurl = true },
+  DiagnosticUnderlineHint = { sp = c_blue, undercurl = true },
+  DiagnosticUnderlineInfo = { sp = c_blue, undercurl = true },
+  DiagnosticUnderlineWarn = { sp = c_yellow, undercurl = true },
+  DiagnosticVirtualTextError = { bg = c_red, fg = c_red },
+  DiagnosticVirtualTextHint = { bg = c_green, fg = c_blue },
+  DiagnosticVirtualTextInfo = { bg = c_winterBlue, fg = c_blue },
+  DiagnosticVirtualTextWarn = { bg = c_yellow, fg = c_yellow },
+
+  -- Filetype
+  -- Git
+  gitHash = { fg = c_dragonAsh },
+
+  -- Sh/Bash
+  bashSpecialVariables = { link = 'Constant' },
+  shAstQuote = { link = 'Constant' },
+  shCaseEsac = { link = 'Operator' },
+  shDeref = { link = 'Special' },
+  shDerefSimple = { link = 'shDerefVar' },
+  shDerefVar = { link = 'Constant' },
+  shNoQuote = { link = 'shAstQuote' },
+  shQuote = { link = 'String' },
+  shTestOpr = { link = 'Operator' },
+
+  -- HTML
+  htmlBold = { bold = true },
+  htmlBoldItalic = { bold = true, italic = true },
+  htmlH1 = { fg = c_red, bold = true },
+  htmlH2 = { fg = c_red, bold = true },
+  htmlH3 = { fg = c_red, bold = true },
+  htmlH4 = { fg = c_red, bold = true },
+  htmlH5 = { fg = c_red, bold = true },
+  htmlH6 = { fg = c_red, bold = true },
+  htmlItalic = { italic = true },
+  htmlLink = { fg = c_blue, underline = true },
+  htmlSpecialChar = { link = 'SpecialChar' },
+  htmlSpecialTagName = { fg = c_dragonViolet },
+  htmlString = { fg = c_dragonAsh },
+  htmlTagName = { link = 'Tag' },
+  htmlTitle = { link = 'Title' },
+
+  -- Markdown
+  markdownBold = { bold = true },
+  markdownBoldItalic = { bold = true, italic = true },
+  markdownCode = { fg = c_green },
+  markdownCodeBlock = { fg = c_green },
+  markdownError = { link = 'NONE' },
+  markdownEscape = { fg = 'NONE' },
+  markdownH1 = { link = 'htmlH1' },
+  markdownH2 = { link = 'htmlH2' },
+  markdownH3 = { link = 'htmlH3' },
+  markdownH4 = { link = 'htmlH4' },
+  markdownH5 = { link = 'htmlH5' },
+  markdownH6 = { link = 'htmlH6' },
+  markdownListMarker = { fg = c_yellow },
+
+  -- Typescript
+  typescriptBlock = { link = 'Comment' },
+
+  -- Checkhealth
+  healthError = { fg = c_red },
+  healthSuccess = { fg = c_green },
+  healthWarning = { fg = c_yellow },
+  helpHeader = { link = 'Title' },
+  helpSectionDelim = { link = 'Title' },
+
+  -- Qf
+  qfFileName = { link = 'Directory' },
+  qfLineNr = { link = 'lineNr' },
+
+  -- Plugins {{{2
+  -- nvim-cmp
+  CmpCompletion = { link = 'Pmenu' },
+  CmpCompletionBorder = { link = 'FloatBorder' },
+  CmpCompletionSbar = { link = 'PmenuSbar' },
+  CmpCompletionSel = { bg = c_blue, fg = 'NONE' },
+  CmpCompletionThumb = { link = 'PmenuThumb' },
+  CmpDocumentation = { link = 'NormalFloat' },
+  CmpDocumentationBorder = { link = 'FloatBorder' },
+  CmpItemAbbr = { fg = c_dragonFg2 },
+  CmpItemAbbrDeprecated = { fg = c_dragonAsh, strikethrough = true },
+  CmpItemAbbrMatch = { fg = c_red },
+  CmpItemAbbrMatchFuzzy = { link = 'CmpItemAbbrMatch' },
+  CmpItemKindClass = { link = 'Type' },
+  CmpItemKindConstant = { link = 'Constant' },
+  CmpItemKindConstructor = { link = '@constructor' },
+  CmpItemKindCopilot = { link = 'String' },
+  CmpItemKindDefault = { fg = c_katanaGray },
+  CmpItemKindEnum = { link = 'Type' },
+  CmpItemKindEnumMember = { link = 'Constant' },
+  CmpItemKindField = { link = '@variable.member' },
+  CmpItemKindFile = { link = 'Directory' },
+  CmpItemKindFolder = { link = 'Directory' },
+  CmpItemKindFunction = { link = 'Function' },
+  CmpItemKindInterface = { link = 'Type' },
+  CmpItemKindKeyword = { link = '@keyword' },
+  CmpItemKindMethod = { link = 'Function' },
+  CmpItemKindModule = { link = '@keyword.import' },
+  CmpItemKindOperator = { link = 'Operator' },
+  CmpItemKindProperty = { link = '@property' },
+  CmpItemKindReference = { link = 'Type' },
+  CmpItemKindSnippet = { fg = c_blue },
+  CmpItemKindStruct = { link = 'Type' },
+  CmpItemKindText = { fg = c_dragonFg2 },
+  CmpItemKindTypeParameter = { link = 'Type' },
+  CmpItemKindValue = { link = 'String' },
+  CmpItemKindVariable = { fg = c_red },
+  CmpItemMenu = { fg = c_dragonAsh },
+
+  -- gitsigns
+  GitSignsAdd = { fg = c_green },
+  GitSignsChange = { fg = c_yellow },
+  GitSignsDelete = { fg = c_red },
+  GitSignsDeletePreview = { bg = c_red },
+
+  -- fugitive
+  DiffAdded = { fg = c_green },
+  DiffChanged = { fg = c_yellow },
+  DiffDeleted = { fg = c_red },
+  DiffNewFile = { fg = c_green },
+  DiffOldFile = { fg = c_red },
+  DiffRemoved = { fg = c_red },
+  fugitiveHash = { link = 'gitHash' },
+  fugitiveHeader = { link = 'Title' },
+  fugitiveStagedModifier = { fg = c_green },
+  fugitiveUnstagedModifier = { fg = c_yellow },
+  fugitiveUntrackedModifier = { fg = c_blue },
+
+  -- telescope
+  TelescopeMatching = { fg = c_red, bold = true },
+  TelescopeNormal = { fg = c_dragonFg2, bg = c_dragonBg3 },
+  TelescopePreviewNormal = { bg = c_dragonBg2 },
+  TelescopePreviewBorder = { fg = c_dragonBg2, bg = c_dragonBg2 },
+  TelescopeBorder = { bg = c_dragonBg3, fg = c_dragonBg3 },
+  TelescopePromptNormal = { bg = c_dragonBg3 },
+  TelescopePromptBorder = { fg = c_dragonBg3, bg = c_dragonBg3 },
+  TelescopeResultsClass = { link = 'Structure' },
+  TelescopeResultsField = { link = '@keyword.member' },
+  TelescopeResultsMethod = { link = 'Function' },
+  TelescopeResultsStruct = { link = 'Structure' },
+  TelescopeResultsVariable = { link = '@variable' },
+  TelescopeSelection = { link = 'CursorLine' },
+  TelescopeSelectionCaret = { link = 'CursorLineNr' },
+  TelescopeTitle = { fg = c_red },
+
+  IndentBlanklineChar = { fg = c_dragonBg3 },
+  IndentBlanklineSpaceChar = { link = 'IndentBlanklineChar' },
+  IndentBlanklineSpaceCharBlankline = { link = 'IndentBlanklineChar' },
+
+  -- nvim-dap-ui
+  DebugBreakpoint = { fg = c_red },
+  DebugBreakpointLine = { fg = c_red },
+  DebugStopped = { fg = c_yellow },
+  DebugStoppedLine = { fg = c_yellow },
+  DebugLogPoint = { fg = c_blue },
+  DebugLogPointLine = { fg = c_blue },
+
+  DapUIBreakpointsCurrentLine = { bold = true, fg = c_dragonFg0 },
+  DapUIBreakpointsDisabledLine = { link = 'Comment' },
+  DapUIBreakpointsInfo = { fg = c_blue },
+  DapUIBreakpointsPath = { link = 'Directory' },
+  DapUIDecoration = { fg = c_sumiInk6 },
+  DapUIFloatBorder = { link = 'FloatBorder' },
+  DapUILineNumber = { fg = c_blue },
+  DapUIModifiedValue = { bold = true, fg = c_blue },
+  DapUIPlayPause = { fg = c_green },
+  DapUIRestart = { fg = c_green },
+  DapUIScope = { link = 'Special' },
+  DapUISource = { fg = c_red },
+  DapUIStepBack = { fg = c_blue },
+  DapUIStepInto = { fg = c_blue },
+  DapUIStepOut = { fg = c_blue },
+  DapUIStepOver = { fg = c_blue },
+  DapUIStop = { fg = c_red },
+  DapUIStoppedThread = { fg = c_blue },
+  DapUIThread = { fg = c_dragonFg0 },
+  DapUIType = { link = 'Type' },
+  DapUIUnavailable = { fg = c_dragonAsh },
+  DapUIWatchesEmpty = { fg = c_red },
+  DapUIWatchesError = { fg = c_red },
+  DapUIWatchesValue = { fg = c_dragonFg0 },
+
+  -- lazy.nvim
+  LazyProgressTodo = { fg = c_dragonBg5 },
+
+  -- statusline
+  StatusLineGitAdded = { bg = c_dragonBg3, fg = c_green },
+  StatusLineGitChanged = { bg = c_dragonBg3, fg = c_yellow },
+  StatusLineGitRemoved = { bg = c_dragonBg3, fg = c_red },
+  StatusLineHeader = { bg = c_dragonBg5, fg = c_dragonFg1 },
+  StatusLineHeaderModified = { bg = c_red, fg = c_dragonBg1 },
+}
 
 -- Highlight group overrides {{{1
 -- if vim.go.bg == 'light' then hlgroups.CursorLine = { bg = c_dragonBg0 }
 --   hlgroups.FloatBorder = { bg = c_dragonBg0, fg = c_dragonBg0 }
 --   hlgroups.NormalFloat = { bg = c_dragonBg0 }
---   hlgroups.DiagnosticSignWarn = { fg = c_autumnYellow }
---   hlgroups.DiagnosticUnderlineWarn = { sp = c_autumnYellow, undercurl =
---   true } hlgroups.DiagnosticVirtualTextWarn = { bg = c_winterYellow, fg
---   = c_autumnYellow } hlgroups.DiagnosticWarn = { fg =
---   c_autumnYellow }
+--   hlgroups.DiagnosticSignWarn = { fg = c_yellow }
+--   hlgroups.DiagnosticUnderlineWarn = { sp = c_yellow, undercurl =
+--   true } hlgroups.DiagnosticVirtualTextWarn = { bg = c_yellow, fg
+--   = c_yellow } hlgroups.DiagnosticWarn = { fg =
+--   c_yellow }
 --
 --   hlgroups.TelescopeBorder = { bg = c_dragonBg0, fg =
---   c_dragonBg0 } hlgroups.TelescopeMatching = { fg = c_dragonRed, bold =
+--   c_dragonBg0 } hlgroups.TelescopeMatching = { fg = c_red, bold =
 --   true } hlgroups.TelescopeNormal = { fg = c_dragonFg0, bg =
 --   c_dragonBg0 } hlgroups.TelescopePromptBorder = { fg = c_dragonBg0, bg
 --   = c_dragonBg0 } hlgroups.TelescopePromptNormal = { bg =
 --   c_dragonBg0 } hlgroups.TelescopePreviewNormal = { bg = c_dragonBg2 }
 --   hlgroups.TelescopePreviewBorder = { fg = c_dragonBg2, bg =
 --   c_dragonBg2 }
---
---   hlgroups.MiniFilesTitleFocused = { fg = c_autumnGreen, bg =
---   c_dragonBg0 } hlgroups.MiniFilesTitle = { fg = c_dragonBlue0, bg
---   = c_dragonBg0 } hlgroups.MiniFilesNormal = { fg =
---   c_dragonFg0, bg = c_dragonBg0 }
---
---   -- hlgroups.GlanceListCursorLine = { bg = c_dragonBg1 }
---   -- hlgroups.GlanceListMatch = { bg = c_dragonBg4 } hlgroups.GlanceListNormal
---   -- = { bg = c_dragonBg0, fg = c_dragonFg0 } hlgroups.GlanceWinBarFilename = {
---     -- bg = c_dragonBg0, fg = c_dragonFg1 } hlgroups.GlanceWinBarFilepath = {
---       -- bg = c_dragonBg0, fg = c_dragonAsh }
---       -- hlgroups.GlanceWinBarTitle = { bg = c_dragonBg0, fg = c_dragonFg1,
---       -- bold = true }
---       hlgroups.IncSearch = { bg = c_autumnYellow, fg =
---       c_dragonBg0, bold = true } hlgroups.Keyword = { fg = c_dragonRed
---     } hlgroups.ModeMsg = { fg = c_dragonRed, bold = true }
---     hlgroups.Pmenu = { bg = c_dragonBg0, fg = c_dragonFg1 }
---     hlgroups.PmenuSbar = { bg = c_dragonBg2 } hlgroups.PmenuSel = { bg
---     = c_dragonFg0, fg = c_dragonBg0 } hlgroups.PmenuThumb = {
---       bg = c_dragonBg4 } hlgroups.Search = { bg = c_dragonBg3 }
---       hlgroups.StatusLine = { bg = c_dragonBg0 }
---       -- hlgroups.StatusLineGitAdded = { bg = c_dragonBg0, fg = c_dragonGreen1
---       -- } hlgroups.StatusLineGitChanged = { bg = c_dragonBg0, fg =
---       -- c_autumnYellow } hlgroups.StatusLineGitRemoved = { bg = c_dragonBg0,
---       -- fg = c_dragonRed } hlgroups.StatusLineHeader = { bg = c_dragonFg0, fg
---       -- = c_dragonBg0 } hlgroups.StatusLineHeaderModified = { bg =
---       -- c_dragonRed, fg = c_dragonBg0 }
---       hlgroups.Visual = { bg = c_dragonBg3 }
---       hlgroups['@variable.parameter'] = { link = 'Identifier' } end
---       -- }}}1
---
+--end
+
 -- Set highlight groups
 for hlgroup_name, hlgroup_attr in pairs(hlgroups) do
   vim.api.nvim_set_hl(0, hlgroup_name, hlgroup_attr)

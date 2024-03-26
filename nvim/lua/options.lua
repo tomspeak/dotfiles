@@ -14,6 +14,9 @@ vim.cmd [[set noshowcmd]]
 -- Set highlight on search
 vim.o.hlsearch = false
 
+-- Disable all folding
+vim.cmd [[set nofoldenable]]
+
 -- Make line numbers default
 vim.opt.number = true
 vim.opt.relativenumber = true
