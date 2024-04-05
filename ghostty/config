@@ -1,6 +1,6 @@
 font-size = 18
 font-thicken = true
-font-family = Berkeley Mono
+#font-family = Berkeley Mono
 #font-family = JetBrains Mono
 #font-family = Fira Code
 #font-family = Monaco

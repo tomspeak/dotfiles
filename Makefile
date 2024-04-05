@@ -15,6 +15,7 @@ symlinks:
 	@ln -sf $(DIR)/starship.toml ~/.config
 	@ln -sf $(DIR)/ghostty ~/.config
 	@ln -sf $(DIR)/spacebar ~/.config/
+	@ln -sf $(DIR)/skhdrc ~/.config/
 
 install_ohmyzsh:
 	./scripts/install_oh_my_zsh.sh
