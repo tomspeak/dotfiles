@@ -16,6 +16,8 @@ symlinks:
 	@ln -sf $(DIR)/ghostty ~/.config
 	@ln -sf $(DIR)/spacebar ~/.config/
 	@ln -sf $(DIR)/skhdrc ~/.config/
+	@mkdir -p ~/Library/KeyBindings/
+	@ln -sf $(DIR)/DefaultKeyBinding.dict ~/Library/KeyBindings/
 
 install_ohmyzsh:
 	./scripts/install_oh_my_zsh.sh
