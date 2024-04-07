@@ -11,7 +11,11 @@ font-thicken = true
 #font-family-bold = "BerkeleyMono-Bold"
 #font-family-italic = "BerkeleyMono-Italic"
 #font-family-bold-italic = "BerkeleyMono-BoldItalic"
-#font-family = Zed Mono
+font-family = Zed Mono
+
+font-feature = "-calt"
+font-feature = "-liga"
+font-feature = "-dlig"
 
 macos-non-native-fullscreen = true
 macos-titlebar-tabs = false
