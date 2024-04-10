@@ -1,0 +1,66 @@
+{
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "editor.fontFamily": "Berkeley Mono, Cascadia Code, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontSize": 20,
+  "editor.lineHeight": 1.5,
+  "editor.inlineSuggest.enabled": true,
+  "editor.minimap.enabled": false,
+  "editor.formatOnSave": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.iconTheme": "vscode-jetbrains-icon-theme-2023-auto",
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "telemetry.telemetryLevel": "off",
+  "workbench.preferredLightColorTheme": "Quiet Light",
+  "window.autoDetectColorScheme": true,
+  "window.systemColorTheme": "auto",
+  "workbench.startupEditor": "none",
+  "editor.inlayHints.fontFamily": "Zed Mono",
+  "update.showReleaseNotes": false,
+  "workbench.sideBar.location": "right",
+  "editor.wordWrap": "on",
+  "vim.targets.enable": true,
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.renderWhitespace": "none",
+  "breadcrumbs.enabled": false,
+  "terminal.external.osxExec": "Ghostty.app",
+  "vim.leader": "<Space>",
+  "vim.camelCaseMotion.enable": true,
+  "vim.cursorStylePerMode.visualblock": "block-outline",
+  "vim.cursorStylePerMode.visualline": "block-outline",
+  "vim.enableNeovim": true,
+  "vim.highlightedyank.enable": true,
+  "vim.hlsearch": true,
+  "vim.neovimPath": "/opt/homebrew/bin/nvim",
+  "vim.smartRelativeLine": true,
+  "vim.useSystemClipboard": true,
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["="],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
+    {
+      "before": ["<leader>", "f"],
+      "commands": ["revealInExplorer"]
+    }
+  ],
+  "window.commandCenter": false,
+  "workbench.layoutControl.enabled": false,
+  "workbench.colorTheme": "Github Light (rainglow)",
+  "workbench.reduceMotion": "on"
+}

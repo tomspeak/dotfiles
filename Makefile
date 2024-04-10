@@ -18,6 +18,7 @@ symlinks:
 	@ln -sf $(DIR)/skhdrc ~/.config/
 	@mkdir -p ~/Library/KeyBindings/
 	@ln -sf $(DIR)/DefaultKeyBinding.dict ~/Library/KeyBindings/
+	@find $(DIR)/vscode -type f -exec ln -sf {} ~/Library/Application\ Support/Code/User/ \;
 
 install_ohmyzsh:
 	./scripts/install_oh_my_zsh.sh
