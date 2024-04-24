@@ -8,7 +8,7 @@ M.ui = {
   changed_themes = {},
   theme_toggle = { 'me', 'me' },
   -- theme = 'me',
-  theme = 'nano-light',
+  theme = 'everforest',
   transparency = false,
 
   cmp = {

@@ -23,7 +23,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "telemetry.telemetryLevel": "off",
   "workbench.preferredLightColorTheme": "Quiet Light",
@@ -61,6 +61,10 @@
   ],
   "window.commandCenter": false,
   "workbench.layoutControl.enabled": false,
-  "workbench.colorTheme": "Github Light (rainglow)",
-  "workbench.reduceMotion": "on"
+  "workbench.reduceMotion": "on",
+  "breadcrumbs.symbolPath": "off",
+  "editor.stickyScroll.enabled": false,
+  "editor.stickyScroll.scrollWithEditor": false,
+  "workbench.tree.enableStickyScroll": false,
+  "workbench.colorTheme": "poimandres-noitalics"
 }

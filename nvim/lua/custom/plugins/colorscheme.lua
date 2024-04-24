@@ -21,13 +21,14 @@ return {
       update_interval = 30000,
       set_dark_mode = function()
         -- vim.opt.background = 'dark'
-        -- require('nvconfig').ui.theme = 'everforest'
-        -- require('base46').load_all_highlights()
+        require('nvconfig').ui.theme = 'everforest'
+        require('base46').load_all_highlights()
       end,
       set_light_mode = function()
         -- vim.opt.background = 'dark'
+        require('nvconfig').ui.theme = 'everforest'
         -- require('nvconfig').ui.theme = 'minimal'
-        -- require('base46').load_all_highlights()
+        require('base46').load_all_highlights()
       end,
     },
   },
