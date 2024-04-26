@@ -1,6 +1,7 @@
 return {
   'akinsho/bufferline.nvim',
-  tag = 'v4.5.0',
+  -- tag = 'v4.5.3',
+  branch = 'main',
   event = { 'BufReadPost', 'BufNewFile' },
   config = function()
     local bufferline = require 'bufferline'
