@@ -13,6 +13,8 @@ return {
     opts = {},
   },
 
+  { 'e-q/okcolors.nvim', name = 'okcolors' },
+
   {
     'f-person/auto-dark-mode.nvim',
     priority = 1000,
