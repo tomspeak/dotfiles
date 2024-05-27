@@ -1,8 +1,9 @@
 return {
   {
-    'numToStr/Comment.nvim',
-    event = { 'BufReadPost', 'BufNewFile' },
+    'folke/ts-comments.nvim',
     opts = {},
+    event = { 'BufReadPost', 'BufNewFile' },
+    enabled = vim.fn.has 'nvim-0.10.0' == 1,
   },
   {
     'kylechui/nvim-surround',
