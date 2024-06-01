@@ -63,7 +63,7 @@ return {
         map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
         map('<leader>fm', vim.lsp.buf.format, '[F]ormat')
 
-        vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+        vim.lsp.inlay_hint.enable(false, { bufnr = event.buf })
       end,
     })
 
