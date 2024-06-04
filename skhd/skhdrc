@@ -2,6 +2,8 @@
 alt - s : open /Applications/Spotify.app
 alt - q : open /Applications/Ghostty.app
 alt - w : open /Applications/Brave\ Browser.app
+# lock screen
+alt - l : pmset displaysleepnow
 
 # balance size of windows
 shift + alt - 0 : yabai -m space --balance
@@ -66,3 +68,4 @@ alt - f : yabai -m window --toggle zoom-fullscreen
 
 # toggle layout
 ctrl + alt - s : yabai -m space --layout $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
+

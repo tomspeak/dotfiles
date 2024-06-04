@@ -54,8 +54,8 @@ echo "Installing tmux plugins"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 echo "Starting services"
-skhd --start-service
-yabai --start-service
+skhd --install-service
+yabai --install-service
 brew services start sketchybar
 
 echo "Setting preferences"
