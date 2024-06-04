@@ -4,20 +4,23 @@
 yabai -m space 1 --label web
 yabai -m space 2 --label code
 yabai -m space 3 --label notes
-yabai -m space 4 --label mail
-yabai -m space 5 --label re
-yabai -m space 6 --label media
-yabai -m space 7 --label social
+yabai -m space 4 --label social
+yabai -m space 5 --label media
+yabai -m space 6 --label misc
 
 # window rules
-yabai -m rule --add app="^Mail$" space=mail
 yabai -m rule --add app="^Brave Browser$" space=web
+yabai -m rule --add app="^Ghostty$" space=code
 yabai -m rule --add app="^Notes$" space=notes
-yabai -m rule --add app="^ida64$" space=re
-yabai -m rule --add app="^Transmission$" space=media
+yabai -m rule --add app="^Obsidian$" space=notes
+yabai -m rule --add app="^Mail$" space=social
+yabai -m rule --add app="^Calendar$" space=social
+yabai -m rule --add app="^Signal$" space=social
+yabai -m rule --add app="^Discord$" space=social
 yabai -m rule --add app="^Spotify$" space=media
-yabai -m rule --add app="^Discord$" space=social grid=1:1:0:0:1:1 manage=off
-yabai -m rule --add app="^(Calculator|System Preferences|Archive Utility|System Settings)$" manage=off
+yabai -m rule --add app="^Transmission$" space=misc
+
+yabai -m rule --add app="^(Calculator|System Preferences|Archive Utility|System Settings|Karabiner-Elements|Finder)$" manage=off
 
 # specific space settings
 yabai -m config --space mail layout stack
@@ -46,10 +49,10 @@ yabai -m config \
 	split_ratio 0.50 \
 	split_type auto \
 	auto_balance off \
-	top_padding 10 \
-	left_padding 10 \
-	right_padding 10 \
-	bottom_padding 10 \
+	top_padding 8 \
+	left_padding 8 \
+	right_padding 8 \
+	bottom_padding 8 \
 	window_gap 10 \
 	layout bsp \
 	mouse_modifier fn \
