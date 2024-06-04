@@ -33,6 +33,7 @@ else
 fi
 
 echo "Setting symlinks"
+mkdir -p ~/.config/
 ln -sf "$dotfiles/zsh/zshrc" ~/.zshrc
 ln -sf "$dotfiles/applescripts" ~/.applescripts
 ln -sf "$dotfiles/tmux/tmux.conf" ~/.tmux.conf
