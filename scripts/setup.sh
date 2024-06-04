@@ -52,6 +52,10 @@ find "$dotfiles/vscode" -type f -exec ln -sf {} ~/Library/Application\ Support/C
 echo "Installing tmux plugins"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
+echo "Starting services"
+skhd --start-service
+yabai --start-service
+
 echo "Setting preferences"
 
 # Disable the sound effects on boot
