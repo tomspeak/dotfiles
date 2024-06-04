@@ -27,16 +27,16 @@ yabai -m config --space mail layout stack
 
 # global settings
 yabai -m config \
-	external_bar main:41:0 \
-	mouse_follows_focus off \
+	external_bar all:41:0 \
+	mouse_follows_focus on \
 	focus_follows_mouse off \
 	window_placement second_child \
 	window_topmost off \
-	window_shadow off \
+	window_shadow on \
 	window_animation_duration 0.25 \
 	window_opacity_duration 0.25 \
-	active_window_opacity 0.90 \
-	normal_window_opacity 0.50 \
+	active_window_opacity 0.95 \
+	normal_window_opacity 0.10 \
 	window_opacity on \
 	insert_feedback_color 0xaad75f5f \
 	active_window_border_color 0xBF775759 \
