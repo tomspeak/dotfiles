@@ -14,6 +14,9 @@ if ! command -v brew &>/dev/null; then
 	exit 1
 fi
 
+echo "Create 10 Spaces for Yabai to use. Press enter to continue..."
+read -r
+
 echo "Installing brew casks and apps"
 brew tap Homebrew/bundle
 brew tap caskroom/versions
@@ -23,7 +26,7 @@ brew install koekeishiya/formulae/yabai
 brew install koekeishiya/formulae/skhd
 brew bundle
 
-echo "Give permissions to SKHD, Yabai, Alfred, SketchyBar, Karabiner"
+echo "Give permissions to SKHD, Yabai, Alfred, SketchyBar, Karabiner. Press enter to continue..."
 read -r
 
 echo "Sign in to Spotify. Press enter to continue..."
