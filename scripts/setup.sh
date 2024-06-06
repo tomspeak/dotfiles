@@ -63,4 +63,7 @@ read -r
 echo "Install fonts. Press enter to continue..."
 read -r
 
+echo "Set wallpaper to black and screensaver to ~/dotfiles/wallpaper/. Press enter to continue..."
+read -r
+
 echo "Setup complete, log out and in again :)"
