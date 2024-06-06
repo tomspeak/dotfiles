@@ -54,7 +54,13 @@ skhd --install-service
 yabai --install-service
 brew services start sketchybar
 
-echo "Setup complete, remaining steps:"
-echo "1. Logout"
-echo "2. Open a tmux session and do PREFIX + U to install plugins"
-echo "3. Install Ghostty - https://github.com/ghostty-org/ghostty/releases/tag/tip"
+echo "Open a tmux session and do PREFIX + U to install plugins. Press enter to continue..."
+read -r
+
+echo "Install Ghostty https://github.com/ghostty-org/ghostty/releases/tag/tip Press enter to continue..."
+read -r
+
+echo "Install fonts. Press enter to continue..."
+read -r
+
+echo "Setup complete, log out and in again :)"
