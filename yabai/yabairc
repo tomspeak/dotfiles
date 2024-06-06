@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
 # mission-control desktop labels
-yabai -m space 1 --label web
-yabai -m space 2 --label code
+yabai -m space 1 --label code
+yabai -m space 2 --label web
 yabai -m space 3 --label notes
 yabai -m space 4 --label social
 yabai -m space 5 --label media
@@ -21,7 +21,7 @@ yabai -m rule --add app="^Discord$" space=social
 yabai -m rule --add app="^Spotify$" space=media
 yabai -m rule --add app="^Transmission$" space=misc
 
-yabai -m rule --add app="^(Calculator|System Preferences|Archive Utility|System Settings|Karabiner-Elements|Finder)$" manage=off
+yabai -m rule --add app="^(Calculator|Software Update|Dictionary|VLC|zoom.us|Photo Booth|Archive Utility|App Store|Alfred|System Preferences|Archive Utility|System Settings|Karabiner-Elements|Finder)$" manage=off
 
 # specific space settings
 yabai -m config --space mail layout stack
@@ -50,11 +50,11 @@ yabai -m config \
 	split_ratio 0.50 \
 	split_type auto \
 	auto_balance off \
-	top_padding 8 \
-	left_padding 8 \
-	right_padding 8 \
-	bottom_padding 8 \
-	window_gap 10 \
+	top_padding 12 \
+	left_padding 12 \
+	right_padding 12 \
+	bottom_padding 12 \
+	window_gap 12 \
 	layout bsp \
 	mouse_modifier fn \
 	mouse_action1 move \
