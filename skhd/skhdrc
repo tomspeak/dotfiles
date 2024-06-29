@@ -3,7 +3,7 @@ alt - s : open /Applications/Spotify.app
 alt - q : open /Applications/Ghostty.app
 alt - w : open /Applications/Brave\ Browser.app
 # lock screen
-alt - l : pmset displaysleepnow
+alt - p : pmset displaysleepnow
 
 # balance size of windows
 shift + alt - 0 : yabai -m space --balance
