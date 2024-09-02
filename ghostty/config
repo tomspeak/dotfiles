@@ -1,6 +1,6 @@
 font-size = 18
 font-thicken = true
-font-family = Consolas
+#font-family = Consolas
 #font-family = Berkeley Mono
 #font-family = JetBrains Mono
 #font-family = Fira Code
@@ -12,13 +12,13 @@ font-family = Consolas
 #font-family-bold = "BerkeleyMono-Bold"
 #font-family-italic = "BerkeleyMono-Italic"
 #font-family-bold-italic = "BerkeleyMono-BoldItalic"
-#font-family = Zed Mono
+font-family = Zed Mono
 #font-family = DinaRemasterII
 #font-family = "MxPlus ToshibaSat 9x16"
 
-font-feature = "-calt"
-font-feature = "-liga"
-font-feature = "-dlig"
+#font-feature = "-calt"
+#font-feature = "-liga"
+#font-feature = "-dlig"
 
 cursor-style-blink = true
 mouse-hide-while-typing = true

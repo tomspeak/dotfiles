@@ -22,7 +22,7 @@ return {
 
     filters = {
       dotfiles = false,
-      custom = { 'node_modules', '.DS_STORE' },
+      custom = { 'node_modules', '.DS_STORE', '*.o', '*.d' },
     },
 
     renderer = {
