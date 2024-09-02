@@ -28,6 +28,12 @@ return {
     event = { 'BufReadPost', 'BufNewFile' },
   },
   {
+    'echasnovski/mini.bracketed',
+    version = false,
+    opts = {},
+    event = { 'BufReadPost', 'BufNewFile' },
+  },
+  {
     'echasnovski/mini.pairs',
     version = false,
     opts = {},

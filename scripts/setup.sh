@@ -3,7 +3,7 @@
 # Ask for the administrator password upfront
 sudo -v
 
-read -pr "Pass an absolute path to the dotfiles folder, e.g. /Users/t/dotfiles" dotfiles
+read -p "Pass an absolute path to the dotfiles folder, e.g. /Users/t/dotfiles" dotfiles
 
 echo "Creating workspace folder"
 mkdir -p ~/workspace/

@@ -93,7 +93,11 @@ return {
           previewer = true,
         },
         colorscheme = {
-          previewer = false,
+          previewer = true,
+        },
+        buffers = {
+          ignore_current_buffer = true,
+          sort_lastused = true,
         },
       },
       extensions = {
@@ -128,6 +132,7 @@ return {
     vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
     vim.keymap.set('n', '<leader>th', builtin.colorscheme, { desc = '[ ] Find existing buffers' })
+    vim.keymap.set('n', 'z=', ":lua require'telescope.builtin'.spell_suggest{}<cr>")
 
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set('n', '<leader>/', function()

@@ -12,5 +12,27 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
-  { import = 'custom.plugins' },
+  spec = {
+    { import = 'custom.plugins' },
+  },
+  checker = { enabled = false },
+  defaults = {
+    lazy = false,
+    version = false, -- always use the latest git commit
+  },
+  change_detection = {
+    enabled = false,
+    notify = false,
+  },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        'gzip',
+        'tarPlugin',
+        'tohtml',
+        'tutor',
+        'zipPlugin',
+      },
+    },
+  },
 }
