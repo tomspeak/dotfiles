@@ -38,12 +38,6 @@ return {
     priority = 1000,
   },
   {
-    'alternight-theme/neovim',
-    name = 'alternight',
-    lazy = false,
-    priority = 1000,
-  },
-  {
     'aktersnurra/no-clown-fiesta.nvim',
     name = 'no-clown-fiesta',
     lazy = false,
@@ -56,14 +50,6 @@ return {
     'slugbyte/lackluster.nvim',
     lazy = false,
     priority = 1000,
-    init = function()
-      --vim.cmd.colorscheme("everforest")
-      vim.cmd.colorscheme 'lackluster-hack'
-      -- vim.cmd.colorscheme("nano-theme")
-      -- vim.cmd colorscheme "no-clown-fiesta"
-      -- vim.opt.background = "light"
-      -- vim.cmd.colorscheme("lackluster-mint")
-    end,
   },
   {
     'vague2k/vague.nvim',
@@ -90,6 +76,12 @@ return {
   },
   {
     'sainnhe/gruvbox-material',
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    'bluz71/vim-moonfly-colors',
+    name = 'moonfly',
     lazy = false,
     priority = 1000,
   },
