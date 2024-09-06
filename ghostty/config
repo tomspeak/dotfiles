@@ -1,5 +1,5 @@
 font-size = 18
-font-thicken = true
+#font-thicken = true
 #font-family = Consolas
 #font-family = Berkeley Mono
 #font-family = JetBrains Mono
@@ -12,7 +12,7 @@ font-thicken = true
 #font-family-bold = "BerkeleyMono-Bold"
 #font-family-italic = "BerkeleyMono-Italic"
 #font-family-bold-italic = "BerkeleyMono-BoldItalic"
-font-family = Zed Mono
+#font-family = Zed Mono
 #font-family = DinaRemasterII
 #font-family = "MxPlus ToshibaSat 9x16"
 
