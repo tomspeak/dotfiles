@@ -124,7 +124,7 @@ return {
           packageManager = 'yarn',
         },
       },
-      tsserver = {
+      ts_ls = {
         settings = {
           typescript = {
             inlayHints = {
