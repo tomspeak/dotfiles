@@ -42,9 +42,6 @@ return {
     name = 'no-clown-fiesta',
     lazy = false,
     priority = 1000,
-    -- config = function()
-    --   require("no-clown-fiesta").setup()
-    -- end,
   },
   {
     'slugbyte/lackluster.nvim',
@@ -90,6 +87,11 @@ return {
   {
     'bluz71/vim-moonfly-colors',
     name = 'moonfly',
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    'ramojus/mellifluous.nvim',
     lazy = false,
     priority = 1000,
   },
