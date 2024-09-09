@@ -8,15 +8,10 @@ font-size = 18
 #font-family = SF Mono
 #font-family = IBM Plex Mono
 #font-family = Monaspace Argon
-#font-family = "BerkeleyMono-Regular"
-#font-family-bold = "BerkeleyMono-Bold"
-#font-family-italic = "BerkeleyMono-Italic"
-#font-family-bold-italic = "BerkeleyMono-BoldItalic"
 #font-family = Zed Mono
 #font-family = DinaRemasterII
 #font-family = "MxPlus ToshibaSat 9x16"
 font-family = Fira Code
-
 
 #font-feature = "-calt"
 #font-feature = "-liga"
