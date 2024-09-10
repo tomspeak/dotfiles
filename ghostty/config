@@ -1,7 +1,7 @@
 font-size = 18
 #font-thicken = true
 #font-family = Consolas
-#font-family = Berkeley Mono
+font-family = Berkeley Mono
 #font-family = JetBrains Mono
 #font-family = Fira Code
 #font-family = Monaco
@@ -11,7 +11,7 @@ font-size = 18
 #font-family = Zed Mono
 #font-family = DinaRemasterII
 #font-family = "MxPlus ToshibaSat 9x16"
-font-family = Fira Code
+#font-family = Fira Code
 
 #font-feature = "-calt"
 #font-feature = "-liga"
