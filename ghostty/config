@@ -1,21 +1,23 @@
-font-size = 18
+font-size = 11
 #font-thicken = true
 #font-family = Consolas
-font-family = Berkeley Mono
+#font-family = Berkeley Mono
 #font-family = JetBrains Mono
 #font-family = Fira Code
-#font-family = Monaco
-#font-family = SF Mono
+#font-family = Menlo
+font-family = SF Mono
 #font-family = IBM Plex Mono
 #font-family = Monaspace Argon
 #font-family = Zed Mono
 #font-family = DinaRemasterII
 #font-family = "MxPlus ToshibaSat 9x16"
 #font-family = Fira Code
+#font-family = Departure Mono
 
-#font-feature = "-calt"
-#font-feature = "-liga"
-#font-feature = "-dlig"
+
+font-feature = "-calt"
+font-feature = "-liga"
+font-feature = "-dlig"
 
 cursor-style-blink = true
 mouse-hide-while-typing = true
@@ -29,6 +31,10 @@ window-theme = dark
 # Does not work - https://github.com/mitchellh/ghostty/issues/327
 keybind = super+right_bracket=next_tab
 keybind = super+left_bracket=previous_tab
+
+keybind = global:alt+`=toggle_quick_terminal
+quick-terminal-position = top
+quick-terminal-screen = mouse
 
 confirm-close-surface = false
 
