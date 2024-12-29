@@ -1,91 +1,29 @@
 font-size = 12
 font-family = TX-02
-#font-thicken = true
-#font-family = Consolas
-#font-family = Berkeley Mono
-#font-family = JetBrains Mono
-#font-family = Fira Code
-#font-family = Menlo
-#font-family = SF Mono
-#font-family = IBM Plex Mono
-#font-family = Monaspace Argon
-#font-family = Zed Mono
-#font-family = DinaRemasterII
-#font-family = "MxPlus ToshibaSat 9x16"
-#font-family = Fira Code
-#font-family = Departure Mono
+font-style = Condensed
+window-title-font-family = TX-02
+font-thicken = true
+#font-feature = +calt
+#font-feature = +liga
+#font-feature = +dlig
 
-
-font-feature = "-calt"
-font-feature = "-liga"
-font-feature = "-dlig"
-
+theme = dark:GruvBoxDarkHard,light:catppuccin-latte
 cursor-style-blink = true
+cursor-style = block
 mouse-hide-while-typing = true
-adjust-cell-height = 35%
-window-padding-balance = true
 window-colorspace = "display-p3"
+window-theme = auto
+window-padding-color = background
+window-padding-x = 0
+window-padding-y = 0
+window-decoration = false
+window-theme = auto
 
 macos-non-native-fullscreen = true
 macos-option-as-alt = true
-window-decoration = false
-window-theme = dark
-
-# Does not work - https://github.com/mitchellh/ghostty/issues/327
-keybind = super+right_bracket=next_tab
-keybind = super+left_bracket=previous_tab
 
 keybind = global:alt+`=toggle_quick_terminal
 quick-terminal-position = top
 quick-terminal-screen = mouse
 
 confirm-close-surface = false
-
-theme = catppuccin-latte
-#theme = OneHalfLight
-#theme = rose-pine-dawn
-
-foreground = #FFFFFF
-background = #151515
-selection-foreground = #FFFFFF
-selection-background = #373737
-
-# Cursor colors
-#cursor-color = #ffffff
-# this is a mid point between 2 themes while toggling dark/light mode is
-# not supported https://meyerweb.com/eric/tools/color-blend/#643F61:CCFF66:10:hex
-cursor-color = #939663
-cursor-text = #1e1e1e
-
-# black
-palette = 0=#202020
-palette = 8=#555555
-
-# red
-palette = 1=#AC4142
-palette = 9=#AC4142
-
-# green
-palette = 2=#88afa2
-palette = 10=#90A959
-
-# yellow
-palette = 3=#F4BF75
-palette = 11=#F4BF75
-
-# blue
-palette = 4=#A5D6FF
-palette = 12=#7E97AB
-
-# magenta
-palette = 5=#AA759F
-palette = 13=#AA759F
-
-# cyan
-palette = 6=#75B5AA
-palette = 14=#75B5AA
-
-# white
-palette = 7=#D0D0D0
-palette = 15=#E1E1E1
-
