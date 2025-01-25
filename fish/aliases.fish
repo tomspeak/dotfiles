@@ -10,6 +10,8 @@ alias afk="open -a /System/Library/CoreServices/ScreenSaverEngine.app"
 
 alias n='nvim'
 
+alias hs='history | grep'
+
 #laravel
 alias a="php artisan"
 alias af="php artisan migrate:fresh && php artisan db:seed"

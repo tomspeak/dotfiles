@@ -32,16 +32,7 @@ function fish_prompt
 
     fish_git_prompt " %s"
 
-    # if jobs -q
-    #     set_color --bold red
-    #     printf ' φ '
-    # else
-    #     set_color normal
-    #     printf ' φ '
-    # end
-    printf ' '
     set_color normal
 
-    echo
-    echo -n ' '
+    echo ' '
 end
