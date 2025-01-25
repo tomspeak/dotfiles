@@ -1,20 +1,20 @@
 return {
-  {
-    'f-person/auto-dark-mode.nvim',
-    priority = 1000,
-    lazy = false,
-    opts = {
-      update_interval = 30000,
-      set_dark_mode = function()
-        vim.opt.background = 'dark'
-        vim.cmd.colorscheme 'habamax'
-      end,
-      set_light_mode = function()
-        vim.opt.background = 'light'
-        vim.cmd.colorscheme 'dragon'
-      end,
-    },
-  },
+  -- {
+  --   'f-person/auto-dark-mode.nvim',
+  --   priority = 1000,
+  --   lazy = false,
+  --   opts = {
+  --     update_interval = 30000,
+  --     set_dark_mode = function()
+  --       vim.opt.background = 'dark'
+  --       vim.cmd.colorscheme 'habamax'
+  --     end,
+  --     set_light_mode = function()
+  --       vim.opt.background = 'light'
+  --       vim.cmd.colorscheme 'dragon'
+  --     end,
+  --   },
+  -- },
   { 'e-q/okcolors.nvim', name = 'okcolors' },
   {
     'slugbyte/lackluster.nvim',
@@ -83,6 +83,10 @@ return {
     'sainnhe/gruvbox-material',
     lazy = false,
     priority = 1000,
+    config = function()
+      vim.g.gruvbox_material_enable_italic = false
+      vim.cmd.colorscheme 'gruvbox-material'
+    end,
   },
   {
     'bluz71/vim-moonfly-colors',
