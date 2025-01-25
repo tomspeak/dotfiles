@@ -5,6 +5,9 @@ sudo -v
 
 read -p "Pass an absolute path to the dotfiles folder, e.g. /Users/t/dotfiles" dotfiles
 
+echo "Silencing terminal login messages"
+touch ~/.hushlogin
+
 echo "Creating workspace folder"
 mkdir -p ~/workspace/
 
