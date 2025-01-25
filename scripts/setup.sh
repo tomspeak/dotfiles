@@ -16,21 +16,21 @@ xcode-select --install
 ./brew.sh
 
 # Add the Homebrew zsh to allowed shells
-echo "Changing default shell to Homebrew zsh"
-echo "$(brew --prefix)/bin/zsh" | sudo tee -a /etc/shells >/dev/null
-# Set the Homebrew zsh as default shell
-chsh -s "$(brew --prefix)/bin/zsh"
+echo "Changing default shell to Homebrew fish"
+echo "$(brew --prefix)/bin/fish" | sudo tee -a /etc/shells >/dev/null
+# Set the Homebrew fish as default shell
+chsh -s "$(brew --prefix)/bin/fish"
 
-echo "Installing oh-my-zsh"
-if [ ! -r ~/.oh-my-zsh ]; then
-	curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-else
-	echo 'oh-my-zsh already installed'
-fi
+#echo "Installing oh-my-zsh"
+#if [ ! -r ~/.oh-my-zsh ]; then
+#curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+#else
+#echo 'oh-my-zsh already installed'
+#fi
 
 echo "Setting symlinks"
 mkdir -p ~/.config/
-ln -sf "$dotfiles/zsh/zshrc" ~/.zshrc
+#ln -sf "$dotfiles/zsh/zshrc" ~/.zshrc
 ln -sf "$dotfiles/applescripts" ~/.applescripts
 ln -sf "$dotfiles/tmux/tmux.conf" ~/.tmux.conf
 ln -sf "$dotfiles/tmux/theme.sh" ~/.tmux/theme.sh
@@ -42,6 +42,7 @@ ln -sf "$dotfiles/starship.toml" ~/.config
 ln -sf "$dotfiles/ghostty" ~/.config
 ln -sf "$dotfiles/spacebar" ~/.config/
 ln -sf "$dotfiles/skhdrc" ~/.config/
+ln -sf "$dotfiles/fish" ~/.config
 mkdir -p ~/Library/KeyBindings/
 ln -sf "$dotfiles/DefaultKeyBinding.dict" ~/Library/KeyBindings/
 find "$dotfiles/vscode" -type f -exec ln -sf {} ~/Library/Application\ Support/Code/User/ \;
@@ -52,7 +53,6 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 echo "Starting services"
 skhd --install-service
 yabai --install-service
-brew services start sketchybar
 
 echo "Open a tmux session and do PREFIX + U to install plugins. Press enter to continue..."
 read -r

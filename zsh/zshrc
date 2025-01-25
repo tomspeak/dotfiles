@@ -43,7 +43,7 @@ ZSH_HIGHLIGHT_STYLES[globbing]='none'
 ZSH_HIGHLIGHT_STYLES[unknown-token]='none'
 
 # so autoenv runs all the time, even when you open a tmux split
-cd .
+#cd .
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/dotfiles/zsh/aliases
