@@ -7,7 +7,7 @@ font-thicken = true
 #font-feature = +liga
 #font-feature = +dlig
 
-theme = dark:GruvBoxDarkHard,light:catppuccin-latte
+theme = GruvboxDarkHard
 cursor-style-blink = true
 cursor-style = block
 mouse-hide-while-typing = true
