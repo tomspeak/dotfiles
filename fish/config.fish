@@ -27,7 +27,7 @@ function fish_prompt
     end
 
     set_color --bold
-    printf '%s' (prompt_pwd)
+    printf '%s' (pwd)
     set_color normal
 
     fish_git_prompt " %s"
