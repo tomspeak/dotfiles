@@ -14,5 +14,6 @@ rbenv/versions
 vim/vim/autoload/plug.vim.old
 bundle/cache
 zsh/work
+fish/work.fish
 nvim/lazy-lock.json
 karabiner/automatic_backups/

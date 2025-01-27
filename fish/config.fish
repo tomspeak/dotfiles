@@ -1,4 +1,7 @@
 source ~/.config/fish/aliases.fish
+if test -f ~/.config/fish/work.fish
+  source ~/.config/fish/work.fish
+end
 
 theme_gruvbox dark hard
 
