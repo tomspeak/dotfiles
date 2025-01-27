@@ -9,20 +9,15 @@ SETUVAR FZF_PREVIEW_FILE_CMD:head\x20\x2dn\x2010
 SETUVAR FZF_TMUX_HEIGHT:40\x25
 SETUVAR --export PAGER:less
 SETUVAR --export VISUAL:nvim
-SETUVAR ZO_CMD:zo
-SETUVAR Z_CMD:z
-SETUVAR Z_DATA:/Users/t/\x2elocal/share/z/data
 SETUVAR Z_DATA_DIR:/Users/t/\x2elocal/share/z
-SETUVAR Z_EXCLUDE:\x5e/Users/t\x24
 SETUVAR __fish_initialized:3400
 SETUVAR _fisher_acomagu_2F_fish_2D_async_2D_prompt_files:\x7e/\x2econfig/fish/conf\x2ed/__async_prompt\x2efish
 SETUVAR _fisher_jethrokuan_2F_fzf_files:\x7e/\x2econfig/fish/functions/__fzf_cd\x2efish\x1e\x7e/\x2econfig/fish/functions/__fzf_complete\x2efish\x1e\x7e/\x2econfig/fish/functions/__fzf_complete_preview\x2efish\x1e\x7e/\x2econfig/fish/functions/__fzf_find_file\x2efish\x1e\x7e/\x2econfig/fish/functions/__fzf_get_dir\x2efish\x1e\x7e/\x2econfig/fish/functions/__fzf_open\x2efish\x1e\x7e/\x2econfig/fish/functions/__fzf_parse_commandline\x2efish\x1e\x7e/\x2econfig/fish/functions/__fzf_reverse_isearch\x2efish\x1e\x7e/\x2econfig/fish/functions/__fzfcmd\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/fzf\x2efish
-SETUVAR _fisher_jethrokuan_2F_z_files:\x7e/\x2econfig/fish/functions/__z\x2efish\x1e\x7e/\x2econfig/fish/functions/__z_add\x2efish\x1e\x7e/\x2econfig/fish/functions/__z_clean\x2efish\x1e\x7e/\x2econfig/fish/functions/__z_complete\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/z\x2efish
 SETUVAR _fisher_jorgebucaran_2F_autopair_2E_fish_files:\x7e/\x2econfig/fish/functions/_autopair_backspace\x2efish\x1e\x7e/\x2econfig/fish/functions/_autopair_insert_left\x2efish\x1e\x7e/\x2econfig/fish/functions/_autopair_insert_right\x2efish\x1e\x7e/\x2econfig/fish/functions/_autopair_insert_same\x2efish\x1e\x7e/\x2econfig/fish/functions/_autopair_tab\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/autopair\x2efish
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
 SETUVAR _fisher_oh_2D_my_2D_fish_2F_plugin_2D_brew_files:\x7e/\x2econfig/fish/conf\x2ed/brew\x2efish
 SETUVAR _fisher_oh_2D_my_2D_fish_2F_plugin_2D_osx_files:\x7e/\x2econfig/fish/functions/cdf\x2efish\x1e\x7e/\x2econfig/fish/functions/flushdns\x2efish\x1e\x7e/\x2econfig/fish/functions/itunes\x2efish\x1e\x7e/\x2econfig/fish/functions/manp\x2efish\x1e\x7e/\x2econfig/fish/functions/pfd\x2efish\x1e\x7e/\x2econfig/fish/functions/pfs\x2efish\x1e\x7e/\x2econfig/fish/functions/pushdf\x2efish\x1e\x7e/\x2econfig/fish/functions/ql\x2efish\x1e\x7e/\x2econfig/fish/functions/showhidden\x2efish\x1e\x7e/\x2econfig/fish/functions/trash\x2efish\x1e\x7e/\x2econfig/fish/functions/unset\x2efish\x1e\x7e/\x2econfig/fish/functions/updatedb\x2efish
-SETUVAR _fisher_plugins:jorgebucaran/fisher\x1eoh\x2dmy\x2dfish/plugin\x2dosx\x1eacomagu/fish\x2dasync\x2dprompt\x1eoh\x2dmy\x2dfish/plugin\x2dbrew\x1ejethrokuan/fzf\x1ejorgebucaran/autopair\x2efish\x1ejethrokuan/z\x1erstacruz/fish\x2dnpm\x2dglobal
+SETUVAR _fisher_plugins:jorgebucaran/fisher\x1eoh\x2dmy\x2dfish/plugin\x2dosx\x1eacomagu/fish\x2dasync\x2dprompt\x1eoh\x2dmy\x2dfish/plugin\x2dbrew\x1ejethrokuan/fzf\x1ejorgebucaran/autopair\x2efish\x1erstacruz/fish\x2dnpm\x2dglobal
 SETUVAR _fisher_rstacruz_2F_fish_2D_npm_2D_global_files:\x7e/\x2econfig/fish/conf\x2ed/npm\x2dglobal\x2efish
 SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR fish_color_autosuggestion:brblack

@@ -1,5 +1,5 @@
 # focus apps
-alt - s : open /Applications/Spotify.app
+#alt - s : open /Applications/Spotify.app
 alt - q : open /Applications/Ghostty.app
 alt - w : open /Applications/Brave\ Browser.app
 
