@@ -50,7 +50,9 @@ function fish_prompt
         end
     end
 
-    # Add a space
-    set_color normal
-    echo -n ' '
+    set_color normal # reset colors
+    printf "\n" # add new line
+    #echo  " λ  " # actual prompt line
+    #echo " > "
+    echo " >> "
 end
