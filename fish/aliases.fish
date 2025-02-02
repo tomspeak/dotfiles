@@ -25,3 +25,15 @@ alias c="composer"
 alias ci="composer install"
 alias cr="composer require"
 alias crd="composer require --dev"
+
+function yta
+  yt-dlp -f bestaudio --audio-format m4a --embed-thumbnail --add-metadata --metadata-from-title "%(title)s" --output "%(title)s.%(ext)s" -x $argv[1]
+end
+
+function mkcd
+  mkdir -p $argv[1] && cd $argv[1]
+end
+
+function gif
+  ffmpeg -i $argv[1] -vf fps=5,scale=480:-1,smartblur=ls=-0.5 $argv[2]
+end
