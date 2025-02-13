@@ -45,7 +45,8 @@ ln -sf "$dotfiles/starship.toml" ~/.config
 ln -sf "$dotfiles/ghostty" ~/.config
 ln -sf "$dotfiles/spacebar" ~/.config/
 ln -sf "$dotfiles/skhdrc" ~/.config/
-ln -sf "$dotfiles/fish" ~/.config
+#ln -sf "$dotfiles/fish" ~/.config
+ln -sf "$dotfiles/bash/bashrc" ~/.bashrc
 mkdir -p ~/Library/KeyBindings/
 ln -sf "$dotfiles/DefaultKeyBinding.dict" ~/Library/KeyBindings/
 find "$dotfiles/vscode" -type f -exec ln -sf {} ~/Library/Application\ Support/Code/User/ \;

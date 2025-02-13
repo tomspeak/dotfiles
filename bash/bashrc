@@ -1,0 +1,43 @@
+if [ -f ~/dotfiles/bash/work.sh ]; then
+        source ~/dotfiles/bash/work.sh
+fi
+
+#bind '"\e[A": history-search-backward'
+#bind '"\e[B": history-search-forward'
+#https://bluz71.github.io/2018/03/15/bash-shell-tweaks-tips.html
+shopt -s cdspell
+
+HISTFILESIZE=-1
+HISTSIZE=1000000
+HISTIGNORE=?:??
+shopt -s histappend histverify
+
+PS1="\n\e[0;32m[clown@\h] \W\e[m\n  >>  "
+
+alias tmux="TERM=xterm-256color tmux"
+alias tl="tmux ls"
+alias ta="tmux attach -t"
+alias tk="tmux kill-session -t"
+alias td="tmux detach"
+alias tat='tmux -u new-session -As "$(basename "$PWD")"'
+
+alias afk="open -a /System/Library/CoreServices/ScreenSaverEngine.app"
+
+alias n='nvim'
+
+alias hs='history | grep'
+
+yta_func() {
+        yt-dlp -f bestaudio --audio-format m4a --embed-thumbnail --add-metadata --metadata-from-title "%(title)s" --output "%(title)s.%(ext)s" -x "$1"
+}
+alias yta=yta_func
+
+mkcd_func() {
+        mkdir -p "$1" && cd "$1"
+}
+alias mkcd=mkcd_func
+
+gif_func() {
+        ffmpeg -i "$1" -vf fps=5,scale=480:-1,smartblur=ls=-0.5 "$2"
+}
+alias gif=gif_func

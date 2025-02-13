@@ -15,5 +15,6 @@ vim/vim/autoload/plug.vim.old
 bundle/cache
 zsh/work
 fish/work.fish
+bash/work.sh
 nvim/lazy-lock.json
 karabiner/automatic_backups/
