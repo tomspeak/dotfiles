@@ -1,6 +1,7 @@
 [ -f $HOME/dotfiles/zsh/work ] && source $HOME/dotfiles/zsh/work
 
-PS1="%F{green}[clown@%m] %~%f  >>  "
+NEWLINE=$'\n'
+PS1="%F{green}[clown@%m] %~%f${NEWLINE} >> "
 
 ZSH_DISABLE_COMPFIX=true
 
