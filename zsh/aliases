@@ -48,3 +48,7 @@ alias cr="composer require"
 alias crd="composer require --dev"
 
 alias n='nvim'
+
+alias yta=yta_func
+alias mkcd=mkcd_func
+alias gif=gif_func

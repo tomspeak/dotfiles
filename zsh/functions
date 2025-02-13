@@ -1,3 +1,15 @@
 function new-tmux-from-dir-name {
   tmux -u new-session -As `basename $PWD`
 }
+
+function yta_func() {
+        yt-dlp -f bestaudio --audio-format m4a --embed-thumbnail --add-metadata --metadata-from-title "%(title)s" --output "%(title)s.%(ext)s" -x "$1"
+}
+
+function mkcd_func() {
+        mkdir -p "$1" && cd "$1"
+}
+
+function gif_func() {
+        ffmpeg -i "$1" -vf fps=5,scale=480:-1,smartblur=ls=-0.5 "$2"
+}
