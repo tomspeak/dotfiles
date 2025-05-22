@@ -15,6 +15,10 @@ export PATH="./node_modules/.bin:$PATH"
 # put things in ~/.bin into my $PATH
 export PATH="$HOME/.bin:$PATH"
 
+setopt AUTO_CD              # Go to folder path without using cd.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
+
 TZ="Europe/London"
 HISTFILE=$HOME/.zhistory
 HISTSIZE=20000
