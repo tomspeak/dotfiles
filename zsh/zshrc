@@ -39,8 +39,8 @@ export GIT_MERGE_AUTOEDIT
 export EDITOR='nvim'
 export VEDITOR='code'
 
-source $HOME/dotfiles/zsh/aliases
 source $HOME/dotfiles/zsh/functions
+source $HOME/dotfiles/zsh/aliases
 
 #FZF
 # Setting ag as the default source for fzf
