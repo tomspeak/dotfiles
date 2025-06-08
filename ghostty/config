@@ -1,5 +1,6 @@
 font-size = 12
-font-family = TX-02
+#font-family = TX-02
+font-family = Monaspace Neon Var
 font-style = Condensed
 window-title-font-family = TX-02
 font-thicken = true
@@ -8,8 +9,12 @@ font-thicken = true
 #font-feature = +dlig
 
 #theme = GruvboxDarkHard
-theme = Mathias
+#theme = Black Metal
+theme = Everforest Dark - Hard
+cursor-style-blink = true
+cursor-style = block
 mouse-hide-while-typing = true
+shell-integration-features = no-cursor
 window-colorspace = "display-p3"
 macos-icon = glass
 macos-titlebar-proxy-icon = hidden
@@ -19,10 +24,6 @@ window-padding-x = 0
 window-padding-y = 0
 window-decoration = false
 window-theme = auto
-cursor-style = block
-cursor-style-blink = false
-cursor-color = #B62EB2
-shell-integration-features = no-cursor
 
 macos-non-native-fullscreen = true
 macos-option-as-alt = true
