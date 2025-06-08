@@ -2,7 +2,7 @@
   "[python]": {
     "editor.formatOnType": true
   },
-  "editor.fontFamily": "Berkeley Mono, Cascadia Code, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "'Monaspace Neon Var',  Berkeley Mono, Cascadia Code, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 20,
   "editor.lineHeight": 1.5,
   "editor.inlineSuggest.enabled": true,
@@ -11,7 +11,6 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "workbench.iconTheme": "vscode-jetbrains-icon-theme-2023-auto",
   "github.copilot.enable": {
     "*": true,
     "yaml": false,
@@ -66,5 +65,17 @@
   "editor.stickyScroll.enabled": false,
   "editor.stickyScroll.scrollWithEditor": false,
   "workbench.tree.enableStickyScroll": false,
-  "workbench.colorTheme": "poimandres-noitalics"
+  "workbench.colorTheme": "poimandres-noitalics",
+  "zls.enable_inlay_hints": true,
+  "zls.enable_snippets": true,
+  "zls.warn_style": true,
+  "zig.zls.enabled": "on",
+  "zig.path": "zig",
+  "workbench.preferredDarkColorTheme": "Gruvbox Material Dark",
+  "editor.inlineSuggest.fontFamily": "'Zed Mono'",
+  "debug.console.fontSize": 14,
+  "editor.cursorStyle": "block",
+  "workbench.iconTheme": null,
+  "workbench.tips.enabled": false,
+  "breadcrumbs.icons": false
 }
