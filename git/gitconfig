@@ -1,12 +1,22 @@
+[advice]  # disable advices
+    addEmptyPathspec = false
+    pushNonFastForward = false
+    statusHints = false
+
+[blame]
+    coloring = highlightRecent
+    date = relative
+
 [filter "media"]
   required = true
   clean = git media clean %f
   smudge = git media smudge %f
 [user]
-	email = tom@bere.al
+	email = tom@speak.sh
 	name = Tom Speak
 [core]
   editor = nvim
+	pager = diff-so-fancy | less --tabs=4 -RF
 [push]
   default = simple
 [alias]
@@ -69,6 +79,7 @@
 	algorithm = histogram
 	submodule = log
 	context = 10
+  renames = copies
 [help]
 	autocorrect = 10
 [url "git@github.com:"]
@@ -86,6 +97,10 @@
 	enabled = true
 [status]
 	submoduleSummary = true
+  branch = true
+  short = true
+  showStash = true
+  showUntrackedFiles = all  # show individual untracked files
 [submodule]
 	recurse = true
 [branch]
@@ -97,3 +112,10 @@
 	date = iso
 [rebase]
 	updateRefs = true
+[pager]
+    branch = false  # no need to use pager for git branch
+[interactive]
+    diffFilter = diff-so-fancy --patch
+    singlekey = true
+[diff-so-fancy]
+    markEmptyLines = false
