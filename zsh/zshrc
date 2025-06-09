@@ -1,7 +1,13 @@
 [ -f $HOME/dotfiles/zsh/work ] && source $HOME/dotfiles/zsh/work
 
 NEWLINE=$'\n'
-PS1="%F{green}[clown@%m] %~%f${NEWLINE} >> "
+PS1="%F{green}[clown@"
+if [[ -n "$SSH_CONNECTION" ]]; then
+  PS1+="%{$SSH_CONNECTION%% *%%}"
+else
+  PS1+="local"
+fi
+PS1+="] %~%f %f$NEWLINE >> "
 
 ZSH_DISABLE_COMPFIX=true
 
