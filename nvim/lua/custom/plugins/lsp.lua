@@ -152,7 +152,10 @@ return {
           },
         },
       },
-      zls = {},
+      zls = {
+        enable_build_on_save = true,
+        semantic_tokens = 'partial',
+      },
     }
 
     require('mason').setup {
