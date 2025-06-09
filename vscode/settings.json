@@ -69,13 +69,34 @@
   "zls.enable_inlay_hints": true,
   "zls.enable_snippets": true,
   "zls.warn_style": true,
-  "zig.zls.enabled": "on",
-  "zig.path": "zig",
   "workbench.preferredDarkColorTheme": "Gruvbox Material Dark",
   "editor.inlineSuggest.fontFamily": "'Zed Mono'",
   "debug.console.fontSize": 14,
   "editor.cursorStyle": "block",
   "workbench.iconTheme": null,
   "workbench.tips.enabled": false,
-  "breadcrumbs.icons": false
+  "breadcrumbs.icons": false,
+
+  "zig.zls.enabled": "on",
+  "zig.path": "zig",
+  "[zig]": {
+    "editor.formatOnSave": true,
+
+    "editor.suggest.insertMode": "replace",
+    "editor.codeActionsOnSave": {
+      // Run code actions that currently supports adding and removing discards.
+      "source.fixAll": "explicit",
+
+      // Run code actions that sorts @import declarations.
+      "source.organizeImports": "explicit"
+    }
+  },
+  "editor.semanticTokenColorCustomizations": {
+    "rules": {
+      "*.deprecated": {
+        // highlight semantic tokens that are marked as "deprecated"
+        "strikethrough": true
+      }
+    }
+  }
 }
