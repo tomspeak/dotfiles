@@ -1,16 +1,16 @@
 font-size = 12
-#font-family = TX-02
-font-family = Monaspace Neon Var
-font-style = Condensed
+font-family = TX-02
+#font-family = Monaspace Neon Var
+#font-style = Condensed
 window-title-font-family = TX-02
 font-thicken = true
 #font-feature = +calt
 #font-feature = +liga
 #font-feature = +dlig
 
-#theme = GruvboxDarkHard
+theme = GruvboxDarkHard
 #theme = Black Metal
-theme = Everforest Dark - Hard
+#theme = Everforest Dark - Hard
 cursor-style-blink = true
 cursor-style = block
 mouse-hide-while-typing = true
