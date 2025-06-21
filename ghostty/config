@@ -1,9 +1,14 @@
-font-size = 12
+font-size = 16
 font-family = TX-02
 #font-family = Monaspace Neon Var
 #font-style = Condensed
 window-title-font-family = TX-02
-font-thicken = true
+#font-thicken = true
+
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+
 #font-feature = +calt
 #font-feature = +liga
 #font-feature = +dlig
@@ -11,19 +16,21 @@ font-thicken = true
 theme = GruvboxDarkHard
 #theme = Black Metal
 #theme = Everforest Dark - Hard
+#theme = Oxocarbon
+
 cursor-style-blink = true
 cursor-style = block
 mouse-hide-while-typing = true
-shell-integration-features = no-cursor
+shell-integration-features = no-cursor,sudo,no-title
 window-colorspace = "display-p3"
-macos-icon = glass
 macos-titlebar-proxy-icon = hidden
 window-theme = auto
+window-padding-balance = true
 window-padding-color = background
 window-padding-x = 0
 window-padding-y = 0
 window-decoration = false
-window-theme = auto
+adjust-cell-height = 35%
 
 macos-non-native-fullscreen = true
 macos-option-as-alt = true
