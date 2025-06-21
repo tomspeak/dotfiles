@@ -1,9 +1,8 @@
 return {
   'mfussenegger/nvim-dap',
   dependencies = {
-    'rcarriga/nvim-dap-ui',
+    { 'igorlfs/nvim-dap-view', opts = { winbar = { controls = { enabled = true } } } },
     'theHamsta/nvim-dap-virtual-text',
-    'nvim-neotest/nvim-nio',
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
   },
@@ -61,21 +60,12 @@ return {
   },
   config = function()
     local dap = require 'dap'
-    local dapui = require 'dapui'
 
     require('mason-nvim-dap').setup {
       automatic_setup = true,
       handlers = {},
       ensure_installed = {},
     }
-
-    dapui.setup {
-      icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
-    }
-
-    dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-    dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-    dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
     require('nvim-dap-virtual-text').setup()
 
