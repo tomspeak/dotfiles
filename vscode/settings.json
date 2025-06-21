@@ -2,7 +2,7 @@
   "[python]": {
     "editor.formatOnType": true
   },
-  "editor.fontFamily": "'Monaspace Neon Var',  Berkeley Mono, Cascadia Code, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "TX-02, 'Monaspace Neon Var',  Berkeley Mono, Cascadia Code, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 20,
   "editor.lineHeight": 1.5,
   "editor.inlineSuggest.enabled": true,
@@ -98,5 +98,14 @@
         "strikethrough": true
       }
     }
-  }
+  },
+  "terminal.integrated.fontSize": 16,
+  "editor.overtypeCursorStyle": "line",
+  "terminal.integrated.cursorStyleInactive": "line",
+  "vim.cursorStylePerMode.insert": "line",
+  "zig.zls.additionalOptions": {
+    "zig.zls.enableAutofix": true, // Will set the "enable_autofix" config option
+    "zig.zls.buildOnSaveStep": "check" // Will set the "build_on_save_step" config option
+  },
+  "extensions.ignoreRecommendations": true
 }
