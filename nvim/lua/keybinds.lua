@@ -40,8 +40,8 @@ vim.keymap.set('n', '<tab>', '<cmd> BufferLineCycleNext <CR>', { desc = 'Goto ne
 vim.keymap.set('n', '<S-tab>', '<cmd> BufferLineCyclePrev <CR>', { desc = 'Goto prev buffer' })
 
 -- Search/Replace under current word
-vim.keymap.set('n', '<leader>ss', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set('v', '<leader>ss', [[:s///gI<Left><Left><Left><Left>]])
+vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set('v', '<leader>rr', [[:s///gI<Left><Left><Left><Left>]])
 
 -- Stay in visual mode when changing indentation
 vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true })
