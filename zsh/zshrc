@@ -1,5 +1,18 @@
 [ -f $HOME/dotfiles/zsh/work ] && source $HOME/dotfiles/zsh/work
 
+git_branch_prompt() {
+  if git rev-parse --is-inside-work-tree &>/dev/null; then
+    local branch dirty stash
+
+    branch=$(git symbolic-ref --quiet --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)
+
+    git diff --quiet --ignore-submodules HEAD 2>/dev/null || dirty="*"
+
+    echo " (${branch}${dirty})"
+  fi
+}
+
+setopt prompt_subst
 NEWLINE=$'\n'
 PS1="%F{green}[clown@"
 if [[ -n "$SSH_CONNECTION" ]]; then
@@ -7,7 +20,7 @@ if [[ -n "$SSH_CONNECTION" ]]; then
 else
   PS1+="local"
 fi
-PS1+="] %~%f %f$NEWLINE >> "
+PS1+="] %~\$(git_branch_prompt)%f$NEWLINE >> "
 
 ZSH_DISABLE_COMPFIX=true
 
