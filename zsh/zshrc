@@ -17,7 +17,7 @@ export PATH=/usr/local/sbin:$PATH
 export PATH=~/.composer/vendor/bin:$PATH
 
 # execute locally installed npm modules
-export PATH="./node_modules/.bin:$PATH"
+export PATH="${pwd}/node_modules/.bin:$PATH"
 # put things in ~/.bin into my $PATH
 export PATH="$HOME/.bin:$PATH"
 
