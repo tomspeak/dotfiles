@@ -23,6 +23,8 @@ brew 'wget'
 brew 'yabai'
 brew 'youtube-dl'
 brew 'zsh'
+brew 'zsh-syntax-highlighting'
+brew 'zsh-autosuggestions'
 
 cask '1password'
 cask 'alfred'

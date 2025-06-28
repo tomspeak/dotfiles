@@ -33,7 +33,7 @@ chsh -s "$(brew --prefix)/bin/fish"
 
 echo "Setting symlinks"
 mkdir -p ~/.config/
-#ln -sf "$dotfiles/zsh/zshrc" ~/.zshrc
+ln -sf "$dotfiles/zsh/zshrc" ~/.zshrc
 ln -sf "$dotfiles/applescripts" ~/.applescripts
 ln -sf "$dotfiles/tmux/tmux.conf" ~/.tmux.conf
 ln -sf "$dotfiles/tmux/theme.sh" ~/.tmux/theme.sh
