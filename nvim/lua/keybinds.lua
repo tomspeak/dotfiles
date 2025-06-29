@@ -55,9 +55,6 @@ vim.keymap.set('i', '<A-k>', '<Esc>:m .-2<CR>==gi')
 vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv")
 
--- Retain what we pasted instead of writing it to the register
-vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true })
-
 -- Vertical split
 vim.keymap.set('n', '<Leader>v', vim.cmd.vsplit, { silent = true })
 

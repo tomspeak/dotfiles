@@ -85,12 +85,6 @@ return {
     end,
   },
   {
-    'echasnovski/mini.pairs',
-    version = false,
-    opts = {},
-    event = { 'InsertEnter' },
-  },
-  {
     'echasnovski/mini.indentscope',
     version = false,
     opts = {
