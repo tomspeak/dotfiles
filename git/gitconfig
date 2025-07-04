@@ -17,6 +17,7 @@
 [core]
   editor = nvim
 	pager = diff-so-fancy | less --tabs=4 -RF
+	excludesfile = ~/.gitignore_global
 [push]
   default = simple
 [alias]

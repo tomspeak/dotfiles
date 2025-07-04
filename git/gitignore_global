@@ -16,3 +16,5 @@ _site/
 .venv
 .idea/
 .projections.json
+.zig-cache/
+zig-out/
