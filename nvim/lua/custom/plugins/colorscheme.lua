@@ -99,4 +99,8 @@ return {
     lazy = false,
     priority = 1000,
   },
+  {
+    'eemed/sitruuna.vim',
+    opts = {},
+  },
 }
