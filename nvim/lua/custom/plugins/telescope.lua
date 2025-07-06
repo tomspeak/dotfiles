@@ -30,8 +30,9 @@ return {
           },
           n = { ['q'] = require('telescope.actions').close },
         },
-        selection_caret = '  ',
-        entry_prefix = '  ',
+        prompt_prefix = '',
+        entry_prefix = ' ',
+        selection_caret = ' ',
         initial_mode = 'insert',
         selection_strategy = 'reset',
         sorting_strategy = 'ascending',
@@ -39,7 +40,7 @@ return {
         layout_config = {
           horizontal = {
             prompt_position = 'top',
-            preview_width = 0.55,
+            preview_width = 0.6,
             results_width = 0.8,
           },
           vertical = {
@@ -120,6 +121,7 @@ return {
     pcall(require('telescope').load_extension, 'live_grep_args')
     pcall(require('telescope').load_extension, 'ui-select')
     pcall(require('telescope').load_extension, 'gh')
+    pcall(require('telescope').load_extension, 'grey')
 
     local builtin = require 'telescope.builtin'
     vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })

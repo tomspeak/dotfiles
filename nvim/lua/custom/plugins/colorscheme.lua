@@ -15,17 +15,6 @@ return {
   --     end,
   --   },
   -- },
-  { 'e-q/okcolors.nvim', name = 'okcolors' },
-  {
-    'slugbyte/lackluster.nvim',
-    lazy = false,
-    priority = 1000,
-  },
-  {
-    'horanmustaplot/xcarbon.nvim',
-    lazy = false,
-    priority = 1000,
-  },
   {
     'neanias/everforest-nvim',
     version = false,
@@ -44,11 +33,6 @@ return {
     priority = 1000,
   },
   {
-    'slugbyte/lackluster.nvim',
-    lazy = false,
-    priority = 1000,
-  },
-  {
     'vague2k/vague.nvim',
     lazy = false,
     priority = 1000,
@@ -60,11 +44,6 @@ return {
         },
       }
     end,
-  },
-  {
-    'shaunsingh/nord.nvim',
-    lazy = false,
-    priority = 1000,
   },
   {
     'nyoom-engineering/oxocarbon.nvim',
@@ -80,29 +59,33 @@ return {
     priority = 1000,
   },
   {
-    'sainnhe/gruvbox-material',
+    'ellisonleao/gruvbox.nvim',
+    priority = 1000,
+    config = true,
+    opts = {
+      undercurl = true,
+      underline = true,
+      bold = false,
+      italic = {
+        strings = false,
+        emphasis = false,
+        comments = false,
+        operators = false,
+        folds = false,
+      },
+      inverse = true, -- invert background for search, diffs, statuslines and errors
+      contrast = '', -- can be "hard", "soft" or empty string
+    },
+  },
+  {
+    'yorickpeterse/nvim-grey',
     lazy = false,
     priority = 1000,
-    config = function()
-      vim.g.gruvbox_material_enable_italic = false
-      vim.cmd.colorscheme 'gruvbox-material'
-    end,
   },
   {
     'bluz71/vim-moonfly-colors',
     name = 'moonfly',
     lazy = false,
     priority = 1000,
-  },
-  {
-    'ramojus/mellifluous.nvim',
-    lazy = false,
-    priority = 1000,
-  },
-  {
-    'eemed/sitruuna.vim',
-    lazy = false,
-    priority = 1000,
-    config = function() end,
   },
 }
