@@ -22,9 +22,51 @@ alias yo="yarn outdated"
 alias yui="yarn upgrade-interactive"
 
 # tmux
+ta() {
+  if ! tmux has-session 2>/dev/null; then
+    echo "No tmux sessions found."
+    return 1
+  fi
+
+  local session
+  session=$(tmux list-sessions \
+    -F "#{session_name} (#{session_windows} windows, #{session_created})" |
+    fzf --prompt="🌺 tmux sessions >> " \
+        --border=rounded \
+        --height=40% \
+        --layout=reverse \
+        --color=border:bright-green \
+        --ansi \
+        --preview-window=right:40% \
+        --preview="echo {} | cut -d' ' -f1 | xargs -I{} tmux list-windows -t {}" |
+    cut -d' ' -f1)
+
+  if [ -n "$session" ]; then
+    tmux attach -t "$session"
+  fi
+}
 alias tl="tmux ls"
-alias ta="tmux attach -t"
-alias tk="tmux kill-session -t"
+alias ta="ta"
+tk() {
+  if ! tmux has-session 2>/dev/null; then
+    echo "No tmux sessions to kill."
+    return 1
+  fi
+
+  local sessions
+  sessions=$(tmux list-sessions -F "#{session_name}" |
+    fzf --multi \
+        --prompt="kill tmux sessions >> " \
+        --border=rounded \
+        --height=40% \
+        --layout=reverse \
+        --color=border:bright-red) || return
+
+  for s in $sessions; do
+    tmux kill-session -t "$s" && echo "Killed session: $s"
+  done
+}
+alias tk="tk"
 alias td="tmux detach"
 alias tat="new-tmux-from-dir-name"
 
