@@ -33,11 +33,9 @@ vim.keymap.set('n', '<leader>X', '<cmd> BufferLineCloseOthers <CR>', { desc = 'C
 -- NvimTree
 vim.keymap.set('n', '_', '<cmd> NvimTreeFindFile <CR>', { desc = 'Nvimtree Find File', nowait = true })
 vim.keymap.set('n', '-', '<cmd> NvimTreeToggle <CR>', { desc = 'Nvimtree Toggle', nowait = true })
+
 -- Aerial
 vim.keymap.set('n', '<C-->', '<cmd> AerialToggle <CR>', { desc = 'Aerial Toggle' })
--- BufferLine
-vim.keymap.set('n', '<tab>', '<cmd> BufferLineCycleNext <CR>', { desc = 'Goto next buffer' })
-vim.keymap.set('n', '<S-tab>', '<cmd> BufferLineCyclePrev <CR>', { desc = 'Goto prev buffer' })
 
 -- Search/Replace under current word
 vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
