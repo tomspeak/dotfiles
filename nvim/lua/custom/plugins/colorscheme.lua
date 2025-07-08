@@ -78,7 +78,7 @@ return {
     },
   },
   {
-    'yorickpeterse/nvim-grey',
+    'tomspeak/nvim-grey',
     lazy = false,
     priority = 1000,
   },
@@ -87,5 +87,18 @@ return {
     name = 'moonfly',
     lazy = false,
     priority = 1000,
+  },
+  {
+    'webhooked/kanso.nvim',
+    lazy = false,
+    priority = 1000,
+    opts = {
+      bold = true,
+      italics = false,
+      compile = false,
+      undercurl = true,
+      commentStyle = { italic = false },
+      keywordStyle = { italic = false },
+    },
   },
 }
