@@ -22,12 +22,6 @@ return {
     event = { 'BufReadPost', 'BufNewFile' },
   },
   {
-    'echasnovski/mini.align',
-    version = false,
-    opts = {},
-    event = { 'BufReadPost', 'BufNewFile' },
-  },
-  {
     'echasnovski/mini.bracketed',
     version = false,
     opts = {},
