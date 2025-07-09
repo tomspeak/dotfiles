@@ -27,6 +27,7 @@ return {
       },
     },
     'WhoIsSethDaniel/mason-tool-installer.nvim',
+    'saghen/blink.cmp',
   },
   event = { 'BufReadPre', 'BufNewFile' },
   config = function()
@@ -64,11 +65,40 @@ return {
         map('<leader>fm', vim.lsp.buf.format, '[F]ormat')
 
         vim.lsp.inlay_hint.enable(false, { bufnr = event.buf })
+
+        local function client_supports_method(client, method, bufnr)
+          if vim.fn.has 'nvim-0.11' == 1 then
+            return client:supports_method(method, bufnr)
+          else
+            return client.supports_method(method, { bufnr = bufnr })
+          end
+        end
+
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
+          local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
+          vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+            buffer = event.buf,
+            group = highlight_augroup,
+            callback = vim.lsp.buf.document_highlight,
+          })
+
+          vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+            buffer = event.buf,
+            group = highlight_augroup,
+            callback = vim.lsp.buf.clear_references,
+          })
+
+          vim.api.nvim_create_autocmd('LspDetach', {
+            group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
+            callback = function(event2)
+              vim.lsp.buf.clear_references()
+              vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+            end,
+          })
+        end
       end,
     })
-
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
     local servers = {
       rust_analyzer = {
@@ -125,9 +155,6 @@ return {
         },
       },
       lua_ls = {
-        -- cmd = {},
-        -- filetypes {},
-        -- capabilities = {},
         flags = { debounce_text_changes = 150 },
         settings = {
           Lua = {
@@ -164,32 +191,17 @@ return {
       },
     }
 
-    local ensure_installed = vim.tbl_keys(servers or {})
-    vim.list_extend(ensure_installed, {
-      'stylua',
-      'taplo',
-      'prettierd',
-      'gofumpt',
-      'goimports',
-      'shfmt',
-      'buf',
-    })
-
     require('mason-lspconfig').setup {
-      ensure_installed = vim.tbl_keys(servers),
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}
-          require('lspconfig')[server_name].setup {
-            cmd = server.cmd,
-            settings = server.settings,
-            filetypes = server.filetypes,
-            capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {}),
-          }
+          local capabilities = require('blink.cmp').get_lsp_capabilities()
+          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+          require('lspconfig')[server_name].setup(server)
         end,
       },
     }
 
-    require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+    require('mason-tool-installer').setup {}
   end,
 }

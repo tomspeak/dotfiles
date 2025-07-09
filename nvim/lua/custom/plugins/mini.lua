@@ -18,7 +18,9 @@ return {
   {
     'echasnovski/mini.ai',
     version = false,
-    opts = {},
+    opts = {
+      n_lines = 500,
+    },
     event = { 'BufReadPost', 'BufNewFile' },
   },
   {
