@@ -54,17 +54,18 @@ return {
     },
     completion = {
       documentation = { auto_show = false },
-      -- menu = {
-      --   draw = {
-      --     align_to = 'none', -- <- this avoids the error
-      --     columns = {
-      --       {
-      --         { 'label', 'label_description' },
-      --         gap = 1,
-      --       },
-      --     },
-      --   },
-      -- },
+      menu = {
+        draw = {
+          padding = { 0, 1 }, -- padding only on right side
+          components = {
+            kind_icon = {
+              text = function(ctx)
+                return '[' .. kind_map[ctx.kind] .. ']'
+              end,
+            },
+          },
+        },
+      },
     },
     snippets = { preset = 'luasnip' },
     sources = {
