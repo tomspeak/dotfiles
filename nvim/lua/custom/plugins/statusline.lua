@@ -30,7 +30,7 @@ return {
     },
     sections = {
       lualine_a = {},
-      lualine_b = { 'branch', 'diff' },
+      lualine_b = { 'branch' },
       lualine_c = {
         {
           'filename',
