@@ -18,8 +18,8 @@ font-feature = -calt
 font-feature = -liga
 font-feature = -dlig
 
-theme = GruvboxDarkHard
-background = #282828
+#theme = GruvboxDarkHard
+#background = #282828
 #theme = Black Metal
 #theme = Everforest Dark - Hard
 #theme = Oxocarbon
@@ -29,18 +29,17 @@ cursor-style = block
 mouse-hide-while-typing = true
 shell-integration-features = no-cursor,sudo,no-title
 window-colorspace = "display-p3"
-macos-titlebar-proxy-icon = hidden
+#macos-titlebar-proxy-icon = hidden
 window-theme = auto
 window-padding-balance = true
 window-padding-color = background
 window-padding-x = 2
 window-padding-y = 1
-window-decoration = false
+window-decoration = auto
 adjust-cell-height = 35%
 
 macos-non-native-fullscreen = true
 macos-titlebar-style = hidden
-macos-window-shadow = true
 macos-option-as-alt = true
 
 keybind = global:alt+`=toggle_quick_terminal
@@ -48,3 +47,26 @@ quick-terminal-position = top
 quick-terminal-screen = mouse
 
 confirm-close-surface = false
+
+palette = 0=#090E13
+palette = 1=#c4746e
+palette = 2=#8a9a7b
+palette = 3=#c4b28a
+palette = 4=#8ba4b0
+palette = 5=#a292a3
+palette = 6=#8ea4a2
+palette = 7=#a4a7a4
+palette = 8=#5C6066
+palette = 9=#e46876
+palette = 10=#87a987
+palette = 11=#e6c384
+palette = 12=#7fb4ca
+palette = 13=#938aa9
+palette = 14=#7aa89f
+palette = 15=#c5c9c7
+
+background = #090E13
+foreground = #c5c9c7
+cursor-color = #c5c9c7
+selection-background = #22262D
+selection-foreground = #c5c9c7
