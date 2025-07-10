@@ -48,7 +48,15 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-    keymap = { preset = 'super-tab' },
+    keymap = {
+      preset = 'default',
+
+      ['<C-p>'] = { 'select_prev', 'fallback' },
+      ['<C-n>'] = { 'select_next', 'fallback' },
+      ['<cr>'] = { 'select_and_accept', 'fallback' },
+      ['<C-n>'] = { 'snippet_forward', 'fallback' },
+      ['<C-p>'] = { 'snippet_backward', 'fallback' },
+    },
     appearance = {
       nerd_font_variant = 'normal',
     },
