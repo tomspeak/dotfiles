@@ -22,7 +22,7 @@ end
 
 -- Final statusline
 function Statusline()
-  return string.format(' %s %s %%= %s ', git_branch(), filename(), diagnostics())
+  return string.format(' %s %%= %s    (%s)', filename(), diagnostics(), git_branch())
 end
 
 vim.o.statusline = '%!v:lua.Statusline()'
