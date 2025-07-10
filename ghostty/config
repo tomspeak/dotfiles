@@ -34,7 +34,7 @@ window-theme = auto
 window-padding-balance = true
 window-padding-color = background
 window-padding-x = 2
-window-padding-y = 1
+window-padding-y = 0
 window-decoration = auto
 adjust-cell-height = 35%
 

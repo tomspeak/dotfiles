@@ -36,3 +36,4 @@ require('lazy').setup {
 }
 
 vim.cmd [[colorscheme naysayer]]
+require 'statusline'

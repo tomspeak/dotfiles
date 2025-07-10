@@ -28,7 +28,6 @@ vim.keymap.set('n', ';', ':', { desc = 'Enter command mode', nowait = true })
 vim.keymap.set('v', ';', ':', { desc = 'Enter command mode', nowait = true })
 vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = 'Close window' })
 vim.keymap.set('n', '<leader>x', '<cmd> bd <CR>', { desc = 'Close buffer' })
-vim.keymap.set('n', '<leader>X', '<cmd> BufferLineCloseOthers <CR>', { desc = 'Close all other buffers' })
 
 -- NvimTree
 vim.keymap.set('n', '_', '<cmd> NvimTreeFindFile <CR>', { desc = 'Nvimtree Find File', nowait = true })
