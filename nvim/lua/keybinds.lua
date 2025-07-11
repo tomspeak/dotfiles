@@ -34,7 +34,7 @@ vim.keymap.set('n', '_', '<cmd> NvimTreeFindFile <CR>', { desc = 'Nvimtree Find 
 vim.keymap.set('n', '-', '<cmd> NvimTreeToggle <CR>', { desc = 'Nvimtree Toggle', nowait = true })
 
 -- Aerial
-vim.keymap.set('n', '<C-->', '<cmd> AerialToggle <CR>', { desc = 'Aerial Toggle' })
+vim.keymap.set('n', '<C-_>', '<cmd>AerialToggle<CR>', { desc = 'Aerial Toggle' })
 
 -- Search/Replace under current word
 vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])

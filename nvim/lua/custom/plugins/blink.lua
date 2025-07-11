@@ -50,21 +50,18 @@ return {
   opts = {
     keymap = {
       preset = 'default',
+      ['<CR>'] = { 'select_and_accept', 'fallback' },
 
-      ['<C-p>'] = { 'select_prev', 'fallback' },
-      ['<C-n>'] = { 'select_next', 'fallback' },
-      ['<cr>'] = { 'select_and_accept', 'fallback' },
-      ['<C-n>'] = { 'snippet_forward', 'fallback' },
-      ['<C-p>'] = { 'snippet_backward', 'fallback' },
+      ['<C-n>'] = { 'select_next', 'snippet_forward', 'fallback' },
+      ['<C-p>'] = { 'select_prev', 'snippet_backward', 'fallback' },
     },
     appearance = {
       nerd_font_variant = 'normal',
     },
     completion = {
-      documentation = { auto_show = false },
       menu = {
         draw = {
-          padding = { 0, 1 }, -- padding only on right side
+          padding = { 1, 1 },
           components = {
             kind_icon = {
               text = function(ctx)
