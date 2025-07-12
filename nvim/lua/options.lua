@@ -74,11 +74,14 @@ vim.opt.fillchars = {
 
 -- Set tabs to 2 spaces
 vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 
 vim.opt.cmdheight = 1
 
+vim.opt.autoindent = true
+vim.opt.copyindent = true
 -- Enable smart indenting (see https://stackoverflow.com/questions/1204149/smart-wrap-in-vim)
 vim.opt.breakindent = true
 
