@@ -1,7 +1,11 @@
 return {
   'mfussenegger/nvim-dap',
+  cmd = 'DapContinue',
   dependencies = {
-    { 'igorlfs/nvim-dap-view', opts = { winbar = { controls = { enabled = true } } } },
+    {
+      'rcarriga/nvim-dap-ui',
+      dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
+    },
     'theHamsta/nvim-dap-virtual-text',
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
@@ -59,31 +63,40 @@ return {
     },
   },
   config = function()
-    local dap = require 'dap'
+    local dap, dapui = require 'dap', require 'dapui'
+
+    dapui.setup()
+
+    dap.listeners.before.attach.dapui_config = function()
+      dapui.open()
+    end
+    dap.listeners.before.launch.dapui_config = function()
+      dapui.open()
+    end
+    dap.listeners.before.event_terminated.dapui_config = function()
+      dapui.close()
+    end
+    dap.listeners.before.event_exited.dapui_config = function()
+      dapui.close()
+    end
 
     require('mason-nvim-dap').setup {
-      automatic_setup = true,
+      automatic_installation = true,
+      ensure_installed = { 'codelldb' },
       handlers = {},
-      ensure_installed = {},
     }
-
-    require('nvim-dap-virtual-text').setup()
-
-    dap.adapters.lldb = {
-      type = 'executable',
-      command = '/Applications/Xcode.app/Contents/Developer/usr/bin/lldb-dap',
-      name = 'lldb',
-    }
+    require('nvim-dap-virtual-text').setup {}
 
     dap.configurations.zig = {
       {
-        name = 'Launch',
-        type = 'lldb',
+        name = '[Zig] LLDB: Basic',
+        type = 'codelldb',
         request = 'launch',
         program = '${workspaceFolder}/zig-out/bin/${workspaceFolderBasename}',
         cwd = '${workspaceFolder}',
         stopOnEntry = false,
         args = {},
+        console = 'integratedTerminal',
       },
     }
   end,
