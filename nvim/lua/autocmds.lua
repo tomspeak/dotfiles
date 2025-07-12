@@ -6,6 +6,8 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   callback = function()
     vim.opt.spell = true
     vim.opt.spelllang = 'en'
+    vim.opt.wrap = true
+    vim.opt.linebreak = true
   end,
 })
 
