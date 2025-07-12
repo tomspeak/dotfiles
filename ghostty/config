@@ -7,9 +7,9 @@ adjust-cursor-thickness = 1
 
 font-size = 16
 #font-family = TX-02
-font-family = Lucida Console
+#font-family = Lucida Console
 #font-family = IosevkaInput
-#font-family = Monaspace Neon Var
+font-family = Monaspace Neon Var
 window-title-font-family = TX-02
 font-thicken = false
 font-synthetic-style = false
