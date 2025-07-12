@@ -1,8 +1,10 @@
 return {
   {
     'tpope/vim-fugitive',
-    event = 'VeryLazy',
-    keys = { { '<leader>gg', ':vert G<CR>', desc = 'Git status' } },
+    cmd = 'G',
+    keys = {
+      { '<leader>gg', ':vert G<CR>', desc = 'Git status', silent = true },
+    },
     dependencies = {
       'tpope/vim-rhubarb',
     },
