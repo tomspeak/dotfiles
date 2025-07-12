@@ -28,7 +28,7 @@ local kind_map = {
 
 return {
   'saghen/blink.cmp',
-  event = 'VimEnter',
+  event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
     {
       'L3MON4D3/LuaSnip',
