@@ -44,13 +44,6 @@ vim.keymap.set('v', '<leader>rr', [[:s///gI<Left><Left><Left><Left>]])
 vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
 
--- Move lines of text up/down
-vim.keymap.set('n', '<A-j>', ':m .+1<CR>==')
-vim.keymap.set('n', '<A-k>', ':m .-2<CR>==')
-vim.keymap.set('i', '<A-j>', '<Esc>:m .+1<CR>==gi')
-vim.keymap.set('i', '<A-k>', '<Esc>:m .-2<CR>==gi')
-vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv")
-vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv")
 
 -- Vertical split
 vim.keymap.set('n', '<Leader>v', vim.cmd.vsplit, { silent = true })

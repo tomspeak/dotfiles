@@ -80,6 +80,7 @@ return {
       }
     end,
   },
+  { 'echasnovski/mini.move', version = '*', opts = {} },
   {
     'echasnovski/mini.indentscope',
     version = false,
