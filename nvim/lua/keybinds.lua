@@ -44,7 +44,6 @@ vim.keymap.set('v', '<leader>rr', [[:s///gI<Left><Left><Left><Left>]])
 vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
 
-
 -- Vertical split
 vim.keymap.set('n', '<Leader>v', vim.cmd.vsplit, { silent = true })
 
