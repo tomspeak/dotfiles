@@ -38,6 +38,8 @@ setopt AUTO_CD              # Go to folder path without using cd.
 setopt SHARE_HISTORY             # Share history between all sessions.
 setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
 
+bindkey '^f' autosuggest-accept
+
 zstyle ':completion:*' completer _extensions _complete _approximate
 
 zstyle ':completion:*' menu select  # menu with selection
