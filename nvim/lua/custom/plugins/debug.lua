@@ -183,6 +183,7 @@ return {
         stopOnEntry = false,
         args = {},
         console = 'integratedTerminal',
+        preLaunchTask = 'zig build',
       },
     }
   end,
