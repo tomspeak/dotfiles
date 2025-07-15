@@ -5,7 +5,7 @@ return {
     { '<leader>sr', '<cmd>FzfLua resume<cr>', desc = 'Resume' },
     { '<leader>sg', '<cmd>FzfLua live_grep_native<cr>', desc = 'Grep' },
     { '<leader>sw', '<cmd>FzfLua grep_cword<cr>', desc = 'Grep word under cursor' },
-    { '<leader>sf', '<cmd>FzfLua files<cr>', desc = 'Find files' },
+    --    { '<leader>sf', '<cmd>FzfLua files<cr>', desc = 'Find files' },
     { '<leader><leader>', '<cmd>FzfLua buffers<cr>', desc = 'Find buffers' },
     { 'z=', '<cmd>FzfLua spell_suggest<cr>', desc = 'Spell suggest' },
     { '<leader>km', '<cmd>FzfLua keymaps<cr>', desc = 'View keymaps' },
