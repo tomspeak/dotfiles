@@ -1,28 +1,26 @@
--- Git branch using Fugitive
-local function git_branch()
+_G.Statusline_git_branch = function()
   if vim.fn.exists '*FugitiveHead' == 1 then
-    local branch = vim.fn.FugitiveHead()
-    return branch ~= '' and branch or ''
+    local b = vim.fn.FugitiveHead()
+    return b ~= '' and b or ''
   end
   return ''
 end
 
--- File name
-local function filename()
+_G.Statusline_filename = function()
   local fname = vim.fn.expand '%:t'
   return fname ~= '' and fname or '[No Name]'
 end
 
--- LSP diagnostics
-local function diagnostics()
+_G.Statusline_diagnostics = function()
   local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
   local warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
   return string.format('E:%d W:%d', errors, warnings)
 end
 
--- Final statusline
-function Statusline()
-  return string.format(' %s %%= %s    (%s)', filename(), diagnostics(), git_branch())
-end
-
-vim.o.statusline = '%!v:lua.Statusline()'
+-- Set statusline globally, but use per-window-safe syntax
+vim.opt.statusline = table.concat {
+  ' %{v:lua.Statusline_filename()}',
+  ' %=',
+  ' %{v:lua.Statusline_diagnostics()}',
+  ' (%{v:lua.Statusline_git_branch()}) ',
+}
