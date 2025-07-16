@@ -39,3 +39,11 @@ require('lazy').setup {
 
 vim.cmd [[colorscheme naysayer]]
 require 'statusline'
+
+vim.filetype.add {
+  extension = {
+    ztml = 'html',
+  },
+}
+
+vim.treesitter.language.register('html', 'ztml')

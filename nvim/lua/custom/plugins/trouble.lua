@@ -1,13 +1,25 @@
+local opts = {
+  focus = true,
+  indent_guides = false,
+
+  modes = {
+    diagnostics = {
+      groups = {
+        { 'filename', format = '{basename:Title} {count}' },
+      },
+    },
+  },
+}
+
 return {
   'folke/trouble.nvim',
   cmd = 'Trouble',
-  opts = {
-    icons = false,
-    use_diagnostic_signs = true,
-    auto_fold = false,
-    height = 6,
-    fold_open = ' ',
-    fold_closed = ' ',
-    multiline = true,
+  keys = {
+    {
+      '<leader>ds',
+      '<cmd>Trouble diagnostics toggle<cr>',
+      desc = 'Diagnostics (Trouble)',
+    },
   },
+  opts = opts,
 }
