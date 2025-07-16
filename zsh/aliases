@@ -101,6 +101,7 @@ alias bigf= 'find / -xdev -type f -size +500M'  # display "big" files > 500M
 alias z="zig"
 alias zb="zig build"
 alias zbr="zig build run"
+alias zbrw="zig build run -fincremental --watch"
 alias zt="zig test"
 alias zr="zig run"
 alias zf="zig fetch"
