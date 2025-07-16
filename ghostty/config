@@ -7,9 +7,9 @@ adjust-cursor-thickness = 1
 
 font-size = 16
 #font-family = TX-02
-#font-family = Lucida Console
+font-family = Lucida Console
 #font-family = IosevkaInput
-font-family = Monaspace Neon Var
+#font-family = Monaspace Neon Var
 window-title-font-family = TX-02
 font-thicken = false
 font-synthetic-style = false
@@ -48,25 +48,50 @@ quick-terminal-screen = mouse
 
 confirm-close-surface = false
 
-palette = 0=#090E13
-palette = 1=#c4746e
-palette = 2=#8a9a7b
-palette = 3=#c4b28a
-palette = 4=#8ba4b0
-palette = 5=#a292a3
-palette = 6=#8ea4a2
-palette = 7=#a4a7a4
-palette = 8=#5C6066
-palette = 9=#e46876
-palette = 10=#87a987
-palette = 11=#e6c384
-palette = 12=#7fb4ca
-palette = 13=#938aa9
-palette = 14=#7aa89f
-palette = 15=#c5c9c7
+#palette = 0=#090E13
+#palette = 1=#c4746e
+#palette = 2=#8a9a7b
+#palette = 3=#c4b28a
+#palette = 4=#8ba4b0
+#palette = 5=#a292a3
+#palette = 6=#8ea4a2
+#palette = 7=#a4a7a4
+#palette = 8=#5C6066
+#palette = 9=#e46876
+#palette = 10=#87a987
+#palette = 11=#e6c384
+#palette = 12=#7fb4ca
+#palette = 13=#938aa9
+#palette = 14=#7aa89f
+#palette = 15=#c5c9c7
+#
+#background = #090E13
+#foreground = #c5c9c7
+#cursor-color = #c5c9c7
+#selection-background = #22262D
+#selection-foreground = #c5c9c7
 
-background = #090E13
-foreground = #c5c9c7
-cursor-color = #c5c9c7
-selection-background = #22262D
-selection-foreground = #c5c9c7
+# Naysayer Ghostty Theme (converted from Neovim theme)
+
+palette = 0=#062625
+palette = 1=#F92672
+palette = 2=#A6E22E
+palette = 3=#E6DB74
+palette = 4=#66D9EF
+palette = 5=#FD5FF0
+palette = 6=#A1EFE4
+palette = 7=#ffffff
+palette = 8=#126367
+palette = 9=#ff0000
+palette = 10=#53d549
+palette = 11=#ffaa00
+palette = 12=#66D9EF
+palette = 13=#AE81FF
+palette = 14=#87ffde
+palette = 15=#d0b892
+
+background = #062625
+foreground = #d0b892
+cursor-color = #ffffff
+selection-background = #0000ff
+selection-foreground = #d0b892
