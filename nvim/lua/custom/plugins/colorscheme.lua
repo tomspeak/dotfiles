@@ -106,4 +106,17 @@ return {
     priority = 1000,
     lazy = false,
   },
+  {
+    'miikanissi/modus-themes.nvim',
+    lazy = false,
+    priority = 1000,
+    opts = {
+      style = 'auto',
+      variant = 'default',
+      hide_inactive_statusline = true,
+      styles = {
+        keywords = { italic = false },
+      },
+    },
+  },
 }

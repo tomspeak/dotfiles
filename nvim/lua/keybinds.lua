@@ -50,3 +50,20 @@ vim.keymap.set('n', '<Leader>v', vim.cmd.vsplit, { silent = true })
 -- Quicker macro playback
 vim.keymap.set('n', 'Q', '@qj')
 vim.keymap.set('x', 'Q', ':norm @q<CR>')
+
+-- themes / colors
+vim.keymap.set('n', '<Leader>td', ':set background=dark<CR>', { desc = 'Set background dark', noremap = true })
+vim.keymap.set('n', '<Leader>tl', ':set background=light<CR>', { desc = 'Set background light', noremap = true })
+
+-- Copy file/buffer
+-- copies current buffer file path relative to cwd to register
+vim.keymap.set('n', 'cp', function()
+  local path = vim.fn.resolve(vim.fn.fnamemodify(vim.fn.expand '%', ':~:.'))
+  vim.fn.setreg('+', path)
+end)
+
+-- copies current buffer filename to register
+vim.keymap.set('n', 'cf', function()
+  local filename = vim.fn.resolve(vim.fn.fnamemodify(vim.fn.expand '%', ':t'))
+  vim.fn.setreg('+', filename)
+end)
