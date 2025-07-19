@@ -23,64 +23,48 @@ system_themes=(
   "seoulbones_light"
 )
 
-print_theme_list() {
-  for t in "$CUSTOM_DIR"/*; do
-    [[ -f "$t" ]] && echo "1 $(basename "$t")"
-  done
-
-  for name in "${system_themes[@]}"; do
-    echo "2 $name"
-  done
-}
-
-theme=$(
+# Generate and select theme
+selection=$(
   {
     echo "0 [1m── Custom Themes ─────────────[0m"
     for t in "$CUSTOM_DIR"/*; do
-      [[ -f "$t" ]] && echo "1 $(basename "$t")"
+      [[ -f "$t" ]] && echo "custom $(basename "$t")"
     done
     echo ""
     echo "0 [1m── Built-in Themes ───────────[0m"
     for name in "${system_themes[@]}"; do
-      echo "2 $name"
+      echo "system $name"
     done
   } | fzf \
       --ansi \
       --with-nth=2.. \
-      --nth=2.. \
       --delimiter=' ' \
       --no-unicode \
       --border=none \
       --prompt="Theme > " \
       --no-preview \
-      --reverse \
-      --bind "enter:accept"
+      --reverse
 )
 
-# Strip out the group prefix (first word)
-theme="${theme#* }"
-
-# Let user select
-# theme=$(print_theme_list | fzf --prompt="Theme > " --no-preview --border=none --no-unicode)
-
-if [[ -z "$theme" ]]; then
+# Exit if nothing selected
+[[ -z "$selection" ]] && {
   echo "No theme selected." >&2
   exit 1
-fi
+}
 
-# Parse prefix and name
-prefix=${theme%%:*}
-name=${theme#*:}
+# Split into prefix and theme name
+prefix="${selection%% *}"
+theme="${selection#* }"
 
-# Resolve full path
+# Resolve correct theme path
 if [[ "$prefix" == "custom" ]]; then
-  theme_path="$CUSTOM_DIR/$name"
+  theme_path="$CUSTOM_DIR/$theme"
 else
-  theme_path="$SYSTEM_DIR/$name"
+  theme_path="$SYSTEM_DIR/$theme"
 fi
 
 # Update the symlink
 ln -sf "$theme_path" "$CUSTOM_SYMLINK"
 
-# Signal Ghostty to reload theme
+# Reload Ghostty theme
 pkill -SIGUSR2 ghostty
