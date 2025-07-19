@@ -104,7 +104,6 @@ defaults write com.apple.dock "mru-spaces" -bool "false"
 defaults write com.apple.dock "expose-group-apps" -bool "false"
 defaults write NSGlobalDomain "AppleSpacesSwitchOnActivate" -bool "true"
 defaults write com.apple.spaces "spans-displays" -bool "true"
-defaults write com.apple.spaces "spans-displays" -bool "true"
 
 defaults write com.apple.Finder AppleShowAllFiles true
 # Show the ~/Library folder
