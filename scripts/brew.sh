@@ -19,8 +19,6 @@ read -r
 
 echo "Installing brew casks and apps"
 brew tap Homebrew/bundle
-brew tap caskroom/versions
-brew tap caskroom/cask
 brew tap FelixKratz/formulae
 brew install koekeishiya/formulae/yabai
 brew install koekeishiya/formulae/skhd
