@@ -141,7 +141,7 @@ defaults write com.apple.finder "ShowExternalHardDrivesOnDesktop" -bool "false"
 
 defaults write com.apple.Music "userWantsPlaybackNotifications" -bool "false"
 
-defaults write com.apple.mail DisableReplyAnimations - bool true
+defaults write com.apple.mail DisableReplyAnimations -bool true
 defaults write com.apple.mail DisableSendAnimations -bool true
 defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 defaults write com.apple.mail DraftsViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
