@@ -1,14 +1,9 @@
+local borders = require 'utils.borders'
+
 local function border(hl_name)
-  return {
-    { '┌', hl_name },
-    { '─', hl_name },
-    { '┐', hl_name },
-    { '│', hl_name },
-    { '┘', hl_name },
-    { '─', hl_name },
-    { '└', hl_name },
-    { '│', hl_name },
-  }
+  return vim.tbl_map(function(char)
+    return { char, hl_name }
+  end, borders.single)
 end
 
 return {
