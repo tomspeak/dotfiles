@@ -1,7 +1,10 @@
 _G.Statusline_git_branch = function()
-  if vim.fn.exists '*FugitiveHead' == 1 then
-    local b = vim.fn.FugitiveHead()
-    return b ~= '' and b or ''
+  -- Use git command directly for better performance
+  local handle = io.popen('git branch --show-current 2>/dev/null')
+  if handle then
+    local branch = handle:read '*a'
+    handle:close()
+    return branch and branch:gsub('\n', '') or ''
   end
   return ''
 end

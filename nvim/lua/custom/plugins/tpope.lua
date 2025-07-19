@@ -1,7 +1,7 @@
 return {
   {
     'tpope/vim-fugitive',
-    event = 'VeryLazy',
+    cmd = { 'G', 'Git', 'Gdiff', 'Gwrite', 'Gread', 'Gblame', 'Glog', 'Gclog' },
     keys = {
       { '<leader>gg', ':vert G<CR>', desc = 'Git status', silent = true },
     },
