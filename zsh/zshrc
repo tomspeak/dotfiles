@@ -27,15 +27,15 @@ PS1+="] %~\$(git_branch_prompt)%f$NEWLINE >> "
 
 ZSH_DISABLE_COMPFIX=true
 
+# Environment variables
 export DOTFILES="$HOME/dotfiles"
+
+# PATH configuration
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export PATH=~/.composer/vendor/bin:$PATH
-
-# execute locally installed npm modules
-export PATH="${pwd}/node_modules/.bin:$PATH"
-# put things in ~/.bin into my $PATH
-export PATH="$HOME/.bin:$PATH"
+export PATH="${pwd}/node_modules/.bin:$PATH"  # execute locally installed npm modules
+export PATH="$HOME/.bin:$PATH"                # put things in ~/.bin into my $PATH
 
 setopt AUTO_CD              # Go to folder path without using cd.
 
