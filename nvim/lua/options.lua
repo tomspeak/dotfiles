@@ -36,6 +36,7 @@ vim.opt.signcolumn = 'yes'
 
 -- Decrease update time
 vim.o.updatetime = 250
+vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
@@ -43,11 +44,6 @@ vim.o.completeopt = 'menuone,noselect'
 
 vim.o.title = true
 vim.o.titlestring = '%t%( %M%)' -- title, modified
-
--- vim.o.t_Co = 256
-vim.o.updatetime = 250
-vim.o.timeout = true
-vim.o.timeoutlen = 300
 -- vim.o.wildignore:append("*/node_modules/*")
 vim.o.inccommand = 'split'
 vim.o.incsearch = true
