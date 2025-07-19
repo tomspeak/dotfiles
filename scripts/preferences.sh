@@ -30,7 +30,6 @@ defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
 
 defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
 
-defaults write -g com.apple.mouse.scaling -float 5.0
 defaults write NSGlobalDomain com.apple.mouse.linear -bool "true"
 defaults write NSGlobalDomain com.apple.mouse.scaling -float "2"
 defaults write com.apple.AppleMultitouchTrackpad "TrackpadThreeFingerDrag" -bool "true"
