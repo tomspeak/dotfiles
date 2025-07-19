@@ -38,8 +38,6 @@ export PATH="${pwd}/node_modules/.bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 
 setopt AUTO_CD              # Go to folder path without using cd.
-setopt SHARE_HISTORY             # Share history between all sessions.
-setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
 
 bindkey '^f' autosuggest-accept
 
@@ -78,7 +76,6 @@ setopt HIST_IGNORE_SPACE      # Dont record an entry starting with a space.
 setopt HIST_SAVE_NO_DUPS      # Dont write duplicate entries in the history file.
 setopt SHARE_HISTORY          # Share history between all sessions.
 unsetopt HIST_VERIFY          # Execute commands using history (e.g.: using !$) immediately
-setopt HIST_IGNORE_SPACE
 HOSTNAME="`hostname`"
 PAGER='less'
 export AUTOENV_FILE_ENTER=".env"
