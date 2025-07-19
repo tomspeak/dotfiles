@@ -19,10 +19,10 @@ xcode-select --install
 ./brew.sh
 
 # Add the Homebrew zsh to allowed shells
-echo "Changing default shell to Homebrew fish"
-echo "$(brew --prefix)/bin/fish" | sudo tee -a /etc/shells >/dev/null
-# Set the Homebrew fish as default shell
-chsh -s "$(brew --prefix)/bin/fish"
+echo "Changing default shell to Homebrew zsh"
+echo "$(brew --prefix)/bin/zsh" | sudo tee -a /etc/shells >/dev/null
+# Set the Homebrew zsh as default shell
+chsh -s "$(brew --prefix)/bin/zsh"
 
 #echo "Installing oh-my-zsh"
 #if [ ! -r ~/.oh-my-zsh ]; then
