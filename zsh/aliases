@@ -1,3 +1,10 @@
+# utils
+alias ls="ls -lahFG"
+alias bigf='find / -mount -type f -size +500M 2>/dev/null'
+
+# git
+alias g="git"
+
 # npm
 alias ni="npm install"
 alias nis="npm install --save"
@@ -94,8 +101,6 @@ alias n='nvim'
 alias yta=yta_func
 alias mkcd=mkcd_func
 alias gif=gif_func
-
-alias bigf= 'find / -xdev -type f -size +500M'  # display "big" files > 500M
 
 # zig
 alias z="zig"
