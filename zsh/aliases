@@ -5,6 +5,33 @@ alias bigf='find / -mount -type f -size +500M 2>/dev/null'
 # git
 alias g="git"
 
+# jj 
+alias j="jj"
+alias jst="jj status"
+alias js="jj status"
+alias jl="jj log"
+alias jd="jj diff"
+alias jco="jj edit"
+alias jci="jj commit"
+alias jcim="jj commit -m"
+alias jca="jj commit --amend"
+alias jp="jj git push"
+alias jpf="jj git push --force-with-lease"
+alias jpu="jj git push --set-bookmark"
+alias jf="jj git fetch"
+alias jb="jj bookmark list"
+alias jnb="jj bookmark create"
+alias jnew="jj new"
+alias jdesc="jj describe"
+alias jshow="jj show"
+alias jsquash="jj squash"
+alias jsplit="jj split"
+alias jrebase="jj rebase"
+alias jundo="jj undo"
+alias jlog="jj log --graph"
+alias jjr="jjr"
+alias jjpr="jjpr"
+
 # npm
 alias ni="npm install"
 alias nis="npm install --save"
@@ -72,7 +99,6 @@ tk() {
     tmux kill-session -t "$s" && echo "Killed session: $s"
   done
 }
-alias tk="tk"
 alias td="tmux detach"
 alias tat="new-tmux-from-dir-name"
 

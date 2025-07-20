@@ -1,0 +1,103 @@
+[user]
+name = "Tom Speak"
+email = "tom@speak.sh"
+
+[ui]
+default-command = "log"
+editor = "nvim"
+diff-formatter = ["delta", "--color-only"]
+# paginate-output = true
+
+[git]
+# Auto-fetch from these remotes
+fetch = ["origin", "upstream"]
+# Auto-push to this remote
+push = "origin"
+# Use main as default branch
+default-branch = "main"
+
+[core]
+fsmonitor = "watchman"
+
+[aliases]
+# Core workflow aliases matching your git setup
+stat = ["status"]
+s = ["status"]
+l = ["log", "--graph", "--color=always"]
+l1 = ["log", "--limit", "10"]
+d = ["diff", "--color-words"]
+b = ["bookmark", "list"]
+co = ["edit"]  # jj equivalent of checkout (edit working copy)
+
+# Commit aliases
+ci = ["commit"]
+cim = ["commit", "-m"]
+ca = ["commit", "--amend"]
+
+# Push/pull equivalents
+p = ["git", "push"]
+pf = ["git", "push", "--force-with-lease"]
+plum = ["git", "fetch", "--remote", "upstream"]
+rom = ["git", "fetch", "--remote", "origin"]
+
+# Branch/bookmark management
+newb = ["bookmark", "create"]
+br = ["bookmark", "list"]
+
+# Rebase equivalents
+rc = ["rebase", "--continue"]
+rs = ["rebase", "--skip"]
+ra = ["rebase", "--abort"]
+
+# Show aliases  
+sh = ["show"]
+describe = ["describe"]
+
+# Log variants
+lp = ["log", "--graph", "--limit", "20"]
+lg = ["log", "--graph", "--color=always", "--template", "builtin_log_detailed"]
+
+[colors]
+# Match your git color scheme
+"change_id" = "magenta"
+"commit_id" = "blue"
+"email" = "yellow"
+"username" = "yellow"
+"timestamp" = "cyan"
+"working_copy" = "green"
+"branch" = "magenta"
+"tag" = "yellow"
+"diff removed" = "red"
+"diff added" = "green"
+
+[diff]
+# Use histogram algorithm like git
+algorithm = "histogram"
+# Show renames and copies
+detect-renames = true
+
+[template-aliases]
+# Custom templates for better output
+'format_short_signature(signature)' = 'signature.username()'
+'format_timestamp(timestamp)' = 'timestamp.ago()'
+
+[revsets]
+# Custom revset aliases for common queries
+log = "@ | ancestors(remote_bookmarks()..@, 2) | trunk()"
+work = "mine() & ~remote_bookmarks()"
+recent = "heads(all()) & mine() & ~remote_bookmarks()"
+
+[merge-tools]
+# Use nvim for conflict resolution
+vimdiff.program = "nvim"
+vimdiff.merge-args = ["-d", "$output", "$left", "$base", "$right"]
+
+[signing]
+# GPG signing (optional - uncomment if you use it)
+# sign-all = true
+# backend = "gpg"
+# key = "your-key-id"
+
+[experimental]
+# Enable useful experimental features
+graph = true

@@ -13,3 +13,72 @@ function mkcd_func() {
 function gif_func() {
         ffmpeg -i "$1" -vf fps=5,scale=480:-1,smartblur=ls=-0.5 "$2"
 }
+
+# jj (jujutsu) functions
+function jj_branch_prompt() {
+  if jj status &>/dev/null 2>&1; then
+    local change_id working_copy_dirty=""
+    
+    # Get the current change ID (short form)
+    change_id=$(jj log -r @ --no-graph -T "change_id.short()" 2>/dev/null)
+    
+    # Check if working copy is dirty
+    if [[ -n $(jj status --no-pager 2>/dev/null | grep -E "^(M|A|D|R|\?)") ]]; then
+      working_copy_dirty="*"
+    fi
+    
+    echo " [jj:${change_id}${working_copy_dirty}]"
+  fi
+}
+
+function jjr() {
+  # jj recent bookmarks with fzf selector (similar to git br)
+  if ! jj bookmark list 2>/dev/null | grep -q .; then
+    echo "No bookmarks found."
+    return 1
+  fi
+
+  local bookmark
+  bookmark=$(jj bookmark list --template 'name ++ "\n"' |
+    fzf --prompt="🌺 jj bookmarks >> " \
+        --border=rounded \
+        --height=40% \
+        --layout=reverse \
+        --color=border:bright-green \
+        --ansi \
+        --preview="jj log -r {1} --color=always" \
+        --preview-window=right:50%)
+
+  if [ -n "$bookmark" ]; then
+    jj edit "$bookmark"
+  fi
+}
+
+function jjpr() {
+  # Create a new jj bookmark and push, then open GitHub PR
+  if [ -z "$1" ]; then
+    echo "Usage: jjpr <bookmark-name> [description]"
+    return 1
+  fi
+  
+  local bookmark_name="$1"
+  local description="${2:-}"
+  
+  # Create new bookmark from current change
+  jj bookmark create "$bookmark_name"
+  
+  # Add description if provided
+  if [ -n "$description" ]; then
+    jj describe -m "$description"
+  fi
+  
+  # Push the bookmark
+  jj git push --bookmark "$bookmark_name"
+  
+  # Open GitHub PR if gh is available
+  if command -v gh >/dev/null 2>&1; then
+    gh pr create --web
+  else
+    echo "Install 'gh' CLI to automatically create GitHub PRs"
+  fi
+}

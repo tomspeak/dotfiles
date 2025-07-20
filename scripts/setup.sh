@@ -37,6 +37,7 @@ ln -sf "$dotfiles/zsh/zshrc" ~/.zshrc
 ln -sf "$dotfiles/applescripts" ~/.applescripts
 ln -sf "$dotfiles/tmux/tmux.conf" ~/.tmux.conf
 ln -sf "$dotfiles/tmux/theme.sh" ~/.tmux/theme.sh
+ln -sf "$dotfiles/jj/" ~/.config/jj/
 ln -sf "$dotfiles/git/gitconfig" ~/.gitconfig
 ln -sf "$dotfiles/git/gitignore_global" ~/.gitignore_global
 ln -sf "$dotfiles/nvim/" ~/.config/nvim/
