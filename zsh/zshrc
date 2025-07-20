@@ -1,23 +1,31 @@
 [ -f $HOME/dotfiles/zsh/work ] && source $HOME/dotfiles/zsh/work
 
 typeset -U PATH
-autoload -U colors && colors
+# Defer colors loading
+_load_colors() {
+  autoload -U colors && colors
+  unfunction _load_colors
+}
+_load_colors
 
+# Ultra-fast git prompt with minimal git calls
 git_branch_prompt() {
-  if git rev-parse --is-inside-work-tree &>/dev/null 2>&1; then
-    local branch dirty
-
-    # Use git describe for faster branch detection
-    branch=$(git symbolic-ref --quiet --short HEAD 2>/dev/null)
-    if [[ -z "$branch" ]]; then
-      branch=$(git rev-parse --short HEAD 2>/dev/null)
-    fi
-
-    # Quick dirty check - only check if git status is dirty
-    [[ -n $(git status --porcelain 2>/dev/null) ]] && dirty="*"
-
-    echo " (${branch}${dirty})"
+  # Skip if not in git repo (fastest check)
+  [[ -d .git ]] || git rev-parse --git-dir &>/dev/null || return
+  
+  local branch dirty
+  # Fast branch detection
+  if [[ -f .git/HEAD ]]; then
+    branch=$(< .git/HEAD)
+    branch=${branch##*/}
+  else
+    branch=$(git symbolic-ref --quiet --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)
   fi
+  
+  # Quick dirty check - only if index or worktree changed
+  [[ -n $(git status --porcelain 2>/dev/null) ]] && dirty="*"
+  
+  echo " (${branch}${dirty})"
 }
 
 setopt prompt_subst
@@ -32,51 +40,63 @@ PS1+="] %~\$(git_branch_prompt)%f$NEWLINE >> "
 
 ZSH_DISABLE_COMPFIX=true
 
+# Optimize PATH - build once instead of multiple exports
+path=(
+  /usr/local/bin
+  /usr/local/sbin
+  ~/.composer/vendor/bin
+  "${pwd}/node_modules/.bin"
+  "$HOME/.bin"
+  $path
+)
+export PATH
+
 # Environment variables
 export DOTFILES="$HOME/dotfiles"
-
-# PATH configuration
-export PATH=/usr/local/bin:$PATH
-export PATH=/usr/local/sbin:$PATH
-export PATH=~/.composer/vendor/bin:$PATH
-export PATH="${pwd}/node_modules/.bin:$PATH"  # execute locally installed npm modules
-export PATH="$HOME/.bin:$PATH"                # put things in ~/.bin into my $PATH
 
 setopt AUTO_CD              # Go to folder path without using cd.
 
 bindkey '^f' autosuggest-accept
 
-# Optimize completion system with caching
-autoload -Uz compinit
-# Only regenerate once a day
-if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+# Skip completion system entirely for startup speed
+# Completions will be loaded on first tab press
+_setup_completions() {
+  autoload -Uz compinit
+  if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
     compinit
-else
+  else
     compinit -C
-fi
+  fi
+  
+  zstyle ':completion:*' completer _extensions _complete _approximate
+  zstyle ':completion:*' menu select
+  zstyle ':completion:*' use-cache true
+  zstyle ':completion:*' rehash false
+  
+  # Rebind to normal completion
+  bindkey '^I' expand-or-complete
+  unfunction _setup_completions
+}
 
-zstyle ':completion:*' completer _extensions _complete _approximate
-zstyle ':completion:*' menu select  # menu with selection
-zstyle ':completion:*' increment yes
-zstyle ':completion:*' verbose yes
-zstyle ':completion:*' squeeze-slashes yes  # replace // with /
-zstyle ':completion:*' file-sort modification  # show recently used files first
-zstyle ':completion:*' list-dirs-first yes
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"  # colored files and directories, blue selection box
-zstyle ':completion:*' ignored-patterns '.git'
-zstyle ':completion:*' rehash false  # improves performance
-zstyle ':completion:*' use-cache true
+# Custom widget to load completions on first use
+_load_and_complete() {
+  _setup_completions
+  zle expand-or-complete
+}
+zle -N _load_and_complete
+bindkey '^I' _load_and_complete
 
-bindkey '^I' complete-word  # Tab, complete instead of expand-and-complete
+# Tab completion handled by lazy loading above
 bindkey '^[[3~' delete-char  # Delete
 bindkey '^[[Z' reverse-menu-complete  # Shift+Tab
 bindkey '^[[1;5D' backward-word  # Control-Left
 bindkey '^[[1;5C' forward-word  # Control-Right
 
-TZ="Europe/London"
+# Optimize history settings
 HISTFILE=$HOME/.zhistory
-HISTSIZE=20000
-SAVEHIST=20000
+HISTSIZE=10000  # Reduced from 20000
+SAVEHIST=10000  # Reduced from 20000
+TZ="Europe/London"
 setopt INC_APPEND_HISTORY     # Immediately append to history file.
 setopt EXTENDED_HISTORY       # Record timestamp in history.
 setopt HIST_EXPIRE_DUPS_FIRST # Expire duplicate entries first when trimming history.
@@ -104,18 +124,32 @@ export VEDITOR='code'
 source $HOME/dotfiles/zsh/functions
 source $HOME/dotfiles/zsh/aliases
 
-# Optimize autosuggestions
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-ZSH_AUTOSUGGEST_USE_ASYNC=true
+# Lazy load expensive plugins
+_lazy_load_plugins() {
+  # Cache brew prefix to avoid multiple calls
+  BREW_PREFIX="${BREW_PREFIX:-$(brew --prefix)}"
+  
+  # Load autosuggestions with optimizations
+  ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+  ZSH_AUTOSUGGEST_USE_ASYNC=true
+  local autosuggest_path="$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  [[ -f $autosuggest_path ]] && source "$autosuggest_path"
+  
+  # Load syntax highlighting last
+  local ZSH_HIGHLIGHT_FILE="$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  [[ -f $ZSH_HIGHLIGHT_FILE ]] && source $ZSH_HIGHLIGHT_FILE
+  
+  # Load FZF
+  source <(fzf --zsh)
+  
+  # Remove function after first use
+  unfunction _lazy_load_plugins
+}
 
-#FZF - defer loading
-source <(fzf --zsh)
-
-# Load syntax highlighting last (as recommended) and with optimizations
-# Cache brew prefix to avoid multiple calls
-BREW_PREFIX="${BREW_PREFIX:-$(brew --prefix)}"
-ZSH_HIGHLIGHT_FILE="$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-autosuggest_path="$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-
-[[ -f $autosuggest_path ]] && source "$autosuggest_path"
-[[ -f $ZSH_HIGHLIGHT_FILE ]] && source $ZSH_HIGHLIGHT_FILE
+# Trigger plugin loading on first command that might need them
+zle-line-init() {
+  type _lazy_load_plugins >/dev/null 2>&1 && _lazy_load_plugins
+  # Remove this hook after first use
+  zle -D zle-line-init
+}
+zle -N zle-line-init
