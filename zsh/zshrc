@@ -1,15 +1,20 @@
 [ -f $HOME/dotfiles/zsh/work ] && source $HOME/dotfiles/zsh/work
 
 typeset -U PATH
-autoload colors; colors;
+autoload -U colors && colors
 
 git_branch_prompt() {
-  if git rev-parse --is-inside-work-tree &>/dev/null; then
-    local branch dirty stash
+  if git rev-parse --is-inside-work-tree &>/dev/null 2>&1; then
+    local branch dirty
 
-    branch=$(git symbolic-ref --quiet --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)
+    # Use git describe for faster branch detection
+    branch=$(git symbolic-ref --quiet --short HEAD 2>/dev/null)
+    if [[ -z "$branch" ]]; then
+      branch=$(git rev-parse --short HEAD 2>/dev/null)
+    fi
 
-    git diff --quiet --ignore-submodules HEAD 2>/dev/null || dirty="*"
+    # Quick dirty check - only check if git status is dirty
+    [[ -n $(git status --porcelain 2>/dev/null) ]] && dirty="*"
 
     echo " (${branch}${dirty})"
   fi
@@ -41,18 +46,24 @@ setopt AUTO_CD              # Go to folder path without using cd.
 
 bindkey '^f' autosuggest-accept
 
-zstyle ':completion:*' completer _extensions _complete _approximate
+# Optimize completion system with caching
+autoload -Uz compinit
+# Only regenerate once a day
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+    compinit
+else
+    compinit -C
+fi
 
+zstyle ':completion:*' completer _extensions _complete _approximate
 zstyle ':completion:*' menu select  # menu with selection
 zstyle ':completion:*' increment yes
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' squeeze-slashes yes  # replace // with /
-
 zstyle ':completion:*' file-sort modification  # show recently used files first
 zstyle ':completion:*' list-dirs-first yes
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"  # colored files and directories, blue selection box
 zstyle ':completion:*' ignored-patterns '.git'
-
 zstyle ':completion:*' rehash false  # improves performance
 zstyle ':completion:*' use-cache true
 
@@ -93,10 +104,18 @@ export VEDITOR='code'
 source $HOME/dotfiles/zsh/functions
 source $HOME/dotfiles/zsh/aliases
 
-#FZF
-# Setting ag as the default source for fzf
+# Optimize autosuggestions
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_USE_ASYNC=true
+
+#FZF - defer loading
 source <(fzf --zsh)
-ZSH_HIGHLIGHT_FILE=/opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-[[ -f $ZSH_HIGHLIGHT_FILE ]] && source $ZSH_HIGHLIGHT_FILE
-autosuggest_path="$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+# Load syntax highlighting last (as recommended) and with optimizations
+# Cache brew prefix to avoid multiple calls
+BREW_PREFIX="${BREW_PREFIX:-$(brew --prefix)}"
+ZSH_HIGHLIGHT_FILE="$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+autosuggest_path="$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
 [[ -f $autosuggest_path ]] && source "$autosuggest_path"
+[[ -f $ZSH_HIGHLIGHT_FILE ]] && source $ZSH_HIGHLIGHT_FILE
