@@ -26,6 +26,8 @@ local kind_map = {
   TypeParameter = 'Type',
 }
 
+local implementation = (vim.env.IS_WORK == nil) and 'prefer_rust' or 'lua'
+
 return {
   'saghen/blink.cmp',
   event = { 'InsertEnter', 'CmdlineEnter' },
@@ -79,7 +81,7 @@ return {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
       },
     },
-    fuzzy = { implementation = 'prefer_rust_with_warning' },
+    fuzzy = { implementation = implementation },
     signature = { enabled = true },
   },
   opts_extend = { 'sources.default' },
