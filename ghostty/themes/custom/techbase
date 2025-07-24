@@ -1,0 +1,26 @@
+# Techbase Ghostty Theme (converted from techbase.nvim)
+
+# Standard ANSI colors (0-15)
+palette = 0=#191d23
+palette = 1=#F71735
+palette = 2=#74BAA8
+palette = 3=#E9B872
+palette = 4=#6A8BE3
+palette = 5=#BCB6EC
+palette = 6=#1A8C9B
+palette = 7=#CCD5E5
+palette = 8=#474B65
+palette = 9=#F71735
+palette = 10=#9FDACC
+palette = 11=#FFA630
+palette = 12=#A9B9EF
+palette = 13=#BCB6EC
+palette = 14=#74BAA8
+palette = 15=#D6DDEA
+
+# Terminal appearance
+background = #191d23
+foreground = #CCD5E5
+cursor-color = #5DCD9A
+selection-background = #121E42
+selection-foreground = #CCD5E5

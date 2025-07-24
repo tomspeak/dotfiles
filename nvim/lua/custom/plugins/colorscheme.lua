@@ -125,4 +125,8 @@ return {
     priority = 1000,
     config = function() end,
   },
+  {
+    'mcauley-penney/techbase.nvim',
+    priority = 1000,
+  },
 }
