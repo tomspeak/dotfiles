@@ -24,20 +24,12 @@ echo "$(brew --prefix)/bin/zsh" | sudo tee -a /etc/shells >/dev/null
 # Set the Homebrew zsh as default shell
 chsh -s "$(brew --prefix)/bin/zsh"
 
-#echo "Installing oh-my-zsh"
-#if [ ! -r ~/.oh-my-zsh ]; then
-#curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-#else
-#echo 'oh-my-zsh already installed'
-#fi
-
 echo "Setting symlinks"
 mkdir -p ~/.config/
 ln -sf "$dotfiles/zsh/zshrc" ~/.zshrc
 ln -sf "$dotfiles/applescripts" ~/.applescripts
 ln -sf "$dotfiles/tmux/tmux.conf" ~/.tmux.conf
 ln -sf "$dotfiles/tmux/theme.sh" ~/.tmux/theme.sh
-ln -sf "$dotfiles/jj/" ~/.config/jj/
 ln -sf "$dotfiles/git/gitconfig" ~/.gitconfig
 ln -sf "$dotfiles/git/gitignore_global" ~/.gitignore_global
 ln -sf "$dotfiles/nvim/" ~/.config/nvim/
@@ -46,7 +38,6 @@ ln -sf "$dotfiles/starship.toml" ~/.config
 ln -sf "$dotfiles/ghostty" ~/.config
 ln -sf "$dotfiles/spacebar" ~/.config/
 ln -sf "$dotfiles/skhdrc" ~/.config/
-#ln -sf "$dotfiles/fish" ~/.config
 ln -sf "$dotfiles/bash/bashrc" ~/.bashrc
 mkdir -p ~/Library/KeyBindings/
 ln -sf "$dotfiles/DefaultKeyBinding.dict" ~/Library/KeyBindings/
