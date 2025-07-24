@@ -37,7 +37,7 @@ require('lazy').setup {
   },
 }
 
-vim.cmd [[colorscheme naysayer]]
+vim.cmd [[colorscheme techbase]]
 require 'statusline'
 
 vim.filetype.add {

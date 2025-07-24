@@ -45,3 +45,9 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end,
   group = 'Git',
 })
+
+vim.api.nvim_create_autocmd('BufNewFile', {
+  group = vim.api.nvim_create_augroup('Skeleton', { clear = true }),
+  command = 'silent! 0r ' .. vim.fn.stdpath 'config' .. '/templates/skeleton.%:e',
+  desc = 'If one exists, use a template when opening a new file',
+})

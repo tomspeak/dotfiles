@@ -1,21 +1,22 @@
-local icons = require 'utils.icons'
-
 return {
   'lewis6991/gitsigns.nvim',
   event = 'BufReadPost',
   opts = {
+    attach_to_untracked = false,
     preview_config = {
       border = 'solid',
       style = 'minimal',
+      row = 1,
+      col = 1,
     },
+    signcolumn = true,
     signs = {
-      add = { text = icons.ui.GitSignAdd },
-      untracked = { text = icons.ui.GitSignUntracked },
-      change = { text = icons.ui.GitSignChange },
-      delete = { text = icons.ui.GitSignDelete },
-      topdelete = { text = icons.ui.GitSignTopdelete },
-      changedelete = { text = icons.ui.GitSignChangedelete },
+      change = { text = '┋' },
     },
+    signs_staged = {
+      change = { text = '┋' },
+    },
+    update_debounce = 500,
     current_line_blame = false,
     current_line_blame_opts = {
       virt_text = true,

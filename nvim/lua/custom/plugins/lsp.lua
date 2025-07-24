@@ -120,13 +120,20 @@ return {
       clangd = {
         cmd = {
           'clangd',
-          '--background-index',
-          '--background-index-priority=normal',
+          '-j=6',
+          '--all-scopes-completion',
+          '--background-index', -- should include a compile_commands.json or .txt
           '--clang-tidy',
-          '--header-insertion=iwyu',
+          '--cross-file-rename',
           '--completion-style=detailed',
-          '--function-arg-placeholders',
           '--fallback-style=llvm',
+          '--function-arg-placeholders',
+          '--header-insertion-decorators',
+          '--header-insertion=never',
+          '--limit-results=10',
+          '--pch-storage=memory',
+          '--query-driver=/usr/include/*',
+          '--suggest-missing-includes',
         },
         init_options = {
           usePlaceholders = true,

@@ -61,14 +61,49 @@ return {
       nerd_font_variant = 'normal',
     },
     completion = {
+      trigger = {
+        show_on_backspace_after_accept = true,
+        show_on_insert = true,
+        show_on_trigger_character = true,
+      },
+      keyword = {
+        range = 'full',
+      },
+      list = {
+        selection = { preselect = true, auto_insert = false },
+      },
+      documentation = {
+        window = {
+          border = 'solid',
+          min_width = 40,
+          max_width = 70,
+        },
+        auto_show = true,
+        auto_show_delay_ms = 500,
+      },
       menu = {
+        min_width = 34,
+        max_height = 10,
         draw = {
-          padding = { 1, 1 },
+          align_to = 'cursor',
+
+          padding = 1,
+          gap = 3,
+          columns = {
+            { 'kind_icon', gap = 1, 'label' },
+            { 'label_description' },
+          },
           components = {
             kind_icon = {
               text = function(ctx)
                 return '[' .. kind_map[ctx.kind] .. ']'
               end,
+            },
+            label = {
+              width = {
+                fill = true,
+                max = 60,
+              },
             },
           },
         },

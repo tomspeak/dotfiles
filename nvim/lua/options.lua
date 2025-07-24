@@ -21,6 +21,17 @@ vim.cmd [[set nofoldenable]]
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+vim.o.fileignorecase = true
+vim.o.colorcolumn = '+0'
+vim.opt.listchars = {
+  nbsp = '␣',
+  tab = '  ',
+  trail = '·',
+}
+
+vim.o.pumheight = 15
+vim.o.winborder = 'solid'
+
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
@@ -66,6 +77,12 @@ vim.opt.fillchars = {
   foldopen = '▾',
   foldsep = '│',
   foldclose = '▸',
+}
+vim.opt.diffopt = {
+  'filler',
+  'indent-heuristic',
+  'linematch:60',
+  'vertical',
 }
 
 -- Set tabs to 2 spaces
