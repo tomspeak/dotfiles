@@ -51,6 +51,8 @@ path=(
 )
 export PATH
 
+export MANPAGER='nvim +Man!'
+
 # Environment variables
 export DOTFILES="$HOME/dotfiles"
 
