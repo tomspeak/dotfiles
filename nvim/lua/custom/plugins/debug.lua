@@ -155,7 +155,6 @@ return {
     }
     dapvt.setup {}
     dapmason.setup {
-
       automatic_installation = true,
       ensure_installed = { 'codelldb' },
       handlers = {},

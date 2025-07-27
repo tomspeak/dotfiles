@@ -143,17 +143,9 @@ return {
       },
       cssls = {},
       html = {},
-      tailwindcss = {},
-      gopls = {},
       yamlls = {},
       jsonls = {},
       bashls = {},
-      terraformls = {},
-      eslint = {
-        settings = {
-          packageManager = 'yarn',
-        },
-      },
       lua_ls = {
         flags = { debounce_text_changes = 150 },
         settings = {
