@@ -12,14 +12,23 @@ local function get_hl(group)
   return ok and hl or {}
 end
 
-local highlights = {
+local highlights_dark = {
   StatusLine = {
     fg = 'White',
     bg = 'NvimDarkGrey2',
   },
 }
 
+local highlights_light = {
+  StatusLine = {
+    fg = 'Black',
+    bg = 'NvimLightGrey2',
+  },
+}
+
 local function extend_default_colorscheme()
+  local highlights = vim.o.background == 'dark' and highlights_dark or highlights_light
+
   for group, opts in pairs(highlights) do
     vim.api.nvim_set_hl(0, group, opts)
   end

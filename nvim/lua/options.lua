@@ -3,8 +3,6 @@ vim.g.maplocalleader = ' '
 
 vim.o.termguicolors = true
 
--- Hide status bar on initial load, lualine then enables it on BufRead
---vim.o.laststatus = 0
 vim.o.showmode = false
 -- hide file progress / col/line crap in cmd line
 vim.cmd [[set noruler]]

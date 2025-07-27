@@ -1,6 +1,8 @@
 require 'options'
 require 'keybinds'
 require 'autocmds'
+vim.cmd [[colorscheme default-extended]]
+require 'statusline'
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -36,9 +38,6 @@ require('lazy').setup {
     },
   },
 }
-
-vim.cmd [[colorscheme default-extended]]
-require 'statusline'
 
 vim.filetype.add {
   extension = {

@@ -1,6 +1,6 @@
 _G.Statusline_git_branch = function()
   -- Use git command directly for better performance
-  local handle = io.popen('git branch --show-current 2>/dev/null')
+  local handle = io.popen 'git branch --show-current 2>/dev/null'
   if handle then
     local branch = handle:read '*a'
     handle:close()
@@ -20,10 +20,23 @@ _G.Statusline_diagnostics = function()
   return string.format('E:%d W:%d', errors, warnings)
 end
 
--- Set statusline globally, but use per-window-safe syntax
+-- Set statusline normally
 vim.opt.statusline = table.concat {
   ' %{v:lua.Statusline_filename()}',
   ' %=',
   ' %{v:lua.Statusline_diagnostics()}',
   ' (%{v:lua.Statusline_git_branch()}) ',
 }
+
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+  pattern = '*',
+  callback = function()
+    vim.schedule(function()
+      if vim.bo.filetype == 'ministarter' or vim.fn.bufname('%'):match 'starter' then
+        vim.o.laststatus = 0
+      else
+        vim.o.laststatus = 2
+      end
+    end)
+  end,
+})
