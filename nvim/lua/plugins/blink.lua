@@ -30,6 +30,7 @@ local implementation = (vim.env.IS_WORK == nil) and 'prefer_rust' or 'lua'
 
 return {
   'saghen/blink.cmp',
+  cond = false,
   event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
     {
@@ -90,7 +91,7 @@ return {
           padding = 1,
           gap = 3,
           columns = {
-            { 'kind_icon', gap = 1, 'label' },
+            { 'kind_icon',        gap = 1, 'label' },
             { 'label_description' },
           },
           components = {

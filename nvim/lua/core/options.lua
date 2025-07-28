@@ -49,7 +49,7 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = 'menuone,noselect,fuzzy'
 
 vim.o.title = true
 vim.o.titlestring = '%t%( %M%)' -- title, modified
@@ -62,10 +62,10 @@ vim.o.lazyredraw = true -- Do not redraw during macros, good performance increas
 vim.o.undolevels = 200
 vim.o.scrolloff = 999
 vim.o.clipboard = 'unnamed,unnamedplus' -- make vim use system clipboard
-vim.o.backspace = 'indent,eol,start' -- make backspace work as expected
-vim.o.swapfile = false -- disable the .swp files vim creates
-vim.o.splitright = true -- open horizontal splits to the right
-vim.o.splitbelow = true -- open vertical splits below
+vim.o.backspace = 'indent,eol,start'    -- make backspace work as expected
+vim.o.swapfile = false                  -- disable the .swp files vim creates
+vim.o.splitright = true                 -- open horizontal splits to the right
+vim.o.splitbelow = true                 -- open vertical splits below
 vim.opt.fillchars = {
   vert = '│',
   fold = '⠀',

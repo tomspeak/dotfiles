@@ -17,7 +17,7 @@ local headers = {
     ' No one is interested.”',
   }, '\n'),
 }
-function random_elem(tb)
+local function random_elem(tb)
   math.randomseed(os.time())
   local keys = {}
   for k in pairs(tb) do
@@ -53,7 +53,7 @@ return {
     opts = {},
     event = { 'BufReadPost', 'BufNewFile' },
   },
-  { 'echasnovski/mini.move', version = '*', event = { 'BufReadPost', 'BufNewFile' }, opts = {} },
+  { 'echasnovski/mini.move',  version = '*', event = { 'BufReadPost', 'BufNewFile' }, opts = {} },
   { 'echasnovski/mini.pairs', version = '*', event = { 'BufReadPost', 'BufNewFile' }, opts = {} },
   {
     'echasnovski/mini.indentscope',

@@ -1,4 +1,4 @@
-_G.Statusline_git_branch = function()
+local git_branch = function()
   -- Use git command directly for better performance
   local handle = io.popen 'git branch --show-current 2>/dev/null'
   if handle then
@@ -8,6 +8,13 @@ _G.Statusline_git_branch = function()
   end
   return ''
 end
+
+local function safe_git_branch()
+  local ok, result = pcall(git_branch)
+  return ok and result or ""
+end
+
+_G.git_branch = safe_git_branch
 
 _G.Statusline_filename = function()
   local fname = vim.fn.expand '%:t'
@@ -22,10 +29,10 @@ end
 
 -- Set statusline normally
 vim.opt.statusline = table.concat {
-  ' %{v:lua.Statusline_filename()}',
+  ' %{v:lua.Statusline_filename()} %m %r',
   ' %=',
   ' %{v:lua.Statusline_diagnostics()}',
-  ' (%{v:lua.Statusline_git_branch()}) ',
+  ' (%{v:lua.git_branch()}) ',
 }
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
