@@ -20,7 +20,7 @@ brew tap FelixKratz/formulae
 brew install koekeishiya/formulae/skhd
 brew bundle
 
-echo "Give permissions to SKHD, Yabai, Alfred, SketchyBar, Karabiner. Press enter to continue..."
+echo "Give permissions to SKHD, Alfred, SketchyBar, Karabiner. Press enter to continue..."
 read -r
 
 echo "Sign in to Spotify. Press enter to continue..."

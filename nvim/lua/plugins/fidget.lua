@@ -1,6 +1,6 @@
 return {
   'j-hui/fidget.nvim',
-  event = "LspAttach",
+  event = 'LspAttach',
   opts = {
     notification = {
       window = {

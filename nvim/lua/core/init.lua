@@ -1,6 +1,5 @@
 require 'core.keybinds'
 require 'core.options'
-require 'core.lsp'
 require 'core.keybinds'
 require 'core.autocmds'
 require 'core.statusline'

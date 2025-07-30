@@ -16,6 +16,16 @@ local headers = {
     ' No one queues up to see it.                ',
     ' No one is interested.”',
   }, '\n'),
+  table.concat({
+    '"So we decide to start again.',
+    ' Wipe the slate clean.',
+    ' Start fresh.',
+    ' And then we have children.',
+    ' Little carbon copies we can turn to and say,',
+    ' "You will do what I could not. You will succeed where I have failed."',
+    ' Because we want someone to get it right this time.',
+    ' But not me... Personally speaking I can\'t wait to watch life tear you apart."',
+  }, '\n'),
 }
 local function random_elem(tb)
   math.randomseed(os.time())
@@ -53,7 +63,7 @@ return {
     opts = {},
     event = { 'BufReadPost', 'BufNewFile' },
   },
-  { 'echasnovski/mini.move',  version = '*', event = { 'BufReadPost', 'BufNewFile' }, opts = {} },
+  { 'echasnovski/mini.move', version = '*', event = { 'BufReadPost', 'BufNewFile' }, opts = {} },
   { 'echasnovski/mini.pairs', version = '*', event = { 'BufReadPost', 'BufNewFile' }, opts = {} },
   {
     'echasnovski/mini.indentscope',

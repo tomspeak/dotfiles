@@ -11,7 +11,7 @@ end
 
 local function safe_git_branch()
   local ok, result = pcall(git_branch)
-  return ok and result or ""
+  return ok and result or ''
 end
 
 _G.git_branch = safe_git_branch

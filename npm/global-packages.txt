@@ -1,0 +1,5 @@
+claude-code
+neovim
+vscode-langservers-extracted
+bash-language-server
+yaml-language-server

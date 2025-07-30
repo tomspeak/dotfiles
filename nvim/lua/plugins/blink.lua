@@ -44,7 +44,6 @@ return {
       end)(),
       opts = {},
     },
-    'folke/lazydev.nvim',
   },
   build = 'cargo build --release',
 
@@ -91,7 +90,7 @@ return {
           padding = 1,
           gap = 3,
           columns = {
-            { 'kind_icon',        gap = 1, 'label' },
+            { 'kind_icon', gap = 1, 'label' },
             { 'label_description' },
           },
           components = {
@@ -112,10 +111,7 @@ return {
     },
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'lazydev' },
-      providers = {
-        lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
-      },
+      default = { 'lsp', 'path', 'snippets' },
     },
     fuzzy = { implementation = implementation },
     signature = { enabled = true },

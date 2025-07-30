@@ -7,8 +7,6 @@ return {
       dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
     },
     'theHamsta/nvim-dap-virtual-text',
-    'williamboman/mason.nvim',
-    'jay-babu/mason-nvim-dap.nvim',
   },
   keys = {
     {
@@ -70,7 +68,7 @@ return {
     },
   },
   config = function()
-    local dap, dapui, dapvt, dapmason = require 'dap', require 'dapui', require 'nvim-dap-virtual-text', require 'mason-nvim-dap'
+    local dap, dapui, dapvt = require 'dap', require 'dapui', require 'nvim-dap-virtual-text'
 
     dapui.setup {
       controls = {
@@ -154,11 +152,6 @@ return {
       },
     }
     dapvt.setup {}
-    dapmason.setup {
-      automatic_installation = true,
-      ensure_installed = { 'codelldb' },
-      handlers = {},
-    }
 
     dap.listeners.after.event_initialized['dapui_config'] = function()
       dapui.open()
@@ -172,6 +165,18 @@ return {
       dapui.close()
     end
 
+    dap.adapters.codelldb = {
+      type = 'server',
+      port = '${port}',
+      executable = {
+        command = vim.fn.expand '~/dotfiles/dependencies/codelldb/extension/adapter/codelldb',
+        args = { '--port', '${port}' },
+        env = {
+          LLDB_LIBRARY_PATH = vim.fn.expand '~/dotfiles/dependencies/codelldb/extension/lldb/lib',
+        },
+      },
+    }
+
     dap.configurations.zig = {
       {
         name = '[Zig] LLDB: Basic',
@@ -182,7 +187,7 @@ return {
         stopOnEntry = false,
         args = {},
         console = 'integratedTerminal',
-        preLaunchTask = 'zig build',
+        preLaunchTask = 'rm -rf zig-out && zig build',
       },
     }
   end,

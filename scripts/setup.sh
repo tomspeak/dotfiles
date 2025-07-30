@@ -46,9 +46,14 @@ find "$dotfiles/vscode" -type f -exec ln -sf {} ~/Library/Application\ Support/C
 echo "Installing tmux plugins"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
+echo "Installing global npm packages"
+./$dotfiles/npm/install.sh
+
+echo "Installing codelldb"
+./$dotfiles/scripts/install-codelldb.sh
+
 echo "Starting services"
 skhd --install-service
-yabai --install-service
 
 echo "Open a tmux session and do PREFIX + U to install plugins. Press enter to continue..."
 read -r
