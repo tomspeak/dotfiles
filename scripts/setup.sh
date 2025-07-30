@@ -18,6 +18,8 @@ xcode-select --install
 
 ./brew.sh
 
+./install-git-modules.sh
+
 # Add the Homebrew zsh to allowed shells
 echo "Changing default shell to Homebrew zsh"
 echo "$(brew --prefix)/bin/zsh" | sudo tee -a /etc/shells >/dev/null
