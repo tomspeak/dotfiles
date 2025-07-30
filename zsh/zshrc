@@ -136,7 +136,7 @@ _lazy_load_plugins() {
   # Load autosuggestions with optimizations
   ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
   ZSH_AUTOSUGGEST_USE_ASYNC=true
-  local autosuggest_path="$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  local autosuggest_path="$HOME/dotfiles/deps/zsh-autosuggestions/zsh-autosuggestions.zsh"
   [[ -f $autosuggest_path ]] && source "$autosuggest_path"
   
   # Load syntax highlighting last
