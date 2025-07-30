@@ -1,9 +1,6 @@
-[submodule "dependencies/zsh-yarn-completions"]
-	path = dependencies/zsh-yarn-completions
+[submodule "deps/zsh-yarn-completions"]
+	path = deps/zsh-yarn-completions
 	url = https://github.com/chrisands/zsh-yarn-completions.git
-[submodule "dependencies/zsh-autosuggestions"]
-	path = dependencies/zsh-autosuggestions
-	url = https://github.com/zsh-users/zsh-autosuggestions
-[submodule "dependencies/zsh-z"]
-	path = dependencies/zsh-z
-	url = https://github.com/agkozak/zsh-z.git
+[submodule "deps/zsh-autosuggestions"]
+	path = deps/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions.git

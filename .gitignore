@@ -21,4 +21,4 @@ nvim/lazy-lock.json
 karabiner/automatic_backups/
 ghostty/themes/current-theme
 tmux-client-*.log
-dependencies
+dependencies/codelldb

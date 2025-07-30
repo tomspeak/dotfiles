@@ -3,7 +3,7 @@
 set -e
 
 # Config
-TARGET_DIR="$HOME/dotfiles/dependencies"
+TARGET_DIR="$HOME/dotfiles/deps"
 VSIX_URL="https://github.com/vadimcn/codelldb/releases/download/v1.11.5/codelldb-darwin-arm64.vsix"
 VSIX_FILE="codelldb.vsix"
 EXTRACT_DIR="codelldb"
