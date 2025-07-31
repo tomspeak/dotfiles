@@ -5,3 +5,5 @@ alt - w : open /Applications/Brave\ Browser.app
 
 # lock screen
 alt - p : pmset displaysleepnow
+# block lock screen
+cmd + alt - p : osascript -e 'tell application "Ghostty" to activate' -e 'tell application "Ghostty" to do script "caffeinate -t 7200; echo \"Blocking Screensaver\"; exec $SHELL"'
