@@ -50,12 +50,21 @@
   "vim.useSystemClipboard": true,
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-      "before": ["="],
-      "commands": ["workbench.action.toggleSidebarVisibility"]
+      "before": [
+        "="
+      ],
+      "commands": [
+        "workbench.action.toggleSidebarVisibility"
+      ]
     },
     {
-      "before": ["<leader>", "f"],
-      "commands": ["revealInExplorer"]
+      "before": [
+        "<leader>",
+        "f"
+      ],
+      "commands": [
+        "revealInExplorer"
+      ]
     }
   ],
   "window.commandCenter": false,
@@ -76,17 +85,14 @@
   "workbench.iconTheme": null,
   "workbench.tips.enabled": false,
   "breadcrumbs.icons": false,
-
   "zig.zls.enabled": "on",
   "zig.path": "zig",
   "[zig]": {
     "editor.formatOnSave": true,
-
     "editor.suggest.insertMode": "replace",
     "editor.codeActionsOnSave": {
       // Run code actions that currently supports adding and removing discards.
       "source.fixAll": "explicit",
-
       // Run code actions that sorts @import declarations.
       "source.organizeImports": "explicit"
     }
