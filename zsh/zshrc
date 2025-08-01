@@ -140,12 +140,11 @@ _lazy_load_plugins() {
   [[ -f $autosuggest_path ]] && source "$autosuggest_path"
   
   # Load syntax highlighting last
-  local ZSH_HIGHLIGHT_FILE="$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-  [[ -f $ZSH_HIGHLIGHT_FILE ]] && source $ZSH_HIGHLIGHT_FILE
+  # local ZSH_HIGHLIGHT_FILE="$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  # [[ -f $ZSH_HIGHLIGHT_FILE ]] && source $ZSH_HIGHLIGHT_FILE
   
   # Load FZF
   source <(fzf --zsh)
-  
   
   # Remove function after first use
   unfunction _lazy_load_plugins
