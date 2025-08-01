@@ -27,6 +27,7 @@ return {
       map('H', vim.lsp.buf.document_highlight, 'Hover Word')
       map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
       map('<leader>fm', vim.lsp.buf.format, '[F]ormat')
+      vim.keymap.set('i', '<C-space>', vim.lsp.completion.get, { buffer = buf, desc = 'LSP: ' .. 'Complete' })
     end
 
     autocmd('LspAttach', {
@@ -41,17 +42,19 @@ return {
           lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
         end
 
-        local highlight_augroup = autogrp('user-lsp-highlight', { clear = false })
-        autocmd({ 'CursorHold', 'CursorHoldI' }, {
-          buffer = ev.buf,
-          group = highlight_augroup,
-          callback = vim.lsp.buf.document_highlight,
-        })
-        autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-          buffer = ev.buf,
-          group = highlight_augroup,
-          callback = vim.lsp.buf.clear_references,
-        })
+        if client:supports_method 'textDocument/documentHighlight' then
+          local highlight_augroup = autogrp('user-lsp-highlight', { clear = false })
+          autocmd({ 'CursorHold', 'CursorHoldI' }, {
+            buffer = ev.buf,
+            group = highlight_augroup,
+            callback = vim.lsp.buf.document_highlight,
+          })
+          autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+            buffer = ev.buf,
+            group = highlight_augroup,
+            callback = vim.lsp.buf.clear_references,
+          })
+        end
 
         keybinds(buf)
         document_color(client, buf)
@@ -184,6 +187,7 @@ return {
           },
         },
       },
+      taplo = {},
       zls = {
         enable_build_on_save = true,
         semantic_tokens = 'partial',
