@@ -2,41 +2,64 @@
 --         NvimDarkMagenta, NvimDarkRed, NvimDarkYellow
 --   Light: NvimLightBlue, NvimLightCyan, NvimLightGreen, NvimLightGrey1-4,
 --          NvimLightMagenta, NvimLightRed, NvimLightYellow
---  :Inspect
+--  :Inspect, :InspectTree
 
 vim.cmd 'colorscheme default'
 
--- Utility to get existing highlight groups
-local function get_hl(group)
-  local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = group })
-  return ok and hl or {}
-end
+local set_hl = vim.api.nvim_set_hl
 
-local highlights_dark = {
-  StatusLine = {
-    fg = 'White',
-    bg = 'NvimDarkGrey2',
+-- Highlight spec: each entry can be:
+--   "GroupName" → link to another group (same for dark/light)
+--   { fg = ..., bg = ... } → color settings for both
+--   { dark = "LinkName", light = "LinkName" }
+--   { dark = { fg = ..., bg = ... }, light = { fg = ..., bg = ... } }
+local highlights_spec = {
+  StatusLine            = {
+    dark  = { fg = 'White', bg = 'NvimDarkGrey2' },
+    light = { fg = 'Black', bg = 'NvimLightGrey2' },
   },
+  StatusLineNC          = "StatusLine",
+
+  ["@comment"]          = "Comment",
+  ["@string"]           = "String",
+  ["@number"]           = "Number",
+  ["@boolean"]          = "Boolean",
+  ["@constant"]         = "Constant",
+  ["@function"]         = "Function",
+  ["@function.builtin"] = "Function",
+  ["@variable"]         = "Identifier",
+  ["@type"]             = "Type",
+  ["@keyword"]          = "Keyword",
+  ["@keyword.function"] = "Keyword",
+  ["@field"]            = "Identifier",
+  ["@property"]         = "Identifier",
+  ["@parameter"]        = "Identifier",
 }
 
-local highlights_light = {
-  StatusLine = {
-    fg = 'Black',
-    bg = 'NvimLightGrey2',
-  },
-}
+local function apply_highlights()
+  local background = vim.o.background
 
-local function extend_default_colorscheme()
-  local highlights = vim.o.background == 'dark' and highlights_dark or highlights_light
-
-  for group, opts in pairs(highlights) do
-    vim.api.nvim_set_hl(0, group, opts)
+  for group, spec in pairs(highlights_spec) do
+    if type(spec) == "string" then
+      set_hl(0, group, { link = spec })
+    elseif type(spec) == "table" then
+      if spec.dark or spec.light then
+        local theme_spec = spec[background] or spec.dark or spec.light
+        if type(theme_spec) == "string" then
+          set_hl(0, group, { link = theme_spec })
+        elseif type(theme_spec) == "table" then
+          set_hl(0, group, theme_spec)
+        end
+      else
+        set_hl(0, group, spec)
+      end
+    end
   end
 end
 
-extend_default_colorscheme()
+apply_highlights()
 
 vim.api.nvim_create_autocmd('ColorScheme', {
   pattern = 'default-extended',
-  callback = extend_default_colorscheme,
+  callback = apply_highlights,
 })

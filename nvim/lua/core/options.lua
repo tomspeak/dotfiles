@@ -49,7 +49,7 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect,fuzzy'
+vim.o.completeopt = 'menu,menuone,noselect,noinsert,popup,fuzzy'
 
 vim.o.title = true
 vim.o.titlestring = '%t%( %M%)' -- title, modified
