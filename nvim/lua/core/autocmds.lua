@@ -48,6 +48,12 @@ vim.api.nvim_create_autocmd('BufEnter', {
 
 vim.api.nvim_create_autocmd('BufNewFile', {
   group = vim.api.nvim_create_augroup('Skeleton', { clear = true }),
-  command = 'silent! 0r ' .. vim.fn.stdpath 'config' .. '/templates/skeleton.%:e',
-  desc = 'If one exists, use a template when opening a new file',
+  callback = function()
+    local ext = vim.fn.expand '%:e'
+    local template = vim.fn.stdpath 'config' .. '/templates/skeleton.' .. ext
+    if vim.fn.filereadable(template) == 1 then
+      vim.cmd('0r ' .. vim.fn.fnameescape(template))
+    end
+  end,
+  desc = 'Load template when creating new file based on filetype',
 })
