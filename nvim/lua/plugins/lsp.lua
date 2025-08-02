@@ -1,6 +1,7 @@
 return {
   'neovim/nvim-lspconfig',
   event = { 'BufReadPre', 'BufNewFile' },
+  dependencies = { 'folke/snacks.nvim', 'saghen/blink.cmp' },
   config = function()
     local lsp = vim.lsp
     local diag = vim.diagnostic
@@ -18,16 +19,19 @@ return {
         vim.keymap.set('n', keys, func, { buffer = buf, desc = 'LSP: ' .. desc })
       end
 
-      map('gd', require('fzf-lua').lsp_definitions, '[G]oto [D]efinition')
-      map('gV', '<cmd>vsplit | lua vim.lsp.buf.definition()<cr>', '[G]oto [V]ertical [D]efinition')
-      map('gr', require('fzf-lua').lsp_references, '[G]oto [R]eferences')
-      map('gI', require('fzf-lua').lsp_implementations, '[G]oto [I]mplementation')
+      map('<leader>ca', vim.lsp.buf.code_action, 'LSP [C]ode [A]ction')
+      map('gd', Snacks.picker.lsp_definitions, '[G]oto [D]efinition')
+      map('gV', '<cmd>vsplit | lua Snacks.picker.lsp_definitions()<cr>', '[G]oto [V]ertical [D]efinition')
+      map('gr', Snacks.picker.lsp_references, '[G]oto [R]eferences')
+      map('gI', Snacks.picker.lsp_implementations, '[G]oto [I]mplementation')
+      map('gy', Snacks.picker.lsp_type_definitions, '[G]oto T[y]pe Definitions')
+      map('<leader>ss', Snacks.picker.lsp_symbols, 'Goto [S]ymbols')
+      map('<leader>sS', Snacks.picker.lsp_workspace_symbols, 'Goto Work[s]pace [S]ymbols')
       map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
       map('K', vim.lsp.buf.hover, 'Hover Documentation')
       map('H', vim.lsp.buf.document_highlight, 'Hover Word')
       map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
       map('<leader>fm', vim.lsp.buf.format, '[F]ormat')
-      vim.keymap.set('i', '<C-space>', vim.lsp.completion.get, { buffer = buf, desc = 'LSP: ' .. 'Complete' })
     end
 
     autocmd('LspAttach', {
@@ -37,10 +41,6 @@ return {
         local buf = ev.buf
 
         vim.lsp.inlay_hint.enable(false, { bufnr = ev.buf })
-
-        if client:supports_method 'textDocument/completion' then
-          lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-        end
 
         if client:supports_method 'textDocument/documentHighlight' then
           local highlight_augroup = autogrp('user-lsp-highlight', { clear = false })
@@ -195,6 +195,7 @@ return {
     }
 
     for server_name, cfg in pairs(servers) do
+      cfg.capabilities = require('blink.cmp').get_lsp_capabilities(cfg.capabilities)
       vim.lsp.config(server_name, cfg)
       vim.lsp.enable(server_name)
     end

@@ -30,7 +30,6 @@ local implementation = (vim.env.IS_WORK == nil) and 'prefer_rust' or 'lua'
 
 return {
   'saghen/blink.cmp',
-  cond = false,
   event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
     {
@@ -47,15 +46,21 @@ return {
   },
   build = 'cargo build --release',
 
-  ---@module 'blink.cmp'
-  ---@type blink.cmp.Config
   opts = {
     keymap = {
       preset = 'default',
       ['<CR>'] = { 'select_and_accept', 'fallback' },
 
+      ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+
       ['<C-n>'] = { 'select_next', 'snippet_forward', 'fallback' },
       ['<C-p>'] = { 'select_prev', 'snippet_backward', 'fallback' },
+
+      ["<S-k>"] = { "scroll_documentation_up", "fallback" },
+      ["<S-j>"] = { "scroll_documentation_down", "fallback" },
+
+      ["<Tab>"] = { "snippet_forward", "fallback" },
+      ["<S-Tab>"] = { "snippet_backward", "fallback" },
     },
     appearance = {
       nerd_font_variant = 'normal',
@@ -67,10 +72,11 @@ return {
         show_on_trigger_character = true,
       },
       keyword = {
-        range = 'full',
+        range = 'prefix',
       },
       list = {
         selection = { preselect = true, auto_insert = false },
+        max_items = 5,
       },
       documentation = {
         window = {
@@ -81,40 +87,48 @@ return {
         auto_show = true,
         auto_show_delay_ms = 500,
       },
-      menu = {
-        min_width = 34,
-        max_height = 10,
-        draw = {
-          align_to = 'cursor',
-
-          padding = 1,
-          gap = 3,
-          columns = {
-            { 'kind_icon', gap = 1, 'label' },
-            { 'label_description' },
-          },
-          components = {
-            kind_icon = {
-              text = function(ctx)
-                return '[' .. kind_map[ctx.kind] .. ']'
-              end,
-            },
-            label = {
-              width = {
-                fill = true,
-                max = 60,
-              },
-            },
-          },
-        },
-      },
+      -- menu = {
+      --   min_width = 34,
+      --   max_height = 10,
+      --   draw = {
+      --     align_to = 'cursor',
+      --
+      --     padding = 1,
+      --     gap = 1,
+      --     columns = {
+      --       { 'kind_icon',        gap = 1, 'label' },
+      --       { 'label_description' },
+      --     },
+      --     components = {
+      --       kind_icon = {
+      --         text = function(ctx)
+      --           return '[' .. kind_map[ctx.kind] .. ']'
+      --         end,
+      --       },
+      --       label = {
+      --         width = {
+      --           fill = true,
+      --           max = 60,
+      --         },
+      --       },
+      --     },
+      --   },
+      -- },
     },
     snippets = { preset = 'luasnip' },
     sources = {
       default = { 'lsp', 'path', 'snippets' },
+      min_keyword_length = 3
     },
     fuzzy = { implementation = implementation },
-    signature = { enabled = true },
+    signature = {
+      enabled = true,
+      sort = {
+        'exact',
+        'score',
+        'sort_text',
+      },
+    },
   },
   opts_extend = { 'sources.default' },
 }

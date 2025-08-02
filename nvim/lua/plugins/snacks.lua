@@ -4,27 +4,46 @@ return {
     priority = 1000,
     lazy = false,
     keys = {
-      -- Top Pickers & Explorer
       {
         '<leader>sf',
         function()
-          Snacks.picker.files()
+          Snacks.picker.files({
+            finder = "files",
+            format = "file",
+            show_empty = true,
+            supports_live = true,
+            layout = "vscode",
+          })
         end,
         desc = 'Find Files',
       },
       {
-        '<leader>,',
+        '<leader><leader>',
         function()
-          Snacks.picker.buffers()
+          Snacks.picker.buffers({
+            layout = "vscode",
+            on_show = function()
+              vim.cmd.stopinsert()
+            end,
+            finder = "buffers",
+            format = "buffer",
+            hidden = false,
+            unloaded = true,
+            current = true,
+            sort_lastused = true,
+            win = {
+              input = {
+                keys = {
+                  ["d"] = "bufdelete",
+                },
+              },
+              list = { keys = { ["d"] = "bufdelete" } },
+            },
+            -- In case you want to override the layout for this keymap
+            -- layout = "ivy",
+          })
         end,
         desc = 'Buffers',
-      },
-      {
-        '<leader>/',
-        function()
-          Snacks.picker.grep()
-        end,
-        desc = 'Grep',
       },
       -- find
       {
@@ -65,6 +84,13 @@ return {
         desc = 'Help Pages',
       },
       {
+        '<leader>hg',
+        function()
+          Snacks.picker.highlights()
+        end,
+        desc = 'Help Pages',
+      },
+      {
         '<leader>sk',
         function()
           Snacks.picker.keymaps()
@@ -72,7 +98,7 @@ return {
         desc = 'Keymaps',
       },
       {
-        '<leader>sR',
+        '<leader>sr',
         function()
           Snacks.picker.resume()
         end,
@@ -87,54 +113,26 @@ return {
       },
       -- LSP
       {
-        'gd',
+        "<leader>gl",
         function()
-          Snacks.picker.lsp_definitions()
+          Snacks.picker.git_log({
+            finder = "git_log",
+            format = "git_log",
+            preview = "git_show",
+            confirm = "git_checkout",
+            layout = "vertical",
+          })
         end,
-        desc = 'Goto Definition',
+        desc = "Git Log",
       },
       {
-        'gD',
+        "<M-b>",
         function()
-          Snacks.picker.lsp_declarations()
+          Snacks.picker.git_branches({
+            layout = "select",
+          })
         end,
-        desc = 'Goto Declaration',
-      },
-      {
-        'gr',
-        function()
-          Snacks.picker.lsp_references()
-        end,
-        nowait = true,
-        desc = 'References',
-      },
-      {
-        'gI',
-        function()
-          Snacks.picker.lsp_implementations()
-        end,
-        desc = 'Goto Implementation',
-      },
-      {
-        'gy',
-        function()
-          Snacks.picker.lsp_type_definitions()
-        end,
-        desc = 'Goto T[y]pe Definition',
-      },
-      {
-        '<leader>ss',
-        function()
-          Snacks.picker.lsp_symbols()
-        end,
-        desc = 'LSP Symbols',
-      },
-      {
-        '<leader>sS',
-        function()
-          Snacks.picker.lsp_workspace_symbols()
-        end,
-        desc = 'LSP Workspace Symbols',
+        desc = "Branches",
       },
     },
     ---@type snacks.Config
@@ -147,13 +145,20 @@ return {
       explorer = { enabled = true },
       indent = { enabled = false },
       input = { enabled = false },
-      picker = { enabled = true },
       notifier = { enabled = false },
       quickfile = { enabled = false },
       scope = { enabled = false },
       scroll = { enabled = false },
       statuscolumn = { enabled = false },
       words = { enabled = false },
+
+      picker = {
+        enabled = true,
+        layout = {
+          preset = "ivy",
+          cycle = false,
+        },
+      },
 
       matcher = {
         frecency = true,
@@ -162,6 +167,13 @@ return {
       icons = {
         files = {
           enabled = false,
+        },
+      },
+
+      formatters = {
+        file = {
+          filename_first = true, -- display filename before the file path
+          truncate = 80,
         },
       },
     },
