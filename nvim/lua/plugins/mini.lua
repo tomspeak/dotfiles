@@ -64,7 +64,21 @@ return {
     event = { 'BufReadPost', 'BufNewFile' },
   },
   { 'echasnovski/mini.move', version = '*', event = { 'BufReadPost', 'BufNewFile' }, opts = {} },
-  { 'echasnovski/mini.pairs', version = '*', event = { 'BufReadPost', 'BufNewFile' }, opts = {} },
+  {
+    'echasnovski/mini.pairs',
+    version = '*',
+    event = { 'BufReadPost', 'BufNewFile' },
+    opts = {
+      modes = { insert = true, command = true, terminal = false },
+      skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+      skip_ts = { "string" },
+      skip_unbalanced = true,
+      markdown = true,
+      mappings = {
+        ["`"] = false,
+      },
+    }
+  },
   {
     'echasnovski/mini.indentscope',
     version = false,
