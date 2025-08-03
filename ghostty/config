@@ -6,13 +6,15 @@ adjust-underline-position = 10%
 adjust-cursor-thickness = 1
 
 font-size = 16
-font-family = Terminus (TTF) 
+#font-family = AverageMono
+#font-family = CPMono_v07
+#font-family = Cutive Mono
 #font-family = Fira Code
-#font-style = Retina
-#font-family = TX-02
+#font-family = Hasklig
 #font-family = Lucida Console
-#font-family = IosevkaInput
 #font-family = Monaspace Neon Var
+#font-family = TX-02
+#font-family = Terminus (TTF) 
 window-title-font-family = TX-02
 font-thicken = false
 font-synthetic-style = false
@@ -22,10 +24,6 @@ font-feature = -liga
 font-feature = -dlig
 
 theme = current-theme
-#background = #282828
-#theme = Black Metal
-#theme = Everforest Dark - Hard
-#theme = Oxocarbon
 
 cursor-style-blink = true
 cursor-style = block
