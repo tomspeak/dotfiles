@@ -71,7 +71,7 @@ return {
     opts = {
       modes = { insert = true, command = true, terminal = false },
       skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
-      skip_ts = { "string" },
+      skip_ts = { "string", "comment" },
       skip_unbalanced = true,
       markdown = true,
       mappings = {
@@ -104,6 +104,7 @@ return {
           "notify",
           "toggleterm",
           "lazyterm",
+          "nvimtree"
         },
         callback = function()
           vim.b.miniindentscope_disable = true
