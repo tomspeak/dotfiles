@@ -80,7 +80,7 @@ return {
       },
       documentation = {
         window = {
-          border = 'solid',
+          border = 'single',
           min_width = 40,
           max_width = 70,
         },
@@ -120,14 +120,16 @@ return {
       default = { 'lsp', 'path', 'snippets' },
       min_keyword_length = 3
     },
-    fuzzy = { implementation = implementation },
-    signature = {
-      enabled = true,
-      sort = {
+    fuzzy = {
+      implementation = implementation,
+      sorts = {
         'exact',
         'score',
         'sort_text',
       },
+    },
+    signature = {
+      enabled = true,
     },
   },
   opts_extend = { 'sources.default' },
