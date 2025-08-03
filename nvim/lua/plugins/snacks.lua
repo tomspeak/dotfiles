@@ -39,8 +39,6 @@ return {
               },
               list = { keys = { ["d"] = "bufdelete" } },
             },
-            -- In case you want to override the layout for this keymap
-            -- layout = "ivy",
           })
         end,
         desc = 'Buffers',
@@ -111,6 +109,13 @@ return {
         end,
         desc = 'Colorschemes',
       },
+      {
+        '<leader>sd',
+        function()
+          Snacks.picker.diagnostics()
+        end,
+        desc = 'Colorschemes',
+      },
       -- LSP
       {
         "<leader>gl",
@@ -124,6 +129,16 @@ return {
           })
         end,
         desc = "Git Log",
+      },
+      {
+        "<leader>gd",
+        function()
+          Snacks.picker.git_diff({
+            finder = "git_diff",
+            preview = "diff",
+          })
+        end,
+        desc = "Git Diff",
       },
       {
         "<M-b>",
