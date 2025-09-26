@@ -50,21 +50,12 @@
   "vim.useSystemClipboard": true,
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-      "before": [
-        "="
-      ],
-      "commands": [
-        "workbench.action.toggleSidebarVisibility"
-      ]
+      "before": ["="],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
     },
     {
-      "before": [
-        "<leader>",
-        "f"
-      ],
-      "commands": [
-        "revealInExplorer"
-      ]
+      "before": ["<leader>", "f"],
+      "commands": ["revealInExplorer"]
     }
   ],
   "window.commandCenter": false,
@@ -113,5 +104,10 @@
     "zig.zls.enableAutofix": true, // Will set the "enable_autofix" config option
     "zig.zls.buildOnSaveStep": "check" // Will set the "build_on_save_step" config option
   },
-  "extensions.ignoreRecommendations": true
+  "extensions.ignoreRecommendations": true,
+  "chat.agent.enabled": false,
+  "chat.commandCenter.enabled": false,
+  "chat.notifyWindowOnConfirmation": false,
+  "telemetry.feedback.enabled": false,
+  "telemetry.editStats.enabled": false
 }
