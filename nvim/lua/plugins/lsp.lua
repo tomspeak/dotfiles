@@ -99,29 +99,6 @@ return {
     }
 
     local servers = {
-      rust_analyzer = {
-        ['rust-analyzer'] = {
-          completion = {
-            postfix = {
-              enable = false,
-            },
-          },
-          cargo = {
-            allFeatures = true,
-            loadOutDirsFromCheck = true,
-            runBuildScripts = true,
-          },
-          checkOnSave = {
-            command = 'clippy',
-          },
-          procMacro = {
-            enable = true,
-            ignored = {
-              ['async-trait'] = { 'async_trait' },
-            },
-          },
-        },
-      },
       clangd = {
         cmd = {
           'clangd',
