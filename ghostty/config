@@ -6,6 +6,7 @@ adjust-underline-position = 10%
 adjust-cursor-thickness = 1
 
 font-size = 16
+font-family = Lilex
 #font-family = AverageMono
 #font-family = CPMono_v07
 #font-family = Cutive Mono
