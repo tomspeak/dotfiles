@@ -23,5 +23,32 @@ return {
   {
     'mcauley-penney/techbase.nvim',
     priority = 1000,
+    lazy = false,
+  },
+  {
+    'Yazeed1s/oh-lucy.nvim',
+    priority = 1000,
+    lazy = false,
+  },
+  {
+    'nyoom-engineering/oxocarbon.nvim',
+    priority = 1000,
+    lazy = false,
+  },
+  {
+    'Mofiqul/vscode.nvim',
+    priority = 1000,
+    lazy = false,
+  },
+  {
+    'rose-pine/neovim',
+    name = "rose-pine",
+    priority = 1000,
+    lazy = false,
+  },
+  {
+    "vague2k/vague.nvim",
+    lazy = false,
+    priority = 1000,
   },
 }
