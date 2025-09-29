@@ -44,6 +44,7 @@ ln -sf "$dotfiles/bash/bashrc" ~/.bashrc
 mkdir -p ~/Library/KeyBindings/
 ln -sf "$dotfiles/DefaultKeyBinding.dict" ~/Library/KeyBindings/
 find "$dotfiles/vscode" -type f -exec ln -sf {} ~/Library/Application\ Support/Code/User/ \;
+ln -sf "$dotfiles/zed/*" ~/.config/zed/
 
 echo "Installing tmux plugins"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
