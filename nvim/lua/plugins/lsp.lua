@@ -28,7 +28,14 @@ return {
       map('<leader>ss', Snacks.picker.lsp_symbols, 'Goto [S]ymbols')
       map('<leader>sS', Snacks.picker.lsp_workspace_symbols, 'Goto Work[s]pace [S]ymbols')
       map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-      map('K', vim.lsp.buf.hover, 'Hover Documentation')
+      map('K', function()
+        vim.lsp.buf.hover {
+          border = "single",
+          max_height = 20,
+          max_width = 130,
+          close_events = { "CursorMoved", "BufLeave", "WinLeave", "LSPDetach" },
+        }
+      end, 'Hover Documentation')
       map('H', vim.lsp.buf.document_highlight, 'Hover Word')
       map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
       map('<leader>fm', vim.lsp.buf.format, '[F]ormat')
@@ -88,14 +95,22 @@ return {
 
     ---@type vim.diagnostic.Opts
     diag.config {
-      underline = true,
-      update_in_insert = false,
-      -- virtual_text = { spacing = 4, source = 'if_many', prefix = '~' },
-      severity_sort = true,
-      float = {
-        border = 'rounded',
-        source = true,
-      },
+      vim.diagnostic.config {
+        virtual_text = false,
+        virtual_lines = {
+          severity = { min = vim.diagnostic.severity.ERROR },
+          current_line = true,
+          format = function(dg)
+            return string.format("%s", dg.message)
+          end,
+        },
+        signs = {
+          severity = { min = vim.diagnostic.severity.WARN },
+        },
+        underline = false,
+        severity_sort = false,
+        update_in_insert = false,
+      }
     }
 
     local servers = {
