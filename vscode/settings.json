@@ -69,7 +69,6 @@
   "zls.enable_inlay_hints": true,
   "zls.enable_snippets": true,
   "zls.warn_style": true,
-  "workbench.preferredDarkColorTheme": "Gruvbox Material Dark",
   "editor.inlineSuggest.fontFamily": "'Zed Mono'",
   "debug.console.fontSize": 14,
   "editor.cursorStyle": "block",
@@ -109,5 +108,7 @@
   "chat.commandCenter.enabled": false,
   "chat.notifyWindowOnConfirmation": false,
   "telemetry.feedback.enabled": false,
-  "telemetry.editStats.enabled": false
+  "telemetry.editStats.enabled": false,
+  "workbench.settings.showAISearchToggle": false,
+  "workbench.preferredDarkColorTheme": "Gruvbox Material Dark"
 }
