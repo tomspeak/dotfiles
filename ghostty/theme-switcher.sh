@@ -15,6 +15,8 @@ system_themes=(
   "N0tch2K"
   "NvimDark"
   "NvimLight"
+  "Atom One Dark"
+  "One Half Dark"
   "Oxocarbon"
   "Vague"
   "nord"
