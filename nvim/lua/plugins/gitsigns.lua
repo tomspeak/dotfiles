@@ -2,28 +2,33 @@ return {
   'lewis6991/gitsigns.nvim',
   event = 'BufReadPost',
   opts = {
-    attach_to_untracked = false,
-    preview_config = {
+    attach_to_untracked     = false,
+    preview_config          = {
       border = 'solid',
       style = 'minimal',
       row = 1,
       col = 1,
     },
-    signcolumn = true,
-    signs = {
-      change = { text = '┋' },
+    signs                   = {
+      add          = { text = '+' },
+      change       = { text = '~' },
+      delete       = { text = '-' },
+      topdelete    = { text = '‾' },
+      changedelete = { text = '≈' },
+      untracked    = { text = '?' },
     },
-    signs_staged = {
-      change = { text = '┋' },
-    },
-    update_debounce = 500,
-    current_line_blame = false,
+    signcolumn              = true,
+    numhl                   = false,
+    linehl                  = false,
+    word_diff               = false,
+    update_debounce         = 500,
+    current_line_blame      = false,
     current_line_blame_opts = {
       virt_text = true,
       virt_text_pos = 'eol',
       delay = 100,
     },
-    on_attach = function(bufnr)
+    on_attach               = function(bufnr)
       local gs = package.loaded.gitsigns
 
       local function map(mode, l, r, opts)
