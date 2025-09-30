@@ -1,17 +1,17 @@
 return {
   {
     'f-person/auto-dark-mode.nvim',
-    priority = 1000,
+    priority = 10000,
     lazy = false,
     opts = {
       update_interval = 30000,
       set_dark_mode = function()
         vim.opt.background = 'dark'
-        vim.cmd.colorscheme 'default-extended'
+        vim.cmd.colorscheme 'onedark'
       end,
       set_light_mode = function()
         vim.opt.background = 'light'
-        vim.cmd.colorscheme 'default-extended'
+        vim.cmd.colorscheme 'vscode'
       end,
     },
   },
@@ -52,7 +52,7 @@ return {
     priority = 1000,
   },
   {
-    "navarasu/onedark.nvim",
+    "olimorris/onedarkpro.nvim",
     lazy = false,
     priority = 1000,
   }
