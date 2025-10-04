@@ -61,5 +61,10 @@ return {
     lazy = false,
     priority = 1000,
     opts = {},
+  },
+  {
+    "slugbyte/lackluster.nvim",
+    lazy = false,
+    priority = 1000,
   }
 }
