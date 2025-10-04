@@ -109,7 +109,7 @@ return {
           severity = { min = vim.diagnostic.severity.WARN },
         },
         underline = false,
-        severity_sort = false,
+        severity_sort = true,
         update_in_insert = false,
       }
     }
