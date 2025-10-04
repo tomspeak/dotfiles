@@ -34,6 +34,7 @@ return {
           max_height = 20,
           max_width = 130,
           close_events = { "CursorMoved", "BufLeave", "WinLeave", "LSPDetach" },
+          focusable = true,
         }
       end, 'Hover Documentation')
       map('H', vim.lsp.buf.document_highlight, 'Hover Word')

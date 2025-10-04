@@ -7,7 +7,7 @@ return {
       update_interval = 30000,
       set_dark_mode = function()
         vim.opt.background = 'dark'
-        vim.cmd.colorscheme 'onedark'
+        vim.cmd.colorscheme 'kanagawa-paper'
       end,
       set_light_mode = function()
         vim.opt.background = 'light'

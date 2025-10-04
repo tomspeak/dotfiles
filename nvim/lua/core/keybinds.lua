@@ -1,64 +1,76 @@
+local keymap = vim.keymap.set --[[@type function]]
+
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 -- Disable `<Space>` so we can use it as <Leader>
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+keymap({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+keymap('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+keymap('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- Handle navigation between windows
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+keymap('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+keymap('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+keymap('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+keymap('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
-vim.keymap.set('n', '<Esc>', function()
+keymap('n', '<Esc>', function()
   vim.cmd 'noh'
   vim.lsp.buf.clear_references()
 end, { desc = 'Clear highlights' })
-vim.keymap.set('n', ';', ':', { desc = 'Enter command mode', nowait = true })
-vim.keymap.set('v', ';', ':', { desc = 'Enter command mode', nowait = true })
-vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = 'Close window' })
-vim.keymap.set('n', '<leader>x', '<cmd> bd <CR>', { desc = 'Close buffer' })
+keymap('n', ';', ':', { desc = 'Enter command mode', nowait = true })
+keymap('v', ';', ':', { desc = 'Enter command mode', nowait = true })
+keymap('n', '<leader>q', ':q<CR>', { desc = 'Close window' })
+keymap('n', '<leader>x', '<cmd> bd <CR>', { desc = 'Close buffer' })
 
 -- NvimTree
-vim.keymap.set('n', '_', '<cmd> NvimTreeFindFile <CR>', { desc = 'Nvimtree Find File', nowait = true })
-vim.keymap.set('n', '-', '<cmd> NvimTreeToggle <CR>', { desc = 'Nvimtree Toggle', nowait = true })
+keymap('n', '_', '<cmd> NvimTreeFindFile <CR>', { desc = 'Nvimtree Find File', nowait = true })
+keymap('n', '-', '<cmd> NvimTreeToggle <CR>', { desc = 'Nvimtree Toggle', nowait = true })
 
 -- Aerial
-vim.keymap.set('n', '<C-_>', '<cmd>AerialToggle<CR>', { desc = 'Aerial Toggle' })
+keymap('n', '<C-_>', '<cmd>AerialToggle<CR>', { desc = 'Aerial Toggle' })
 
 -- Search/Replace under current word
-vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set('v', '<leader>rr', [[:s///gI<Left><Left><Left><Left>]])
+keymap('n', '<Leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+  { desc = 'Search & replace word under cursor', silent = false })
+keymap("v", "<leader>rr", "y:%s/<C-r>0//gc<left><left><left>", { desc = "Search/replace visual" })
 
 -- Stay in visual mode when changing indentation
-vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true })
-vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
+keymap('v', '<', '<gv', { noremap = true, silent = true })
+keymap('v', '>', '>gv', { noremap = true, silent = true })
 
 -- Vertical split
-vim.keymap.set('n', '<Leader>v', vim.cmd.vsplit, { silent = true })
+keymap('n', '<Leader>v', vim.cmd.vsplit, { silent = true })
 
 -- Quicker macro playback
-vim.keymap.set('n', 'Q', '@qj')
-vim.keymap.set('x', 'Q', ':norm @q<CR>')
+keymap('n', 'Q', '@qj')
+keymap('x', 'Q', ':norm @q<CR>')
 
 -- themes / colors
-vim.keymap.set('n', '<Leader>td', ':set background=dark<CR>', { desc = 'Set background dark', noremap = true })
-vim.keymap.set('n', '<Leader>tl', ':set background=light<CR>', { desc = 'Set background light', noremap = true })
+keymap('n', '<Leader>td', ':set background=dark<CR>', { desc = 'Set background dark', noremap = true })
+keymap('n', '<Leader>tl', ':set background=light<CR>', { desc = 'Set background light', noremap = true })
 
 -- Copy file/buffer
 -- copies current buffer file path relative to cwd to register
-vim.keymap.set('n', 'cp', function()
+keymap('n', 'cp', function()
   local path = vim.fn.resolve(vim.fn.fnamemodify(vim.fn.expand '%', ':~:.'))
   vim.fn.setreg('+', path)
 end)
 
 -- copies current buffer filename to register
-vim.keymap.set('n', 'cf', function()
+keymap('n', 'cf', function()
   local filename = vim.fn.resolve(vim.fn.fnamemodify(vim.fn.expand '%', ':t'))
   vim.fn.setreg('+', filename)
 end)
+
+-- append to end of line
+keymap("n", "<Leader>,", ":normal! A,<CR>", { desc = "Append comma", silent = true })
+keymap("n", "<Leader>;", ":normal! A;<CR>", { desc = "Append semicolon", silent = true })
+
+keymap("n", "<Leader>rt", "<cmd>restart<CR>", { desc = "Restart Neovim" })

@@ -12,7 +12,7 @@ return {
             format = "file",
             show_empty = true,
             supports_live = true,
-            layout = "vscode",
+            layout = "vscode"
           })
         end,
         desc = 'Find Files',
