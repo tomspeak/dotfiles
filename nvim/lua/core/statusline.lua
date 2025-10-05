@@ -21,22 +21,16 @@ _G.Statusline_filename = function()
   return fname ~= '' and fname or '[No Name]'
 end
 
-_G.Statusline_diagnostics = function()
-  local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
-  local warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
-  return string.format('E:%d W:%d', errors, warnings)
-end
-
--- Set statusline normally
 vim.opt.statusline = table.concat {
   ' %{v:lua.Statusline_filename()} %m %r',
   ' %=',
-  ' %{v:lua.Statusline_diagnostics()}',
+  ' %(%{v:lua.vim.diagnostic.status()} %)',
   ' (%{v:lua.git_branch()}) ',
 }
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
   pattern = '*',
+
   callback = function()
     vim.schedule(function()
       if vim.bo.filetype == 'ministarter' or vim.fn.bufname('%'):match 'starter' then
