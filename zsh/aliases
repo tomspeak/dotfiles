@@ -94,7 +94,6 @@ alias ci="composer install"
 alias cr="composer require"
 alias crd="composer require --dev"
 
-alias n='nvim'
 
 alias yta=yta_func
 alias mkcd=mkcd_func
@@ -110,3 +109,29 @@ alias zr="zig run"
 alias zf="zig fetch"
 
 alias m="make"
+
+# rust cargo
+alias c="cargo"
+alias cr="cargo run"
+alias cb="cargo build"
+alias cc="cargo check"
+alias cdoc="cargo doc"
+
+alias n='nvim'
+
+nnvim_update() {
+  mkdir -p "$HOME/.bin/" 
+  mkdir -p "$HOME/.nnvim-nightly/"
+  cd "$HOME/.nnvim-nightly" || return 1
+  curl -L -o nvim-macos-arm64.tar.gz https://github.com/neovim/neovim/releases/download/nightly/nvim-macos-arm64.tar.gz
+  rm -rf nvim-nightly && mkdir nvim-nightly
+  tar -xzf nvim-macos-arm64.tar.gz -C nvim-nightly --strip-components=1
+  chmod +x nvim-nightly/bin/nvim
+  xattr -c nvim-nightly/bin/nvim 2>/dev/null
+  ln -sf "$HOME/.nnvim-nightly/nvim-nightly/bin/nvim" "$HOME/.bin/nnvim"
+  rm -f *.tar.gz
+  echo "-> Installed Neovim nightly → $HOME/.bin/nnvim"
+}
+
+alias nnightly="nnvim_update"
+alias nn="$HOME/.bin/nnvim"
