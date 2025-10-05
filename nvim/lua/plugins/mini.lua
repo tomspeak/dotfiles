@@ -26,6 +26,10 @@ local headers = {
     ' Because we want someone to get it right this time.',
     ' But not me... Personally speaking I can\'t wait to watch life tear you apart."',
   }, '\n'),
+  table.concat({
+    '"There is a point to all of this,',
+    ' and its always been You."',
+  }, '\n'),
 }
 local function random_elem(tb)
   math.randomseed(os.time())
