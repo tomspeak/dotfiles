@@ -20,9 +20,9 @@ window-title-font-family = TX-02
 font-thicken = false
 font-synthetic-style = false
 
-font-feature = -calt
-font-feature = -liga
-font-feature = -dlig
+font-feature = +calt
+font-feature = +liga
+font-feature = +dlig
 
 theme = current-theme
 
