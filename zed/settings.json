@@ -7,6 +7,11 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "languages": {
+    "HTML": {
+      "format_on_save": "off"
+    }
+  },
   "ui_font_family": ".ZedMono",
   "outline_panel": {
     "dock": "right"
@@ -25,6 +30,11 @@
     "diagnostics": false,
     "metrics": false
   },
+  "git": {
+    "git_gutter": "tracked_files"
+  },
+  "wrap_guides": [90],
+
   "buffer_font_size": 17,
   "vim_mode": true,
   "relative_line_numbers": true,
@@ -34,6 +44,9 @@
   "vertical_scroll_margin": 999,
   "tab_bar": {
     "show": true
+  },
+  "preview_tabs": {
+    "enabled": false
   },
   "toolbar": {
     "breadcrumbs": false,
@@ -72,12 +85,14 @@
   },
   "disable_ai": false,
   "agent": {
+    "use_modifier_to_send": true,
+    "play_sound_when_agent_done": true,
     "default_profile": "ask",
     "default_model": {
       "provider": "ollama",
       "model": "qwen2.5-coder:7b"
     },
-    "enabled": false,
+    "enabled": true,
     "enable_feedback": false
   },
   "language_models": {

@@ -9,6 +9,10 @@
   {
     "context": "(Workspace && !Editor && !Terminal) || (Editor && VimControl)",
     "bindings": {
+      "shift-h": "pane::ActivatePreviousItem",
+      "shift-l": "pane::ActivateNextItem",
+      "shift-q": "pane::CloseActiveItem",
+
       "space s f": "file_finder::Toggle",
       "space s p": [
         "projects::OpenRecent",
@@ -68,9 +72,6 @@
   {
     "context": "Workspace",
     "bindings": {
-      "shift-h": "pane::ActivatePreviousItem",
-      "shift-l": "pane::ActivateNextItem",
-      "shift-q": "pane::CloseActiveItem",
       "ctrl-q": "pane::CloseActiveItem",
       "ctrl-h": "workspace::ActivatePaneLeft",
       "ctrl-l": "workspace::ActivatePaneRight",
