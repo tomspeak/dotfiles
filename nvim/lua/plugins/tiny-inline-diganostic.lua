@@ -3,7 +3,12 @@ return {
   event = "VeryLazy",
   priority = 1000,
   config = function()
-    vim.diagnostic.config({ update_in_insert = false, virtual_text = false, severity_sort = true })
+    vim.diagnostic.config({
+      update_in_insert = false,
+      virtual_text = false,
+      severity_sort = true,
+      severity = { vim.diagnostic.severity.ERROR, vim.diagnostic.severity.WARN }
+    })
 
     require("tiny-inline-diagnostic").setup({
       preset = "classic",
@@ -11,7 +16,7 @@ return {
         show_source = {
           enabled = false,
           -- Show source only when multiple sources exist for the same diagnostic
-          if_many = false,
+          if_many = true,
         },
         set_arrow_to_diag_color = true,
         throttle = 0,
@@ -36,8 +41,6 @@ return {
 
         severity = {
           vim.diagnostic.severity.ERROR,
-          vim.diagnostic.severity.WARN,
-          vim.diagnostic.severity.INFO,
         },
       },
     })
