@@ -94,26 +94,6 @@ return {
       restart_lsp()
     end, {})
 
-    ---@type vim.diagnostic.Opts
-    diag.config {
-      vim.diagnostic.config {
-        virtual_text = false,
-        virtual_lines = {
-          severity = { min = vim.diagnostic.severity.ERROR },
-          current_line = true,
-          format = function(dg)
-            return string.format("%s", dg.message)
-          end,
-        },
-        signs = {
-          severity = { min = vim.diagnostic.severity.WARN },
-        },
-        underline = false,
-        severity_sort = true,
-        update_in_insert = false,
-      }
-    }
-
     local servers = {
       clangd = {
         cmd = {
