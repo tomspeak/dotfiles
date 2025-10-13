@@ -1,4 +1,4 @@
-local keymap = vim.keymap.set --[[@type function]]
+local keymap = vim.keymap.set
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
