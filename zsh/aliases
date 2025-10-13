@@ -146,3 +146,45 @@ alias nn='nvim'
 alias nnu="nnvim_update"
 alias n="$HOME/.bin/nnvim"
 alias nn='nvim'
+
+
+ai_commit() {
+  set -e
+
+  if git diff --cached --quiet; then
+    echo "❌ No staged changes. Please run 'git add .' first."
+    return 1
+  fi
+
+    GIT_PAGER=cat git diff --cached --no-color --unified=3 | \
+  ollama run gemma3:12b --format '{"type": "object", "properties": {"commit_title": {"type": "string"}, "commit_body": {"type": "string"}}}' <<EOF | \
+  jq -r '"\(.commit_title)\n\n\(.commit_body)"' | \
+  git commit -F -
+Given the git diff above, output a conventional commit message consisting of:
+
+- a short descriptive title (max 12 words, imperative mood, lowercase)
+- a list explaining why the changes were made or what they improve
+
+Do not use backticks, quotes, or markdown.
+Separate title and body with a single blank line.
+EOF
+
+#   GIT_PAGER=cat git diff --cached --no-color --unified=3 | \
+#   ollama run qwen2.5-coder:7b <<EOF | git commit -F -
+# Given a git diff above, output a convential commit message consistent of:
+#
+# - a short descriptive title (format: (area of code, e.g. nvim, ui-component name, service router) max 12 words, imperative mood, lowercase)
+# - a list format explaination of why the changes were made or what it improves. 
+#
+# Do *not* output backticks, quotes, markdown, only plain text content.  You must output in the format of a convential git commit with no additional styling. Separate title and body with a single blank line.
+#
+# The format is as follows:
+#
+# {title}
+#
+# {body}
+#
+# EOF
+}
+
+alias ai="ai_commit"
