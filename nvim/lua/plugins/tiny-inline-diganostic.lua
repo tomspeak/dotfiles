@@ -6,7 +6,7 @@ return {
     vim.diagnostic.config({
       update_in_insert = false,
       virtual_text = false,
-      severity_sort = true,
+      severity_sort = false,
       severity = { vim.diagnostic.severity.ERROR, vim.diagnostic.severity.WARN, vim.diagnostic.severity.HINT }
     })
 
@@ -39,5 +39,7 @@ return {
         },
       },
     })
+
+    vim.diagnostic.open_float = require("tiny-inline-diagnostic.override").open_float
   end
 }
