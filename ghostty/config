@@ -6,15 +6,12 @@ adjust-underline-position = 10%
 adjust-cursor-thickness = 1
 
 font-size = 16
-font-family = Lilex
-#font-family = AverageMono
 #font-family = CPMono_v07
-#font-family = Cutive Mono
 #font-family = Fira Code
 #font-family = Hasklig
 #font-family = Lucida Console
 #font-family = Monaspace Neon Var
-#font-family = TX-02
+font-family = TX-02
 #font-family = Terminus (TTF) 
 window-title-font-family = TX-02
 font-thicken = false
@@ -43,9 +40,5 @@ adjust-cell-height = 35%
 macos-non-native-fullscreen = true
 macos-titlebar-style = hidden
 macos-option-as-alt = true
-
-keybind = global:alt+`=toggle_quick_terminal
-quick-terminal-position = top
-quick-terminal-screen = mouse
 
 confirm-close-surface = false
