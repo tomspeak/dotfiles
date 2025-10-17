@@ -121,8 +121,8 @@ nnvim_update() {
   local orig_dir="$PWD"
 
   mkdir -p "$HOME/.bin/" 
-  mkdir -p "$HOME/.nnvim-nightly/"
-  cd "$HOME/.nnvim-nightly" || return 1
+  mkdir -p "$HOME/.nvim-nightly/"
+  cd "$HOME/.nvim-nightly" || return 1
 
   curl -L -o nvim-macos-arm64.tar.gz https://github.com/neovim/neovim/releases/download/nightly/nvim-macos-arm64.tar.gz
 
@@ -131,22 +131,17 @@ nnvim_update() {
   chmod +x nvim-nightly/bin/nvim
   xattr -c nvim-nightly/bin/nvim 2>/dev/null
 
-  ln -sf "$HOME/.nnvim-nightly/nvim-nightly/bin/nvim" "$HOME/.bin/nnvim"
+  ln -sf "$HOME/.nvim-nightly/nvim-nightly/bin/nvim" "$HOME/.bin/nvim"
   rm -f *.tar.gz
 
-  echo "-> Installed Neovim nightly → $HOME/.bin/nnvim"
+  echo "-> Installed Neovim nightly → $HOME/.bin/nvim"
 
   cd "$orig_dir" || return 1
 }
 
 alias nnu="nnvim_update"
-alias n="$HOME/.bin/nnvim"
+alias n="$HOME/.bin/nvim"
 alias nn='nvim'
-
-alias nnu="nnvim_update"
-alias n="$HOME/.bin/nnvim"
-alias nn='nvim'
-
 
 ai_commit() {
   set -e
