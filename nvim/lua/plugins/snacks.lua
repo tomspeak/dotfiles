@@ -29,12 +29,12 @@ return {
             format = "buffer",
             hidden = false,
             unloaded = true,
-            current = true,
+            current = false,
             sort_lastused = true,
             win = {
               input = {
                 keys = {
-                  ["d"] = "bufdelete",
+                  ["<c-x>"] = { "bufdelete", mode = { "n", "i" } },
                 },
               },
               list = { keys = { ["d"] = "bufdelete" } },
