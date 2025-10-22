@@ -66,5 +66,10 @@ return {
     "slugbyte/lackluster.nvim",
     lazy = false,
     priority = 1000,
+  },
+  {
+    "p00f/alabaster.nvim",
+    lazy = false,
+    priority = 1000,
   }
 }
