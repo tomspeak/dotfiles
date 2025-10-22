@@ -2,8 +2,13 @@ function new-tmux-from-dir-name {
   tmux -u new-session -As `basename $PWD`
 }
 
-function yta_func() {
-        yt-dlp -f bestaudio --audio-format m4a --embed-thumbnail --add-metadata --metadata-from-title "%(title)s" --output "%(title)s.%(ext)s" -x "$1"
+yta_func() {
+    yt-dlp -x --audio-format m4a --audio-quality 0 \
+        --embed-thumbnail --add-metadata \
+        --metadata-from-title "%(title)s" \
+        --cookies-from-browser "brave:Default" \
+        --output "%(title)s.%(audio_ext)s" \
+        "$1"
 }
 
 function mkcd_func() {
