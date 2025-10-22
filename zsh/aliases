@@ -116,6 +116,7 @@ alias cr="cargo run"
 alias cb="cargo build"
 alias cc="cargo check"
 alias cdoc="cargo doc"
+alias ct="cargo test"
 
 nnvim_update() {
   local orig_dir="$PWD"
