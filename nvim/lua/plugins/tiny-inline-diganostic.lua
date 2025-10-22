@@ -7,7 +7,11 @@ return {
       update_in_insert = false,
       virtual_text = false,
       severity_sort = false,
-      severity = { vim.diagnostic.severity.ERROR, vim.diagnostic.severity.WARN, vim.diagnostic.severity.HINT }
+      signs = false,
+      severity = { vim.diagnostic.severity.ERROR },
+      underline = {
+        severity = { min = vim.diagnostic.severity.ERROR },
+      },
     })
 
     require("tiny-inline-diagnostic").setup({
@@ -20,6 +24,7 @@ return {
           enabled = false,
           if_many = true,
         },
+
         set_arrow_to_diag_color = true,
         throttle = 0,
         softwrap = 30,
@@ -29,13 +34,12 @@ return {
 
         -- Manage how diagnostic messages handle overflow
         overflow = {
-          mode = "none",
-          padding = 0,
+          mode = "wrap",
+          padding = 2,
         },
 
         severity = {
           vim.diagnostic.severity.ERROR,
-          vim.diagnostic.severity.HINT
         },
       },
     })
