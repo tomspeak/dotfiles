@@ -52,6 +52,9 @@ return {
       map('H', vim.lsp.buf.document_highlight, 'Hover Word')
       map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
       map('<leader>fm', vim.lsp.buf.format, '[F]ormat')
+      map('<leader>ti', function()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = buf }))
+      end, 'Toggle Inlay Hints')
     end
 
     autocmd('LspAttach', {

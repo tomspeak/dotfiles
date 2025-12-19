@@ -52,7 +52,8 @@ vim.o.inccommand = 'split'
 vim.o.incsearch = true
 vim.o.hlsearch = true
 vim.o.cursorline = true
-vim.o.lazyredraw = true -- Do not redraw during macros, good performance increase
+-- NOTE: lazyredraw disabled because it conflicts with inccommand live preview
+-- vim.o.lazyredraw = true
 vim.o.undolevels = 200
 vim.o.scrolloff = 999
 vim.o.clipboard = 'unnamed,unnamedplus' -- make vim use system clipboard

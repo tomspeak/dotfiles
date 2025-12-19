@@ -74,3 +74,17 @@ keymap("n", "<Leader>,", ":normal! A,<CR>", { desc = "Append comma", silent = tr
 keymap("n", "<Leader>;", ":normal! A;<CR>", { desc = "Append semicolon", silent = true })
 
 keymap("n", "<Leader>rt", "<cmd>restart<CR>", { desc = "Restart Neovim" })
+
+-- Make/Build
+keymap('n', '<leader>m', '<cmd>Make<CR>', { desc = 'Run makeprg' })
+keymap('n', '<leader>M', '<cmd>Make!<CR>', { desc = 'Run makeprg (background)' })
+
+-- Quickfix navigation
+keymap('n', '[q', '<cmd>cprev<CR>', { desc = 'Previous quickfix' })
+keymap('n', ']q', '<cmd>cnext<CR>', { desc = 'Next quickfix' })
+keymap('n', '<leader>co', '<cmd>copen<CR>', { desc = 'Open quickfix' })
+keymap('n', '<leader>cc', '<cmd>cclose<CR>', { desc = 'Close quickfix' })
+
+-- Terminal
+keymap('n', '<leader>tt', '<cmd>terminal<CR>', { desc = 'Open terminal' })
+keymap('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })

@@ -154,3 +154,6 @@ zle-line-init() {
   zle -D zle-line-init
 }
 zle -N zle-line-init
+
+# opencode
+export PATH=/Users/t/.opencode/bin:$PATH

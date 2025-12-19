@@ -42,7 +42,7 @@ _G.Statusline_lsp = function()
   for _, client in ipairs(clients) do
     table.insert(names, client.name)
   end
-  return '[LSP: ' .. table.concat(names, ', ') .. ']'
+  return '[' .. table.concat(names, ', ') .. ']'
 end
 
 -- Word count for prose files

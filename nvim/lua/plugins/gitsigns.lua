@@ -66,6 +66,20 @@ return {
         gs.blame_line { full = true }
       end, { desc = 'git blame line full' })
 
+      -- Stage/Reset hunks
+      map('n', '<leader>hs', gs.stage_hunk, { desc = 'Stage hunk' })
+      map('n', '<leader>hr', gs.reset_hunk, { desc = 'Reset hunk' })
+      map('v', '<leader>hs', function()
+        gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') }
+      end, { desc = 'Stage selection' })
+      map('v', '<leader>hr', function()
+        gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') }
+      end, { desc = 'Reset selection' })
+      map('n', '<leader>hS', gs.stage_buffer, { desc = 'Stage buffer' })
+      map('n', '<leader>hR', gs.reset_buffer, { desc = 'Reset buffer' })
+      map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'Undo stage hunk' })
+      map('n', '<leader>hp', gs.preview_hunk, { desc = 'Preview hunk' })
+
       -- Toggles
       map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'toggle git blame line' })
       map('n', '<leader>tD', gs.toggle_deleted, { desc = 'toggle git show deleted' })

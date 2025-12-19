@@ -66,6 +66,13 @@ return {
       end,
       desc = 'Debug: See last session result.',
     },
+    {
+      '<leader>dc',
+      function()
+        require('dap').run_to_cursor()
+      end,
+      desc = 'Debug: Run to Cursor',
+    },
   },
   config = function()
     local dap, dapui, dapvt = require 'dap', require 'dapui', require 'nvim-dap-virtual-text'
