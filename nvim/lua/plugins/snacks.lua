@@ -149,6 +149,41 @@ return {
         end,
         desc = "Branches",
       },
+      {
+        "<leader>gc",
+        function()
+          Snacks.picker.git_log({
+            finder = "git_log",
+            format = "git_log",
+            preview = "git_show",
+            layout = "vertical",
+          })
+        end,
+        desc = "Git Commit History",
+      },
+      {
+        "<leader>gS",
+        function()
+          vim.cmd "Git stash"
+        end,
+        desc = "Stash changes",
+      },
+      {
+        "<leader>gP",
+        function()
+          vim.ui.input(
+            { prompt = "Stash index to pop (or leave blank for latest): " },
+            function(input)
+              if input then
+                vim.cmd("Git stash pop " .. input)
+              else
+                vim.cmd "Git stash pop"
+              end
+            end
+          )
+        end,
+        desc = "Unstash changes",
+      },
     },
     ---@type snacks.Config
     opts = {

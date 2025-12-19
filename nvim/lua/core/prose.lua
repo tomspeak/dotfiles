@@ -10,7 +10,7 @@ local function enable_soft()
 
   local punctuations = { ",", ".", "?", "!" }
   for _, p in ipairs(punctuations) do
-    vim.keymap.set("i", p, p .. "<C-g>u", { buffer = true })
+    vim.keymap.set("i", p, p .. "<C-g>u", { buffer = true, desc = "Add break after " .. p })
   end
 end
 
@@ -27,6 +27,13 @@ local function setup_commands()
   api.nvim_buf_create_user_command(0, "PencilSoft", function()
     enable_soft()
   end, { desc = "Switch to soft-wrap mode" })
+
+  -- Word count command for prose
+  api.nvim_buf_create_user_command(0, "WordCount", function()
+    local words = vim.fn.wordcount().words
+    local chars = vim.fn.wordcount().chars
+    print(string.format("Words: %d | Characters: %d", words, chars))
+  end, { desc = "Show word and character count" })
 end
 
 api.nvim_create_autocmd("FileType", {
