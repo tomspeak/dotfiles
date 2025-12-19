@@ -139,11 +139,7 @@ _lazy_load_plugins() {
   ZSH_AUTOSUGGEST_USE_ASYNC=true
   local autosuggest_path="$HOME/dotfiles/deps/zsh-autosuggestions/zsh-autosuggestions.zsh"
   [[ -f $autosuggest_path ]] && source "$autosuggest_path"
-  
-  # Load syntax highlighting last
-  # local ZSH_HIGHLIGHT_FILE="$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-  # [[ -f $ZSH_HIGHLIGHT_FILE ]] && source $ZSH_HIGHLIGHT_FILE
-  
+
   # Load FZF
   source <(fzf --zsh)
   

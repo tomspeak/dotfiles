@@ -169,10 +169,10 @@ return {
       type = 'server',
       port = '${port}',
       executable = {
-        command = vim.fn.expand '~/dotfiles/dependencies/codelldb/extension/adapter/codelldb',
+        command = vim.fn.expand '~/dotfiles/deps/codelldb/extension/adapter/codelldb',
         args = { '--port', '${port}' },
         env = {
-          LLDB_LIBRARY_PATH = vim.fn.expand '~/dotfiles/dependencies/codelldb/extension/lldb/lib',
+          LLDB_LIBRARY_PATH = vim.fn.expand '~/dotfiles/deps/codelldb/extension/lldb/lib',
         },
       },
     }

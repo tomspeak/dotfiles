@@ -9,12 +9,12 @@ local headers = {
     '“... no single, individual moment is in and of itself unendurable.”',
   }, '\n'),
   table.concat({
-    '“Gentlemen, welcome to the world of reality,                 ',
-    ' There is no audience. No one to appluad, to admire.                ',
+    '"Gentlemen, welcome to the world of reality,                 ',
+    ' There is no audience. No one to applaud, to admire.                ',
     ' No one to see you. Do you understand?                ',
     ' Here is the truth: actual heroism receives no ovation, entertains no one.                ',
     ' No one queues up to see it.                ',
-    ' No one is interested.”',
+    ' No one is interested."',
   }, '\n'),
   table.concat({
     '"So we decide to start again.',

@@ -1,8 +1,5 @@
 return {
   'nvim-tree/nvim-tree.lua',
-  dependencies = {
-    'nvim-lua/plenary.nvim',
-  },
   cmd = { 'NvimTreeToggle', 'NvimTreeOpen', 'NvimTreeFocus', 'NvimTreeFindFile', 'NvimTreeFindFileToggle' },
   opts = {
     -- don't disable netwr, we need it for :GBrowse (rhubarb/fugitive)

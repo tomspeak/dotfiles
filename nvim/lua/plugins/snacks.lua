@@ -114,7 +114,7 @@ return {
         function()
           Snacks.picker.diagnostics()
         end,
-        desc = 'Colorschemes',
+        desc = 'Diagnostics',
       },
       -- LSP
       {

@@ -30,7 +30,7 @@ local function setup_commands()
 end
 
 api.nvim_create_autocmd("FileType", {
-  pattern = { "markdown", "text", "rst" },
+  pattern = { "markdown", "text", "rst", "txt", "tex", "mdx", "gitcommit" },
   callback = function()
     enable_soft()
     setup_commands()

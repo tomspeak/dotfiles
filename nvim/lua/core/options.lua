@@ -6,9 +6,6 @@ vim.cmd [[set noruler]]
 -- hide key presses showing up in cmd line (e.g. Leader = <20>, etc.
 vim.cmd [[set noshowcmd]]
 
--- Set highlight on search
-vim.o.hlsearch = false
-
 -- Disable all folding
 vim.cmd [[set nofoldenable]]
 
@@ -95,13 +92,3 @@ vim.opt.breakindent = true
 
 -- disable nvim intro
 vim.opt.shortmess:append 'sI'
-
--- Disable plugins shipped with neovim
-vim.g.loaded_2html_plugin = 0
-vim.g.loaded_gzip = 0
-vim.g.loaded_matchit = 0
-vim.g.loaded_tar = 0
-vim.g.loaded_tarPlugin = 0
-vim.g.loaded_tutor_mode_plugin = 0
-vim.g.loaded_zip = 0
-vim.g.loaded_zipPlugin = 0

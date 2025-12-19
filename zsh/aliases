@@ -89,9 +89,9 @@ alias at="php artisan test"
 alias atink="php artisan tinker"
 
 #composer
-alias c="composer"
+alias comp="composer"
 alias ci="composer install"
-alias cr="composer require"
+alias creq="composer require"
 alias crd="composer require --dev"
 
 

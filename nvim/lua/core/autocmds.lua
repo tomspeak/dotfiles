@@ -1,17 +1,3 @@
--- Enable spell checking for certain file types
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  group = vim.api.nvim_create_augroup('edit_text', { clear = true }),
-  pattern = { '*.txt', '*.md', '*.tex', '*.mdx', '*.rst', 'txt', 'gitcommit' },
-  desc = 'Enable spell checking and text wrapping for certain filetypes',
-  callback = function()
-    vim.opt.spell = true
-    vim.opt.spelllang = 'en'
-    vim.opt.wrap = true
-    vim.opt.linebreak = true
-    vim.opt.textwidth = 0
-  end,
-})
-
 -- Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {

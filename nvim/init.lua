@@ -24,6 +24,7 @@ require('lazy').setup {
   performance = {
     rtp = {
       disabled_plugins = {
+        '2html_plugin',
         'gzip',
         'matchit',
         'matchparen',
@@ -31,6 +32,8 @@ require('lazy').setup {
         'tarPlugin',
         'tohtml',
         'tutor',
+        'tutor_mode_plugin',
+        'zipPlugin',
       },
     },
   },

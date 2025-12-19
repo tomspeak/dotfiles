@@ -16,6 +16,7 @@ return {
       opts = {},
     },
   },
+  -- Requires: cargo (rustup)
   build = 'cargo build --release',
 
   opts = {

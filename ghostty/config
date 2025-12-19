@@ -6,16 +6,17 @@ adjust-underline-position = 10%
 adjust-cursor-thickness = 1
 
 font-size = 16
+font-family = Berkeley Mono 
 #font-family = CPMono_v07
 #font-family = Fira Code
-font-family = CommitMono
+#font-family = CommitMono
 #font-family = Hasklig
 #font-family = Lucida Console
 #font-family = Monaspace Neon Var
 #font-family = TX-02
 #font-family = Terminus (TTF) 
 window-title-font-family = TX-02
-font-thicken = false
+font-thicken = true
 font-synthetic-style = false
 
 font-feature = +calt
