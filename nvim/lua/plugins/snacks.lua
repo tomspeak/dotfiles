@@ -184,6 +184,13 @@ return {
         end,
         desc = "Unstash changes",
       },
+      {
+        "z=",
+        function()
+          Snacks.picker.spelling()
+        end,
+        desc = "Spelling suggestions",
+      },
     },
     ---@type snacks.Config
     opts = {
