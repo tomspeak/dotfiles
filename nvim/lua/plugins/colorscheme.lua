@@ -7,7 +7,7 @@ return {
       update_interval = 30000,
       set_dark_mode = function()
         vim.opt.background = 'dark'
-        vim.cmd.colorscheme 'kanagawa-paper'
+        vim.cmd.colorscheme 'rose-pine-moon'
       end,
       set_light_mode = function()
         vim.opt.background = 'light'
@@ -17,11 +17,6 @@ return {
   },
   {
     'RostislavArts/naysayer.nvim',
-    priority = 1000,
-    lazy = false,
-  },
-  {
-    'mcauley-penney/techbase.nvim',
     priority = 1000,
     lazy = false,
   },
@@ -37,12 +32,6 @@ return {
   },
   {
     'Mofiqul/vscode.nvim',
-    priority = 1000,
-    lazy = false,
-  },
-  {
-    'rose-pine/neovim',
-    name = "rose-pine",
     priority = 1000,
     lazy = false,
   },
@@ -63,13 +52,12 @@ return {
     opts = {},
   },
   {
-    "slugbyte/lackluster.nvim",
-    lazy = false,
-    priority = 1000,
+    "rose-pine/neovim",
+    name = "rose-pine",
+    opts = {
+      styles = {
+        italic = false,
+      },
+    }
   },
-  {
-    "p00f/alabaster.nvim",
-    lazy = false,
-    priority = 1000,
-  }
 }

@@ -2,7 +2,7 @@
   "[python]": {
     "editor.formatOnType": true
   },
-  "editor.fontFamily": "TX-02, 'Monaspace Neon Var',  Berkeley Mono, Cascadia Code, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "'TX-02', 'Monaspace Neon Var',  Berkeley Mono, Cascadia Code, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 20,
   "editor.lineHeight": 1.5,
   "editor.inlineSuggest.enabled": true,
@@ -110,5 +110,5 @@
   "telemetry.feedback.enabled": false,
   "telemetry.editStats.enabled": false,
   "workbench.settings.showAISearchToggle": false,
-  "workbench.preferredDarkColorTheme": "Gruvbox Material Dark"
+  "workbench.preferredDarkColorTheme": "One Dark Pro Flat"
 }

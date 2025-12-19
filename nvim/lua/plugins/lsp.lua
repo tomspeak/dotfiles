@@ -14,6 +14,18 @@ return {
       end
     end
 
+    vim.diagnostic.config({
+      update_in_insert = false,
+      virtual_text = false,
+      virtual_lines = false,
+      severity_sort = true,
+      signs = true,
+      severity = { vim.diagnostic.severity.ERROR },
+      -- underline = {
+      --   severity = { min = vim.diagnostic.severity.ERROR },
+      -- },
+    })
+
     local keybinds = function(buf)
       local map = function(keys, func, desc)
         vim.keymap.set('n', keys, func, { buffer = buf, desc = 'LSP: ' .. desc })

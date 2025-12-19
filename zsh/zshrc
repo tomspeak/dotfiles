@@ -47,6 +47,7 @@ path=(
   ~/.composer/vendor/bin
   "${pwd}/node_modules/.bin"
   "$HOME/.bin"
+  ~/.local/bin
   ~/workspace/zig/zls/zig-out/bin
   "${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
   $path

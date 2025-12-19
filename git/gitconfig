@@ -12,8 +12,8 @@
   clean = git media clean %f
   smudge = git media smudge %f
 [user]
-	email = tom@speak.sh
-	name = Tom Speak
+	email = tomspeak@users.noreply.github.com
+	name = tom speak
 [core]
   editor = nvim
 	pager = diff-so-fancy | less --tabs=4 -RF

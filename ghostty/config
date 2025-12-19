@@ -8,10 +8,11 @@ adjust-cursor-thickness = 1
 font-size = 16
 #font-family = CPMono_v07
 #font-family = Fira Code
+font-family = CommitMono
 #font-family = Hasklig
 #font-family = Lucida Console
 #font-family = Monaspace Neon Var
-font-family = TX-02
+#font-family = TX-02
 #font-family = Terminus (TTF) 
 window-title-font-family = TX-02
 font-thicken = false
@@ -42,3 +43,4 @@ macos-titlebar-style = hidden
 macos-option-as-alt = true
 
 confirm-close-surface = false
+keybind = shift+enter=text:\x1b\r
