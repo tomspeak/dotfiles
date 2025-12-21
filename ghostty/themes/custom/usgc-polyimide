@@ -1,0 +1,27 @@
+# USGC-POLYIMIDE-GT
+# Ghostty color scheme (Amber scheme)
+# Part Number: 5200-030
+
+background = #000000
+foreground = #FFBF00
+cursor-color = #00A645
+cursor-text = #000000
+selection-background = #000066
+selection-foreground = #00FFFF
+
+palette = 0=#262626
+palette = 1=#CC0404
+palette = 2=#C4C400
+palette = 3=#C4C400
+palette = 4=#6B4099
+palette = 5=#EB5AB9
+palette = 6=#34C9C9
+palette = 7=#E8E8E8
+palette = 8=#737373
+palette = 9=#FF0000
+palette = 10=#FFFF00
+palette = 11=#FFBF00
+palette = 12=#6B7ADB
+palette = 13=#EB7AEB
+palette = 14=#7BDEDE
+palette = 15=#FFFFFF
