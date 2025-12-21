@@ -29,51 +29,9 @@ alias yo="yarn outdated"
 alias yui="yarn upgrade-interactive"
 
 # tmux
-ta() {
-  if ! tmux has-session 2>/dev/null; then
-    echo "No tmux sessions found."
-    return 1
-  fi
-
-  local session
-  session=$(tmux list-sessions \
-    -F "#{session_name} (#{session_windows} windows, #{session_created})" |
-    fzf --prompt="🌺 tmux sessions >> " \
-        --border=rounded \
-        --height=40% \
-        --layout=reverse \
-        --color=border:bright-green \
-        --ansi \
-        --preview-window=right:40% \
-        --preview="echo {} | cut -d' ' -f1 | xargs -I{} tmux list-windows -t {}" |
-    cut -d' ' -f1)
-
-  if [ -n "$session" ]; then
-    tmux attach -t "$session"
-  fi
-}
 alias tl="tmux ls"
-tk() {
-  if ! tmux has-session 2>/dev/null; then
-    echo "No tmux sessions to kill."
-    return 1
-  fi
-
-  local sessions
-  sessions=$(tmux list-sessions -F "#{session_name}" |
-    fzf --multi \
-        --prompt="kill tmux sessions >> " \
-        --border=rounded \
-        --height=40% \
-        --layout=reverse \
-        --color=border:bright-red) || return
-
-  for s in $sessions; do
-    tmux kill-session -t "$s" && echo "Killed session: $s"
-  done
-}
 alias td="tmux detach"
-alias tat="new-tmux-from-dir-name"
+alias tat="tmux_new_from_dir"
 
 #macos
 alias afk="open -a /System/Library/CoreServices/ScreenSaverEngine.app"
@@ -81,8 +39,7 @@ alias afk="open -a /System/Library/CoreServices/ScreenSaverEngine.app"
 #laravel
 alias a="php artisan"
 alias af="php artisan migrate:fresh && php artisan db:seed"
-function artisanMake() { php artisan make:$@ }
-alias am="artisanMake"
+alias am="artisan_make"
 alias al="php artisan list"
 alias aq="php artisan queue:work"
 alias at="php artisan test"
@@ -93,11 +50,6 @@ alias comp="composer"
 alias ci="composer install"
 alias creq="composer require"
 alias crd="composer require --dev"
-
-
-alias yta=yta_func
-alias mkcd=mkcd_func
-alias gif=gif_func
 
 # zig
 alias z="zig"
@@ -118,69 +70,6 @@ alias cc="cargo check"
 alias cdoc="cargo doc"
 alias ct="cargo test"
 
-nnvim_update() {
-  local orig_dir="$PWD"
-
-  mkdir -p "$HOME/.bin/" 
-  mkdir -p "$HOME/.nvim-nightly/"
-  cd "$HOME/.nvim-nightly" || return 1
-
-  curl -L -o nvim-macos-arm64.tar.gz https://github.com/neovim/neovim/releases/download/nightly/nvim-macos-arm64.tar.gz
-
-  rm -rf nvim-nightly && mkdir nvim-nightly
-  tar -xzf nvim-macos-arm64.tar.gz -C nvim-nightly --strip-components=1
-  chmod +x nvim-nightly/bin/nvim
-  xattr -c nvim-nightly/bin/nvim 2>/dev/null
-
-  ln -sf "$HOME/.nvim-nightly/nvim-nightly/bin/nvim" "$HOME/.bin/nvim"
-  rm -f *.tar.gz
-
-  echo "-> Installed Neovim nightly → $HOME/.bin/nvim"
-
-  cd "$orig_dir" || return 1
-}
-
-alias nnu="nnvim_update"
+alias nnu="nvim_nightly_update"
 alias n="$HOME/.bin/nvim"
 alias nn='nvim'
-
-ai_commit() {
-  set -e
-
-  if git diff --cached --quiet; then
-    echo "❌ No staged changes. Please run 'git add .' first."
-    return 1
-  fi
-
-    GIT_PAGER=cat git diff --cached --no-color --unified=3 | \
-  ollama run gemma3:12b --format '{"type": "object", "properties": {"commit_title": {"type": "string"}, "commit_body": {"type": "string"}}}' <<EOF | \
-  jq -r '"\(.commit_title)\n\n\(.commit_body)"' | \
-  git commit -F -
-Given the git diff above, output a conventional commit message consisting of:
-
-- a short descriptive title (max 12 words, imperative mood, lowercase)
-- a list explaining why the changes were made or what they improve
-
-Do not use backticks, quotes, or markdown.
-Separate title and body with a single blank line.
-EOF
-
-#   GIT_PAGER=cat git diff --cached --no-color --unified=3 | \
-#   ollama run qwen2.5-coder:7b <<EOF | git commit -F -
-# Given a git diff above, output a convential commit message consistent of:
-#
-# - a short descriptive title (format: (area of code, e.g. nvim, ui-component name, service router) max 12 words, imperative mood, lowercase)
-# - a list format explaination of why the changes were made or what it improves. 
-#
-# Do *not* output backticks, quotes, markdown, only plain text content.  You must output in the format of a convential git commit with no additional styling. Separate title and body with a single blank line.
-#
-# The format is as follows:
-#
-# {title}
-#
-# {body}
-#
-# EOF
-}
-
-alias ai="ai_commit"

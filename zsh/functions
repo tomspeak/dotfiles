@@ -1,21 +1,96 @@
-function new-tmux-from-dir-name {
-  tmux -u new-session -As `basename $PWD`
+function tmux_new_from_dir {
+  tmux -u new-session -As "$(basename "$PWD")"
 }
 
-yta_func() {
-    yt-dlp -x --audio-format m4a --audio-quality 0 \
-        --embed-thumbnail --add-metadata \
-        --metadata-from-title "%(title)s" \
-        --cookies-from-browser "brave:Default" \
-        --output "%(title)s.%(audio_ext)s" \
-        "$1"
+function yta {
+  [[ -z "$1" ]] && { echo "Usage: yta <url>"; return 1; }
+  yt-dlp -x --audio-format m4a --audio-quality 0 \
+    --embed-thumbnail --add-metadata \
+    --metadata-from-title "%(title)s" \
+    --cookies-from-browser "brave:Default" \
+    --output "%(title)s.%(audio_ext)s" \
+    "$1"
 }
 
-function mkcd_func() {
-        mkdir -p "$1" && cd "$1"
+function mkcd {
+  [[ -z "$1" ]] && { echo "Usage: mkcd <directory>"; return 1; }
+  mkdir -p "$1" || { echo "Failed to create directory: $1"; return 1; }
+  cd "$1" || { echo "Failed to change directory: $1"; return 1; }
 }
 
-function gif_func() {
-        ffmpeg -i "$1" -vf fps=5,scale=480:-1,smartblur=ls=-0.5 "$2"
+function gif {
+  [[ -z "$1" || -z "$2" ]] && { echo "Usage: gif <input> <output>"; return 1; }
+  [[ ! -f "$1" ]] && { echo "Input file not found: $1"; return 1; }
+  ffmpeg -i "$1" -vf fps=5,scale=480:-1,smartblur=ls=-0.5 "$2"
+}
+
+function ta {
+  if ! tmux has-session 2>/dev/null; then
+    echo "No tmux sessions found."
+    return 1
+  fi
+
+  local session
+  session=$(tmux list-sessions \
+    -F "#{session_name} (#{session_windows} windows, #{session_created})" |
+    fzf --prompt="tmux sessions >> " \
+        --border=rounded \
+        --height=40% \
+        --layout=reverse \
+        --color=border:bright-green \
+        --ansi \
+        --preview-window=right:40% \
+        --preview="echo {} | cut -d' ' -f1 | xargs -I{} tmux list-windows -t {}" |
+    cut -d' ' -f1)
+
+  if [[ -n "$session" ]]; then
+    tmux attach -t "$session"
+  fi
+}
+
+function tk {
+  if ! tmux has-session 2>/dev/null; then
+    echo "No tmux sessions to kill."
+    return 1
+  fi
+
+  local sessions
+  sessions=$(tmux list-sessions -F "#{session_name}" |
+    fzf --multi \
+        --prompt="kill tmux sessions >> " \
+        --border=rounded \
+        --height=40% \
+        --layout=reverse \
+        --color=border:bright-red) || return
+
+  for s in $sessions; do
+    tmux kill-session -t "$s" && echo "Killed session: $s"
+  done
+}
+
+function artisan_make {
+  php artisan make:"$@"
+}
+
+function nvim_nightly_update {
+  local orig_dir="$PWD"
+
+  mkdir -p "$HOME/.bin/" 
+  mkdir -p "$HOME/.nvim-nightly/"
+  cd "$HOME/.nvim-nightly" || return 1
+
+  curl -L -o nvim-macos-arm64.tar.gz https://github.com/neovim/neovim/releases/download/nightly/nvim-macos-arm64.tar.gz
+
+  rm -rf nvim-nightly && mkdir nvim-nightly
+  tar -xzf nvim-macos-arm64.tar.gz -C nvim-nightly --strip-components=1
+  chmod +x nvim-nightly/bin/nvim
+  xattr -c nvim-nightly/bin/nvim 2>/dev/null
+
+  ln -sf "$HOME/.nvim-nightly/nvim-nightly/bin/nvim" "$HOME/.bin/nvim"
+  rm -f *.tar.gz
+
+  echo "-> Installed Neovim nightly -> $HOME/.bin/nvim"
+
+  cd "$orig_dir" || return 1
 }
 

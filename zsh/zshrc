@@ -1,6 +1,11 @@
-[ -f $HOME/dotfiles/zsh/work ] && source $HOME/dotfiles/zsh/work
+if [[ -f "$HOME/dotfiles/zsh/work" ]]; then
+  source "$HOME/dotfiles/zsh/work"
+  echo "[zsh] Work environment loaded"
+fi
 
-typeset -U PATH
+# Ensure homebrew is in PATH
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+
 # Defer colors loading
 _load_colors() {
   autoload -U colors && colors
@@ -8,31 +13,22 @@ _load_colors() {
 }
 _load_colors
 
-# Ultra-fast git prompt with minimal git calls
+# Fast git prompt
 git_branch_prompt() {
-  # Skip if not in git repo (fastest check)
   [[ -d .git ]] || git rev-parse --git-dir &>/dev/null || return
   
-  local branch dirty
-  # Fast branch detection
-  if [[ -f .git/HEAD ]]; then
-    branch=$(< .git/HEAD)
-    branch=${branch##*/}
-  else
-    branch=$(git symbolic-ref --quiet --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)
-  fi
-  
-  # Quick dirty check - only if index or worktree changed
-  [[ -n $(git status --porcelain 2>/dev/null) ]] && dirty="*"
-  
-  echo " (${branch}${dirty})"
+  local branch
+  branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) || return
+  [[ "$branch" == "HEAD" ]] && branch=$(git rev-parse --short HEAD 2>/dev/null)
+  [[ -z $(git status --porcelain 2>/dev/null) ]] || branch="$branch*"
+  echo " ($branch)"
 }
 
 setopt prompt_subst
 NEWLINE=$'\n'
-PS1="%F{green}[clown@"
+PS1="%(?.%F{green}.%F{red})[clown@"
 if [[ -n "$SSH_CONNECTION" ]]; then
-  PS1+="%{$SSH_CONNECTION%% *%%}"
+  PS1+="${SSH_CONNECTION%% *}"
 else
   PS1+="local"
 fi
@@ -40,38 +36,32 @@ PS1+="] %~\$(git_branch_prompt)%f$NEWLINE >> "
 
 ZSH_DISABLE_COMPFIX=true
 
-# Optimize PATH - build once instead of multiple exports
+# Prepend custom paths to existing PATH (preserves homebrew etc)
+# Use $path array to manipulate, then export
 path=(
   /usr/local/bin
   /usr/local/sbin
   ~/.composer/vendor/bin
-  "${pwd}/node_modules/.bin"
   "$HOME/.bin"
   ~/.local/bin
   ~/workspace/zig/zls/zig-out/bin
-  "${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+  "${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
+  /Users/t/.opencode/bin
   $path
 )
-export PATH
+typeset -U PATH
 
 export MANPAGER='nvim +Man!'
-
-# Environment variables
 export DOTFILES="$HOME/dotfiles"
 
 setopt AUTO_CD              # Go to folder path without using cd.
 
 bindkey '^f' autosuggest-accept
 
-# Skip completion system entirely for startup speed
-# Completions will be loaded on first tab press
+# Lazy load completions on first tab press
 _setup_completions() {
   autoload -Uz compinit
-  if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
-    compinit
-  else
-    compinit -C
-  fi
+  compinit -C
   
   zstyle ':completion:*' completer _extensions _complete _approximate
   zstyle ':completion:*' menu select
@@ -91,16 +81,16 @@ _load_and_complete() {
 zle -N _load_and_complete
 bindkey '^I' _load_and_complete
 
-# Tab completion handled by lazy loading above
+# Tab completion
 bindkey '^[[3~' delete-char  # Delete
 bindkey '^[[Z' reverse-menu-complete  # Shift+Tab
 bindkey '^[[1;5D' backward-word  # Control-Left
 bindkey '^[[1;5C' forward-word  # Control-Right
 
-# Optimize history settings
+# History settings
 HISTFILE=$HOME/.zhistory
-HISTSIZE=10000  # Reduced from 20000
-SAVEHIST=10000  # Reduced from 20000
+HISTSIZE=20000
+SAVEHIST=20000
 TZ="Europe/London"
 setopt INC_APPEND_HISTORY     # Immediately append to history file.
 setopt EXTENDED_HISTORY       # Record timestamp in history.
@@ -112,13 +102,8 @@ setopt HIST_IGNORE_SPACE      # Dont record an entry starting with a space.
 setopt HIST_SAVE_NO_DUPS      # Dont write duplicate entries in the history file.
 setopt SHARE_HISTORY          # Share history between all sessions.
 unsetopt HIST_VERIFY          # Execute commands using history (e.g.: using !$) immediately
-HOSTNAME="`hostname`"
 PAGER='less'
-export AUTOENV_FILE_ENTER=".env"
-DEFAULT_USER="t"
 unsetopt correct
-unsetopt correctall
-DISABLE_CORRECTION="true"
 
 GIT_MERGE_AUTOEDIT=no
 export GIT_MERGE_AUTOEDIT
@@ -126,34 +111,18 @@ export GIT_MERGE_AUTOEDIT
 export EDITOR='nvim'
 export VEDITOR='code'
 
-source $HOME/dotfiles/zsh/functions
-source $HOME/dotfiles/zsh/aliases
+source "$HOME/dotfiles/zsh/functions"
+source "$HOME/dotfiles/zsh/aliases"
 
-# Lazy load expensive plugins
-_lazy_load_plugins() {
-  # Cache brew prefix to avoid multiple calls
-  BREW_PREFIX="${BREW_PREFIX:-$(brew --prefix)}"
-  
-  # Load autosuggestions with optimizations
-  ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-  ZSH_AUTOSUGGEST_USE_ASYNC=true
-  local autosuggest_path="$HOME/dotfiles/deps/zsh-autosuggestions/zsh-autosuggestions.zsh"
-  [[ -f $autosuggest_path ]] && source "$autosuggest_path"
+# Load autosuggestions with optimizations
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_USE_ASYNC=true
+local autosuggest_path="$HOME/dotfiles/deps/zsh-autosuggestions/zsh-autosuggestions.zsh"
+if [[ -f "$autosuggest_path" ]]; then
+  source "$autosuggest_path" || echo "[WARNING] Failed to load zsh-autosuggestions"
+fi
 
-  # Load FZF
+# Load FZF
+if type fzf &>/dev/null; then
   source <(fzf --zsh)
-  
-  # Remove function after first use
-  unfunction _lazy_load_plugins
-}
-
-# Trigger plugin loading on first command that might need them
-zle-line-init() {
-  type _lazy_load_plugins >/dev/null 2>&1 && _lazy_load_plugins
-  # Remove this hook after first use
-  zle -D zle-line-init
-}
-zle -N zle-line-init
-
-# opencode
-export PATH=/Users/t/.opencode/bin:$PATH
+fi
