@@ -5,10 +5,9 @@ function tmux_new_from_dir {
 function yta {
   [[ -z "$1" ]] && { echo "Usage: yta <url>"; return 1; }
   yt-dlp -x --audio-format m4a --audio-quality 0 \
-    --embed-thumbnail --add-metadata \
-    --metadata-from-title "%(title)s" \
+    --embed-thumbnail --embed-metadata \
     --cookies-from-browser "brave:Default" \
-    --output "%(title)s.%(audio_ext)s" \
+    --output "%(title)s.%(ext)s" \
     "$1"
 }
 
