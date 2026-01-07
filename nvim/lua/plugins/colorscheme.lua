@@ -60,4 +60,18 @@ return {
       },
     }
   },
+  {
+    "datsfilipe/vesper.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      italics = {
+        comments = false,
+        keywords = false,
+        functions = false,
+        strings = false,
+        variables = false,
+      },
+    },
+  },
 }

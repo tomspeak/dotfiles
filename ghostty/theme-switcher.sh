@@ -24,6 +24,7 @@ system_themes=(
   "Rose Pine"
   "Seoulbones Dark"
   "Seoulbones Light"
+  "Vesper"
 )
 
 # Generate and select theme
