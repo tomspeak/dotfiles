@@ -1,6 +1,5 @@
 if [[ -f "$HOME/dotfiles/zsh/work" ]]; then
   source "$HOME/dotfiles/zsh/work"
-  echo "[zsh] Work environment loaded"
 fi
 
 # Ensure homebrew is in PATH

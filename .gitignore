@@ -20,5 +20,6 @@ bash/work.sh
 nvim/lazy-lock.json
 karabiner/automatic_backups/
 ghostty/themes/current-theme
+ghostty/work
 tmux-client-*.log
 deps/codelldb

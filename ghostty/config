@@ -6,18 +6,18 @@ adjust-underline-position = 10%
 adjust-cursor-thickness = 2
 
 font-size = 18
-#font-family = Berkeley Mono 
+font-family = Berkeley Mono
 #font-family = CPMono_v07
 #font-family = Fira Code
 #font-family = CommitMono
 #font-family = Hasklig
 #font-family = Lucida Console
 #font-family = Monaspace Neon Var
-font-family = TX-02
-#font-family = Terminus (TTF) 
-window-title-font-family = TX-02
+#font-family = TX-02
+#font-family = Terminus (TTF)
+window-title-font-family = Berkeley Mono
 font-thicken = true
-font-thicken-strength = 68
+font-thicken-strength = 40
 font-synthetic-style = false
 
 font-feature = +calt
@@ -38,9 +38,9 @@ window-padding-color = background
 window-padding-x = 2
 window-padding-y = 0
 window-decoration = auto
-adjust-cell-height = 37%
-adjust-cell-width = 1%
-adjust-font-baseline = 1
+adjust-cell-height = 30%
+adjust-cell-width = 0
+adjust-font-baseline = 0
 
 macos-non-native-fullscreen = true
 macos-titlebar-style = hidden
@@ -48,3 +48,5 @@ macos-option-as-alt = true
 
 confirm-close-surface = false
 keybind = shift+enter=text:\x1b\r
+
+config-file = ?work
