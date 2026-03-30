@@ -6,6 +6,7 @@
                 "rules": [
                     {
                         "description": "Map left_control + F1–F12 to real function keys",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {

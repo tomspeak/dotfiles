@@ -194,7 +194,7 @@ return {
       -- refer to the configuration section below
       bigfile = { enabled = false },
       dashboard = { enabled = false },
-      explorer = { enabled = true },
+      explorer = { enabled = false },
       indent = { enabled = false },
       input = { enabled = false },
       notifier = { enabled = false },

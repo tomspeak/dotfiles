@@ -12,15 +12,18 @@
   editor = nvim
   pager = diff-so-fancy | less --tabs=4 -RF
   excludesfile = ~/.gitignore_global
+  fsmonitor = true
 [push]
-  default = simple
+  default = current
+[pull]
+  rebase = true
 [alias]
   a = add
   aa = add .
   co = checkout
   ci = commit
   cim = commit -m
-  ca = commit -a --amend
+  ca = commit --amend
   cp = cherry-pick
   rc = rebase --continue
   rs = rebase --skip
@@ -76,7 +79,7 @@
   context = 10
   renames = copies
 [help]
-  autocorrect = 10
+  autocorrect = prompt
 [url "git@github.com:"]
   insteadOf = https://github.com/
 [filter "lfs"]
@@ -90,6 +93,11 @@
   verbose = true
 [rerere]
   enabled = true
+[merge]
+  conflictstyle = zdiff3
+[rebase]
+  updateRefs = true
+  autoStash = true
 [status]
   submoduleSummary = true
   branch = true
@@ -105,8 +113,6 @@
   prunetags = true
 [log]
   date = iso
-[rebase]
-  updateRefs = true
 [pager]
   branch = false
 [interactive]
@@ -114,3 +120,5 @@
   singlekey = true
 [diff-so-fancy]
   markEmptyLines = false
+[include]
+  path = ~/.gitconfig.local

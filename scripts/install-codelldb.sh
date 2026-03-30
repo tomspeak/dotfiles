@@ -29,5 +29,3 @@ chmod +x "$CODELLDB_BIN"
 sudo ln -sf "$CODELLDB_BIN" /usr/local/bin/codelldb
 
 echo "codelldb installed to $TARGET_DIR/$EXTRACT_DIR and symlinked to /usr/local/bin"
-
-exec zsh

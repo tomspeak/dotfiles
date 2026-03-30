@@ -81,9 +81,6 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 10
 defaults write com.apple.HIToolbox AppleFnUsageType -int "0"
 defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
 
-# Disable local Time Machine snapshots
-sudo tmutil disablelocal
-
 # Disable hibernation (speeds up entering sleep mode)
 sudo pmset -a hibernatemode 0
 
@@ -131,8 +128,8 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 	OpenWith -bool true \
 	Privileges -bool true
 
-defaults write NSGlobalDomain Acom.apple.springing.enabled -bool true
-defaults write NSGlobalDomain Acom.apple.springing.delay -float 0
+defaults write NSGlobalDomain com.apple.springing.enabled -bool true
+defaults write NSGlobalDomain com.apple.springing.delay -float 0
 
 defaults write com.apple.finder "CreateDesktop" -bool "false"
 defaults write com.apple.finder "ShowExternalHardDrivesOnDesktop" -bool "false"
@@ -167,7 +164,7 @@ killall Finder
 killall Safari
 killall SystemUIServer
 killall Music
-killall Activity Monitor
+killall "Activity Monitor"
 killall Calendar
 killall Mail
 killall cfprefsd

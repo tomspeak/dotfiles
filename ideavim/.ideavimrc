@@ -16,15 +16,6 @@ set scrolloff=999
 
 let mapleader = " "
 
-" system clipboard
-vmap <leader>y "+y
-vmap <leader>d "+d
-nmap <leader>y "+yy
-nmap <leader>p "+p
-nmap <leader>P "+P
-vmap <leader>p "+p
-vmap <leader>P "+P
-
 " Move around windows
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l

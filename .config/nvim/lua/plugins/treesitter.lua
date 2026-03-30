@@ -78,8 +78,8 @@ return {
           ["ia"] = "@parameter.inner",
           ["al"] = "@loop.outer",
           ["il"] = "@loop.inner",
-          ["ai"] = "@conditional.outer",
-          ["ii"] = "@conditional.inner",
+          ["aI"] = "@conditional.outer",
+          ["iI"] = "@conditional.inner",
         },
       },
       move = {

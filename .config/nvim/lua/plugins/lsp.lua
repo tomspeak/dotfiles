@@ -49,7 +49,9 @@ return {
       end, 'Hover Documentation')
       map('H', vim.lsp.buf.document_highlight, 'Hover Word')
       map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-      map('<leader>fm', vim.lsp.buf.format, '[F]ormat')
+      map('<leader>fm', function()
+        require('conform').format({ lsp_format = 'fallback' })
+      end, '[F]ormat')
       map('<leader>ti', function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = buf }))
       end, 'Toggle Inlay Hints')
@@ -98,7 +100,6 @@ return {
           '--all-scopes-completion',
           '--background-index', -- should include a compile_commands.json or .txt
           '--clang-tidy',
-          '--cross-file-rename',
           '--completion-style=detailed',
           '--fallback-style=llvm',
           '--function-arg-placeholders',
@@ -107,7 +108,6 @@ return {
           '--limit-results=10',
           '--pch-storage=memory',
           '--query-driver=/usr/include/*',
-          '--suggest-missing-includes',
         },
         init_options = {
           usePlaceholders = true,
@@ -154,8 +154,12 @@ return {
       },
       taplo = {},
       zls = {
-        enable_build_on_save = true,
-        semantic_tokens = 'partial',
+        settings = {
+          zls = {
+            enable_build_on_save = true,
+            semantic_tokens = 'partial',
+          },
+        },
       },
     }
 

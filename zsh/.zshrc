@@ -1,21 +1,16 @@
-if [[ -f "$HOME/dotfiles/zsh/work" ]]; then
-  source "$HOME/dotfiles/zsh/work"
+if [[ -f "$HOME/dotfiles/shell/work" ]]; then
+  source "$HOME/dotfiles/shell/work"
 fi
 
 # Ensure homebrew is in PATH
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 
-# Defer colors loading
-_load_colors() {
-  autoload -U colors && colors
-  unfunction _load_colors
-}
-_load_colors
+autoload -U colors && colors
 
 # Fast git prompt
 git_branch_prompt() {
   [[ -d .git ]] || git rev-parse --git-dir &>/dev/null || return
-  
+
   local branch
   branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) || return
   [[ "$branch" == "HEAD" ]] && branch=$(git rev-parse --short HEAD 2>/dev/null)
@@ -33,8 +28,6 @@ else
 fi
 PS1+="] %~\$(git_branch_prompt)%f$NEWLINE >> "
 
-ZSH_DISABLE_COMPFIX=true
-
 # Prepend custom paths to existing PATH (preserves homebrew etc)
 # Use $path array to manipulate, then export
 path=(
@@ -50,10 +43,18 @@ path=(
 )
 typeset -U PATH
 
+export TZ="Europe/London"
 export MANPAGER='nvim +Man!'
 export DOTFILES="$HOME/dotfiles"
+export PAGER='less'
+export GIT_MERGE_AUTOEDIT=no
+export EDITOR='nvim'
+export VEDITOR='code'
 
 setopt AUTO_CD              # Go to folder path without using cd.
+setopt AUTO_PUSHD           # Push directories onto the stack.
+setopt PUSHD_IGNORE_DUPS    # Don't push duplicates.
+setopt PUSHD_SILENT         # Don't print the stack after pushd/popd.
 
 bindkey '^f' autosuggest-accept
 
@@ -61,12 +62,12 @@ bindkey '^f' autosuggest-accept
 _setup_completions() {
   autoload -Uz compinit
   compinit -C
-  
+
   zstyle ':completion:*' completer _extensions _complete _approximate
   zstyle ':completion:*' menu select
   zstyle ':completion:*' use-cache true
   zstyle ':completion:*' rehash false
-  
+
   # Rebind to normal completion
   bindkey '^I' expand-or-complete
   unfunction _setup_completions
@@ -90,38 +91,31 @@ bindkey '^[[1;5C' forward-word  # Control-Right
 HISTFILE=$HOME/.zhistory
 HISTSIZE=20000
 SAVEHIST=20000
-TZ="Europe/London"
-setopt INC_APPEND_HISTORY     # Immediately append to history file.
 setopt EXTENDED_HISTORY       # Record timestamp in history.
 setopt HIST_EXPIRE_DUPS_FIRST # Expire duplicate entries first when trimming history.
-setopt HIST_IGNORE_DUPS       # Dont record an entry that was just recorded again.
 setopt HIST_IGNORE_ALL_DUPS   # Delete old recorded entry if new entry is a duplicate.
 setopt HIST_FIND_NO_DUPS      # Do not display a line previously found.
 setopt HIST_IGNORE_SPACE      # Dont record an entry starting with a space.
 setopt HIST_SAVE_NO_DUPS      # Dont write duplicate entries in the history file.
 setopt SHARE_HISTORY          # Share history between all sessions.
 unsetopt HIST_VERIFY          # Execute commands using history (e.g.: using !$) immediately
-PAGER='less'
 unsetopt correct
 
-GIT_MERGE_AUTOEDIT=no
-export GIT_MERGE_AUTOEDIT
-
-export EDITOR='nvim'
-export VEDITOR='code'
-
-source "$HOME/dotfiles/zsh/functions"
-source "$HOME/dotfiles/zsh/aliases"
+source "$HOME/dotfiles/shell/functions"
+source "$HOME/dotfiles/shell/aliases"
 
 # Load autosuggestions with optimizations
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_USE_ASYNC=true
-local autosuggest_path="$HOME/dotfiles/deps/zsh-autosuggestions/zsh-autosuggestions.zsh"
+autosuggest_path="$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 if [[ -f "$autosuggest_path" ]]; then
   source "$autosuggest_path" || echo "[WARNING] Failed to load zsh-autosuggestions"
 fi
 
 # Load FZF
-if type fzf &>/dev/null; then
+if (( $+commands[fzf] )); then
+  export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
   source <(fzf --zsh)
 fi

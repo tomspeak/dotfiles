@@ -1,31 +1,8 @@
--- Statusline with caching and modular components
+-- Statusline with modular components
 
-local git_branch_cache = {}
-local cache_duration = 1000 -- 1 second in ms
-
-local function get_git_branch()
-  local cwd = vim.fn.getcwd()
-  local now = vim.uv.now()
-
-  -- Return cached result if still valid
-  if git_branch_cache[cwd] and (now - git_branch_cache[cwd].time) < cache_duration then
-    return git_branch_cache[cwd].branch
-  end
-
-  -- Fetch fresh branch
-  local handle = io.popen 'git branch --show-current 2>/dev/null'
-  local branch = ''
-  if handle then
-    branch = handle:read '*a':gsub('\n', '')
-    handle:close()
-  end
-
-  -- Cache the result
-  git_branch_cache[cwd] = { branch = branch, time = now }
-  return branch
+_G.git_branch = function()
+  return vim.b.gitsigns_head or ''
 end
-
-_G.git_branch = get_git_branch
 
 _G.Statusline_filename = function()
   local fname = vim.fn.expand '%:t'

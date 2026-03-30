@@ -1,3 +1,0 @@
-[submodule "deps/zsh-autosuggestions"]
-	path = deps/zsh-autosuggestions
-	url = https://github.com/zsh-users/zsh-autosuggestions.git

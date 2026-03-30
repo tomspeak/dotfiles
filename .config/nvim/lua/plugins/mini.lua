@@ -1,12 +1,12 @@
 local headers = {
   table.concat({
-    '“And when he came to,                                         ',
+    '"And when he came to,                                         ',
     ' he was flat on his back on the beach in the freezing sand,  ',
     ' and it was raining out of a low sky,                        ',
-    ' and the tide was way out.”                                  ',
+    ' and the tide was way out."                                  ',
   }, '\n'),
   table.concat({
-    '“... no single, individual moment is in and of itself unendurable.”',
+    '"... no single, individual moment is in and of itself unendurable."',
   }, '\n'),
   table.concat({
     '"Gentlemen, welcome to the world of reality,                 ',
@@ -56,7 +56,9 @@ return {
   {
     'echasnovski/mini.bracketed',
     version = false,
-    opts = {},
+    opts = {
+      comment = { suffix = '' }, -- disable [c/]c, used by gitsigns for hunk navigation
+    },
     event = { 'BufReadPost', 'BufNewFile' },
   },
   { 'echasnovski/mini.move', version = '*', event = { 'BufReadPost', 'BufNewFile' }, opts = {} },
@@ -90,17 +92,8 @@ return {
       vim.api.nvim_create_autocmd("FileType", {
         pattern = {
           "help",
-          "alpha",
-          "dashboard",
-          "neo-tree",
-          "Trouble",
-          "trouble",
           "lazy",
-          "mason",
-          "notify",
-          "toggleterm",
-          "lazyterm",
-          "nvimtree"
+          "NvimTree",
         },
         callback = function()
           vim.b.miniindentscope_disable = true
