@@ -5,7 +5,7 @@ local cache_duration = 1000 -- 1 second in ms
 
 local function get_git_branch()
   local cwd = vim.fn.getcwd()
-  local now = vim.loop.now()
+  local now = vim.uv.now()
 
   -- Return cached result if still valid
   if git_branch_cache[cwd] and (now - git_branch_cache[cwd].time) < cache_duration then

@@ -1,13 +1,7 @@
-vim.o.termguicolors = true
-
 vim.o.showmode = false
--- hide file progress / col/line crap in cmd line
-vim.cmd [[set noruler]]
--- hide key presses showing up in cmd line (e.g. Leader = <20>, etc.
-vim.cmd [[set noshowcmd]]
-
--- Disable all folding
-vim.cmd [[set nofoldenable]]
+vim.o.ruler = false
+vim.o.showcmd = false
+vim.o.foldenable = false
 
 -- Make line numbers default
 vim.opt.number = true

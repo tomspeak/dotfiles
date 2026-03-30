@@ -10,7 +10,7 @@ local function enable_soft()
 
   local punctuations = { ",", ".", "?", "!" }
   for _, p in ipairs(punctuations) do
-    vim.keymap.set("i", p, p .. "<C-g>u", { buffer = true, desc = "Add break after " .. p })
+    vim.keymap.set("i", p, p .. "<C-g>u", { buf = 0, desc = "Add break after " .. p })
   end
 end
 

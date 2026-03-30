@@ -28,7 +28,7 @@ return {
 
     local keybinds = function(buf)
       local map = function(keys, func, desc)
-        vim.keymap.set('n', keys, func, { buffer = buf, desc = 'LSP: ' .. desc })
+        vim.keymap.set('n', keys, func, { buf = buf, desc = 'LSP: ' .. desc })
       end
 
       map('<leader>ca', vim.lsp.buf.code_action, 'LSP [C]ode [A]ction')
@@ -42,7 +42,6 @@ return {
       map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
       map('K', function()
         vim.lsp.buf.hover {
-          border = "single",
           max_height = 20,
           max_width = 130,
           close_events = { "CursorMoved", "BufLeave", "WinLeave", "LSPDetach" },
