@@ -45,7 +45,7 @@ path=(
   ~/.local/bin
   ~/workspace/zig/zls/zig-out/bin
   "${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
-  /Users/t/.opencode/bin
+  "$HOME/.opencode/bin"
   $path
 )
 typeset -U PATH

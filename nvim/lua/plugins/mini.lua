@@ -31,15 +31,7 @@ local headers = {
     ' and its always been You."',
   }, '\n'),
 }
-local function random_elem(tb)
-  math.randomseed(os.time())
-  local keys = {}
-  for k in pairs(tb) do
-    table.insert(keys, k)
-  end
-  return tb[keys[math.random(#keys)]]
-end
-local header = random_elem(headers)
+local header = headers[math.random(#headers)]
 
 return {
   {

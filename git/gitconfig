@@ -1,23 +1,17 @@
-[advice]  # disable advices
-    addEmptyPathspec = false
-    pushNonFastForward = false
-    statusHints = false
-
+[advice]
+  addEmptyPathspec = false
+  pushNonFastForward = false
+  statusHints = false
 [blame]
-    coloring = highlightRecent
-    date = relative
-
-[filter "media"]
-  required = true
-  clean = git media clean %f
-  smudge = git media smudge %f
+  coloring = highlightRecent
+  date = relative
 [user]
-	email = tomspeak@users.noreply.github.com
-	name = tom speak
+  email = tomspeak@users.noreply.github.com
+  name = tom speak
 [core]
   editor = nvim
-	pager = diff-so-fancy | less --tabs=4 -RF
-	excludesfile = ~/.gitignore_global
+  pager = diff-so-fancy | less --tabs=4 -RF
+  excludesfile = ~/.gitignore_global
 [push]
   default = simple
 [alias]
@@ -71,52 +65,52 @@
 [credential]
   helper = osxkeychain
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
 [diff]
   colorMoved = default
-	algorithm = histogram
-	submodule = log
-	context = 10
+  algorithm = histogram
+  submodule = log
+  context = 10
   renames = copies
 [help]
-	autocorrect = 10
+  autocorrect = 10
 [url "git@github.com:"]
-	insteadOf = https://github.com/
+  insteadOf = https://github.com/
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [commit]
-	verbose = true
+  verbose = true
 [rerere]
-	enabled = true
+  enabled = true
 [status]
-	submoduleSummary = true
+  submoduleSummary = true
   branch = true
   short = true
   showStash = true
-  showUntrackedFiles = all  # show individual untracked files
+  showUntrackedFiles = all
 [submodule]
-	recurse = true
+  recurse = true
 [branch]
-	sort = -committerdate
+  sort = -committerdate
 [fetch]
-	prune = true
-	prunetags = true
+  prune = true
+  prunetags = true
 [log]
-	date = iso
+  date = iso
 [rebase]
-	updateRefs = true
+  updateRefs = true
 [pager]
-    branch = false  # no need to use pager for git branch
+  branch = false
 [interactive]
-    diffFilter = diff-so-fancy --patch
-    singlekey = true
+  diffFilter = diff-so-fancy --patch
+  singlekey = true
 [diff-so-fancy]
-    markEmptyLines = false
+  markEmptyLines = false

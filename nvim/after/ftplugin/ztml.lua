@@ -1,13 +1,7 @@
 vim.filetype.add {
   extension = {
-    ztml = 'html',
+    ztml = 'ztml',
   },
 }
 
-vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
-  pattern = '*.ztml',
-  callback = function()
-    vim.bo.filetype = 'ztml'
-    vim.treesitter.language.register('html', 'ztml')
-  end,
-})
+vim.treesitter.language.register('html', 'ztml')

@@ -152,14 +152,9 @@ return {
       {
         "<leader>gc",
         function()
-          Snacks.picker.git_log({
-            finder = "git_log",
-            format = "git_log",
-            preview = "git_show",
-            layout = "vertical",
-          })
+          Snacks.picker.git_log_file()
         end,
-        desc = "Git Commit History",
+        desc = "Git Commit History (current file)",
       },
       {
         "<leader>gS",

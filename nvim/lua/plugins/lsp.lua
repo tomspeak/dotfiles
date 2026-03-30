@@ -4,7 +4,6 @@ return {
   dependencies = { 'folke/snacks.nvim', 'saghen/blink.cmp' },
   config = function()
     local lsp = vim.lsp
-    local diag = vim.diagnostic
     local autocmd = vim.api.nvim_create_autocmd
     local autogrp = vim.api.nvim_create_augroup
 
@@ -125,17 +124,13 @@ return {
         flags = { debounce_text_changes = 150 },
         settings = {
           Lua = {
-            runtime = {
-              version = 'LuaJIT',
-              path = vim.list_extend(vim.split(package.path, ';'), { 'lua/?.lua', 'lua/?/init.lua' }),
-            },
             workspace = {
               checkThirdParty = false,
-              library = vim.list_extend({}, {
+              library = {
                 vim.env.VIMRUNTIME,
                 'lua',
                 'nvim-test',
-              }),
+              },
             },
             diagnostics = {
               globals = { 'use', 'vim' },
