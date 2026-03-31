@@ -7,4 +7,3 @@ shell/work
 .config/ghostty/themes/current-theme
 .config/ghostty/work
 tmux-client-*.log
-deps/codelldb

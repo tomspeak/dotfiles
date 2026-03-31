@@ -1,7 +1,3 @@
-if [[ -f "$HOME/dotfiles/shell/work" ]]; then
-  source "$HOME/dotfiles/shell/work"
-fi
-
 # Ensure homebrew is in PATH
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 
@@ -104,12 +100,16 @@ unsetopt correct
 source "$HOME/dotfiles/shell/functions"
 source "$HOME/dotfiles/shell/aliases"
 
+if [[ -f "$HOME/dotfiles/shell/work" ]]; then
+  source "$HOME/dotfiles/shell/work"
+fi
+
 # Load autosuggestions with optimizations
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_USE_ASYNC=true
-autosuggest_path="$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+autosuggest_path="/opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 if [[ -f "$autosuggest_path" ]]; then
-  source "$autosuggest_path" || echo "[WARNING] Failed to load zsh-autosuggestions"
+  source "$autosuggest_path"
 fi
 
 # Load FZF

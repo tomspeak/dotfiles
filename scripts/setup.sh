@@ -45,7 +45,9 @@ ln -sf "$dotfiles/git/.gitignore_global" ~/.gitignore_global
 ln -sf "$dotfiles/tmux/.tmux.conf" ~/.tmux.conf
 ln -sf "$dotfiles/ideavim/.ideavimrc" ~/.ideavimrc
 ln -sf "$dotfiles/keybindings/Library/KeyBindings/DefaultKeyBinding.dict" ~/Library/KeyBindings/DefaultKeyBinding.dict
-find "$dotfiles/vscode/Library/Application Support/Code/User" -type f -exec ln -sf {} ~/Library/Application\ Support/Code/User/ \;
+if [ -d "$dotfiles/vscode/Library/Application Support/Code/User" ]; then
+  find "$dotfiles/vscode/Library/Application Support/Code/User" -type f -exec ln -sf {} ~/Library/Application\ Support/Code/User/ \;
+fi
 
 # tmux plugins
 if [ ! -d ~/.tmux/plugins/tpm ]; then

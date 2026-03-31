@@ -8,7 +8,7 @@ keymap.set(
   function()
     vim.cmd.RustLsp('codeAction')
   end,
-  { silent = true, buf = bufnr }
+  { silent = true, buffer = bufnr }
 )
 
 keymap.set(
@@ -17,5 +17,5 @@ keymap.set(
   function()
     vim.cmd.RustLsp({ 'hover', 'actions' })
   end,
-  { silent = true, buf = bufnr }
+  { silent = true, buffer = bufnr }
 )

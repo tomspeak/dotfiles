@@ -27,7 +27,7 @@ return {
 
     local keybinds = function(buf)
       local map = function(keys, func, desc)
-        vim.keymap.set('n', keys, func, { buf = buf, desc = 'LSP: ' .. desc })
+        vim.keymap.set('n', keys, func, { buffer = buf, desc = 'LSP: ' .. desc })
       end
 
       map('<leader>ca', vim.lsp.buf.code_action, 'LSP [C]ode [A]ction')
