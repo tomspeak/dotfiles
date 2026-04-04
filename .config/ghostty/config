@@ -46,6 +46,9 @@ macos-non-native-fullscreen = true
 macos-titlebar-style = hidden
 macos-option-as-alt = true
 
+clipboard-trim-trailing-spaces = true
+minimum-contrast = 1.1
+scrollback-limit = 50000
 confirm-close-surface = false
 keybind = shift+enter=text:\x1b\r
 
