@@ -1,30 +1,25 @@
 auto-update = download
 auto-update-channel = tip
 
-adjust-underline-thickness = -20%
-adjust-underline-position = 10%
-adjust-cursor-thickness = 2
+theme = current-theme
 
-font-size = 18
-font-family = Berkeley Mono
+font-size = 16
+#font-family = Berkeley Mono
+font-family = Monaspace Neon Var
 #font-family = CPMono_v07
 #font-family = Fira Code
 #font-family = CommitMono
 #font-family = Hasklig
 #font-family = Lucida Console
-#font-family = Monaspace Neon Var
 #font-family = TX-02
 #font-family = Terminus (TTF)
 window-title-font-family = Berkeley Mono
 font-thicken = true
-font-thicken-strength = 40
 font-synthetic-style = false
 
 font-feature = +calt
 font-feature = +liga
 font-feature = +dlig
-
-theme = current-theme
 
 cursor-style-blink = true
 cursor-style = block
@@ -35,13 +30,16 @@ window-colorspace = "display-p3"
 window-theme = auto
 window-padding-balance = true
 window-padding-color = background
-window-padding-x = 2
+window-padding-x = 0
 window-padding-y = 0
 window-decoration = auto
-adjust-cell-height = 30%
+adjust-underline-thickness = 1
+adjust-cursor-thickness = 4
+adjust-cell-height = 20
 adjust-cell-width = 0
 adjust-font-baseline = 0
 
+unfocused-split-opacity = 0.85
 macos-non-native-fullscreen = true
 macos-titlebar-style = hidden
 macos-option-as-alt = true
@@ -50,6 +48,8 @@ clipboard-trim-trailing-spaces = true
 minimum-contrast = 1.1
 scrollback-limit = 50000
 confirm-close-surface = false
+
+# coding agents shift + enter
 keybind = shift+enter=text:\x1b\r
 
 config-file = ?work
