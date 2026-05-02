@@ -38,9 +38,6 @@ vim.o.updatetime = 250
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
--- Completion defaults stay narrow; richer behavior is layered by mini.completion.
-vim.o.complete = '.'
-
 vim.o.title = true
 vim.o.titlestring = '%t%( %M%)' -- title, modified
 -- vim.o.wildignore:append("*/node_modules/*")
