@@ -15,6 +15,23 @@ vim.api.nvim_create_autocmd('VimResized', {
   desc = 'Auto-resize windows on terminal buffer resize.',
 })
 
+local focus_group = vim.api.nvim_create_augroup('WindowFocus', { clear = true })
+vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
+  group = focus_group,
+  callback = function()
+    vim.opt_local.cursorline = true
+  end,
+  desc = 'Emphasize the active window.',
+})
+
+vim.api.nvim_create_autocmd('WinLeave', {
+  group = focus_group,
+  callback = function()
+    vim.opt_local.cursorline = false
+  end,
+  desc = 'Dim inactive windows.',
+})
+
 vim.api.nvim_create_augroup('Git', { clear = true })
 
 vim.api.nvim_create_autocmd('BufEnter', {

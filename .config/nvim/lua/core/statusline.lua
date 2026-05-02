@@ -35,7 +35,7 @@ end
 vim.opt.statusline = table.concat {
   ' %{v:lua.Statusline_filename()} %m %r',
   ' %=',
-  ' %(%{v:lua.vim.diagnostic.status()} %)',
+  [[ %{% luaeval("(package.loaded['vim.diagnostic'] and vim.diagnostic.status(0) ~= '' and vim.diagnostic.status(0) .. ' ') or ''") %}]],
   ' %{v:lua.Statusline_lsp()}',
   '%{v:lua.Statusline_wordcount()}',
   ' (%{v:lua.git_branch()}) ',

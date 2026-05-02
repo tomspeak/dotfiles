@@ -16,6 +16,8 @@ vim.opt.listchars = {
 }
 
 vim.o.pumheight = 15
+vim.o.pumblend = 0
+vim.o.pumborder = 'single'
 vim.o.winborder = 'single'
 
 -- Enable mouse mode
@@ -36,8 +38,8 @@ vim.o.updatetime = 250
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
--- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menu,menuone,noselect,noinsert,popup,fuzzy'
+-- Completion defaults stay narrow; richer behavior is layered by mini.completion.
+vim.o.complete = '.'
 
 vim.o.title = true
 vim.o.titlestring = '%t%( %M%)' -- title, modified
@@ -60,7 +62,7 @@ vim.opt.fillchars = {
   fold = '⠀',
   eob = ' ', -- suppress ~ at EndOfBuffer
   diff = '⣿',
-  msgsep = '‾',
+  msgsep = ' ',
   foldopen = '▾',
   foldsep = '│',
   foldclose = '▸',
@@ -87,3 +89,4 @@ vim.opt.breakindent = true
 
 -- disable nvim intro
 vim.opt.shortmess:append 'sI'
+vim.opt.shortmess:append 'c'

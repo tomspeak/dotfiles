@@ -75,9 +75,25 @@ keymap("n", "<Leader>;", ":normal! A;<CR>", { desc = "Append semicolon", silent 
 
 keymap("n", "<Leader>rt", "<cmd>restart<CR>", { desc = "Restart Neovim" })
 
+-- Structural selection
+keymap({ 'n', 'x', 'o' }, '<A-o>', function()
+  if vim.treesitter.get_parser(nil, nil, { error = false }) then
+    require('vim.treesitter._select').select_parent(vim.v.count1)
+  else
+    vim.lsp.buf.selection_range(vim.v.count1)
+  end
+end, { desc = 'Expand structural selection' })
+keymap({ 'n', 'x', 'o' }, '<A-i>', function()
+  if vim.treesitter.get_parser(nil, nil, { error = false }) then
+    require('vim.treesitter._select').select_child(vim.v.count1)
+  else
+    vim.lsp.buf.selection_range(-vim.v.count1)
+  end
+end, { desc = 'Shrink structural selection' })
+
 -- Make/Build
 keymap('n', '<leader>m', '<cmd>Make<CR>', { desc = 'Run makeprg' })
-keymap('n', '<leader>M', '<cmd>Make!<CR>', { desc = 'Run makeprg (background)' })
+keymap('n', '<leader>M', '<cmd>Make!<CR>', { desc = 'Run makeprg without jumping' })
 
 -- Quickfix navigation
 keymap('n', '[q', '<cmd>cprev<CR>', { desc = 'Previous quickfix' })
@@ -88,3 +104,24 @@ keymap('n', '<leader>cc', '<cmd>cclose<CR>', { desc = 'Close quickfix' })
 -- Terminal
 keymap('n', '<leader>tt', '<cmd>terminal<CR>', { desc = 'Open terminal' })
 keymap('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- Built-in completion menu navigation
+keymap('i', '<Tab>', function()
+  return vim.fn.pumvisible() == 1 and '<C-n>' or '<Tab>'
+end, { expr = true, desc = 'Next completion item' })
+keymap('i', '<S-Tab>', function()
+  return vim.fn.pumvisible() == 1 and '<C-p>' or '<S-Tab>'
+end, { expr = true, desc = 'Previous completion item' })
+keymap('i', '<CR>', function()
+  if vim.fn.pumvisible() == 1 then
+    local selected = vim.fn.complete_info({ 'selected' }).selected
+    return selected ~= -1 and '<C-y>' or '<C-e><CR>'
+  end
+  return '<CR>'
+end, { expr = true, desc = 'Accept completion or newline' })
+keymap('i', '<C-y>', function()
+  return vim.fn.pumvisible() == 1 and '<C-y>' or '<Ignore>'
+end, { expr = true, desc = 'Accept completion' })
+keymap('i', '<C-e>', function()
+  return vim.fn.pumvisible() == 1 and '<C-e>' or '<Ignore>'
+end, { expr = true, desc = 'Dismiss completion' })

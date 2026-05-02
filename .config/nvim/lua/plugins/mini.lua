@@ -107,4 +107,14 @@ return {
     event = { 'BufReadPost', 'BufNewFile' },
     opts = {},
   },
+  {
+    'echasnovski/mini.snippets',
+    version = false,
+    event = 'InsertEnter',
+    opts = {
+      mappings = {
+        expand = '',
+      },
+    },
+  },
 }

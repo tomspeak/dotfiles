@@ -76,6 +76,21 @@ return {
   },
   config = function()
     local dap, dapui, dapvt = require 'dap', require 'dapui', require 'nvim-dap-virtual-text'
+    local function zig_build_and_resolve_program()
+      local cwd = vim.fn.getcwd()
+      local result = vim.system({ 'zig', 'build' }, { cwd = cwd, text = true }):wait()
+
+      if result.code ~= 0 then
+        error(result.stderr ~= '' and result.stderr or 'zig build failed')
+      end
+
+      local program = cwd .. '/zig-out/bin/' .. vim.fn.fnamemodify(cwd, ':t')
+      if vim.uv.fs_stat(program) then
+        return program
+      end
+
+      return vim.fn.input('Path to Zig executable: ', cwd .. '/zig-out/bin/', 'file')
+    end
 
     dapui.setup {
       controls = {
@@ -189,12 +204,11 @@ return {
         name = '[Zig] LLDB: Basic',
         type = 'codelldb',
         request = 'launch',
-        program = '${workspaceFolder}/zig-out/bin/${workspaceFolderBasename}',
+        program = zig_build_and_resolve_program,
         cwd = '${workspaceFolder}',
         stopOnEntry = false,
         args = {},
         console = 'integratedTerminal',
-        preLaunchTask = 'rm -rf zig-out && zig build',
       },
     }
   end,

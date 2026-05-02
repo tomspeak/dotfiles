@@ -1,17 +1,39 @@
 return {
   'neovim/nvim-lspconfig',
   event = { 'BufReadPre', 'BufNewFile' },
-  dependencies = { 'folke/snacks.nvim', 'saghen/blink.cmp' },
+  dependencies = { 'folke/snacks.nvim', 'nvim-mini/mini.completion', 'stevearc/conform.nvim' },
   config = function()
     local lsp = vim.lsp
     local autocmd = vim.api.nvim_create_autocmd
     local autogrp = vim.api.nvim_create_augroup
+    local mini_completion = require 'mini.completion'
 
     local document_color = function(client, buf)
       if client:supports_method 'textDocument/documentColor' then
-        vim.lsp.document_color.enable(true, buf)
+        vim.lsp.document_color.enable(true, { bufnr = buf })
       end
     end
+
+    local symbol_filter = {
+      default = {
+        'Class',
+        'Constructor',
+        'Enum',
+        'Field',
+        'Function',
+        'Interface',
+        'Method',
+        'Module',
+        'Namespace',
+        'Package',
+        'Property',
+        'Struct',
+        'Trait',
+        'Variable',
+        'Constant',
+        'Object',
+      },
+    }
 
     vim.diagnostic.config({
       update_in_insert = false,
@@ -36,8 +58,16 @@ return {
       map('gr', Snacks.picker.lsp_references, '[G]oto [R]eferences')
       map('gI', Snacks.picker.lsp_implementations, '[G]oto [I]mplementation')
       map('gy', Snacks.picker.lsp_type_definitions, '[G]oto T[y]pe Definitions')
-      map('<leader>ss', Snacks.picker.lsp_symbols, 'Goto [S]ymbols')
-      map('<leader>sS', Snacks.picker.lsp_workspace_symbols, 'Goto Work[s]pace [S]ymbols')
+      map('<leader>ss', function()
+        Snacks.picker.lsp_symbols({
+          filter = symbol_filter,
+        })
+      end, 'Goto [S]ymbols')
+      map('<leader>sS', function()
+        Snacks.picker.lsp_workspace_symbols({
+          filter = symbol_filter,
+        })
+      end, 'Goto Work[s]pace [S]ymbols')
       map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
       map('K', function()
         vim.lsp.buf.hover {
@@ -50,7 +80,7 @@ return {
       map('H', vim.lsp.buf.document_highlight, 'Hover Word')
       map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
       map('<leader>fm', function()
-        require('conform').format({ lsp_format = 'fallback' })
+        require('conform').format({ bufnr = buf, timeout_ms = 500, lsp_format = 'fallback' })
       end, '[F]ormat')
       map('<leader>ti', function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = buf }))
@@ -63,7 +93,7 @@ return {
         local client = lsp.get_client_by_id(ev.data.client_id)
         local buf = ev.buf
 
-        vim.lsp.inlay_hint.enable(false, { bufnr = ev.buf })
+        vim.lsp.inlay_hint.enable(false, { bufnr = buf })
 
         if client:supports_method 'textDocument/documentHighlight' then
           local highlight_augroup = autogrp('user-lsp-highlight', { clear = false })
@@ -163,8 +193,11 @@ return {
       },
     }
 
+    vim.lsp.config('*', {
+      capabilities = mini_completion.get_lsp_capabilities(),
+    })
+
     for server_name, cfg in pairs(servers) do
-      cfg.capabilities = require('blink.cmp').get_lsp_capabilities(cfg.capabilities)
       vim.lsp.config(server_name, cfg)
       vim.lsp.enable(server_name)
     end
