@@ -110,6 +110,19 @@ return {
   {
     'echasnovski/mini.snippets',
     version = false,
-    opts = {},
+    opts = function()
+      local snippets = require 'mini.snippets'
+
+      return {
+        expand = {
+          insert = function(snippet)
+            return snippets.default_insert(snippet, {
+              empty_tabstop = '',
+              empty_tabstop_final = '',
+            })
+          end,
+        },
+      }
+    end,
   },
 }

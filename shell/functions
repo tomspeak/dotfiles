@@ -3,12 +3,65 @@ function tmux_new_from_dir {
 }
 
 function yta {
-  [[ -z "$1" ]] && { echo "Usage: yta <url>"; return 1; }
-  yt-dlp -x --audio-format m4a --audio-quality 0 \
-    --embed-thumbnail --embed-metadata \
-    --cookies-from-browser "brave:Default" \
-    --output "%(title)s.%(ext)s" \
-    "$1"
+  [[ -z "$1" ]] && {
+    echo "Usage: yta <url>"
+    return 1
+  }
+
+  local url="$1" file tmp bytes pathlog
+  pathlog="$(mktemp -t yta-path.XXXXXX)" || return 1
+
+  echo "yta: downloading best audio..."
+  yt-dlp \
+    --no-playlist \
+    -f 'ba' \
+    -x --audio-format m4a --audio-quality 0 \
+    --embed-thumbnail --convert-thumbnails jpg \
+    --embed-metadata --no-embed-chapters --no-embed-info-json --no-embed-subs \
+    --cookies-from-browser 'brave:Default' \
+    --output '%(title).180B [%(id)s].%(ext)s' \
+    --print-to-file after_move:filepath "$pathlog" \
+    "$url" || {
+      echo "yta: yt-dlp failed"
+      rm -f "$pathlog"
+      return 1
+    }
+
+  file="$(tail -n 1 "$pathlog")"
+  rm -f "$pathlog"
+
+  [[ -f "$file" ]] || {
+    echo "yta: could not find output file: $file"
+    return 1
+  }
+
+  echo "yta: downloaded:"
+  echo "  $file"
+
+  tmp="${file%.*}.applemusic.tmp.${file##*.}"
+
+  echo "yta: cleaning container for Apple Music..."
+  ffmpeg -hide_banner -loglevel warning -y \
+    -i "$file" \
+    -map 0:a:0 -map '0:v:0?' \
+    -c:a copy \
+    -c:v mjpeg -pix_fmt yuvj420p -q:v 2 \
+    -map_metadata 0 -map_chapters -1 \
+    -disposition:v:0 attached_pic \
+    "$tmp" || {
+      echo "yta: ffmpeg cleanup failed"
+      rm -f "$tmp"
+      return 1
+    }
+
+  mv -f "$tmp" "$file"
+
+  bytes=$(stat -f%z "$file")
+  echo "yta: finished Apple Music-clean M4A"
+  echo "  size: $(( bytes / 1024 / 1024 )) MB"
+
+  (( bytes > 200000000 )) && \
+    echo "yta: warning: over 200 MB, Apple Music cloud upload may reject it"
 }
 
 function mkcd {
