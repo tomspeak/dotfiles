@@ -6,6 +6,7 @@ theme = current-theme
 font-size = 16
 font-family = Berkeley Mono
 #font-family = Monaspace Neon Var
+font-family = Monaspace Neon NF
 #font-family = CPMono_v07
 #font-family = Fira Code
 #font-family = CommitMono
