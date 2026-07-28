@@ -101,6 +101,14 @@ defaults write com.apple.dock "expose-group-apps" -bool "false"
 defaults write NSGlobalDomain "AppleSpacesSwitchOnActivate" -bool "true"
 defaults write com.apple.spaces "spans-displays" -bool "true"
 
+# Load Hammerspoon config from ~/.config (symlinked from dotfiles) instead of ~/.hammerspoon
+defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
+
+# Enable native "Move left/right a space" (ctrl+arrow) so Karabiner's Tab+[/]
+# space navigation works without popping Mission Control
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "{enabled = 1; value = { parameters = ( 65535, 123, 262144 ); type = standard; }; }"
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{enabled = 1; value = { parameters = ( 65535, 124, 262144 ); type = standard; }; }"
+
 defaults write com.apple.Finder AppleShowAllFiles true
 # Show the ~/Library folder
 chflags nohidden ~/Library

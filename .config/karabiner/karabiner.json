@@ -173,6 +173,46 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "TAB to shift+option+control (hyper) or TAB (If Alone)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "tab",
+                                    "modifiers": {}
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "modifiers": ["left_option", "left_control"]
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "tab" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "TAB + [ / ] to navigate spaces (hyper)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "open_bracket",
+                                    "modifiers": { "mandatory": ["left_control", "left_option", "left_shift"] }
+                                },
+                                "to": [{ "key_code": "left_arrow", "modifiers": ["left_control"] }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "close_bracket",
+                                    "modifiers": { "mandatory": ["left_control", "left_option", "left_shift"] }
+                                },
+                                "to": [{ "key_code": "right_arrow", "modifiers": ["left_control"] }],
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },
