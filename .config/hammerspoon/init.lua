@@ -3,7 +3,10 @@
 -- ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -- ┃
 -- ┃  APPS   left-hand cluster · focusing an app also jumps to its Space
--- ┃     q VS Code   w Ghostty   e Chrome   r Chat   1 Gmail   2 Calendar   3 Music
+-- ┃            q editor   w browser   e chat   r Ghostty   1 mail   2 calendar   3 Music
+-- ┃     work     = VSCode(FB) / Chrome / GChat / Gmail / GCalendar
+-- ┃     personal = VSCode / Brave / Signal / Apple Mail / Apple Calendar
+-- ┃     (picked by presence of ~/dotfiles/shell/work)
 -- ┃
 -- ┃  WINDOW    h / l  half left / right       space  full screen
 -- ┃            j / k  left / right corner  (press again to flip top<->bottom)
@@ -196,16 +199,35 @@ end)
 --   Ergonomic left-hand cluster (Tab held by left hand):
 --   most-used apps on the easiest keys. Positional, not
 --   mnemonic. 'g' is reload, '4' is a free spare.
+--
+--   Work vs personal uses the same marker the shell does:
+--   the gitignored ~/dotfiles/shell/work file, present only
+--   on the work machine. Env vars can't be used here —
+--   Hammerspoon is launched by launchd and does not inherit
+--   the shell environment.
 -- ===================================================
-local apps = {
-    q = 'com.facebook.fbvscode', -- VS Code
-    w = 'com.mitchellh.ghostty', -- Ghostty
-    e = 'com.google.Chrome', -- Chrome
-    r = 'com.google.Chrome.app.pommaclcbfghclhalboakcipcmmndhcj', -- Google Chat
+local WORK_APPS = {
+    q = 'com.facebook.fbvscode', -- VS Code (FB build)
+    w = 'com.google.Chrome', -- Chrome
+    e = 'com.google.Chrome.app.pommaclcbfghclhalboakcipcmmndhcj', -- Google Chat
+    r = 'com.mitchellh.ghostty', -- Ghostty
     ['1'] = 'com.google.Chrome.app.fmgjjmmmlfnkbppncabfkddbjimcfncm', -- Gmail
     ['2'] = 'com.google.Chrome.app.gihbagcjamhppndmlkgmccomodfodggj', -- Calendar
     ['3'] = 'com.apple.Music', -- Apple Music
 }
+local PERSONAL_APPS = {
+    q = 'com.microsoft.VSCode', -- VS Code
+    w = 'com.brave.Browser', -- Brave
+    e = 'org.whispersystems.signal-desktop', -- Signal
+    r = 'com.mitchellh.ghostty', -- Ghostty
+    ['1'] = 'com.apple.mail', -- Apple Mail
+    ['2'] = 'com.apple.iCal', -- Apple Calendar
+    ['3'] = 'com.apple.Music', -- Apple Music
+}
+
+local is_work = hs.fs.attributes(os.getenv('HOME') .. '/dotfiles/shell/work') ~= nil
+local apps = is_work and WORK_APPS or PERSONAL_APPS
+
 for key, bundle_id in pairs(apps) do
     hs.hotkey.bind(HYPER_KEY, key, function()
         hs.application.launchOrFocusByBundleID(bundle_id)
