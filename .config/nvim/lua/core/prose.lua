@@ -47,7 +47,7 @@ api.nvim_create_autocmd("FileType", {
 
     local undo = { 'setlocal spell< wrap< linebreak< conceallevel< textwidth< wrapmargin< formatoptions<' }
     for _, punctuation in ipairs(punctuations) do
-      undo[#undo + 1] = 'silent! iunmap <buffer> ' .. punctuation
+      undo[#undo + 1] = "execute 'silent! iunmap <buffer> " .. punctuation .. "'"
     end
     for _, command in ipairs({ 'PencilHard', 'PencilSoft', 'WordCount' }) do
       undo[#undo + 1] = 'silent! delcommand -buffer ' .. command
