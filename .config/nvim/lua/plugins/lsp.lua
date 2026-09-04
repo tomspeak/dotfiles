@@ -41,11 +41,8 @@ return {
       virtual_text = false,
       virtual_lines = false,
       severity_sort = true,
-      signs = true,
-      severity = { vim.diagnostic.severity.ERROR },
-      -- underline = {
-      --   severity = { min = vim.diagnostic.severity.ERROR },
-      -- },
+      signs = { severity = vim.diagnostic.severity.ERROR },
+      underline = { severity = vim.diagnostic.severity.ERROR },
     })
 
     local keybinds = function(buf)
