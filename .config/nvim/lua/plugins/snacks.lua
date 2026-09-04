@@ -1,3 +1,37 @@
+local history = {
+  confirm = function(picker, item)
+    if not item then
+      return
+    end
+    picker:close()
+    require('lazy').load { plugins = { 'vim-fugitive' } }
+    -- The commit view also works for file history before a rename or deletion.
+    vim.cmd.edit { vim.fn.FugitiveFind(item.commit, item.cwd) }
+  end,
+  actions = {
+    history_checkout = {
+      desc = 'Checkout commit / restore file and index',
+      action = function(picker, item)
+        if not item then
+          return
+        end
+        picker:close()
+        local action = item.file and 'Restore file and index' or 'Checkout commit'
+        local target = item.file and (item.file .. ' from ' .. item.commit) or item.commit
+        vim.ui.select({ 'Cancel', action }, { prompt = action .. ': ' .. target .. '?' }, function(choice)
+          if choice == action then
+            require('snacks.picker.actions').git_checkout(picker, item)
+          end
+        end)
+      end,
+    },
+  },
+  win = {
+    input = { keys = { ['<c-x>'] = { 'history_checkout', mode = { 'n', 'i' } } } },
+    list = { keys = { ['<c-x>'] = 'history_checkout' } },
+  },
+}
+
 return {
   {
     'folke/snacks.nvim',
@@ -124,7 +158,6 @@ return {
             finder = "git_log",
             format = "git_log",
             preview = "git_show",
-            confirm = "git_checkout",
             layout = "vertical",
           })
         end,
@@ -200,6 +233,10 @@ return {
 
       picker = {
         enabled = true,
+        sources = {
+          git_log = history,
+          git_log_file = history,
+        },
         layout = {
           preset = "ivy",
           cycle = false,
