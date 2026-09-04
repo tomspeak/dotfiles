@@ -5,8 +5,13 @@ local history = {
     end
     picker:close()
     require('lazy').load { plugins = { 'vim-fugitive' } }
+    local git_dir = vim.fn.FugitiveExtractGitDir(item.cwd)
+    if git_dir == '' then
+      vim.notify('Cannot locate the selected commit\'s repository', vim.log.levels.WARN)
+      return
+    end
     -- The commit view also works for file history before a rename or deletion.
-    vim.cmd.edit { vim.fn.FugitiveFind(item.commit, item.cwd) }
+    vim.cmd.edit { vim.fn.FugitiveFind(item.commit, git_dir) }
   end,
   actions = {
     history_checkout = {
