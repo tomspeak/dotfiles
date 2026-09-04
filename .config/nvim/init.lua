@@ -13,6 +13,7 @@ require('lazy').setup {
   },
   install = { colorscheme = { 'default' } },
   checker = { enabled = false },
+  pkg = { enabled = false }, -- dependencies are declared here, not imported from package metadata
   rocks = { enabled = false }, -- current plugins need no LuaRocks dependencies
   defaults = {
     lazy = false,
