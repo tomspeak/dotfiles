@@ -77,6 +77,11 @@ return {
   config = function()
     local dap, dapui, dapvt = require 'dap', require 'dapui', require 'nvim-dap-virtual-text'
     local function zig_build_and_resolve_program()
+      local function is_executable(path)
+        local stat = vim.uv.fs_stat(path)
+        return stat and stat.type == 'file' and vim.fn.executable(path) == 1
+      end
+
       local cwd = vim.fn.getcwd()
       local result = vim.system({ 'zig', 'build' }, { cwd = cwd, text = true }):wait()
 
@@ -85,11 +90,21 @@ return {
       end
 
       local program = cwd .. '/zig-out/bin/' .. vim.fn.fnamemodify(cwd, ':t')
-      if vim.uv.fs_stat(program) then
+      if is_executable(program) then
         return program
       end
 
-      return vim.fn.input('Path to Zig executable: ', cwd .. '/zig-out/bin/', 'file')
+      local ok, selected = pcall(vim.fn.input, 'Path to Zig executable: ', cwd .. '/zig-out/bin/', 'file')
+      if not ok or selected == '' then
+        return dap.ABORT
+      end
+
+      program = vim.fn.fnamemodify(vim.fn.expand(selected), ':p')
+      if not is_executable(program) then
+        vim.notify('Not an executable file: ' .. program, vim.log.levels.ERROR)
+        return dap.ABORT
+      end
+      return program
     end
 
     dapui.setup {
