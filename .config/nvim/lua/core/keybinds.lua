@@ -78,14 +78,14 @@ keymap("n", "<Leader>rt", "<cmd>restart<CR>", { desc = "Restart Neovim" })
 -- Structural selection
 keymap({ 'n', 'x', 'o' }, '<A-o>', function()
   if vim.treesitter.get_parser(nil, nil, { error = false }) then
-    require('vim.treesitter._select').select_parent(vim.v.count1)
+    vim.treesitter.select('parent', vim.v.count1)
   else
     vim.lsp.buf.selection_range(vim.v.count1)
   end
 end, { desc = 'Expand structural selection' })
 keymap({ 'n', 'x', 'o' }, '<A-i>', function()
   if vim.treesitter.get_parser(nil, nil, { error = false }) then
-    require('vim.treesitter._select').select_child(vim.v.count1)
+    vim.treesitter.select('child', vim.v.count1)
   else
     vim.lsp.buf.selection_range(-vim.v.count1)
   end
