@@ -83,7 +83,7 @@ return {
         require('conform').format({ bufnr = buf, timeout_ms = 500, lsp_format = 'fallback' })
       end, '[F]ormat')
       map('<leader>ti', function()
-        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = buf }))
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = buf }), { bufnr = buf })
       end, 'Toggle Inlay Hints')
     end
 
