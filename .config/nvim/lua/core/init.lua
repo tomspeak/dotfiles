@@ -1,7 +1,6 @@
 require 'core.keybinds'
 require 'core.options'
 require 'core.autocmds'
-require 'core.commands'
 require 'core.completion'
 require 'core.statusline'
 require 'core.prose'

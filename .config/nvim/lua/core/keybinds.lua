@@ -96,8 +96,8 @@ keymap({ 'n', 'x', 'o' }, '<A-i>', function()
 end, { desc = 'Shrink structural selection' })
 
 -- Make/Build
-keymap('n', '<leader>m', '<cmd>Make<CR>', { desc = 'Run makeprg' })
-keymap('n', '<leader>M', '<cmd>Make!<CR>', { desc = 'Run makeprg without jumping' })
+keymap('n', '<leader>m', '<cmd>make<CR>', { desc = 'Run makeprg' })
+keymap('n', '<leader>M', '<cmd>make!<CR>', { desc = 'Run makeprg without jumping' })
 
 -- Quickfix navigation
 keymap('n', '<leader>co', '<cmd>copen<CR>', { desc = 'Open quickfix' })
