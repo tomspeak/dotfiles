@@ -54,28 +54,14 @@ setopt PUSHD_SILENT         # Don't print the stack after pushd/popd.
 
 bindkey '^f' autosuggest-accept
 
-# Lazy load completions on first tab press
-_setup_completions() {
-  autoload -Uz compinit
-  compinit -C
+# Initialize completion before fzf wraps its widgets.
+autoload -Uz compinit
+compinit
 
-  zstyle ':completion:*' completer _extensions _complete _approximate
-  zstyle ':completion:*' menu select
-  zstyle ':completion:*' use-cache true
-  zstyle ':completion:*' rehash false
-
-  # Rebind to normal completion
-  bindkey '^I' expand-or-complete
-  unfunction _setup_completions
-}
-
-# Custom widget to load completions on first use
-_load_and_complete() {
-  _setup_completions
-  zle expand-or-complete
-}
-zle -N _load_and_complete
-bindkey '^I' _load_and_complete
+zstyle ':completion:*' completer _extensions _complete _approximate
+zstyle ':completion:*' menu select
+zstyle ':completion:*' use-cache true
+zstyle ':completion:*' rehash false
 
 # Tab completion
 bindkey '^[[3~' delete-char  # Delete

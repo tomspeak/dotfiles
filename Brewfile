@@ -22,7 +22,6 @@ brew 'wget'
 brew 'yt-dlp'
 brew 'zsh'
 brew 'zsh-autosuggestions'
-brew 'zsh-syntax-highlighting'
 
 cask '1password'
 cask 'alfred'
