@@ -7,6 +7,7 @@ return {
     local autocmd = vim.api.nvim_create_autocmd
     local autogrp = vim.api.nvim_create_augroup
     local mini_completion = require 'mini.completion'
+    local highlight_group = autogrp('user-lsp-highlight', { clear = true })
 
     local document_color = function(client, buf)
       if client:supports_method 'textDocument/documentColor' then
@@ -92,19 +93,23 @@ return {
       callback = function(ev)
         local client = lsp.get_client_by_id(ev.data.client_id)
         local buf = ev.buf
+        if not client then
+          return
+        end
 
         vim.lsp.inlay_hint.enable(false, { bufnr = buf })
 
-        if client:supports_method 'textDocument/documentHighlight' then
-          local highlight_augroup = autogrp('user-lsp-highlight', { clear = false })
+        if client:supports_method('textDocument/documentHighlight', buf) then
+          -- These callbacks fan out to every supporting client, so own them once per buffer.
+          vim.api.nvim_clear_autocmds { group = highlight_group, buf = buf }
           autocmd({ 'CursorHold', 'CursorHoldI' }, {
-            buf = ev.buf,
-            group = highlight_augroup,
+            buf = buf,
+            group = highlight_group,
             callback = vim.lsp.buf.document_highlight,
           })
           autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-            buf = ev.buf,
-            group = highlight_augroup,
+            buf = buf,
+            group = highlight_group,
             callback = vim.lsp.buf.clear_references,
           })
         end
@@ -121,8 +126,14 @@ return {
     autocmd('LspDetach', {
       group = autogrp('user-lsp-detach', { clear = true }),
       callback = function(ev)
-        lsp.buf.clear_references()
-        vim.api.nvim_clear_autocmds { group = 'user-lsp-highlight', buf = ev.buf }
+        for _, client in ipairs(lsp.get_clients { bufnr = ev.buf, method = 'textDocument/documentHighlight' }) do
+          -- LspDetach fires before the departing client is removed from the buffer.
+          if client.id ~= ev.data.client_id then
+            return
+          end
+        end
+        vim.api.nvim_clear_autocmds { group = highlight_group, buf = ev.buf }
+        vim.api.nvim_buf_call(ev.buf, lsp.buf.clear_references)
       end,
     })
 
