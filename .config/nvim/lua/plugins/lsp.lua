@@ -49,7 +49,7 @@ return {
 
     local keybinds = function(buf)
       local map = function(keys, func, desc)
-        vim.keymap.set('n', keys, func, { buffer = buf, desc = 'LSP: ' .. desc })
+        vim.keymap.set('n', keys, func, { buf = buf, desc = 'LSP: ' .. desc })
       end
 
       map('<leader>ca', vim.lsp.buf.code_action, 'LSP [C]ode [A]ction')
@@ -98,12 +98,12 @@ return {
         if client:supports_method 'textDocument/documentHighlight' then
           local highlight_augroup = autogrp('user-lsp-highlight', { clear = false })
           autocmd({ 'CursorHold', 'CursorHoldI' }, {
-            buffer = ev.buf,
+            buf = ev.buf,
             group = highlight_augroup,
             callback = vim.lsp.buf.document_highlight,
           })
           autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-            buffer = ev.buf,
+            buf = ev.buf,
             group = highlight_augroup,
             callback = vim.lsp.buf.clear_references,
           })
@@ -118,7 +118,7 @@ return {
       group = autogrp('user-lsp-detach', { clear = true }),
       callback = function(ev)
         lsp.buf.clear_references()
-        vim.api.nvim_clear_autocmds { group = 'user-lsp-highlight', buffer = ev.buf }
+        vim.api.nvim_clear_autocmds { group = 'user-lsp-highlight', buf = ev.buf }
       end,
     })
 
