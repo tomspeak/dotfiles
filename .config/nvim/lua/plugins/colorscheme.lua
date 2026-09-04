@@ -7,11 +7,11 @@ return {
       update_interval = 30000,
       set_dark_mode = function()
         vim.opt.background = 'dark'
-        vim.cmd.colorscheme 'vscode'
+        vim.cmd.colorscheme 'jb'
       end,
       set_light_mode = function()
         vim.opt.background = 'light'
-        vim.cmd.colorscheme 'vscode'
+        vim.cmd.colorscheme 'jb'
       end,
     },
   },
@@ -90,5 +90,16 @@ return {
         strings = false,
       },
     }
+  },
+  {
+    "nickkadutskyi/jb.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      integrations = {
+        -- Match Ghostty's background to the statusbar while Neovim is open
+        ghostty = true,
+      },
+    },
   }
 }
