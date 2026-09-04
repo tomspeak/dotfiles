@@ -1,5 +1,12 @@
 #!/bin/bash
-set -e
+set -euo pipefail
+
+dotfiles="$(cd "$(dirname "$0")/.." && pwd)"
+case "${1:-}" in
+  '') brewfile="$dotfiles/Brewfile" ;;
+  --apps) brewfile="$dotfiles/Brewfile.apps" ;;
+  *) echo "Usage: $0 [--apps]" >&2; exit 1 ;;
+esac
 
 # Install Homebrew if not present
 if [ -x /opt/homebrew/bin/brew ]; then
@@ -15,6 +22,6 @@ if [ -x /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# Install everything from the Brewfile
-echo "Running brew bundle"
-brew bundle --file="$(cd "$(dirname "$0")/.." && pwd)/Brewfile"
+# Keep optional GUI applications independent of the core toolchain.
+echo "Installing dependencies from $brewfile"
+brew bundle --file="$brewfile"
