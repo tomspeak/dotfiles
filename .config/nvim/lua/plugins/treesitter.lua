@@ -90,14 +90,14 @@ return {
 
       move_map(']f', move.goto_next_start, '@function.outer')
       move_map(']a', move.goto_next_start, '@parameter.outer')
-      move_map(']c', move.goto_next_start, '@class.outer')
+      move_map(']k', move.goto_next_start, '@class.outer')
       move_map('[f', move.goto_previous_start, '@function.outer')
       move_map('[a', move.goto_previous_start, '@parameter.outer')
-      move_map('[c', move.goto_previous_start, '@class.outer')
+      move_map('[k', move.goto_previous_start, '@class.outer')
       move_map(']F', move.goto_next_end, '@function.outer')
-      move_map(']C', move.goto_next_end, '@class.outer')
+      move_map(']K', move.goto_next_end, '@class.outer')
       move_map('[F', move.goto_previous_end, '@function.outer')
-      move_map('[C', move.goto_previous_end, '@class.outer')
+      move_map('[K', move.goto_previous_end, '@class.outer')
     end,
   },
 }

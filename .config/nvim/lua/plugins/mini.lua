@@ -58,6 +58,7 @@ return {
     version = false,
     opts = {
       comment = { suffix = '' }, -- disable [c/]c, used by gitsigns for hunk navigation
+      file = { suffix = '' }, -- keep [f/]f and [F/]F for Tree-sitter functions
     },
     event = { 'BufReadPost', 'BufNewFile' },
   },

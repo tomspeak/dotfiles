@@ -98,8 +98,6 @@ keymap('n', '<leader>m', '<cmd>Make<CR>', { desc = 'Run makeprg' })
 keymap('n', '<leader>M', '<cmd>Make!<CR>', { desc = 'Run makeprg without jumping' })
 
 -- Quickfix navigation
-keymap('n', '[q', '<cmd>cprev<CR>', { desc = 'Previous quickfix' })
-keymap('n', ']q', '<cmd>cnext<CR>', { desc = 'Next quickfix' })
 keymap('n', '<leader>co', '<cmd>copen<CR>', { desc = 'Open quickfix' })
 keymap('n', '<leader>cc', '<cmd>cclose<CR>', { desc = 'Close quickfix' })
 
