@@ -84,7 +84,7 @@ return {
         vim.lsp.buf.hover {
           max_height = 20,
           max_width = 130,
-          close_events = { "CursorMoved", "BufLeave", "WinLeave", "LSPDetach" },
+          close_events = { 'CursorMoved', 'LspDetach' },
           focusable = true,
         }
       end, 'Hover Documentation')
