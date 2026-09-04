@@ -13,6 +13,7 @@ require('lazy').setup {
   },
   install = { colorscheme = { 'default' } },
   checker = { enabled = false },
+  rocks = { enabled = false }, -- current plugins need no LuaRocks dependencies
   defaults = {
     lazy = false,
     version = false, -- always use the latest git commit
