@@ -28,7 +28,7 @@ unzip -q "$stage/codelldb.vsix" -d "$stage/new"
 
 adapter="$stage/new/extension/adapter/codelldb"
 test -f "$adapter"
-test -d "$stage/new/extension/lldb/lib"
+test -f "$stage/new/extension/lldb/lib/liblldb.dylib"
 chmod +x "$adapter"
 
 # Preserve the previous adapter until the complete replacement is ready.
