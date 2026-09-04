@@ -1,7 +1,8 @@
 -- Statusline with modular components
 
 _G.git_branch = function()
-  return vim.b.gitsigns_head or ''
+  local branch = vim.b.gitsigns_head or ''
+  return branch ~= '' and (' (' .. branch .. ') ') or ''
 end
 
 _G.Statusline_filename = function()
@@ -38,7 +39,7 @@ vim.opt.statusline = table.concat {
   [[ %{% luaeval("(package.loaded['vim.diagnostic'] and vim.diagnostic.status(0) ~= '' and vim.diagnostic.status(0) .. ' ') or ''") %}]],
   ' %{v:lua.Statusline_lsp()}',
   '%{v:lua.Statusline_wordcount()}',
-  ' (%{v:lua.git_branch()}) ',
+  '%{v:lua.git_branch()}',
 }
 
 local M = {}
