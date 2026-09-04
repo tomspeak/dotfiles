@@ -7,6 +7,8 @@ Conflicting existing configurations are saved beside their destinations in
 `*.backup.*/original`; running setup again preserves links already in place.
 Use `nnu` to update nightly; the previous build remains available at
 `~/.nvim-nightly/previous/bin/nvim` until the next successful update.
+GitHub repositories use SSH in the Git config, so configure GitHub SSH access
+before installing Neovim or tmux plugins; the TPM bootstrap itself uses HTTPS.
 
 Run `./scripts/preferences.sh` separately to apply desktop preferences, including
 the sparse Dock layout. It restarts Dock, Finder, and SystemUIServer; reopen other
