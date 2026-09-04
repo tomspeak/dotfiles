@@ -60,16 +60,16 @@ keymap('n', '<Leader>tl', ':set background=light<CR>', { desc = 'Set background 
 
 -- Copy file/buffer
 -- copies current buffer file path relative to cwd to register
-keymap('n', 'cp', function()
+keymap('n', '<leader>cp', function()
   local path = vim.fn.resolve(vim.fn.fnamemodify(vim.fn.expand '%', ':~:.'))
   vim.fn.setreg('+', path)
-end)
+end, { desc = 'Copy file path' })
 
 -- copies current buffer filename to register
-keymap('n', 'cf', function()
-  local filename = vim.fn.resolve(vim.fn.fnamemodify(vim.fn.expand '%', ':t'))
+keymap('n', '<leader>cf', function()
+  local filename = vim.fn.expand '%:t'
   vim.fn.setreg('+', filename)
-end)
+end, { desc = 'Copy filename' })
 
 -- append to end of line
 keymap("n", "<Leader>,", ":normal! A,<CR>", { desc = "Append comma", silent = true })
