@@ -29,7 +29,7 @@
                         ]
                     },
                     {
-                        "description": "left cmd as tmux prefix (CTRL + A) when alone",
+                        "description": "left cmd as tmux prefix (CTRL + A) when alone in Ghostty",
                         "manipulators": [
                             {
                                 "from": {
@@ -42,6 +42,12 @@
                                     {
                                         "key_code": "a",
                                         "modifiers": ["left_control"]
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_if",
+                                        "bundle_identifiers": ["^com\\.mitchellh\\.ghostty$"]
                                     }
                                 ],
                                 "type": "basic"
