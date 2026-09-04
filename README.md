@@ -1,27 +1,29 @@
 # me, myself & Я
 
-On Apple Silicon macOS, run `./scripts/setup.sh` to install dependencies,
-Neovim nightly, and configuration symlinks. If prompted to install Xcode command
-line tools, finish that installation and run setup again.
-The checkout can live anywhere. Core tools and runtimes finish before setup
-publishes configuration links and changes the login shell; GUI applications and
-desktop preferences remain separate steps.
-Conflicting existing configurations are saved beside their destinations in
-`*.backup.*/original`; running setup again preserves links already in place.
-Use `nnu` to update nightly; the previous build remains available at
-`~/.nvim-nightly/previous/bin/nvim` until the next successful update.
-GitHub repositories use SSH in the Git config, so configure GitHub SSH access
-before installing Neovim or tmux plugins; the TPM bootstrap itself uses HTTPS.
+Fresh Apple Silicon Mac, starting in Terminal:
 
-Node is managed only by asdf. `npm/install.sh` installs the version pinned in
-`.tool-versions`, installs the global packages for that version, and selects it
-as the home default without changing other runtimes. Project-specific versions
-still work. Future Node installations from the configured shell use the same
-`npm/global-packages.txt` list; rerun `./npm/install.sh` after changing the pin.
+1. Run `xcode-select --install` and finish the installation before continuing.
 
-Install optional GUI applications with `./scripts/brew.sh --apps` after core
-setup. These live in `Brewfile.apps` and do not gate the command-line toolchain.
+2. Clone and run setup (installs Homebrew tools, asdf Node, Neovim nightly, and config links):
 
-Run `./scripts/preferences.sh` separately to apply desktop preferences, including
-the sparse Dock layout. It restarts Dock, Finder, and SystemUIServer; reopen other
-applications to apply their settings.
+   ```sh
+   git clone https://github.com/tomspeak/dotfiles.git ~/dotfiles
+   cd ~/dotfiles
+   ./scripts/setup.sh
+   ```
+
+3. Open a new Terminal window to load the configured shell.
+
+4. Optional desktop apps: run `~/dotfiles/scripts/brew.sh --apps`.
+   Install [Ghostty tip](https://github.com/ghostty-org/ghostty/releases/tag/tip) (`Ghostty.dmg`) and your Berkeley Mono / Monaspace Neon NF fonts.
+   Open Hammerspoon and Karabiner and grant their requested permissions.
+
+5. Configure [GitHub SSH access](https://docs.github.com/en/authentication/connecting-to-github-with-ssh); the Git config uses SSH for plugin downloads.
+
+6. Start `nvim` and let plugins install. Start `tmux`, then press `Ctrl+a` followed by `Shift+i` to install its plugins.
+
+7. Optional macOS preferences: **review** `~/dotfiles/scripts/preferences.sh` before running it—it changes Dock and power settings.
+
+Existing configs are backed up beside their destinations as `*.backup.*/original`.
+
+Updates: `nnu` for Neovim. For Node, change `.tool-versions`, then run `~/dotfiles/npm/install.sh`.
