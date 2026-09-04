@@ -38,24 +38,47 @@ chsh -s "$brew_zsh"
 
 # Symlinks
 echo "Setting up symlinks"
-mkdir -p ~/.config ~/Library/KeyBindings
+link_config() {
+  local source_path="$1" destination="$2" backup=""
+  mkdir -p "$(dirname "$destination")" || return
+  if [ -L "$destination" ] && [ "$(readlink "$destination")" = "$source_path" ]; then
+    return
+  fi
+  if [ -e "$destination" ] || [ -L "$destination" ]; then
+    backup="$(mktemp -d "$destination.backup.XXXXXX")" || return
+    mv "$destination" "$backup/original" || return
+    echo "Saved $destination to $backup/original"
+  fi
+  if ! ln -s "$source_path" "$destination"; then
+    if [ -n "$backup" ]; then
+      mv "$backup/original" "$destination"
+    fi
+    return 1
+  fi
+}
 
 # ~/.config/ items
 for dir in "$dotfiles"/.config/*/; do
   name="$(basename "$dir")"
-  ln -sfn "$dotfiles/.config/$name" ~/.config/"$name"
+  link_config "$dotfiles/.config/$name" "$HOME/.config/$name"
 done
 
 # ~/ dot files
-ln -sf "$dotfiles/zsh/.zshrc" ~/.zshrc
-ln -sf "$dotfiles/zsh/.zshenv" ~/.zshenv
-ln -sf "$dotfiles/git/.gitconfig" ~/.gitconfig
-ln -sf "$dotfiles/git/.gitignore_global" ~/.gitignore_global
-ln -sf "$dotfiles/tmux/.tmux.conf" ~/.tmux.conf
-ln -sf "$dotfiles/ideavim/.ideavimrc" ~/.ideavimrc
-ln -sf "$dotfiles/keybindings/Library/KeyBindings/DefaultKeyBinding.dict" ~/Library/KeyBindings/DefaultKeyBinding.dict
-if [ -d "$dotfiles/vscode/Library/Application Support/Code/User" ]; then
-  find "$dotfiles/vscode/Library/Application Support/Code/User" -type f -exec ln -sf {} ~/Library/Application\ Support/Code/User/ \;
+link_config "$dotfiles/zsh/.zshrc" "$HOME/.zshrc"
+link_config "$dotfiles/zsh/.zshenv" "$HOME/.zshenv"
+link_config "$dotfiles/git/.gitconfig" "$HOME/.gitconfig"
+link_config "$dotfiles/git/.gitignore_global" "$HOME/.gitignore_global"
+link_config "$dotfiles/tmux/.tmux.conf" "$HOME/.tmux.conf"
+link_config "$dotfiles/ideavim/.ideavimrc" "$HOME/.ideavimrc"
+link_config "$dotfiles/keybindings/Library/KeyBindings/DefaultKeyBinding.dict" "$HOME/Library/KeyBindings/DefaultKeyBinding.dict"
+for file in "$dotfiles/vscode/Library/Application Support/Code/User"/*; do
+  [ -f "$file" ] || continue
+  link_config "$file" "$HOME/Library/Application Support/Code/User/$(basename "$file")"
+done
+
+theme_link="$dotfiles/.config/ghostty/themes/current-theme"
+if [ ! -e "$theme_link" ] && [ ! -L "$theme_link" ]; then
+  ln -s custom/unsure "$theme_link"
 fi
 
 # tmux plugins
