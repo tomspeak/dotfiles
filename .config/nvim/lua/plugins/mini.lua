@@ -75,9 +75,9 @@ return {
     opts = {
       modes = { insert = true, command = true, terminal = false },
       mappings = {
-        ["`"] = false,
+        ['`'] = false,
       },
-    }
+    },
   },
   {
     'echasnovski/mini.indentscope',
@@ -87,15 +87,15 @@ return {
       draw = {
         delay = 0,
       },
-      symbol = "│",
+      symbol = '│',
       options = { try_as_border = true },
     },
     init = function()
-      vim.api.nvim_create_autocmd("FileType", {
+      vim.api.nvim_create_autocmd('FileType', {
         pattern = {
-          "help",
-          "lazy",
-          "NvimTree",
+          'help',
+          'lazy',
+          'NvimTree',
         },
         callback = function()
           vim.b.miniindentscope_disable = true

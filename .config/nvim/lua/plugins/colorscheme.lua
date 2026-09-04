@@ -39,32 +39,32 @@ return {
     lazy = false,
   },
   {
-    "vague2k/vague.nvim",
+    'vague2k/vague.nvim',
     lazy = false,
     priority = 1000,
   },
   {
-    "olimorris/onedarkpro.nvim",
+    'olimorris/onedarkpro.nvim',
     lazy = false,
     priority = 1000,
   },
   {
-    "thesimonho/kanagawa-paper.nvim",
+    'thesimonho/kanagawa-paper.nvim',
     lazy = false,
     priority = 1000,
     opts = {},
   },
   {
-    "rose-pine/neovim",
-    name = "rose-pine",
+    'rose-pine/neovim',
+    name = 'rose-pine',
     opts = {
       styles = {
         italic = false,
       },
-    }
+    },
   },
   {
-    "datsfilipe/vesper.nvim",
+    'datsfilipe/vesper.nvim',
     lazy = false,
     priority = 1000,
     opts = {
@@ -78,13 +78,13 @@ return {
     },
   },
   {
-    "oskarnurm/koda.nvim",
+    'oskarnurm/koda.nvim',
     lazy = false,
     priority = 1000,
     opts = {},
   },
   {
-    "blazkowolf/gruber-darker.nvim",
+    'blazkowolf/gruber-darker.nvim',
     lazy = false,
     priority = 1000,
     opts = {
@@ -92,10 +92,10 @@ return {
       italic = {
         strings = false,
       },
-    }
+    },
   },
   {
-    "nickkadutskyi/jb.nvim",
+    'nickkadutskyi/jb.nvim',
     lazy = false,
     priority = 1000,
     opts = {
@@ -104,5 +104,5 @@ return {
         ghostty = true,
       },
     },
-  }
+  },
 }

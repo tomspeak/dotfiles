@@ -39,11 +39,13 @@ keymap('n', '-', '<cmd> NvimTreeToggle <CR>', { desc = 'Nvimtree Toggle', nowait
 keymap('n', '<C-_>', '<cmd>AerialToggle<CR>', { desc = 'Aerial Toggle' })
 
 -- Search/Replace under current word
-keymap('n', '<Leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { desc = 'Search & replace word under cursor', silent = false })
-keymap('x', '<leader>rr',
+keymap('n', '<Leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Search & replace word under cursor', silent = false })
+keymap(
+  'x',
+  '<leader>rr',
   [[y:%s/\V<C-r>=substitute(escape(getreg('0'), '\/'), '\n', '\\n', 'g')<CR>//gc<Left><Left><Left>]],
-  { desc = 'Search/replace visual literally' })
+  { desc = 'Search/replace visual literally' }
+)
 
 -- Stay in visual mode when changing indentation
 keymap('v', '<', '<gv', { noremap = true, silent = true })
@@ -74,10 +76,10 @@ keymap('n', '<leader>cf', function()
 end, { desc = 'Copy filename' })
 
 -- append to end of line
-keymap("n", "<Leader>,", ":normal! A,<CR>", { desc = "Append comma", silent = true })
-keymap("n", "<Leader>;", ":normal! A;<CR>", { desc = "Append semicolon", silent = true })
+keymap('n', '<Leader>,', ':normal! A,<CR>', { desc = 'Append comma', silent = true })
+keymap('n', '<Leader>;', ':normal! A;<CR>', { desc = 'Append semicolon', silent = true })
 
-keymap("n", "<Leader>rt", "<cmd>restart<CR>", { desc = "Restart Neovim" })
+keymap('n', '<Leader>rt', '<cmd>restart<CR>', { desc = 'Restart Neovim' })
 
 -- Structural selection
 keymap({ 'n', 'x', 'o' }, '<A-o>', function()

@@ -4,9 +4,23 @@ local has_query = function(lang, query_group)
 end
 
 local parsers = {
-  'bash', 'c', 'cpp', 'css', 'html', 'json', 'lua', 'make',
-  'markdown', 'markdown_inline', 'python', 'rust', 'toml',
-  'vim', 'vimdoc', 'yaml', 'zig',
+  'bash',
+  'c',
+  'cpp',
+  'css',
+  'html',
+  'json',
+  'lua',
+  'make',
+  'markdown',
+  'markdown_inline',
+  'python',
+  'rust',
+  'toml',
+  'vim',
+  'vimdoc',
+  'yaml',
+  'zig',
 }
 
 return {

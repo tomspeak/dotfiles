@@ -11,7 +11,7 @@ local function enable_soft()
   opt_local.wrapmargin = 0
 
   for _, p in ipairs(punctuations) do
-    vim.keymap.set("i", p, p .. "<C-g>u", { buf = 0, desc = "Add break after " .. p })
+    vim.keymap.set('i', p, p .. '<C-g>u', { buf = 0, desc = 'Add break after ' .. p })
   end
 end
 
@@ -23,24 +23,24 @@ local function enable_hard()
 end
 
 local function setup_commands()
-  api.nvim_buf_create_user_command(0, "PencilHard", function()
+  api.nvim_buf_create_user_command(0, 'PencilHard', function()
     enable_hard()
-  end, { desc = "Switch to hard-wrap mode" })
+  end, { desc = 'Switch to hard-wrap mode' })
 
-  api.nvim_buf_create_user_command(0, "PencilSoft", function()
+  api.nvim_buf_create_user_command(0, 'PencilSoft', function()
     enable_soft()
-  end, { desc = "Switch to soft-wrap mode" })
+  end, { desc = 'Switch to soft-wrap mode' })
 
   -- Word count command for prose
-  api.nvim_buf_create_user_command(0, "WordCount", function()
+  api.nvim_buf_create_user_command(0, 'WordCount', function()
     local count = vim.fn.wordcount()
-    print(string.format("Words: %d | Characters: %d", count.words, count.chars))
-  end, { desc = "Show word and character count" })
+    print(string.format('Words: %d | Characters: %d', count.words, count.chars))
+  end, { desc = 'Show word and character count' })
 end
 
-api.nvim_create_autocmd("FileType", {
+api.nvim_create_autocmd('FileType', {
   group = api.nvim_create_augroup('user-prose', { clear = true }),
-  pattern = { "markdown", "text", "rst", "txt", "tex", "mdx", "gitcommit" },
+  pattern = { 'markdown', 'text', 'rst', 'txt', 'tex', 'mdx', 'gitcommit' },
   callback = function()
     enable_soft()
     setup_commands()
@@ -49,7 +49,7 @@ api.nvim_create_autocmd("FileType", {
     for _, punctuation in ipairs(punctuations) do
       undo[#undo + 1] = "execute 'silent! iunmap <buffer> " .. punctuation .. "'"
     end
-    for _, command in ipairs({ 'PencilHard', 'PencilSoft', 'WordCount' }) do
+    for _, command in ipairs { 'PencilHard', 'PencilSoft', 'WordCount' } do
       undo[#undo + 1] = 'silent! delcommand -buffer ' .. command
     end
     vim.b.undo_ftplugin = (vim.b.undo_ftplugin and vim.b.undo_ftplugin .. ' | ' or '') .. table.concat(undo, ' | ')

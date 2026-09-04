@@ -2,32 +2,32 @@ return {
   'lewis6991/gitsigns.nvim',
   event = 'BufReadPost',
   opts = {
-    attach_to_untracked     = false,
-    preview_config          = {
+    attach_to_untracked = false,
+    preview_config = {
       border = 'solid',
       style = 'minimal',
       row = 1,
       col = 1,
     },
-    signs                   = {
-      add          = { text = '+' },
-      change       = { text = '~' },
-      delete       = { text = '-' },
-      topdelete    = { text = '‾' },
+    signs = {
+      add = { text = '+' },
+      change = { text = '~' },
+      delete = { text = '-' },
+      topdelete = { text = '‾' },
       changedelete = { text = '≈' },
     },
-    signcolumn              = true,
-    numhl                   = false,
-    linehl                  = false,
-    word_diff               = false,
-    update_debounce         = 500,
-    current_line_blame      = false,
+    signcolumn = true,
+    numhl = false,
+    linehl = false,
+    word_diff = false,
+    update_debounce = 500,
+    current_line_blame = false,
     current_line_blame_opts = {
       virt_text = true,
       virt_text_pos = 'eol',
       delay = 100,
     },
-    on_attach               = function(bufnr)
+    on_attach = function(bufnr)
       local gs = package.loaded.gitsigns
 
       local function map(mode, l, r, opts)
@@ -42,7 +42,7 @@ return {
           return ']c'
         end
         vim.schedule(function()
-          gs.nav_hunk('next')
+          gs.nav_hunk 'next'
         end)
         return '<Ignore>'
       end, { expr = true, desc = 'Jump to next hunk' })
@@ -52,7 +52,7 @@ return {
           return '[c'
         end
         vim.schedule(function()
-          gs.nav_hunk('prev')
+          gs.nav_hunk 'prev'
         end)
         return '<Ignore>'
       end, { expr = true, desc = 'Jump to previous hunk' })
@@ -70,10 +70,10 @@ return {
       map('n', '<leader>hs', gs.stage_hunk, { desc = 'Stage hunk' })
       map('n', '<leader>hr', gs.reset_hunk, { desc = 'Reset hunk' })
       map('v', '<leader>hs', function()
-        gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') }
+        gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
       end, { desc = 'Stage selection' })
       map('v', '<leader>hr', function()
-        gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') }
+        gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
       end, { desc = 'Reset selection' })
       map('n', '<leader>hS', gs.stage_buffer, { desc = 'Stage buffer' })
       map('n', '<leader>hR', gs.reset_buffer, { desc = 'Reset buffer' })

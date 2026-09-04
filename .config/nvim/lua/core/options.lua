@@ -27,7 +27,7 @@ vim.o.mouse = 'a'
 vim.o.undofile = true
 
 -- Keep zg additions in the versioned personal dictionary.
-vim.opt.spellfile = { vim.fn.stdpath('config') .. '/spell/en.utf-8.add' }
+vim.opt.spellfile = { vim.fn.stdpath 'config' .. '/spell/en.utf-8.add' }
 
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.o.ignorecase = true
@@ -53,10 +53,10 @@ vim.o.cursorline = true
 vim.o.scrolloff = 999
 vim.o.scrolloffpad = 1
 vim.o.clipboard = 'unnamed,unnamedplus' -- make vim use system clipboard
-vim.o.backspace = 'indent,eol,start'    -- make backspace work as expected
-vim.o.swapfile = false                  -- disable the .swp files vim creates
-vim.o.splitright = true                 -- open horizontal splits to the right
-vim.o.splitbelow = true                 -- open vertical splits below
+vim.o.backspace = 'indent,eol,start' -- make backspace work as expected
+vim.o.swapfile = false -- disable the .swp files vim creates
+vim.o.splitright = true -- open horizontal splits to the right
+vim.o.splitbelow = true -- open vertical splits below
 vim.opt.fillchars = {
   vert = '│',
   fold = '⠀',
@@ -67,7 +67,7 @@ vim.opt.fillchars = {
   foldsep = '│',
   foldclose = '▸',
 }
-vim.opt.diffopt:append({ vertical = true, linematch = 60 })
+vim.opt.diffopt:append { vertical = true, linematch = 60 }
 
 -- Set tabs to 2 spaces
 vim.opt.tabstop = 2

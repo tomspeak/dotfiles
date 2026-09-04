@@ -7,7 +7,7 @@ local history = {
     require('lazy').load { plugins = { 'vim-fugitive' } }
     local git_dir = vim.fn.FugitiveExtractGitDir(item.cwd)
     if git_dir == '' then
-      vim.notify('Cannot locate the selected commit\'s repository', vim.log.levels.WARN)
+      vim.notify("Cannot locate the selected commit's repository", vim.log.levels.WARN)
       return
     end
     -- The commit view also works for file history before a rename or deletion.
@@ -46,25 +46,25 @@ return {
       {
         '<leader>sf',
         function()
-          Snacks.picker.files({
-            layout = "vscode"
-          })
+          Snacks.picker.files {
+            layout = 'vscode',
+          }
         end,
         desc = 'Find Files',
       },
       {
         '<leader><leader>',
         function()
-          Snacks.picker.buffers({
-            layout = "vscode",
+          Snacks.picker.buffers {
+            layout = 'vscode',
             on_show = function()
               vim.cmd.stopinsert()
             end,
             current = false,
             win = {
-              list = { keys = { ["d"] = "bufdelete" } },
+              list = { keys = { ['d'] = 'bufdelete' } },
             },
-          })
+          }
         end,
         desc = 'Buffers',
       },
@@ -157,63 +157,60 @@ return {
       },
       -- LSP
       {
-        "<leader>gl",
+        '<leader>gl',
         function()
-          Snacks.picker.git_log({
-            layout = "vertical",
-          })
+          Snacks.picker.git_log {
+            layout = 'vertical',
+          }
         end,
-        desc = "Git Log",
+        desc = 'Git Log',
       },
       {
-        "<leader>gd",
+        '<leader>gd',
         function()
           Snacks.picker.git_diff()
         end,
-        desc = "Git Diff",
+        desc = 'Git Diff',
       },
       {
-        "<M-b>",
+        '<M-b>',
         function()
-          Snacks.picker.git_branches({
-            layout = "select",
-          })
+          Snacks.picker.git_branches {
+            layout = 'select',
+          }
         end,
-        desc = "Branches",
+        desc = 'Branches',
       },
       {
-        "<leader>gc",
+        '<leader>gc',
         function()
           Snacks.picker.git_log_file()
         end,
-        desc = "Git Commit History (current file)",
+        desc = 'Git Commit History (current file)',
       },
       {
-        "<leader>gS",
+        '<leader>gS',
         function()
-          vim.cmd "Git stash"
+          vim.cmd 'Git stash'
         end,
-        desc = "Stash changes",
+        desc = 'Stash changes',
       },
       {
-        "<leader>gP",
+        '<leader>gP',
         function()
-          vim.ui.input(
-            { prompt = "Stash index to pop (or leave blank for latest): " },
-            function(input)
-              if input == nil then
-                return
-              end
-              input = vim.trim(input)
-              if input ~= '' and not input:match '^%d+$' then
-                vim.notify('Stash index must be a non-negative integer', vim.log.levels.WARN)
-                return
-              end
-              vim.cmd('Git stash pop' .. (input == '' and '' or ' stash@{' .. input .. '}'))
+          vim.ui.input({ prompt = 'Stash index to pop (or leave blank for latest): ' }, function(input)
+            if input == nil then
+              return
             end
-          )
+            input = vim.trim(input)
+            if input ~= '' and not input:match '^%d+$' then
+              vim.notify('Stash index must be a non-negative integer', vim.log.levels.WARN)
+              return
+            end
+            vim.cmd('Git stash pop' .. (input == '' and '' or ' stash@{' .. input .. '}'))
+          end)
         end,
-        desc = "Unstash changes",
+        desc = 'Unstash changes',
       },
     },
     ---@type snacks.Config
@@ -237,7 +234,7 @@ return {
           git_log_file = history,
         },
         layout = {
-          preset = "ivy",
+          preset = 'ivy',
           cycle = false,
         },
         matcher = {

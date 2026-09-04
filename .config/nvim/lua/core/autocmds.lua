@@ -97,8 +97,13 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   group = vim.api.nvim_create_augroup('LastPosition', { clear = true }),
   callback = function(ev)
     local name = vim.api.nvim_buf_get_name(ev.buf)
-    if not ordinary_window() or name == '' or commit_files[vim.fn.fnamemodify(name, ':t')]
-      or vim.bo[ev.buf].filetype == 'gitcommit' or vim.bo[ev.buf].filetype == 'gitrebase' then
+    if
+      not ordinary_window()
+      or name == ''
+      or commit_files[vim.fn.fnamemodify(name, ':t')]
+      or vim.bo[ev.buf].filetype == 'gitcommit'
+      or vim.bo[ev.buf].filetype == 'gitrebase'
+    then
       return
     end
     local mark = vim.api.nvim_buf_get_mark(ev.buf, '"')
@@ -123,8 +128,7 @@ local entrypoint_only = { c = true, rs = true, py = true, zig = true }
 vim.api.nvim_create_autocmd('BufNewFile', {
   group = vim.api.nvim_create_augroup('Skeleton', { clear = true }),
   callback = function(ev)
-    if vim.bo[ev.buf].buftype ~= '' or vim.api.nvim_buf_line_count(ev.buf) ~= 1
-      or vim.api.nvim_buf_get_lines(ev.buf, 0, 1, false)[1] ~= '' then
+    if vim.bo[ev.buf].buftype ~= '' or vim.api.nvim_buf_line_count(ev.buf) ~= 1 or vim.api.nvim_buf_get_lines(ev.buf, 0, 1, false)[1] ~= '' then
       return
     end
     local name = vim.api.nvim_buf_get_name(ev.buf)
