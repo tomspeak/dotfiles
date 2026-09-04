@@ -50,6 +50,10 @@ return {
     version = false,
     opts = {
       n_lines = 500,
+      mappings = {
+        around_last = 'aL',
+        inside_last = 'iL',
+      },
     },
     event = { 'BufReadPost', 'BufNewFile' },
   },
