@@ -1,31 +1,41 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
-# Config
-TARGET_DIR="$HOME/.local/share"
-VSIX_URL="https://github.com/vadimcn/codelldb/releases/download/v1.11.5/codelldb-darwin-arm64.vsix"
-VSIX_FILE="codelldb.vsix"
-EXTRACT_DIR="codelldb"
+install_dir="$HOME/.local/share/codelldb"
+mkdir -p "$(dirname "$install_dir")"
+stage="$(mktemp -d "${install_dir}.install.XXXXXX")"
+published=false
+cleanup() {
+  if [ "$published" = false ] && { [ -e "$stage/previous" ] || [ -L "$stage/previous" ]; }; then
+    if [ -e "$install_dir" ] || [ -L "$install_dir" ]; then
+      mv "$install_dir" "$stage/failed" || return 1
+    fi
+    if ! mv "$stage/previous" "$install_dir"; then
+      echo "Previous CodeLLDB installation remains at $stage/previous" >&2
+      return 1
+    fi
+  fi
+  rm -rf -- "$stage"
+}
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
 
-# Download the .vsix file
-wget "$VSIX_URL" -O "$VSIX_FILE"
+curl -fL --output "$stage/codelldb.vsix" \
+  https://github.com/vadimcn/codelldb/releases/download/v1.11.5/codelldb-darwin-arm64.vsix
+unzip -q "$stage/codelldb.vsix" -d "$stage/new"
 
-# Extract contents
-mkdir -p "$TARGET_DIR"
-unzip "$VSIX_FILE" -d "$TARGET_DIR/$EXTRACT_DIR"
-rm "$VSIX_FILE"
+adapter="$stage/new/extension/adapter/codelldb"
+test -f "$adapter"
+test -d "$stage/new/extension/lldb/lib"
+chmod +x "$adapter"
 
-# Locate and copy the codelldb binary
-CODELLDB_BIN="$TARGET_DIR/$EXTRACT_DIR/extension/adapter/codelldb"
-
-if [ ! -f "$CODELLDB_BIN" ]; then
-	echo "codelldb binary not found at $CODELLDB_BIN"
-	exit 1
+# Preserve the previous adapter until the complete replacement is ready.
+if [ -e "$install_dir" ] || [ -L "$install_dir" ]; then
+  mv "$install_dir" "$stage/previous"
 fi
+mv "$stage/new" "$install_dir"
+published=true
 
-chmod +x "$CODELLDB_BIN"
-
-sudo ln -sf "$CODELLDB_BIN" /usr/local/bin/codelldb
-
-echo "codelldb installed to $TARGET_DIR/$EXTRACT_DIR and symlinked to /usr/local/bin"
+echo "CodeLLDB installed to $install_dir"
