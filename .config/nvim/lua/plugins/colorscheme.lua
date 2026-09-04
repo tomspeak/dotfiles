@@ -3,15 +3,18 @@ return {
     'f-person/auto-dark-mode.nvim',
     priority = 10000,
     lazy = false,
+    dependencies = { 'nickkadutskyi/jb.nvim' },
+    config = function(_, opts)
+      vim.cmd.colorscheme 'jb'
+      require('auto-dark-mode').setup(opts)
+    end,
     opts = {
       update_interval = 30000,
       set_dark_mode = function()
         vim.opt.background = 'dark'
-        vim.cmd.colorscheme 'jb'
       end,
       set_light_mode = function()
         vim.opt.background = 'light'
-        vim.cmd.colorscheme 'jb'
       end,
     },
   },
