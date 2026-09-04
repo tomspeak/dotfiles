@@ -110,8 +110,10 @@ function tk {
   fi
 
   local sessions s
-  sessions=$(tmux list-sessions -F "#{session_name}" |
+  sessions=$(tmux list-sessions -F $'#{session_id}\t#{session_name}' |
     fzf --multi \
+        --delimiter=$'\t' \
+        --with-nth=2.. \
         --prompt="kill tmux sessions >> " \
         --border=rounded \
         --height=40% \
@@ -119,7 +121,7 @@ function tk {
         --color=border:bright-red) || return
 
   for s in "${(@f)sessions}"; do
-    tmux kill-session -t "$s" && echo "Killed session: $s"
+    tmux kill-session -t "${s%%$'\t'*}" && echo "Killed session: ${s#*$'\t'}"
   done
 }
 
