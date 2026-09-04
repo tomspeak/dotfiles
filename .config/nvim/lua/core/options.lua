@@ -26,6 +26,9 @@ vim.o.mouse = 'a'
 -- Save undo history
 vim.o.undofile = true
 
+-- Keep zg additions in the versioned personal dictionary.
+vim.opt.spellfile = { vim.fn.stdpath('config') .. '/spell/en.utf-8.add' }
+
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
