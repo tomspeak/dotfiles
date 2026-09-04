@@ -16,9 +16,8 @@ fi
 
 mkdir -p "$install_root" "$HOME/.bin"
 build="$(mktemp -d "$install_root/build.XXXXXX")"
-published=false
 cleanup() {
-  if [ "$published" = false ]; then
+  if [ "$(readlink "$launcher" || true)" != "$build/bin/nvim" ]; then
     rm -rf -- "$build"
   fi
 }
@@ -38,7 +37,6 @@ previous="$(readlink "$launcher" || true)"
 older="$(readlink "$rollback_link" || true)"
 ln -s "$build/bin/nvim" "$build/launcher"
 mv -fh "$build/launcher" "$launcher"
-published=true
 
 # Keep one previous runtime for rollback and already-running Neovim sessions.
 case "$previous" in
