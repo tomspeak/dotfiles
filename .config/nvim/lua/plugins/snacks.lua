@@ -186,9 +186,6 @@ return {
     },
     ---@type snacks.Config
     opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
       bigfile = { enabled = false },
       dashboard = { enabled = false },
       explorer = { enabled = false },
@@ -207,22 +204,18 @@ return {
           preset = "ivy",
           cycle = false,
         },
-      },
-
-      matcher = {
-        frecency = true,
-      },
-
-      icons = {
-        files = {
-          enabled = false,
+        matcher = {
+          frecency = true,
         },
-      },
-
-      formatters = {
-        file = {
-          filename_first = true, -- display filename before the file path
-          truncate = 80,
+        icons = {
+          files = {
+            enabled = false,
+          },
+        },
+        formatters = {
+          file = {
+            filename_first = true,
+          },
         },
       },
     },
