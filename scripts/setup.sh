@@ -19,7 +19,6 @@ if ! xcode-select -p >/dev/null 2>&1; then
 fi
 
 cd "$dotfiles"
-./scripts/preferences.sh
 ./scripts/brew.sh
 
 # Child processes cannot update this shell's environment.

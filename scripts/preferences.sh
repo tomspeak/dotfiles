@@ -5,14 +5,15 @@ echo "Setting preferences"
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
 
-defaults delete com.apple.dock && killall Dock
-defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
-defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
-defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
-defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
-defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
-defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
-defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
+# Own the sparse application list without resetting unrelated Dock settings.
+defaults write com.apple.dock persistent-apps -array \
+  '{"tile-type"="spacer-tile";}' \
+  '{"tile-type"="spacer-tile";}' \
+  '{"tile-type"="spacer-tile";}' \
+  '{"tile-type"="spacer-tile";}' \
+  '{"tile-type"="spacer-tile";}' \
+  '{"tile-type"="spacer-tile";}' \
+  '{"tile-type"="spacer-tile";}'
 defaults write com.apple.dock autohide-time-modifier -int 0
 defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock no-bouncing -bool TRUE
@@ -74,7 +75,6 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 defaults write NSGlobalDomain NSUseAnimatedRing -bool false
 defaults write NSGlobalDomain NSToolbarTitleViewRolloverDelay -float 0
-defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 10
@@ -102,7 +102,7 @@ defaults write NSGlobalDomain "AppleSpacesSwitchOnActivate" -bool "true"
 defaults write com.apple.spaces "spans-displays" -bool "true"
 
 # Load Hammerspoon config from ~/.config (symlinked from dotfiles) instead of ~/.hammerspoon
-defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
+defaults write org.hammerspoon.Hammerspoon MJConfigFile "$HOME/.config/hammerspoon/init.lua"
 
 # Enable native "Move left/right a space" (ctrl+arrow) so Karabiner's Tab+[/]
 # space navigation works without popping Mission Control
@@ -122,7 +122,6 @@ defaults write com.apple.finder "FXPreferredViewStyle" -string "Nlsv"
 defaults write com.apple.finder "FXRemoveOldTrashItems" -bool "true"
 defaults write com.apple.finder "FXEnableExtensionChangeWarning" -bool "false"
 defaults write NSGlobalDomain "NSDocumentSaveNewDocumentsToCloud" -bool "false"
-defaults write NSGlobalDomain "NSToolbarTitleViewRolloverDelay" -float "0"
 defaults write com.apple.finder "FXDefaultSearchScope" -string "SCcf"
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 # Automatically open a new Finder window when a volume is mounted
@@ -165,16 +164,8 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 0
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
-defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
-
 killall Dock
 killall Finder
-killall Safari
 killall SystemUIServer
-killall Music
-killall "Activity Monitor"
-killall Calendar
-killall Mail
-killall cfprefsd
 
-echo "Preferences set"
+echo "Preferences set. Reopen applications to apply their settings."
