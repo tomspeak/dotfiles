@@ -130,5 +130,5 @@ function artisan_make {
 }
 
 function nvim_nightly_update {
-  "${DOTFILES:-$HOME/dotfiles}/scripts/install-nvim-nightly.sh"
+  "${DOTFILES:-${${(%):-%x}:A:h:h}}/scripts/install-nvim-nightly.sh"
 }

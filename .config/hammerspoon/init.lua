@@ -6,7 +6,7 @@
 -- ┃            q editor   w browser   e chat   r Ghostty   1 mail   2 calendar   3 Music   4 Zoom
 -- ┃     work     = VSCode(FB) / Chrome / GChat / Gmail / GCalendar
 -- ┃     personal = VSCode / Brave / Signal / Apple Mail / Apple Calendar
--- ┃     (picked by presence of ~/dotfiles/shell/work)
+-- ┃     (picked by presence of shell/work in the dotfiles repository)
 -- ┃
 -- ┃  WINDOW    h / l  half left / right       space  full screen
 -- ┃            j / k  left / right corner  (press again to flip top<->bottom)
@@ -157,7 +157,7 @@ end)
 --   mnemonic. 'g' is reload, '4' is Zoom.
 --
 --   Work vs personal uses the same marker the shell does:
---   the gitignored ~/dotfiles/shell/work file, present only
+--   the gitignored shell/work file in the repository, present only
 --   on the work machine. Env vars can't be used here —
 --   Hammerspoon is launched by launchd and does not inherit
 --   the shell environment.
@@ -181,7 +181,9 @@ local PERSONAL_APPS = {
     ['3'] = 'com.apple.Music', -- Apple Music
 }
 
-local is_work = hs.fs.attributes(os.getenv('HOME') .. '/dotfiles/shell/work') ~= nil
+local config_file = hs.fs.pathToAbsolute(hs.configdir .. '/init.lua')
+local dotfiles = config_file and config_file:match('^(.*)/%.config/hammerspoon/init%.lua$')
+local is_work = dotfiles and hs.fs.attributes(dotfiles .. '/shell/work') ~= nil
 local apps = is_work and WORK_APPS or PERSONAL_APPS
 
 for key, bundle_id in pairs(apps) do

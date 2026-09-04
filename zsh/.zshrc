@@ -41,7 +41,7 @@ typeset -U PATH
 
 export TZ="Europe/London"
 export MANPAGER='nvim +Man!'
-export DOTFILES="$HOME/dotfiles"
+export DOTFILES="${${(%):-%x}:A:h:h}"
 export PAGER='less'
 export GIT_MERGE_AUTOEDIT=no
 export EDITOR='nvim'
@@ -83,11 +83,11 @@ setopt SHARE_HISTORY          # Share history between all sessions.
 unsetopt HIST_VERIFY          # Execute commands using history (e.g.: using !$) immediately
 unsetopt correct
 
-source "$HOME/dotfiles/shell/functions"
-source "$HOME/dotfiles/shell/aliases"
+source "$DOTFILES/shell/functions"
+source "$DOTFILES/shell/aliases"
 
-if [[ -f "$HOME/dotfiles/shell/work" ]]; then
-  source "$HOME/dotfiles/shell/work"
+if [[ -f "$DOTFILES/shell/work" ]]; then
+  source "$DOTFILES/shell/work"
 fi
 
 # Load autosuggestions with optimizations
