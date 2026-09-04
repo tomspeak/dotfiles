@@ -127,23 +127,5 @@ function artisan_make {
 }
 
 function nvim_nightly_update {
-  local orig_dir="$PWD"
-
-  mkdir -p "$HOME/.bin/" 
-  mkdir -p "$HOME/.nvim-nightly/"
-  cd "$HOME/.nvim-nightly" || return 1
-
-  curl -L -o nvim-macos-arm64.tar.gz https://github.com/neovim/neovim/releases/download/nightly/nvim-macos-arm64.tar.gz
-
-  rm -rf nvim-nightly && mkdir nvim-nightly
-  tar -xzf nvim-macos-arm64.tar.gz -C nvim-nightly --strip-components=1
-  chmod +x nvim-nightly/bin/nvim
-  xattr -c nvim-nightly/bin/nvim 2>/dev/null
-
-  ln -sf "$HOME/.nvim-nightly/nvim-nightly/bin/nvim" "$HOME/.bin/nvim"
-  rm -f *.tar.gz
-
-  echo "-> Installed Neovim nightly -> $HOME/.bin/nvim"
-
-  cd "$orig_dir" || return 1
+  "${DOTFILES:-$HOME/dotfiles}/scripts/install-nvim-nightly.sh"
 }
