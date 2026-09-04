@@ -27,7 +27,9 @@ end, { desc = 'Clear highlights' })
 keymap('n', ';', ':', { desc = 'Enter command mode', nowait = true })
 keymap('v', ';', ':', { desc = 'Enter command mode', nowait = true })
 keymap('n', '<leader>q', ':q<CR>', { desc = 'Close window' })
-keymap('n', '<leader>x', '<cmd> bd <CR>', { desc = 'Close buffer' })
+keymap('n', '<leader>x', function()
+  Snacks.bufdelete()
+end, { desc = 'Close buffer without closing splits' })
 
 -- NvimTree
 keymap('n', '_', '<cmd> NvimTreeFindFile <CR>', { desc = 'Nvimtree Find File', nowait = true })
