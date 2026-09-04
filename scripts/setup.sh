@@ -85,7 +85,8 @@ fi
 # tmux plugins
 if [ ! -d ~/.tmux/plugins/tpm ]; then
   echo "Installing tmux plugins"
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  git -c 'url.https://github.com/tmux-plugins/tpm.insteadOf=https://github.com/tmux-plugins/tpm' \
+    clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
 # Global npm packages
