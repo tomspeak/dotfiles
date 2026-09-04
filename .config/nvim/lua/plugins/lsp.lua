@@ -53,7 +53,13 @@ return {
         vim.keymap.set('n', keys, func, { buf = buf, desc = 'LSP: ' .. desc })
       end
 
-      map('<leader>ca', vim.lsp.buf.code_action, 'LSP [C]ode [A]ction')
+      map('<leader>ca', function()
+        if vim.bo[buf].filetype == 'rust' then
+          vim.cmd.RustLsp 'codeAction'
+        else
+          vim.lsp.buf.code_action()
+        end
+      end, '[C]ode [A]ction')
       map('gd', Snacks.picker.lsp_definitions, '[G]oto [D]efinition')
       map('gV', '<cmd>vsplit | lua Snacks.picker.lsp_definitions()<cr>', '[G]oto [V]ertical [D]efinition')
       map('gr', Snacks.picker.lsp_references, '[G]oto [R]eferences')
@@ -71,6 +77,10 @@ return {
       end, 'Goto Work[s]pace [S]ymbols')
       map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
       map('K', function()
+        if vim.bo[buf].filetype == 'rust' then
+          vim.cmd.RustLsp { 'hover', 'actions' }
+          return
+        end
         vim.lsp.buf.hover {
           max_height = 20,
           max_width = 130,
