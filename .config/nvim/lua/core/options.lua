@@ -64,12 +64,7 @@ vim.opt.fillchars = {
   foldsep = '│',
   foldclose = '▸',
 }
-vim.opt.diffopt = {
-  'filler',
-  'indent-heuristic',
-  'linematch:60',
-  'vertical',
-}
+vim.opt.diffopt:append({ vertical = true, linematch = 60 })
 
 -- Set tabs to 2 spaces
 vim.opt.tabstop = 2
