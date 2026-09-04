@@ -47,7 +47,7 @@ macos-option-as-alt = true
 
 clipboard-trim-trailing-spaces = true
 minimum-contrast = 1.1
-scrollback-limit = 50000
+scrollback-limit-lines = 50000
 confirm-close-surface = false
 
 # coding agents shift + enter
