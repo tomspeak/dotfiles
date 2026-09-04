@@ -1,4 +1,4 @@
-claude-code
+@anthropic-ai/claude-code
 neovim
 vscode-langservers-extracted
 bash-language-server

@@ -12,17 +12,27 @@ touch ~/.hushlogin
 echo "Creating workspace folder"
 mkdir -p ~/workspace/
 
-echo "Installing Xcode CLI tools"
-xcode-select --install 2>/dev/null || true
+if ! xcode-select -p >/dev/null 2>&1; then
+  xcode-select --install
+  echo "Finish installing the Xcode command line tools, then run setup again." >&2
+  exit 1
+fi
 
 cd "$dotfiles"
 ./scripts/preferences.sh
 ./scripts/brew.sh
 
+# Child processes cannot update this shell's environment.
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export PATH="$HOME/.bin:$PATH"
+
+echo "Installing Neovim nightly"
+./scripts/install-nvim-nightly.sh
+
 # Change default shell to Homebrew zsh
 echo "Changing default shell to Homebrew zsh"
 brew_zsh="$(brew --prefix)/bin/zsh"
-if ! grep -q "$brew_zsh" /etc/shells; then
+if ! grep -Fxq "$brew_zsh" /etc/shells; then
   echo "$brew_zsh" | sudo tee -a /etc/shells >/dev/null
 fi
 chsh -s "$brew_zsh"
