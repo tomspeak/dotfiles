@@ -47,10 +47,6 @@ return {
         '<leader>sf',
         function()
           Snacks.picker.files({
-            finder = "files",
-            format = "file",
-            show_empty = true,
-            supports_live = true,
             layout = "vscode"
           })
         end,
@@ -64,18 +60,8 @@ return {
             on_show = function()
               vim.cmd.stopinsert()
             end,
-            finder = "buffers",
-            format = "buffer",
-            hidden = false,
-            unloaded = true,
             current = false,
-            sort_lastused = true,
             win = {
-              input = {
-                keys = {
-                  ["<c-x>"] = { "bufdelete", mode = { "n", "i" } },
-                },
-              },
               list = { keys = { ["d"] = "bufdelete" } },
             },
           })
@@ -160,9 +146,6 @@ return {
         "<leader>gl",
         function()
           Snacks.picker.git_log({
-            finder = "git_log",
-            format = "git_log",
-            preview = "git_show",
             layout = "vertical",
           })
         end,
@@ -171,10 +154,7 @@ return {
       {
         "<leader>gd",
         function()
-          Snacks.picker.git_diff({
-            finder = "git_diff",
-            preview = "diff",
-          })
+          Snacks.picker.git_diff()
         end,
         desc = "Git Diff",
       },
