@@ -86,6 +86,29 @@ vim.api.nvim_create_autocmd('FileType', {
   group = 'Git',
 })
 
+local commit_files = {
+  COMMIT_EDITMSG = true,
+  MERGE_MSG = true,
+  SQUASH_MSG = true,
+  TAG_EDITMSG = true,
+  ['git-rebase-todo'] = true,
+}
+vim.api.nvim_create_autocmd('BufReadPost', {
+  group = vim.api.nvim_create_augroup('LastPosition', { clear = true }),
+  callback = function(ev)
+    local name = vim.api.nvim_buf_get_name(ev.buf)
+    if not ordinary_window() or name == '' or commit_files[vim.fn.fnamemodify(name, ':t')]
+      or vim.bo[ev.buf].filetype == 'gitcommit' or vim.bo[ev.buf].filetype == 'gitrebase' then
+      return
+    end
+    local mark = vim.api.nvim_buf_get_mark(ev.buf, '"')
+    if mark[1] > 0 and mark[1] <= vim.api.nvim_buf_line_count(ev.buf) then
+      vim.api.nvim_win_set_cursor(0, mark)
+    end
+  end,
+  desc = 'Restore the last editing position in ordinary files',
+})
+
 vim.api.nvim_create_autocmd('BufNewFile', {
   group = vim.api.nvim_create_augroup('Skeleton', { clear = true }),
   callback = function()
