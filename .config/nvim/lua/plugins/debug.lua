@@ -187,17 +187,7 @@ return {
       dapui.close()
     end
 
-    dap.adapters.codelldb = {
-      type = 'server',
-      port = '${port}',
-      executable = {
-        command = vim.fn.expand '~/.local/share/codelldb/extension/adapter/codelldb',
-        args = { '--port', '${port}' },
-        env = {
-          LLDB_LIBRARY_PATH = vim.fn.expand '~/.local/share/codelldb/extension/lldb/lib',
-        },
-      },
-    }
+    dap.adapters.codelldb = require 'core.codelldb'
 
     dap.configurations.zig = {
       {
