@@ -63,6 +63,7 @@ return {
     opts = {
       comment = { suffix = '' }, -- disable [c/]c, used by gitsigns for hunk navigation
       file = { suffix = '' }, -- keep [f/]f and [F/]F for Tree-sitter functions
+      indent = { suffix = '' }, -- keep [i/]i for Mini.indentscope boundaries
     },
     event = { 'BufReadPost', 'BufNewFile' },
   },
