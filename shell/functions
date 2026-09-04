@@ -86,19 +86,20 @@ function ta {
 
   local session
   session=$(tmux list-sessions \
-    -F "#{session_name} (#{session_windows} windows, #{session_created})" |
+    -F $'#{session_id}\t#{session_name} (#{session_windows} windows, #{session_created})' |
     fzf --prompt="tmux sessions >> " \
+        --delimiter=$'\t' \
+        --with-nth=2.. \
         --border=rounded \
         --height=40% \
         --layout=reverse \
         --color=border:bright-green \
         --ansi \
         --preview-window=right:40% \
-        --preview="echo {} | cut -d' ' -f1 | xargs -I{} tmux list-windows -t {}" |
-    cut -d' ' -f1)
+        --preview='tmux list-windows -t {1}') || return
 
   if [[ -n "$session" ]]; then
-    tmux attach -t "$session"
+    tmux attach -t "${session%%$'\t'*}"
   fi
 }
 
