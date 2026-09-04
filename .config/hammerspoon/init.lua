@@ -3,7 +3,7 @@
 -- ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -- ┃
 -- ┃  APPS   left-hand cluster · focusing an app also jumps to its Space
--- ┃            q editor   w browser   e chat   r Ghostty   1 mail   2 calendar   3 Music
+-- ┃            q editor   w browser   e chat   r Ghostty   1 mail   2 calendar   3 Music   4 Zoom
 -- ┃     work     = VSCode(FB) / Chrome / GChat / Gmail / GCalendar
 -- ┃     personal = VSCode / Brave / Signal / Apple Mail / Apple Calendar
 -- ┃     (picked by presence of ~/dotfiles/shell/work)
@@ -233,6 +233,11 @@ for key, bundle_id in pairs(apps) do
         hs.application.launchOrFocusByBundleID(bundle_id)
     end)
 end
+
+-- Zoom: same bundle id on work + personal, so bound outside the per-machine tables
+hs.hotkey.bind(HYPER_KEY, '4', function()
+    hs.application.launchOrFocusByBundleID('us.zoom.xos')
+end)
 
 -- ===================================================
 --   Spaces
