@@ -37,7 +37,7 @@
   s = status
   st = status --short --branch
   b = branch
-  br = "!f() { git branch --sort=-committerdate | fzf --header 'Checkout Recent Branch' --preview 'git diff --color=always {1}' --pointer='>' | xargs git checkout; }; f"
+  br = "!f() { branch=$(git branch --sort=-committerdate --format='%(refname:short)' | fzf --header 'Checkout Recent Branch' --preview 'git diff --color=always {} --' --pointer='>') || return; [ -n \"$branch\" ] || return 0; git switch -- \"$branch\"; }; f"
   newb = checkout -b
   plum = pull upstream main
   rum = pull --rebase upstream main
