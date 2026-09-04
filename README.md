@@ -3,6 +3,9 @@
 On Apple Silicon macOS, run `./scripts/setup.sh` to install dependencies,
 Neovim nightly, and configuration symlinks. If prompted to install Xcode command
 line tools, finish that installation and run setup again.
+The checkout can live anywhere. Core tools and runtimes finish before setup
+publishes configuration links and changes the login shell; GUI applications and
+desktop preferences remain separate steps.
 Conflicting existing configurations are saved beside their destinations in
 `*.backup.*/original`; running setup again preserves links already in place.
 Use `nnu` to update nightly; the previous build remains available at

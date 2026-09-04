@@ -1,40 +1,39 @@
 #!/bin/bash
-set -e
-
-# Ask for the administrator password upfront
-sudo -v
+set -euo pipefail
 
 dotfiles="$(cd "$(dirname "$0")/.." && pwd)"
 
-echo "Silencing terminal login messages"
-touch ~/.hushlogin
-
-echo "Creating workspace folder"
-mkdir -p ~/workspace/
+case "$(uname -s):$(uname -m)" in
+  Darwin:arm64) ;;
+  *) echo "Setup supports Apple Silicon macOS." >&2; exit 1 ;;
+esac
 
 if ! xcode-select -p >/dev/null 2>&1; then
-  xcode-select --install
+  xcode-select --install || true
   echo "Finish installing the Xcode command line tools, then run setup again." >&2
   exit 1
 fi
+xcrun --find clang >/dev/null
 
 cd "$dotfiles"
 ./scripts/brew.sh
 
 # Child processes cannot update this shell's environment.
 eval "$(/opt/homebrew/bin/brew shellenv)"
-export PATH="$HOME/.bin:$PATH"
+export PATH="$HOME/.bin:${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
+echo "Installing asdf Node and global npm packages"
+"$dotfiles/npm/install.sh"
 
 echo "Installing Neovim nightly"
 ./scripts/install-nvim-nightly.sh
 
-# Change default shell to Homebrew zsh
-echo "Changing default shell to Homebrew zsh"
-brew_zsh="$(brew --prefix)/bin/zsh"
-if ! grep -Fxq "$brew_zsh" /etc/shells; then
-  echo "$brew_zsh" | sudo tee -a /etc/shells >/dev/null
-fi
-chsh -s "$brew_zsh"
+echo "Installing codelldb"
+"$dotfiles/scripts/install-codelldb.sh"
+
+echo "Creating shell and workspace files"
+touch ~/.hushlogin
+mkdir -p ~/workspace/
 
 # Symlinks
 echo "Setting up symlinks"
@@ -89,23 +88,16 @@ if [ ! -d ~/.tmux/plugins/tpm ]; then
     clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
-# Global npm packages
-echo "Installing global npm packages"
-"$dotfiles/npm/install.sh"
+# Activate the new login shell only after its tools and configuration are ready.
+echo "Changing default shell to Homebrew zsh"
+brew_zsh="$(brew --prefix)/bin/zsh"
+test -x "$brew_zsh"
+if ! grep -Fxq "$brew_zsh" /etc/shells; then
+  echo "$brew_zsh" | sudo tee -a /etc/shells >/dev/null
+fi
+chsh -s "$brew_zsh"
 
-echo "Installing codelldb"
-"$dotfiles/scripts/install-codelldb.sh"
-
-echo "Open a tmux session and do PREFIX + I to install plugins. Press enter to continue..."
-read -r
-
-echo "Install Ghostty https://github.com/ghostty-org/ghostty/releases/tag/tip Press enter to continue..."
-read -r
-
-echo "Install fonts. Press enter to continue..."
-read -r
-
-echo "Set wallpaper to black and screensaver to ~/dotfiles/wallpaper/. Press enter to continue..."
-read -r
-
-echo "Setup complete, log out and in again :)"
+echo "Core setup complete. Open a new login shell."
+echo "Optional GUI applications: $dotfiles/scripts/brew.sh --apps"
+echo "Install Ghostty tip and fonts, then use tmux PREFIX + I to install plugins."
+echo "Desktop preferences remain separate: $dotfiles/scripts/preferences.sh"
