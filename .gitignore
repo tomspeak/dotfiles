@@ -2,7 +2,6 @@
 .DS_Store
 shell/secret
 shell/work
-.config/nvim/lazy-lock.json
 .config/karabiner/automatic_backups/
 .config/ghostty/themes/current-theme
 .config/ghostty/work
