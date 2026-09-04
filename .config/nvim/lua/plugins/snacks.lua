@@ -169,11 +169,15 @@ return {
           vim.ui.input(
             { prompt = "Stash index to pop (or leave blank for latest): " },
             function(input)
-              if input then
-                vim.cmd("Git stash pop " .. input)
-              else
-                vim.cmd "Git stash pop"
+              if input == nil then
+                return
               end
+              input = vim.trim(input)
+              if input ~= '' and not input:match '^%d+$' then
+                vim.notify('Stash index must be a non-negative integer', vim.log.levels.WARN)
+                return
+              end
+              vim.cmd('Git stash pop' .. (input == '' and '' or ' stash@{' .. input .. '}'))
             end
           )
         end,
