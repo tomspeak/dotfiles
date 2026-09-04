@@ -1,4 +1,4 @@
-# Make manual: hhttps://www.gnu.org/software/make/manual/make.html
+# Make manual: https://www.gnu.org/software/make/manual/make.html
 # GCC Options: https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html
 # Makefile Tutorial: https://www.youtube.com/watch?v=FfG-QqRK4cY
 
@@ -72,7 +72,7 @@ debug_clean:
 
 install:
 	$(NORMAL_INSTALL)
-	install -m 007 $(bin_name) $(bindir)
+	install -m 755 $(bin_name) $(bindir)
 	cp ./man/$(man_name) $(mandir)/$(man_name)
 
 
