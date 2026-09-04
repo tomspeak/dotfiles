@@ -3,9 +3,14 @@ set -euo pipefail
 
 install_root="$HOME/.nvim-nightly"
 launcher="$HOME/.bin/nvim"
+rollback_link="$install_root/previous"
 
 if [ -e "$launcher" ] && [ ! -L "$launcher" ]; then
   echo "Refusing to replace an existing file or directory: $launcher" >&2
+  exit 1
+fi
+if [ -e "$rollback_link" ] && [ ! -L "$rollback_link" ]; then
+  echo "Refusing to replace an existing rollback directory: $rollback_link" >&2
   exit 1
 fi
 
@@ -30,14 +35,23 @@ test -f "$build/share/nvim/runtime/doc/help.txt"
 
 # Publish only a verified build, replacing the launcher with one rename.
 previous="$(readlink "$launcher" || true)"
+older="$(readlink "$rollback_link" || true)"
 ln -s "$build/bin/nvim" "$build/launcher"
 mv -fh "$build/launcher" "$launcher"
 published=true
 
-# Only remove installations created by this updater or its predecessor.
+# Keep one previous runtime for rollback and already-running Neovim sessions.
 case "$previous" in
   "$install_root"/build.??????/bin/nvim|"$install_root/nvim-nightly/bin/nvim")
-    rm -rf -- "${previous%/bin/nvim}"
+    ln -s "${previous%/bin/nvim}" "$build/previous"
+    mv -fh "$build/previous" "$rollback_link"
+    case "$older" in
+      "$install_root"/build.??????|"$install_root/nvim-nightly")
+        if [ "$older" != "${previous%/bin/nvim}" ] && [ "$older" != "$build" ]; then
+          rm -rf -- "$older"
+        fi
+        ;;
+    esac
     ;;
 esac
 
