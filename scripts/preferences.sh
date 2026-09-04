@@ -19,7 +19,7 @@ defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock no-bouncing -bool TRUE
 defaults write com.apple.dock tilesize -int 36
 defaults write com.apple.dock minimize-to-application -bool true
-defaults write com.apple.dock enable-sprint-loaded-actions-on-all-items -bool true
+defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
 defaults write com.apple.dock launchanim -bool false
 defaults write com.apple.dock expose-animation-duration -float 0.1
 defaults write com.apple.dock autohide -bool true
