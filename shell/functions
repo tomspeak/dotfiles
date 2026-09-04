@@ -108,7 +108,7 @@ function tk {
     return 1
   fi
 
-  local sessions
+  local sessions s
   sessions=$(tmux list-sessions -F "#{session_name}" |
     fzf --multi \
         --prompt="kill tmux sessions >> " \
@@ -117,7 +117,7 @@ function tk {
         --layout=reverse \
         --color=border:bright-red) || return
 
-  for s in $sessions; do
+  for s in "${(@f)sessions}"; do
     tmux kill-session -t "$s" && echo "Killed session: $s"
   done
 }
