@@ -19,7 +19,7 @@ return {
 
     filters = {
       dotfiles = false,
-      custom = { 'node_modules', '.DS_STORE', '*.o', '*.d' },
+      custom = { '^node_modules$', '^[.]DS_Store$', '*.o', '*.d' },
     },
 
     renderer = {
