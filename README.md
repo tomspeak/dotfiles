@@ -10,6 +10,12 @@ Use `nnu` to update nightly; the previous build remains available at
 GitHub repositories use SSH in the Git config, so configure GitHub SSH access
 before installing Neovim or tmux plugins; the TPM bootstrap itself uses HTTPS.
 
+Node is managed only by asdf. `npm/install.sh` installs the version pinned in
+`.tool-versions`, installs the global packages for that version, and selects it
+as the home default without changing other runtimes. Project-specific versions
+still work. Future Node installations from the configured shell use the same
+`npm/global-packages.txt` list; rerun `./npm/install.sh` after changing the pin.
+
 Install optional GUI applications with `./scripts/brew.sh --apps` after core
 setup. These live in `Brewfile.apps` and do not gate the command-line toolchain.
 

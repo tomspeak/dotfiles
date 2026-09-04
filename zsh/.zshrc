@@ -42,6 +42,7 @@ typeset -U PATH
 export TZ="Europe/London"
 export MANPAGER='nvim +Man!'
 export DOTFILES="${${(%):-%x}:A:h:h}"
+export ASDF_NPM_DEFAULT_PACKAGES_FILE="$DOTFILES/npm/global-packages.txt"
 export PAGER='less'
 export GIT_MERGE_AUTOEDIT=no
 export EDITOR='nvim'
