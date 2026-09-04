@@ -113,7 +113,7 @@ return {
         document_color(client, buf)
 
         if client:supports_method 'textDocument/linkedEditingRange' then
-          vim.lsp.linked_editing_range.enable(true, { bufnr = buf, client_id = client.id })
+          vim.lsp.linked_editing_range.enable(true, { bufnr = buf })
         end
       end,
     })
