@@ -135,6 +135,13 @@ return {
         desc = 'Undo History',
       },
       {
+        '<leader>sq',
+        function()
+          Snacks.picker.qflist()
+        end,
+        desc = 'Quickfix List',
+      },
+      {
         '<leader>th',
         function()
           Snacks.picker.colorschemes()
