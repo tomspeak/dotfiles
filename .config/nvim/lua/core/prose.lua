@@ -6,7 +6,8 @@ local function enable_soft()
   opt_local.wrap = true
   opt_local.linebreak = true
   opt_local.conceallevel = 2
-  opt_local.textwidth = 80
+  opt_local.textwidth = 0
+  opt_local.wrapmargin = 0
 
   local punctuations = { ",", ".", "?", "!" }
   for _, p in ipairs(punctuations) do
@@ -17,6 +18,8 @@ end
 local function enable_hard()
   opt_local.wrap = false
   opt_local.linebreak = false
+  opt_local.textwidth = 80
+  opt_local.formatoptions:append 't'
 end
 
 local function setup_commands()
