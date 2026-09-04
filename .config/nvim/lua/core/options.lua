@@ -50,7 +50,6 @@ vim.o.hlsearch = true
 vim.o.cursorline = true
 -- NOTE: lazyredraw disabled because it conflicts with inccommand live preview
 -- vim.o.lazyredraw = true
-vim.o.undolevels = 200
 vim.o.scrolloff = 999
 vim.o.scrolloffpad = 1
 vim.o.clipboard = 'unnamed,unnamedplus' -- make vim use system clipboard
