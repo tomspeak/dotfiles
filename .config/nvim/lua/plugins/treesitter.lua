@@ -3,11 +3,21 @@ local has_query = function(lang, query_group)
   return ok and files and #files > 0
 end
 
+local parsers = {
+  'bash', 'c', 'cpp', 'css', 'html', 'json', 'lua', 'make',
+  'markdown', 'markdown_inline', 'python', 'rust', 'toml',
+  'vim', 'vimdoc', 'yaml', 'zig',
+}
+
 return {
   {
     'neovim-treesitter/nvim-treesitter',
     lazy = false,
-    build = ':TSUpdate',
+    build = function()
+      local ts = require 'nvim-treesitter'
+      assert(ts.install(parsers):wait(300000), 'Parser installation failed; see :TSLog')
+      assert(ts.update():wait(300000), 'Parser update failed; see :TSLog')
+    end,
     cmd = { 'TSInstall', 'TSUninstall', 'TSUpdate', 'TSRegistryUpdate', 'TSStatus', 'TSLog' },
     dependencies = {
       'neovim-treesitter/treesitter-parser-registry',
