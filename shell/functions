@@ -62,6 +62,8 @@ function yta {
 
   (( bytes > 200000000 )) && \
     echo "yta: warning: over 200 MB, Apple Music cloud upload may reject it"
+
+  return 0
 }
 
 function mkcd {
@@ -145,4 +147,3 @@ function nvim_nightly_update {
 
   cd "$orig_dir" || return 1
 }
-
