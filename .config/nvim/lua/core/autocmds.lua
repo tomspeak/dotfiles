@@ -109,14 +109,38 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   desc = 'Restore the last editing position in ordinary files',
 })
 
+local filename_templates = {
+  Makefile = 'Makefile',
+  makefile = 'Makefile',
+  GNUmakefile = 'Makefile',
+  ['main.c'] = 'c',
+  ['main.rs'] = 'rs',
+  ['main.py'] = 'py',
+  ['__main__.py'] = 'py',
+  ['main.zig'] = 'zig',
+}
+local entrypoint_only = { c = true, rs = true, py = true, zig = true }
 vim.api.nvim_create_autocmd('BufNewFile', {
   group = vim.api.nvim_create_augroup('Skeleton', { clear = true }),
-  callback = function()
-    local ext = vim.fn.expand '%:e'
-    local template = vim.fn.stdpath 'config' .. '/templates/skeleton.' .. ext
+  callback = function(ev)
+    if vim.bo[ev.buf].buftype ~= '' or vim.api.nvim_buf_line_count(ev.buf) ~= 1
+      or vim.api.nvim_buf_get_lines(ev.buf, 0, 1, false)[1] ~= '' then
+      return
+    end
+    local name = vim.api.nvim_buf_get_name(ev.buf)
+    local ext = vim.fn.fnamemodify(name, ':e')
+    local key = filename_templates[vim.fn.fnamemodify(name, ':t')]
+    if ext == 'rs' and vim.fn.fnamemodify(name, ':h:t') == 'bin' then
+      key = 'rs'
+    end
+    key = key or (not entrypoint_only[ext] and ext or nil)
+    if not key or key == '' then
+      return
+    end
+    local template = vim.fn.stdpath 'config' .. '/templates/skeleton.' .. key
     if vim.fn.filereadable(template) == 1 then
-      vim.cmd('0r ' .. vim.fn.fnameescape(template))
+      vim.api.nvim_buf_set_lines(ev.buf, 0, -1, false, vim.fn.readfile(template))
     end
   end,
-  desc = 'Load template when creating new file based on filetype',
+  desc = 'Load appropriate boilerplate for empty new files and entrypoints',
 })
