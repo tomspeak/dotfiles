@@ -19,3 +19,7 @@ vim.api.nvim_buf_create_user_command(buf, 'ZigTestFile', function()
   local file = vim.fn.expand '%:p'
   vim.cmd('terminal zig test ' .. vim.fn.shellescape(file))
 end, { desc = 'zig test current file' })
+
+vim.b.undo_ftplugin = (vim.b.undo_ftplugin and vim.b.undo_ftplugin .. ' | ' or '')
+  .. 'setlocal makeprg< expandtab< tabstop< shiftwidth< softtabstop<'
+  .. ' | silent! delcommand -buffer ZigRun | silent! delcommand -buffer ZigTest | silent! delcommand -buffer ZigTestFile'

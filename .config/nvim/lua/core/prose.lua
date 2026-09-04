@@ -1,5 +1,6 @@
 local api = vim.api
 local opt_local = vim.opt_local
+local punctuations = { ',', '.', '?', '!' }
 
 local function enable_soft()
   opt_local.spell = true
@@ -9,7 +10,6 @@ local function enable_soft()
   opt_local.textwidth = 0
   opt_local.wrapmargin = 0
 
-  local punctuations = { ",", ".", "?", "!" }
   for _, p in ipairs(punctuations) do
     vim.keymap.set("i", p, p .. "<C-g>u", { buf = 0, desc = "Add break after " .. p })
   end
@@ -33,16 +33,25 @@ local function setup_commands()
 
   -- Word count command for prose
   api.nvim_buf_create_user_command(0, "WordCount", function()
-    local words = vim.fn.wordcount().words
-    local chars = vim.fn.wordcount().chars
-    print(string.format("Words: %d | Characters: %d", words, chars))
+    local count = vim.fn.wordcount()
+    print(string.format("Words: %d | Characters: %d", count.words, count.chars))
   end, { desc = "Show word and character count" })
 end
 
 api.nvim_create_autocmd("FileType", {
+  group = api.nvim_create_augroup('user-prose', { clear = true }),
   pattern = { "markdown", "text", "rst", "txt", "tex", "mdx", "gitcommit" },
   callback = function()
     enable_soft()
     setup_commands()
+
+    local undo = { 'setlocal spell< wrap< linebreak< conceallevel< textwidth< wrapmargin< formatoptions<' }
+    for _, punctuation in ipairs(punctuations) do
+      undo[#undo + 1] = 'silent! iunmap <buffer> ' .. punctuation
+    end
+    for _, command in ipairs({ 'PencilHard', 'PencilSoft', 'WordCount' }) do
+      undo[#undo + 1] = 'silent! delcommand -buffer ' .. command
+    end
+    vim.b.undo_ftplugin = (vim.b.undo_ftplugin and vim.b.undo_ftplugin .. ' | ' or '') .. table.concat(undo, ' | ')
   end,
 })
