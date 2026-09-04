@@ -16,20 +16,56 @@ vim.api.nvim_create_autocmd('VimResized', {
 })
 
 local focus_group = vim.api.nvim_create_augroup('WindowFocus', { clear = true })
+local dimmed_cursorlines = {}
+local function ordinary_window()
+  return vim.bo.buftype == '' and vim.api.nvim_win_get_config(0).relative == ''
+end
+
 vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
   group = focus_group,
   callback = function()
-    vim.opt_local.cursorline = true
+    if not ordinary_window() then
+      return
+    end
+    local win, buf = vim.api.nvim_get_current_win(), vim.api.nvim_get_current_buf()
+    local saved = dimmed_cursorlines[win]
+    if saved and saved[buf] ~= nil then
+      vim.wo.cursorline = saved[buf]
+      saved[buf] = nil
+    end
   end,
-  desc = 'Emphasize the active window.',
+  desc = 'Restore the active editing window cursorline preference.',
 })
 
 vim.api.nvim_create_autocmd('WinLeave', {
   group = focus_group,
   callback = function()
-    vim.opt_local.cursorline = false
+    if not ordinary_window() then
+      return
+    end
+    local win, buf = vim.api.nvim_get_current_win(), vim.api.nvim_get_current_buf()
+    dimmed_cursorlines[win] = dimmed_cursorlines[win] or {}
+    if dimmed_cursorlines[win][buf] == nil then
+      dimmed_cursorlines[win][buf] = vim.wo.cursorline
+    end
+    vim.wo.cursorline = false
   end,
-  desc = 'Dim inactive windows.',
+  desc = 'Dim inactive editing windows without changing their preferences.',
+})
+
+vim.api.nvim_create_autocmd('WinClosed', {
+  group = focus_group,
+  callback = function(ev)
+    dimmed_cursorlines[tonumber(ev.match)] = nil
+  end,
+})
+vim.api.nvim_create_autocmd('BufWipeout', {
+  group = focus_group,
+  callback = function(ev)
+    for _, saved in pairs(dimmed_cursorlines) do
+      saved[ev.buf] = nil
+    end
+  end,
 })
 
 vim.api.nvim_create_augroup('Git', { clear = true })
