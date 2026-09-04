@@ -41,15 +41,27 @@ vim.opt.statusline = table.concat {
   ' (%{v:lua.git_branch()}) ',
 }
 
+local M = {}
+local zen_active = false
+
+local function update_visibility()
+  vim.o.laststatus = (zen_active or vim.bo.filetype == 'ministarter') and 0 or 2
+end
+
+function M.set_zen(active)
+  zen_active = active
+  update_visibility()
+end
+
+local group = vim.api.nvim_create_augroup('user-statusline', { clear = true })
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
-  pattern = '*',
-  callback = function()
-    vim.schedule(function()
-      if vim.bo.filetype == 'ministarter' or vim.fn.bufname('%'):match 'starter' then
-        vim.o.laststatus = 0
-      else
-        vim.o.laststatus = 2
-      end
-    end)
-  end,
+  group = group,
+  callback = vim.schedule_wrap(update_visibility),
 })
+vim.api.nvim_create_autocmd('User', {
+  group = group,
+  pattern = 'MiniStarterOpened',
+  callback = update_visibility,
+})
+
+return M

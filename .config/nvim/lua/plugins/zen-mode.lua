@@ -21,7 +21,6 @@ return {
     },
     plugins = {
       options = {
-        laststatus = 0,
         showcmd = false,
         ruler = false,
       },
@@ -30,10 +29,14 @@ return {
       tmux = { enabled = true },
     },
     on_open = function()
+      require('core.statusline').set_zen(true)
       vim.opt_local.wrap = true
       vim.opt_local.linebreak = true
       vim.opt_local.spell = true
       vim.opt_local.conceallevel = 2
+    end,
+    on_close = function()
+      require('core.statusline').set_zen(false)
     end,
   },
 }
