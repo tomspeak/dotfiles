@@ -70,14 +70,14 @@ vim.api.nvim_create_autocmd('BufWipeout', {
 
 vim.api.nvim_create_augroup('Git', { clear = true })
 
-vim.api.nvim_create_autocmd('BufEnter', {
-  desc = 'Automatically go into insert mode + spellcheck for commit messages',
-  pattern = 'COMMIT_EDITMSG',
-  callback = function()
-    vim.opt.spell = true
-
-    -- Check if the buffer is empty (e.g., a new commit message)
-    -- This checks for both an empty first line and if the buffer's line count is 1
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Initialize a commit message once without disturbing later navigation',
+  pattern = 'gitcommit',
+  callback = function(ev)
+    if vim.b[ev.buf].commit_initialized then
+      return
+    end
+    vim.b[ev.buf].commit_initialized = true
     vim.api.nvim_win_set_cursor(0, { 1, 0 })
     if vim.fn.getline(1) == '' then
       vim.cmd 'startinsert!'
