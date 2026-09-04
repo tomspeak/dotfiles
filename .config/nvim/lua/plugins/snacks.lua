@@ -128,6 +128,13 @@ return {
         desc = 'Resume',
       },
       {
+        '<leader>su',
+        function()
+          Snacks.picker.undo()
+        end,
+        desc = 'Undo History',
+      },
+      {
         '<leader>th',
         function()
           Snacks.picker.colorschemes()
