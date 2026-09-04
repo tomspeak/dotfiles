@@ -2,9 +2,10 @@
 
 set -e
 
-CUSTOM_DIR="$HOME/.config/ghostty/themes/custom"
-SYSTEM_DIR="/Applications/Ghostty.app/Contents/Resources/ghostty/themes"
-CUSTOM_SYMLINK="$HOME/.config/ghostty/themes/current-theme"
+THEMES_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/ghostty/themes"
+CUSTOM_DIR="$THEMES_DIR/custom"
+SYSTEM_DIR="${GHOSTTY_RESOURCES_DIR:-/Applications/Ghostty.app/Contents/Resources/ghostty}/themes"
+CUSTOM_SYMLINK="$THEMES_DIR/current-theme"
 
 # Whitelist of system themes to include
 system_themes=(
@@ -27,48 +28,53 @@ system_themes=(
   "Vesper"
 )
 
-# Generate and select theme
+# Only existing themes are selectable; keep the source visible beside each name.
 selection=$(
   {
-    echo "0 [1m── Custom Themes ─────────────[0m"
-    for t in "$CUSTOM_DIR"/*; do
-      [[ -f "$t" ]] && echo "custom $(basename "$t")"
+    for theme_path in "$CUSTOM_DIR"/*(N); do
+      if [[ -f "$theme_path" ]]; then
+        printf 'custom %s\n' "${theme_path:t}"
+      fi
     done
-    echo ""
-    echo "0 [1m── Built-in Themes ───────────[0m"
     for name in "${system_themes[@]}"; do
-      echo "system $name"
+      if [[ -f "$SYSTEM_DIR/$name" ]]; then
+        printf 'system %s\n' "$name"
+      fi
     done
   } | fzf \
-      --ansi \
-      --with-nth=2.. \
-      --delimiter=' ' \
+      --header="Custom themes and built-in favorites" \
       --no-unicode \
       --border=none \
       --prompt="Theme > " \
       --no-preview \
       --reverse
-)
-
-# Exit if nothing selected
-[[ -z "$selection" ]] && {
-  echo "No theme selected." >&2
-  exit 1
+) || {
+  picker_status=$?
+  # No match and cancellation leave the current theme untouched.
+  (( picker_status == 1 || picker_status == 130 )) && exit 0
+  exit "$picker_status"
 }
+
+[[ -z "$selection" ]] && exit 0
 
 # Split into prefix and theme name
 prefix="${selection%% *}"
 theme="${selection#* }"
 
 # Resolve correct theme path
-if [[ "$prefix" == "custom" ]]; then
-  theme_path="$CUSTOM_DIR/$theme"
-else
-  theme_path="$SYSTEM_DIR/$theme"
-fi
+case "$prefix" in
+  custom) theme_path="$CUSTOM_DIR/$theme" ;;
+  system) theme_path="$SYSTEM_DIR/$theme" ;;
+  *) printf 'Invalid theme selection: %s\n' "$selection" >&2; exit 1 ;;
+esac
+
+[[ -f "$theme_path" ]] || {
+  printf 'Theme no longer exists: %s\n' "$theme_path" >&2
+  exit 1
+}
 
 # Update the symlink
-ln -sf "$theme_path" "$CUSTOM_SYMLINK"
+ln -sfn "$theme_path" "$CUSTOM_SYMLINK"
 
 # Reload Ghostty theme
-pkill -SIGUSR2 ghostty
+pkill -SIGUSR2 -x ghostty || [[ $? == 1 ]]
