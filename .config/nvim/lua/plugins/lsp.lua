@@ -97,8 +97,6 @@ return {
           return
         end
 
-        vim.lsp.inlay_hint.enable(false, { bufnr = buf })
-
         if client:supports_method('textDocument/documentHighlight', buf) then
           -- These callbacks fan out to every supporting client, so own them once per buffer.
           vim.api.nvim_clear_autocmds { group = highlight_group, buf = buf }
