@@ -1,7 +1,7 @@
 return {
   'neovim/nvim-lspconfig',
   event = { 'BufReadPre', 'BufNewFile' },
-  dependencies = { 'folke/snacks.nvim', 'nvim-mini/mini.completion', 'stevearc/conform.nvim' },
+  dependencies = { 'folke/snacks.nvim', 'nvim-mini/mini.completion' },
   config = function()
     local lsp = vim.lsp
     local autocmd = vim.api.nvim_create_autocmd
@@ -87,9 +87,6 @@ return {
       end, 'Hover Documentation')
       map('H', vim.lsp.buf.document_highlight, 'Hover Word')
       map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-      map('<leader>fm', function()
-        require('conform').format({ bufnr = buf, timeout_ms = 500, lsp_format = 'fallback' })
-      end, '[F]ormat')
       map('<leader>ti', function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = buf }), { bufnr = buf })
       end, 'Toggle Inlay Hints')
