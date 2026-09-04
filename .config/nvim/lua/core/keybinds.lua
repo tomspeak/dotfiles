@@ -39,7 +39,9 @@ keymap('n', '<C-_>', '<cmd>AerialToggle<CR>', { desc = 'Aerial Toggle' })
 -- Search/Replace under current word
 keymap('n', '<Leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
   { desc = 'Search & replace word under cursor', silent = false })
-keymap("v", "<leader>rr", "y:%s/<C-r>0//gc<left><left><left>", { desc = "Search/replace visual" })
+keymap('x', '<leader>rr',
+  [[y:%s/\V<C-r>=substitute(escape(getreg('0'), '\/'), '\n', '\\n', 'g')<CR>//gc<Left><Left><Left>]],
+  { desc = 'Search/replace visual literally' })
 
 -- Stay in visual mode when changing indentation
 keymap('v', '<', '<gv', { noremap = true, silent = true })
