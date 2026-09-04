@@ -36,14 +36,14 @@ return {
       },
     }
 
-    vim.diagnostic.config({
+    vim.diagnostic.config {
       update_in_insert = false,
       virtual_text = false,
       virtual_lines = false,
       severity_sort = true,
       signs = { severity = vim.diagnostic.severity.ERROR },
       underline = { severity = vim.diagnostic.severity.ERROR },
-    })
+    }
 
     local keybinds = function(buf)
       local map = function(keys, func, desc)
@@ -63,14 +63,14 @@ return {
       map('gI', Snacks.picker.lsp_implementations, '[G]oto [I]mplementation')
       map('gy', Snacks.picker.lsp_type_definitions, '[G]oto T[y]pe Definitions')
       map('<leader>ss', function()
-        Snacks.picker.lsp_symbols({
+        Snacks.picker.lsp_symbols {
           filter = symbol_filter,
-        })
+        }
       end, 'Goto [S]ymbols')
       map('<leader>sS', function()
-        Snacks.picker.lsp_workspace_symbols({
+        Snacks.picker.lsp_workspace_symbols {
           filter = symbol_filter,
-        })
+        }
       end, 'Goto Work[s]pace [S]ymbols')
       map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
       map('K', function()
@@ -88,7 +88,7 @@ return {
       map('H', vim.lsp.buf.document_highlight, 'Hover Word')
       map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
       map('<leader>ti', function()
-        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = buf }), { bufnr = buf })
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = buf }, { bufnr = buf })
       end, 'Toggle Inlay Hints')
     end
 
