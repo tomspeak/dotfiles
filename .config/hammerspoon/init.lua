@@ -25,7 +25,6 @@ local hs = _G.hs
         alert = require('hs.alert'),
         hotkey = require('hs.hotkey'),
         window = require('hs.window'),
-        timer = require('hs.timer'),
     }
 
 hs.console.clearConsole()
@@ -42,11 +41,6 @@ hs.grid.setMargins({ 0, 0 }) -- no margins, full screen coverage
 
 -- disable window animation (moving or resizing)
 hs.window.animationDuration = 0
-
--- track last focused window per screen (used by cross-monitor focus)
-local STATE = {
-    last_focused_window_by_screen = {},
-}
 
 ---@type string | nil
 local nav_alert_id = nil
@@ -112,67 +106,29 @@ hs.hotkey.bind(HYPER_KEY, 'space', hs.grid.maximizeWindow) -- full screen
 -- ===================================================
 local function focus_frontmost_window_on_other_monitor()
     local current_window = hs.window.focusedWindow()
-    local current_screen = hs.screen.mainScreen()
-    local all_screens = hs.screen.allScreens()
-
-    -- Store the current window as the last focused for this screen
-    if current_window then
-        STATE.last_focused_window_by_screen[current_screen:id()] = current_window
-    end
-
-    local other_screens = {}
-    for _, screen in ipairs(all_screens) do
+    local current_screen = (current_window and current_window:screen()) or hs.screen.mainScreen()
+    local other_screen
+    for _, screen in ipairs(hs.screen.allScreens()) do
         if screen:id() ~= current_screen:id() then
-            table.insert(other_screens, screen)
+            other_screen = screen
+            break
         end
     end
-
-    if #other_screens == 0 then
+    if not other_screen then
         return nav_alert('Single screen detected')
     end
 
-    local other_screen = other_screens[1]
-    if not other_screen then
-        return nav_alert('Could not find other monitor')
-    end
-
-    -- Prefer the window we last used on the target screen, if still valid
-    local last_focused_on_target = STATE.last_focused_window_by_screen[other_screen:id()]
-    local target_window = nil
-
-    if
-        last_focused_on_target
-        and last_focused_on_target:screen():id() == other_screen:id()
-        and not last_focused_on_target:isMinimized()
-    then
-        target_window = last_focused_on_target
-    else
-        local windows_on_other_screen = {}
-        for _, window in ipairs(hs.window.visibleWindows()) do
-            if
-                window:screen():id() == other_screen:id()
-                and not window:isMinimized()
-                and window:application():name() ~= 'Finder'
-            then
-                table.insert(windows_on_other_screen, window)
-            end
+    -- Front-to-back order already remembers the last visible window used there.
+    for _, window in ipairs(hs.window.orderedWindows()) do
+        local screen = window:screen()
+        local app = window:application()
+        if screen and screen:id() == other_screen:id() and app and window:isStandard() then
+            local name = app:name()
+            window:focus()
+            return nav_alert(name or 'Window focused')
         end
-
-        if #windows_on_other_screen == 0 then
-            return nav_alert('No windows found on other monitor')
-        end
-
-        target_window = windows_on_other_screen[1]
     end
-
-    if not target_window then
-        return nav_alert('No window found on other monitor')
-    end
-
-    target_window:focus()
-    hs.timer.doAfter(0.05, function()
-        nav_alert(target_window:application():name())
-    end)
+    nav_alert('No windows found on other monitor')
 end
 
 hs.hotkey.bind(HYPER_KEY, 'n', focus_frontmost_window_on_other_monitor)
@@ -182,7 +138,7 @@ hs.hotkey.bind(HYPER_KEY, '\\', function()
         return
     end
     local currentScreen = win:screen()
-    local nextScreen = currentScreen:next()
+    local nextScreen = currentScreen and currentScreen:next()
     if nextScreen then
         win:moveToScreen(nextScreen)
     end
@@ -198,7 +154,7 @@ end)
 --
 --   Ergonomic left-hand cluster (Tab held by left hand):
 --   most-used apps on the easiest keys. Positional, not
---   mnemonic. 'g' is reload, '4' is a free spare.
+--   mnemonic. 'g' is reload, '4' is Zoom.
 --
 --   Work vs personal uses the same marker the shell does:
 --   the gitignored ~/dotfiles/shell/work file, present only
