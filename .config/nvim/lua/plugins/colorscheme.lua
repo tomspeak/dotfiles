@@ -75,7 +75,12 @@ return {
     'oskarnurm/koda.nvim',
     lazy = false,
     priority = 1000,
-    opts = {},
+    opts = {
+      colors = {
+        dark = { bg = '#090909', line = '#1a1a1a' },
+        moss = { bg = '#090d0e', line = '#151d1e' },
+      },
+    },
   },
   {
     'blazkowolf/gruber-darker.nvim',
