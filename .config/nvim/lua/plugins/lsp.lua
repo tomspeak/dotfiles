@@ -151,7 +151,6 @@ return {
           '--header-insertion=never',
           '--limit-results=10',
           '--pch-storage=memory',
-          '--query-driver=/usr/include/*',
         },
         init_options = {
           usePlaceholders = true,
