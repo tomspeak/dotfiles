@@ -73,6 +73,19 @@ return {
       end,
       desc = 'Debug: Run to Cursor',
     },
+    {
+      '<leader>de',
+      function()
+        local mode = vim.fn.mode()
+        local expression
+        if mode == 'v' or mode == 'V' or mode == '\22' then
+          expression = table.concat(vim.fn.getregion(vim.fn.getpos 'v', vim.fn.getpos '.', { type = mode, exclusive = vim.o.selection == 'exclusive' }), '\n')
+        end
+        require('dapui').eval(expression)
+      end,
+      mode = { 'n', 'x' },
+      desc = 'Debug: Evaluate Expression',
+    },
   },
   config = function()
     local dap, dapui, dapvt = require 'dap', require 'dapui', require 'nvim-dap-virtual-text'
