@@ -37,9 +37,6 @@ return {
     }
 
     vim.diagnostic.config {
-      update_in_insert = false,
-      virtual_text = false,
-      virtual_lines = false,
       severity_sort = true,
       signs = { severity = vim.diagnostic.severity.ERROR },
       underline = { severity = vim.diagnostic.severity.ERROR },
@@ -168,7 +165,6 @@ return {
       jsonls = {},
       bashls = {},
       lua_ls = {
-        flags = { debounce_text_changes = 150 },
         settings = {
           Lua = {
             workspace = {
