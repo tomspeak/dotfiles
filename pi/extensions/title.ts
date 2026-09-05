@@ -7,10 +7,10 @@ export default function title(pi: ExtensionAPI) {
   function update(ctx: ExtensionContext) {
     if (ctx.mode !== "tui") return;
     const state = waiting ? "waiting" : ctx.isIdle() ? "ready" : "running";
-    const project = basename(ctx.cwd).replace(/[\x00-\x1f\x7f-\x9f#]/g, "_");
-    ctx.ui.setTitle(`π ${state} - ${project}`);
+    const label = (pi.getSessionName() || basename(ctx.cwd)).replace(/[\x00-\x1f\x7f-\x9f#]/g, "_");
+    ctx.ui.setTitle(`π ${state} - ${label}`);
   }
-  for (const event of ["agent_start", "agent_settled"] as const) {
+  for (const event of ["agent_start", "agent_settled", "session_info_changed"] as const) {
     pi.on(event, (_event, ctx) => update(ctx));
   }
   pi.on("ui_prompt_start", (_event, ctx) => { waiting = true; update(ctx); });
@@ -27,7 +27,9 @@ if (import.meta.main) {
   let idle = true;
   const ctx = { mode: "tui", cwd: "/tmp/project", isIdle: () => idle,
     ui: { setTitle: (title: string) => titles.push(title) } };
-  const pi = { on: (name: string, handler: unknown) => handlers.set(name, handler) };
+  let sessionName: string | undefined;
+  const pi = { on: (name: string, handler: unknown) => handlers.set(name, handler),
+    getSessionName: () => sessionName };
   title(pi as unknown as ExtensionAPI);
   handlers.get("agent_settled")({}, ctx);
   idle = false;
@@ -40,5 +42,11 @@ if (import.meta.main) {
   handlers.get("agent_start")({}, { ...ctx, mode: "print" });
   assert.deepEqual(titles, ["π ready - project", "π running - project", "π waiting - project",
     "π running - project", "π ready - project", ""]);
+  sessionName = "Fix #123\x1b";
+  handlers.get("session_info_changed")({}, ctx);
+  assert.equal(titles.at(-1), "π ready - Fix _123_");
+  sessionName = undefined;
+  handlers.get("session_info_changed")({}, ctx);
+  assert.equal(titles.at(-1), "π ready - project");
   console.log("Title lifecycle check passed");
 }

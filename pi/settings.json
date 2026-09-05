@@ -59,6 +59,7 @@
     "showTerminalProgress": true
   },
   "quietStartup": true,
+  "hideThinkingBlock": true,
   "enableInstallTelemetry": false,
   "defaultProjectTrust": "ask",
   "modelThinkingLevels": {
