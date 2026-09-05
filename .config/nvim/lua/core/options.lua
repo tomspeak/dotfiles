@@ -7,7 +7,6 @@ vim.o.foldenable = false
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.o.fileignorecase = true
 vim.o.colorcolumn = '+0'
 vim.opt.listchars = {
   nbsp = '␣',
@@ -38,22 +37,15 @@ vim.opt.signcolumn = 'yes'
 
 -- Decrease update time
 vim.o.updatetime = 250
-vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 vim.o.title = true
 vim.o.titlestring = '%t%( %M%)' -- title, modified
--- vim.o.wildignore:append("*/node_modules/*")
 vim.o.inccommand = 'split'
-vim.o.incsearch = true
-vim.o.hlsearch = true
 vim.o.cursorline = true
--- NOTE: lazyredraw disabled because it conflicts with inccommand live preview
--- vim.o.lazyredraw = true
 vim.o.scrolloff = 999
 vim.o.scrolloffpad = 1
 vim.o.clipboard = 'unnamed,unnamedplus' -- make vim use system clipboard
-vim.o.backspace = 'indent,eol,start' -- make backspace work as expected
 vim.o.swapfile = false -- disable the .swp files vim creates
 vim.o.splitright = true -- open horizontal splits to the right
 vim.o.splitbelow = true -- open vertical splits below
@@ -75,9 +67,6 @@ vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 
-vim.opt.cmdheight = 1
-
-vim.opt.autoindent = true
 vim.opt.copyindent = true
 -- Enable smart indenting (see https://stackoverflow.com/questions/1204149/smart-wrap-in-vim)
 vim.opt.breakindent = true
