@@ -40,6 +40,11 @@ return {
       severity_sort = true,
       signs = { severity = vim.diagnostic.severity.ERROR },
       underline = { severity = vim.diagnostic.severity.ERROR },
+      jump = {
+        on_jump = function(_, buf)
+          vim.diagnostic.open_float { bufnr = buf, scope = 'cursor', focus = false }
+        end,
+      },
     }
 
     local keybinds = function(buf)
