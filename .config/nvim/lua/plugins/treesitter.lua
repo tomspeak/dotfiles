@@ -84,9 +84,6 @@ return {
         select = {
           lookahead = true,
         },
-        move = {
-          set_jumps = true,
-        },
       }
 
       local select_map = function(lhs, query)
