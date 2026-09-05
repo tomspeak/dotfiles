@@ -14,6 +14,7 @@ vim.opt.listchars = {
   trail = '·',
 }
 
+vim.o.completeopt = 'menuone,noselect,fuzzy'
 vim.o.pumheight = 15
 vim.o.pumblend = 0
 vim.o.pumborder = 'single'
