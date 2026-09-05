@@ -17,7 +17,7 @@ export default function (pi: ExtensionAPI) {
         const sep = theme.fg("dim", " │ ");
         const percent = ctx.getContextUsage()?.percent;
         const left = ` ${theme.bold(basename(ctx.cwd))}${sep}${theme.fg("muted", footer.getGitBranch() ?? "no-git")}`;
-        const right = `${theme.fg("accent", model)}${sep}${theme.fg("muted", thinking)}${sep}${theme.fg("muted", `ctx ${percent == null ? "—" : `${Math.round(percent)}%`}`)} `;
+        const right = `${theme.fg("muted", model)}${sep}${theme.fg("muted", thinking)}${sep}${theme.fg("muted", `ctx ${percent == null ? "—" : `${Math.round(percent)}%`}`)} `;
         const shownLeft = truncateToWidth(left, Math.max(0, width - visibleWidth(right) - 1), "");
         return [truncateToWidth(shownLeft + " ".repeat(Math.max(1, width - visibleWidth(shownLeft) - visibleWidth(right))) + right, width, "")];
       },
