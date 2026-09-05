@@ -14,12 +14,6 @@ keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 keymap('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 keymap('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
--- Handle navigation between windows
--- keymap('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
--- keymap('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
--- keymap('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
--- keymap('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
 keymap('n', '<Esc>', function()
   vim.cmd 'noh'
   vim.lsp.buf.clear_references()
