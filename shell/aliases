@@ -5,6 +5,11 @@ alias bigf='find / -mount -type f -size +500M 2>/dev/null'
 # git
 alias g="git"
 
+# hunk
+alias hd='hunk diff'
+alias hshow='hunk show'
+alias hdw='hunk diff --watch'
+
 # npm
 alias ni="npm install"
 alias nis="npm install --save"
