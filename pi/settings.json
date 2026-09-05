@@ -9,6 +9,38 @@
     "npm:@dietrichgebert/ponytail@4.9.0",
     "npm:pi-web-access@0.28.0"
   ],
+  "subagents": {
+    "globalConcurrencyLimit": 4,
+    "maxSubagentSpawnsPerRun": 16,
+    "maxSubagentSpawnsPerSession": 40,
+    "maxActiveAsyncRunsPerSession": 3,
+    "agentOverrides": {
+      "scout": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "low"
+      },
+      "researcher": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "medium"
+      },
+      "delegate": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "medium"
+      },
+      "worker": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "max"
+      },
+      "reviewer": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "max"
+      },
+      "oracle": {
+        "model": "openai-codex/gpt-5.6-sol",
+        "thinking": "high"
+      }
+    }
+  },
   "editorPaddingX": 3,
   "outputPad": 1,
   "enabledModels": [
