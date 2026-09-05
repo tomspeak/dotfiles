@@ -115,6 +115,7 @@ return {
       local snippets = require 'mini.snippets'
 
       return {
+        mappings = { expand = '' },
         expand = {
           insert = function(snippet)
             return snippets.default_insert(snippet, {
