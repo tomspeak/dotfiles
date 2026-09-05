@@ -68,7 +68,7 @@ return {
       map('n', '<leader>hS', gs.stage_buffer, { desc = 'Stage buffer' })
       map('n', '<leader>hR', gs.reset_buffer, { desc = 'Reset buffer' })
       map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'Undo stage hunk' })
-      map('n', '<leader>hp', gs.preview_hunk, { desc = 'Preview hunk' })
+      map('n', '<leader>hp', gs.preview_hunk_inline, { desc = 'Preview hunk inline' })
 
       -- Toggles
       map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'toggle git blame line' })
