@@ -2,8 +2,7 @@ return {
   'nvim-tree/nvim-tree.lua',
   cmd = { 'NvimTreeToggle', 'NvimTreeOpen', 'NvimTreeFocus', 'NvimTreeFindFile', 'NvimTreeFindFileToggle' },
   opts = {
-    -- don't disable netwr, we need it for :GBrowse (rhubarb/fugitive)
-    disable_netrw = false,
+    -- Keep netrw available for :GBrowse (rhubarb/fugitive).
     hijack_netrw = false,
 
     view = {
@@ -12,21 +11,15 @@ return {
       signcolumn = 'no',
     },
 
-    git = {
-      enable = true,
-      ignore = false,
-    },
-
     filters = {
-      dotfiles = false,
+      git_ignored = false,
       custom = { '^node_modules$', '^[.]DS_Store$', '*.o', '*.d' },
     },
 
     renderer = {
       root_folder_label = false,
-      highlight_opened_files = 'none',
       group_empty = true,
-      highlight_git = true,
+      highlight_git = 'name',
       icons = {
         show = {
           git = false,
