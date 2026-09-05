@@ -70,6 +70,9 @@ return {
       map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'Undo stage hunk' })
       map('n', '<leader>hp', gs.preview_hunk_inline, { desc = 'Preview hunk inline' })
 
+      -- Textobjects
+      map({ 'o', 'x' }, 'ih', ':<C-u>Gitsigns select_hunk<CR>', { desc = 'Select hunk' })
+
       -- Toggles
       map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'toggle git blame line' })
       map('n', '<leader>tD', gs.toggle_deleted, { desc = 'toggle git show deleted' })
