@@ -1,4 +1,7 @@
 @anthropic-ai/claude-code
+@earendil-works/pi-coding-agent
+@earendil-works/pi-client
+@earendil-works/pi-server
 neovim
 vscode-langservers-extracted
 bash-language-server

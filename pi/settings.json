@@ -2,11 +2,12 @@
   "lastChangelogVersion": "0.85.1",
   "theme": "minimal",
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.5",
+  "defaultModel": "gpt-5.6-sol",
   "packages": [
-    "npm:pi-subagents",
-    "npm:@juicesharp/rpiv-ask-user-question",
-    "npm:@dietrichgebert/ponytail"
+    "npm:pi-subagents@0.65.1",
+    "npm:@juicesharp/rpiv-ask-user-question@2.9.0",
+    "npm:@dietrichgebert/ponytail@4.9.0",
+    "npm:pi-web-access@0.28.0"
   ],
   "editorPaddingX": 3,
   "outputPad": 1,
@@ -21,7 +22,7 @@
   },
   "quietStartup": true,
   "enableInstallTelemetry": false,
-  "defaultProjectTrust": "always",
+  "defaultProjectTrust": "ask",
   "modelThinkingLevels": {
     "openai-codex/gpt-5.6-sol": "high"
   },
