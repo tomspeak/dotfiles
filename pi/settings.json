@@ -17,7 +17,7 @@
     "agentOverrides": {
       "scout": {
         "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "low"
+        "thinking": "medium"
       },
       "researcher": {
         "model": "openai-codex/gpt-5.6-luna",
@@ -37,7 +37,7 @@
       },
       "oracle": {
         "model": "openai-codex/gpt-5.6-sol",
-        "thinking": "high"
+        "thinking": "max"
       }
     }
   },
