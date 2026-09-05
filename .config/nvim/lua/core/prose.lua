@@ -38,8 +38,10 @@ api.nvim_create_autocmd('FileType', {
   callback = function()
     enable_soft()
     setup_commands()
+    -- Suppress automatic suggestions while keeping explicit completion available.
+    vim.b.minicompletion_config = { delay = { completion = 10 ^ 7 } }
 
-    local undo = { 'setlocal spell< wrap< linebreak< conceallevel< textwidth< wrapmargin< formatoptions<' }
+    local undo = { 'setlocal spell< wrap< linebreak< conceallevel< textwidth< wrapmargin< formatoptions<', 'unlet! b:minicompletion_config' }
     for _, punctuation in ipairs(punctuations) do
       undo[#undo + 1] = "execute 'silent! iunmap <buffer> " .. punctuation .. "'"
     end
