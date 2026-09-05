@@ -2,12 +2,9 @@ return {
   'lewis6991/gitsigns.nvim',
   event = 'BufReadPost',
   opts = {
-    attach_to_untracked = false,
     preview_config = {
       border = 'solid',
-      style = 'minimal',
       row = 1,
-      col = 1,
     },
     signs = {
       add = { text = '+' },
@@ -16,15 +13,8 @@ return {
       topdelete = { text = '‾' },
       changedelete = { text = '≈' },
     },
-    signcolumn = true,
-    numhl = false,
-    linehl = false,
-    word_diff = false,
     update_debounce = 500,
-    current_line_blame = false,
     current_line_blame_opts = {
-      virt_text = true,
-      virt_text_pos = 'eol',
       delay = 100,
     },
     on_attach = function(bufnr)
