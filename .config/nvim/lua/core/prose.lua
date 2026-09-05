@@ -30,12 +30,6 @@ local function setup_commands()
   api.nvim_buf_create_user_command(0, 'PencilSoft', function()
     enable_soft()
   end, { desc = 'Switch to soft-wrap mode' })
-
-  -- Word count command for prose
-  api.nvim_buf_create_user_command(0, 'WordCount', function()
-    local count = vim.fn.wordcount()
-    print(string.format('Words: %d | Characters: %d', count.words, count.chars))
-  end, { desc = 'Show word and character count' })
 end
 
 api.nvim_create_autocmd('FileType', {
@@ -49,7 +43,7 @@ api.nvim_create_autocmd('FileType', {
     for _, punctuation in ipairs(punctuations) do
       undo[#undo + 1] = "execute 'silent! iunmap <buffer> " .. punctuation .. "'"
     end
-    for _, command in ipairs { 'PencilHard', 'PencilSoft', 'WordCount' } do
+    for _, command in ipairs { 'PencilHard', 'PencilSoft' } do
       undo[#undo + 1] = 'silent! delcommand -buffer ' .. command
     end
     vim.b.undo_ftplugin = (vim.b.undo_ftplugin and vim.b.undo_ftplugin .. ' | ' or '') .. table.concat(undo, ' | ')
