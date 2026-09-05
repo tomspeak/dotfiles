@@ -1,0 +1,6 @@
+theme = "auto"
+tab_width = 2
+menu_bar = false
+
+# Keep session-only view changes out of the versioned configuration.
+prompt_save_view_preferences = false
