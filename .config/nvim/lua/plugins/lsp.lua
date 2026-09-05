@@ -15,27 +15,6 @@ return {
       end
     end
 
-    local symbol_filter = {
-      default = {
-        'Class',
-        'Constructor',
-        'Enum',
-        'Field',
-        'Function',
-        'Interface',
-        'Method',
-        'Module',
-        'Namespace',
-        'Package',
-        'Property',
-        'Struct',
-        'Trait',
-        'Variable',
-        'Constant',
-        'Object',
-      },
-    }
-
     vim.diagnostic.config {
       severity_sort = true,
       signs = { severity = vim.diagnostic.severity.ERROR },
@@ -66,14 +45,9 @@ return {
       map('<leader>cO', Snacks.picker.lsp_outgoing_calls, '[C]alls [O]utgoing')
       map('gI', Snacks.picker.lsp_implementations, '[G]oto [I]mplementation')
       map('gy', Snacks.picker.lsp_type_definitions, '[G]oto T[y]pe Definitions')
-      map('<leader>ss', function()
-        Snacks.picker.lsp_symbols {
-          filter = symbol_filter,
-        }
-      end, 'Goto [S]ymbols')
       map('<leader>sS', function()
         Snacks.picker.lsp_workspace_symbols {
-          filter = symbol_filter,
+          filter = { default = require 'core.symbols' },
         }
       end, 'Goto Work[s]pace [S]ymbols')
       map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
