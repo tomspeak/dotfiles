@@ -58,5 +58,5 @@
   "modelThinkingLevels": {
     "openai-codex/gpt-5.6-sol": "high"
   },
-  "tuiMode": "fullscreen"
+  "tuiMode": "regular"
 }
