@@ -1,5 +1,6 @@
 *
 !.gitignore
+!AGENTS.md
 !settings.json
 !keybindings.json
 !extensions/

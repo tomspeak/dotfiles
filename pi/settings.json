@@ -16,27 +16,33 @@
     "maxActiveAsyncRunsPerSession": 3,
     "agentOverrides": {
       "scout": {
+        "inheritGlobalContext": true,
         "model": "openai-codex/gpt-5.6-luna",
         "thinking": "medium"
       },
       "researcher": {
+        "inheritGlobalContext": true,
         "model": "openai-codex/gpt-5.6-luna",
         "thinking": "medium"
       },
       "delegate": {
-        "model": "openai-codex/gpt-5.6-luna",
+        "inheritGlobalContext": true,
+        "model": "openai-codex/gpt-6-astra",
         "thinking": "medium"
       },
       "worker": {
-        "model": "openai-codex/gpt-5.6-luna",
+        "inheritGlobalContext": true,
+        "model": "openai-codex/gpt-6-astra",
         "thinking": "max"
       },
       "reviewer": {
+        "inheritGlobalContext": true,
         "model": "openai-codex/gpt-5.6-luna",
         "thinking": "max"
       },
       "oracle": {
-        "model": "openai-codex/gpt-5.6-sol",
+        "inheritGlobalContext": true,
+        "model": "openai-codex/gpt-6-astra",
         "thinking": "max"
       }
     }
