@@ -86,6 +86,13 @@ return {
       mode = { 'n', 'x' },
       desc = 'Debug: Evaluate Expression',
     },
+    {
+      '<leader>dl',
+      function()
+        require('dap').run_last()
+      end,
+      desc = 'Debug: Run Last',
+    },
   },
   config = function()
     local dap, dapui, dapvt = require 'dap', require 'dapui', require 'nvim-dap-virtual-text'
