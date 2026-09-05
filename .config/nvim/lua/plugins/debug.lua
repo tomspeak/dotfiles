@@ -93,6 +93,16 @@ return {
       end,
       desc = 'Debug: Run Last',
     },
+    {
+      '<leader>dL',
+      function()
+        local ok, message = pcall(vim.fn.input, 'Logpoint message: ')
+        if ok and message and vim.trim(message) ~= '' then
+          require('dap').set_breakpoint(nil, nil, message)
+        end
+      end,
+      desc = 'Debug: Set Logpoint',
+    },
   },
   config = function()
     local dap, dapui, dapvt = require 'dap', require 'dapui', require 'nvim-dap-virtual-text'
