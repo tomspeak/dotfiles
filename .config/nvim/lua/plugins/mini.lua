@@ -68,6 +68,16 @@ return {
         ['`'] = false,
       },
     },
+    config = function(_, opts)
+      local pairs = require 'mini.pairs'
+      pairs.setup(opts)
+      vim.keymap.set('i', '<CR>', function()
+        if vim.fn.pumvisible() == 1 and vim.fn.complete_info({ 'selected' }).selected ~= -1 then
+          return '\25' -- Accept only an explicitly selected completion.
+        end
+        return pairs.cr()
+      end, { expr = true, replace_keycodes = false, desc = 'Accept completion or insert newline' })
+    end,
   },
   {
     'echasnovski/mini.indentscope',
