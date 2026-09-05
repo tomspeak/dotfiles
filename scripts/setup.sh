@@ -69,6 +69,7 @@ link_config "$dotfiles/git/.gitconfig" "$HOME/.gitconfig"
 link_config "$dotfiles/git/.gitignore_global" "$HOME/.gitignore_global"
 link_config "$dotfiles/tmux/.tmux.conf" "$HOME/.tmux.conf"
 link_config "$dotfiles/ideavim/.ideavimrc" "$HOME/.ideavimrc"
+link_config "$dotfiles/pi" "$HOME/.pi/agent"
 link_config "$dotfiles/.config/hammerspoon/init.lua" "$HOME/.hammerspoon/init.lua"
 link_config "$dotfiles/keybindings/Library/KeyBindings/DefaultKeyBinding.dict" "$HOME/Library/KeyBindings/DefaultKeyBinding.dict"
 for file in "$dotfiles/vscode/Library/Application Support/Code/User"/*; do

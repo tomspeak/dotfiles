@@ -1,0 +1,8 @@
+*
+!.gitignore
+!settings.json
+!keybindings.json
+!extensions/
+!extensions/**
+!themes/
+!themes/**

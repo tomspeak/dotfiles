@@ -50,7 +50,4 @@ minimum-contrast = 1.1
 scrollback-limit-lines = 50000
 confirm-close-surface = false
 
-# coding agents shift + enter
-keybind = shift+enter=text:\x1b\r
-
 config-file = ?work
