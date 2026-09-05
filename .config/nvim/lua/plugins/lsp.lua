@@ -61,7 +61,7 @@ return {
       end, '[C]ode [A]ction')
       map('gd', Snacks.picker.lsp_definitions, '[G]oto [D]efinition')
       map('gV', '<cmd>vsplit | lua Snacks.picker.lsp_definitions()<cr>', '[G]oto [V]ertical [D]efinition')
-      map('gr', Snacks.picker.lsp_references, '[G]oto [R]eferences')
+      map('grr', Snacks.picker.lsp_references, '[G]oto [R]eferences')
       map('<leader>ci', Snacks.picker.lsp_incoming_calls, '[C]alls [I]ncoming')
       map('<leader>cO', Snacks.picker.lsp_outgoing_calls, '[C]alls [O]utgoing')
       map('gI', Snacks.picker.lsp_implementations, '[G]oto [I]mplementation')

@@ -12,7 +12,7 @@ keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
 keymap('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-keymap('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+keymap('n', '<leader>cd', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 keymap('n', '<Esc>', function()
   vim.cmd 'noh'
