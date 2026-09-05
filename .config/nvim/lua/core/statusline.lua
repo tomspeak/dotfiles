@@ -5,19 +5,6 @@ _G.git_branch = function()
   return branch ~= '' and (' (' .. branch .. ') ') or ''
 end
 
--- LSP status: show active servers
-_G.Statusline_lsp = function()
-  local clients = vim.lsp.get_clients { bufnr = 0 }
-  if #clients == 0 then
-    return ''
-  end
-  local names = {}
-  for _, client in ipairs(clients) do
-    table.insert(names, client.name)
-  end
-  return '[' .. table.concat(names, ', ') .. ']'
-end
-
 -- Word count for prose files
 _G.Statusline_wordcount = function()
   local ft = vim.bo.filetype
@@ -32,7 +19,6 @@ vim.opt.statusline = table.concat {
   ' %t %m %r',
   ' %=',
   ' %{%v:lua.vim.diagnostic.status()%} ',
-  ' %{v:lua.Statusline_lsp()}',
   '%{v:lua.Statusline_wordcount()}',
   '%{v:lua.git_branch()}',
 }
