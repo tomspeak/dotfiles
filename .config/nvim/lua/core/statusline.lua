@@ -5,11 +5,6 @@ _G.git_branch = function()
   return branch ~= '' and (' (' .. branch .. ') ') or ''
 end
 
-_G.Statusline_filename = function()
-  local fname = vim.fn.expand '%:t'
-  return fname ~= '' and fname or '[No Name]'
-end
-
 -- LSP status: show active servers
 _G.Statusline_lsp = function()
   local clients = vim.lsp.get_clients { bufnr = 0 }
@@ -34,7 +29,7 @@ _G.Statusline_wordcount = function()
 end
 
 vim.opt.statusline = table.concat {
-  ' %{v:lua.Statusline_filename()} %m %r',
+  ' %t %m %r',
   ' %=',
   [[ %{% luaeval("(package.loaded['vim.diagnostic'] and vim.diagnostic.status(0) ~= '' and vim.diagnostic.status(0) .. ' ') or ''") %}]],
   ' %{v:lua.Statusline_lsp()}',
