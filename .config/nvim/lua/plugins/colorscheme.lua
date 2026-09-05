@@ -3,9 +3,9 @@ return {
     'f-person/auto-dark-mode.nvim',
     priority = 10000,
     lazy = false,
-    dependencies = { 'nickkadutskyi/jb.nvim' },
+    dependencies = { 'oskarnurm/koda.nvim' },
     config = function(_, opts)
-      vim.cmd.colorscheme 'jb'
+      vim.cmd.colorscheme 'koda'
       require('auto-dark-mode').setup(opts)
     end,
     opts = {
