@@ -47,7 +47,7 @@
                                 "conditions": [
                                     {
                                         "type": "frontmost_application_if",
-                                        "bundle_identifiers": ["^com\\.mitchellh\\.ghostty$"]
+                                        "bundle_identifiers": ["^com\\.mitchellh\\.ghostty$", "^com\\.microsoft\\.VSCode$", "com.facebook.fbvscode"]
                                     }
                                 ],
                                 "type": "basic"
