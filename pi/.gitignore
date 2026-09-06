@@ -5,5 +5,7 @@
 !keybindings.json
 !extensions/
 !extensions/**
+!skills/
+!skills/**
 !themes/
 !themes/**
