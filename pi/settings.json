@@ -10,6 +10,7 @@
     "npm:pi-web-access@0.28.0"
   ],
   "subagents": {
+    "fleetViewPlacement": "aboveEditor",
     "globalConcurrencyLimit": 4,
     "maxSubagentSpawnsPerRun": 16,
     "maxSubagentSpawnsPerSession": 40,

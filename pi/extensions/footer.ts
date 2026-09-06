@@ -19,7 +19,13 @@ export default function (pi: ExtensionAPI) {
         const left = ` ${theme.bold(basename(ctx.cwd))}${sep}${theme.fg("muted", footer.getGitBranch() ?? "no-git")}`;
         const right = `${theme.fg("muted", model)}${sep}${theme.fg("muted", thinking)}${sep}${theme.fg("muted", `ctx ${percent == null ? "—" : `${Math.round(percent)}%`}`)} `;
         const shownLeft = truncateToWidth(left, Math.max(0, width - visibleWidth(right) - 1), "");
-        return [truncateToWidth(shownLeft + " ".repeat(Math.max(1, width - visibleWidth(shownLeft) - visibleWidth(right))) + right, width, "")];
+        const lines = [truncateToWidth(shownLeft + " ".repeat(Math.max(1, width - visibleWidth(shownLeft) - visibleWidth(right))) + right, width, "")];
+        const status = [...footer.getExtensionStatuses()]
+          .sort(([a], [b]) => a.localeCompare(b))
+          .map(([, text]) => text.replace(/[\r\n\t ]+/g, " ").trim())
+          .filter(Boolean).join(sep);
+        if (status) lines.push(truncateToWidth(theme.fg("muted", ` ${status}`), width));
+        return lines;
       },
     }));
   });
