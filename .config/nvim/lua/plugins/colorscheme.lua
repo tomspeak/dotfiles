@@ -1,13 +1,22 @@
 return {
   {
-    'f-person/auto-dark-mode.nvim',
+    'oskarnurm/koda.nvim',
     priority = 10000,
     lazy = false,
-    dependencies = { 'oskarnurm/koda.nvim' },
-    config = function(_, opts)
+    config = function()
+      require('koda').setup {
+        colors = {
+          dark = { bg = '#090909', line = '#1a1a1a' },
+          moss = { bg = '#090d0e', line = '#151d1e' },
+        },
+      }
       vim.cmd.colorscheme 'koda'
-      require('auto-dark-mode').setup(opts)
     end,
+  },
+  {
+    'f-person/auto-dark-mode.nvim',
+    priority = 9999,
+    lazy = false,
     opts = {
       update_interval = 30000,
     },
@@ -68,17 +77,6 @@ return {
         functions = false,
         strings = false,
         variables = false,
-      },
-    },
-  },
-  {
-    'oskarnurm/koda.nvim',
-    lazy = false,
-    priority = 1000,
-    opts = {
-      colors = {
-        dark = { bg = '#090909', line = '#1a1a1a' },
-        moss = { bg = '#090d0e', line = '#151d1e' },
       },
     },
   },

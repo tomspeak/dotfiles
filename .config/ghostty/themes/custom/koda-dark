@@ -1,0 +1,31 @@
+# Koda Dark for Ghostty
+# Matches the resolved palette in the Neovim configuration, including its
+# custom dark background and line color.
+
+bold-is-bright = true
+
+background = #090909
+foreground = #b0b0b0
+
+cursor-color = #b0b0b0
+cursor-text = #090909
+
+selection-background = #1a1a1a
+selection-foreground = #b0b0b0
+
+palette = 0=#090909
+palette = 1=#ff7676
+palette = 2=#a3d6a3
+palette = 3=#ffffff
+palette = 4=#b3b3b3
+palette = 5=#f4b8e4
+palette = 6=#fafafa
+palette = 7=#b0b0b0
+palette = 8=#50585d
+palette = 9=#ff5733
+palette = 10=#86cd82
+palette = 11=#d9ba73
+palette = 12=#ffffff
+palette = 13=#f2a4db
+palette = 14=#5abfb5
+palette = 15=#ffffff

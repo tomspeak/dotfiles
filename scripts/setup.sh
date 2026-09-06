@@ -79,7 +79,7 @@ done
 
 theme_link="$dotfiles/.config/ghostty/themes/current-theme"
 if [ ! -e "$theme_link" ] && [ ! -L "$theme_link" ]; then
-  ln -s custom/unsure "$theme_link"
+  ln -s custom/koda-dark "$theme_link"
 fi
 
 # tmux plugins
