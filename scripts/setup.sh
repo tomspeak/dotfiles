@@ -62,6 +62,11 @@ for dir in "$dotfiles"/.config/*/; do
   link_config "$dotfiles/.config/$name" "$HOME/.config/$name"
 done
 
+# Keep the XDG config authoritative and ensure Cmd+, opens it.
+rm -f \
+  "$HOME/Library/Application Support/com.mitchellh.ghostty/config" \
+  "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
+
 # ~/ dot files
 link_config "$dotfiles/zsh/.zshrc" "$HOME/.zshrc"
 link_config "$dotfiles/zsh/.zshenv" "$HOME/.zshenv"
