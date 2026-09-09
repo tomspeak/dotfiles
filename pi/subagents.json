@@ -1,0 +1,15 @@
+{
+  "maxConcurrent": 4,
+  "maxConcurrentForeground": 2,
+  "defaultMaxTurns": 12,
+  "graceTurns": 3,
+  "fallbackSubagent": "none",
+  "scopeModels": true,
+  "schedulingEnabled": false,
+  "workflowsEnabled": false,
+  "worktreeIsolation": false,
+  "toolDescriptionMode": "compact",
+  "reportUsage": true,
+  "showCost": true,
+  "showModel": true
+}

@@ -3,6 +3,7 @@
 !AGENTS.md
 !settings.json
 !fabric.json
+!subagents.json
 !keybindings.json
 !extensions/
 !extensions/**
