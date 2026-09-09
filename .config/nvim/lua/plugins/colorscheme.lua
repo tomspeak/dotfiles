@@ -4,8 +4,8 @@ return {
     priority = 10000,
     lazy = false,
     opts = {
-      light_variant = 'default',
-      dark_variant = 'default',
+      light_variant = 'rougier',
+      dark_variant = 'rougier',
     },
     config = function(_, opts)
       require('nano-theme').setup(opts)
