@@ -77,18 +77,11 @@ export class RailEditor extends CustomEditor {
 export default function (pi: ExtensionAPI) {
   let activeTui: TUI | undefined;
 
-  const indicator = (_event: unknown, ctx: ExtensionContext) => {
-    if (ctx.mode !== "tui") return;
-    ctx.ui.setWorkingIndicator({
-      frames: ["·", "•"].map((frame) => ctx.ui.theme.fg("muted", frame)),
-      intervalMs: 500,
-    });
-  };
   const redraw = (_event: unknown, ctx: ExtensionContext) => {
     if (ctx.mode === "tui") activeTui?.requestRender();
   };
 
-  pi.on("session_start", (event, ctx) => {
+  pi.on("session_start", (_event, ctx) => {
     if (ctx.mode !== "tui") return;
     ctx.ui.setEditorComponent((tui, theme, keybindings) => {
       activeTui = tui;
@@ -99,17 +92,12 @@ export default function (pi: ExtensionAPI) {
         (text) => ctx.ui.theme.fg(ctx.isIdle() ? "success" : "warning", text),
       );
     });
-    indicator(event, ctx);
   });
-  pi.on("agent_start", (event, ctx) => {
-    indicator(event, ctx);
-    redraw(event, ctx);
-  });
+  pi.on("agent_start", redraw);
   pi.on("agent_settled", redraw);
   pi.on("session_shutdown", (_event, ctx) => {
     activeTui = undefined;
     if (ctx.mode !== "tui") return;
     ctx.ui.setEditorComponent(undefined);
-    ctx.ui.setWorkingIndicator();
   });
 }
