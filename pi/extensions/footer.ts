@@ -16,8 +16,9 @@ export default function (pi: ExtensionAPI) {
         redraw = () => tui.requestRender();
         const sep = theme.fg("dim", " │ ");
         const percent = ctx.getContextUsage()?.percent;
+        const sessionId = ctx.sessionManager.getSessionId().slice(0, 8);
         const left = ` ${theme.bold(basename(ctx.cwd))}${sep}${theme.fg("muted", footer.getGitBranch() ?? "no-git")}`;
-        const right = `${theme.fg("muted", model)}${sep}${theme.fg("muted", thinking)}${sep}${theme.fg("muted", `ctx ${percent == null ? "—" : `${Math.round(percent)}%`}`)} `;
+        const right = `${theme.fg("muted", model)}${sep}${theme.fg("muted", thinking)}${sep}${theme.fg("muted", `ctx ${percent == null ? "—" : `${Math.round(percent)}%`}`)}${sep}${theme.fg("muted", `sid ${sessionId}`)} `;
         const shownLeft = truncateToWidth(left, Math.max(0, width - visibleWidth(right) - 1), "");
         const lines = [truncateToWidth(shownLeft + " ".repeat(Math.max(1, width - visibleWidth(shownLeft) - visibleWidth(right))) + right, width, "")];
         const status = [...footer.getExtensionStatuses()]

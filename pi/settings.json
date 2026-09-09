@@ -1,53 +1,16 @@
 {
   "lastChangelogVersion": "0.85.1",
-  "theme": "minimal",
+  "theme": "minimal_two",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.6-sol",
   "packages": [
-    "npm:pi-subagents@0.65.1",
+    "npm:@tintinweb/pi-subagents@0.19.0",
     "npm:@juicesharp/rpiv-ask-user-question@2.9.0",
     "npm:@dietrichgebert/ponytail@4.9.0",
-    "npm:pi-web-access@0.28.0"
+    "npm:pi-web-access@0.28.0",
+    "npm:pi-fabric@0.92.3",
+    "npm:pi-blackhole@0.5.2"
   ],
-  "subagents": {
-    "fleetViewPlacement": "aboveEditor",
-    "globalConcurrencyLimit": 4,
-    "maxSubagentSpawnsPerRun": 16,
-    "maxSubagentSpawnsPerSession": 40,
-    "maxActiveAsyncRunsPerSession": 3,
-    "agentOverrides": {
-      "scout": {
-        "inheritGlobalContext": true,
-        "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "medium"
-      },
-      "researcher": {
-        "inheritGlobalContext": true,
-        "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "medium"
-      },
-      "delegate": {
-        "inheritGlobalContext": true,
-        "model": "openai-codex/gpt-6-astra",
-        "thinking": "medium"
-      },
-      "worker": {
-        "inheritGlobalContext": true,
-        "model": "openai-codex/gpt-6-astra",
-        "thinking": "max"
-      },
-      "reviewer": {
-        "inheritGlobalContext": true,
-        "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "max"
-      },
-      "oracle": {
-        "inheritGlobalContext": true,
-        "model": "openai-codex/gpt-6-astra",
-        "thinking": "max"
-      }
-    }
-  },
   "editorPaddingX": 1,
   "outputPad": 1,
   "enabledModels": [
@@ -62,6 +25,11 @@
   "quietStartup": true,
   "hideThinkingBlock": true,
   "enableInstallTelemetry": false,
+  "enableAnalytics": false,
+  "externalEditor": "nvim",
+  "compaction": {
+    "reserveTokens": 27201
+  },
   "defaultProjectTrust": "ask",
   "modelThinkingLevels": {
     "openai-codex/gpt-5.6-sol": "high"

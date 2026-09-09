@@ -2,6 +2,7 @@
 !.gitignore
 !AGENTS.md
 !settings.json
+!fabric.json
 !keybindings.json
 !extensions/
 !extensions/**

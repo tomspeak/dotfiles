@@ -1,11 +1,30 @@
-import { CustomEditor, type ExtensionAPI, type ExtensionContext } from "@earendil-works/pi-coding-agent";
-import { truncateToWidth, type TuiMouseEvent } from "@earendil-works/pi-tui";
+import {
+  CustomEditor,
+  type ExtensionAPI,
+  type ExtensionContext,
+  type KeybindingsManager,
+} from "@earendil-works/pi-coding-agent";
+import {
+  truncateToWidth,
+  type EditorTheme,
+  type TUI,
+  type TuiMouseEvent,
+} from "@earendil-works/pi-tui";
 
 export class RailEditor extends CustomEditor {
   private above = 0;
   private below = 0;
-  private sourceRows: number[] = [];
+  private sourceRows: Array<number | undefined> = [];
   private sourceHeight = 0;
+
+  constructor(
+    tui: TUI,
+    theme: EditorTheme,
+    keybindings: KeybindingsManager,
+    private readonly colorRail?: (text: string) => string,
+  ) {
+    super(tui, theme, keybindings);
+  }
 
   protected renderTopBorder(_width: number, hidden: number): string {
     this.above = hidden;
@@ -28,20 +47,24 @@ export class RailEditor extends CustomEditor {
     const bottom = lines.indexOf("", 1);
     if (bottom < 2) {
       this.sourceRows = lines.map((_line, index) => index);
-      return lines.map((line) => truncateToWidth(line, width, ""));
+      this.sourceRows.push(undefined);
+      return [...lines.map((line) => truncateToWidth(line, width, "")), ""];
     }
-    return lines.flatMap((line, index) => {
+    const rendered = lines.flatMap((line, index) => {
       if (index === 0 || index === bottom) {
         const hidden = index === 0 ? this.above : this.below;
         if (!hidden) return [];
         line = this.borderColor(` ${index === 0 ? "↑" : "↓"} ${hidden} more`);
       } else if (index < bottom && width >= 3 && this.getPaddingX() > 0 && line.startsWith(" ")) {
         // Replace padding, not text: wrapping and cursor columns stay native.
-        line = this.borderColor("▎") + line.slice(1);
+        const rail = this.colorRail ? this.colorRail("▎") : this.borderColor("▎");
+        line = rail + line.slice(1);
       }
       this.sourceRows.push(index);
       return [truncateToWidth(line, width, "")];
     });
+    this.sourceRows.push(undefined);
+    return [...rendered, ""];
   }
 
   handleMouse(event: TuiMouseEvent) {
@@ -52,6 +75,8 @@ export class RailEditor extends CustomEditor {
 }
 
 export default function (pi: ExtensionAPI) {
+  let activeTui: TUI | undefined;
+
   const indicator = (_event: unknown, ctx: ExtensionContext) => {
     if (ctx.mode !== "tui") return;
     ctx.ui.setWorkingIndicator({
@@ -59,13 +84,30 @@ export default function (pi: ExtensionAPI) {
       intervalMs: 500,
     });
   };
+  const redraw = (_event: unknown, ctx: ExtensionContext) => {
+    if (ctx.mode === "tui") activeTui?.requestRender();
+  };
+
   pi.on("session_start", (event, ctx) => {
     if (ctx.mode !== "tui") return;
-    ctx.ui.setEditorComponent((tui, theme, keybindings) => new RailEditor(tui, theme, keybindings));
+    ctx.ui.setEditorComponent((tui, theme, keybindings) => {
+      activeTui = tui;
+      return new RailEditor(
+        tui,
+        theme,
+        keybindings,
+        (text) => ctx.ui.theme.fg(ctx.isIdle() ? "success" : "warning", text),
+      );
+    });
     indicator(event, ctx);
   });
-  pi.on("agent_start", indicator);
+  pi.on("agent_start", (event, ctx) => {
+    indicator(event, ctx);
+    redraw(event, ctx);
+  });
+  pi.on("agent_settled", redraw);
   pi.on("session_shutdown", (_event, ctx) => {
+    activeTui = undefined;
     if (ctx.mode !== "tui") return;
     ctx.ui.setEditorComponent(undefined);
     ctx.ui.setWorkingIndicator();
