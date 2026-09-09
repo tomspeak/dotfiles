@@ -1,13 +1,28 @@
 *
 !.gitignore
+
+# Durable Pi configuration
 !AGENTS.md
+!SYSTEM.md
+!APPEND_SYSTEM.md
 !settings.json
+!models.json
+!keybindings.json
 !fabric.json
 !subagents.json
-!keybindings.json
+!agents/
+!agents/general-purpose.md
+
+# User-authored resources
 !extensions/
 !extensions/**
+!prompts/
+!prompts/**
 !skills/
 !skills/**
 !themes/
 !themes/**
+
+# Package configuration, not runtime state
+!pi-blackhole/
+!pi-blackhole/pi-blackhole-config.json
