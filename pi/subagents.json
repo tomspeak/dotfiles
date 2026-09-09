@@ -5,6 +5,8 @@
   "graceTurns": 3,
   "fallbackSubagent": "none",
   "scopeModels": true,
+  "strictAgentFiles": true,
+  "disableDefaultAgents": true,
   "schedulingEnabled": false,
   "workflowsEnabled": false,
   "worktreeIsolation": false,
