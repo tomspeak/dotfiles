@@ -1,7 +1,20 @@
 return {
   {
-    'oskarnurm/koda.nvim',
+    'ronisbr/nano-theme.nvim',
     priority = 10000,
+    lazy = false,
+    opts = {
+      light_variant = 'default',
+      dark_variant = 'default',
+    },
+    config = function(_, opts)
+      require('nano-theme').setup(opts)
+      vim.cmd.colorscheme 'nano-theme'
+    end,
+  },
+  {
+    'oskarnurm/koda.nvim',
+    priority = 1000,
     lazy = false,
     config = function()
       require('koda').setup {
@@ -10,7 +23,6 @@ return {
           moss = { bg = '#090d0e', line = '#151d1e' },
         },
       }
-      vim.cmd.colorscheme 'koda'
     end,
   },
   {
