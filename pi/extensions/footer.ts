@@ -14,7 +14,7 @@ export default function (pi: ExtensionAPI) {
       dispose: footer.onBranchChange(() => tui.requestRender()),
       render(width: number) {
         redraw = () => tui.requestRender();
-        const sep = theme.fg("dim", " │ ");
+        const sep = theme.fg("borderMuted", " │ ");
         const percent = ctx.getContextUsage()?.percent;
         const sessionId = ctx.sessionManager.getSessionId().slice(0, 8);
         const left = ` ${theme.bold(basename(ctx.cwd))}${sep}${theme.fg("muted", footer.getGitBranch() ?? "no-git")}`;
