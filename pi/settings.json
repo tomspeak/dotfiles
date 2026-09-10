@@ -17,7 +17,7 @@
     "openai-codex/gpt-5.6-sol",
     "openai-codex/gpt-5.6-terra",
     "openai-codex/gpt-6-astra",
-    "openrouter/deepseek/deepseek-v4-pro"
+    "openrouter/~deepseek/deepseek-v4-flash-latest"
   ],
   "terminal": {
     "showTerminalProgress": true
