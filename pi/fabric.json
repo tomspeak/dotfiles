@@ -1,5 +1,16 @@
 {
   "configVersion": 4,
+  "agents": {
+    "enabled": true,
+    "runner": "pi",
+    "maxConcurrent": 4,
+    "maxPerExecution": 4,
+    "maxDepth": 1,
+    "extensions": true
+  },
+  "approvals": {
+    "agent": "ask"
+  },
   "compaction": {
     "engine": "pi"
   }

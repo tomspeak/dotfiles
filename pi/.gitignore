@@ -9,9 +9,6 @@
 !models.json
 !keybindings.json
 !fabric.json
-!subagents.json
-!agents/
-!agents/general-purpose.md
 
 # User-authored resources
 !extensions/
