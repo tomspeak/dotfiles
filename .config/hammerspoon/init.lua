@@ -3,8 +3,9 @@
 -- ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -- ┃
 -- ┃  APPS   left-hand cluster · focusing an app also jumps to its Space
--- ┃            q editor   w browser   e chat   r Ghostty   1 mail   2 calendar   3 Music   4 Zoom
--- ┃     work     = VSCode(FB) / Chrome / GChat / Gmail / GCalendar
+-- ┃            q editor   w browser   e chat   r Ghostty   t Metamate (work only)
+-- ┃            1 mail     2 calendar  3 Music  4 Zoom
+-- ┃     work     = VSCode(FB) / Chrome / GChat / Metamate / Gmail / GCalendar
 -- ┃     personal = VSCode / Brave / Signal / Apple Mail / Apple Calendar
 -- ┃     (picked by presence of shell/work in the dotfiles repository)
 -- ┃
@@ -162,13 +163,21 @@ end)
 --   Hammerspoon is launched by launchd and does not inherit
 --   the shell environment.
 -- ===================================================
+local CHROME_APPS = {
+    google_chat = 'com.google.Chrome.app.pommaclcbfghclhalboakcipcmmndhcj',
+    gmail = 'com.google.Chrome.app.fmgjjmmmlfnkbppncabfkddbjimcfncm',
+    calendar = 'com.google.Chrome.app.gihbagcjamhppndmlkgmccomodfodggj',
+    metamate = 'com.google.Chrome.app.abdabdhdamlffffgfanggnkkfkdggenn',
+}
+
 local WORK_APPS = {
     q = 'com.facebook.fbvscode', -- VS Code (FB build)
     w = 'com.google.Chrome', -- Chrome
-    e = 'com.google.Chrome.app.pommaclcbfghclhalboakcipcmmndhcj', -- Google Chat
+    e = CHROME_APPS.google_chat, -- Google Chat
     r = 'com.mitchellh.ghostty', -- Ghostty
-    ['1'] = 'com.google.Chrome.app.fmgjjmmmlfnkbppncabfkddbjimcfncm', -- Gmail
-    ['2'] = 'com.google.Chrome.app.gihbagcjamhppndmlkgmccomodfodggj', -- Calendar
+    t = CHROME_APPS.metamate, -- Metamate 3 / Agent Cloud
+    ['1'] = CHROME_APPS.gmail, -- Gmail
+    ['2'] = CHROME_APPS.calendar, -- Calendar
     ['3'] = 'com.apple.Music', -- Apple Music
 }
 local PERSONAL_APPS = {
