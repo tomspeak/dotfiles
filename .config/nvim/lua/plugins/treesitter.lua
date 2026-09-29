@@ -25,17 +25,15 @@ local parsers = {
 
 return {
   {
-    'neovim-treesitter/nvim-treesitter',
+    'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
     lazy = false,
     build = function()
       local ts = require 'nvim-treesitter'
       assert(ts.install(parsers):wait(300000), 'Parser installation failed; see :TSLog')
       assert(ts.update():wait(300000), 'Parser update failed; see :TSLog')
     end,
-    cmd = { 'TSInstall', 'TSUninstall', 'TSUpdate', 'TSRegistryUpdate', 'TSStatus', 'TSLog' },
-    dependencies = {
-      'neovim-treesitter/treesitter-parser-registry',
-    },
+    cmd = { 'TSInstall', 'TSUninstall', 'TSUpdate', 'TSLog' },
     config = function()
       local ts = require 'nvim-treesitter'
 
