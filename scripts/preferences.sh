@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# Core setup applies keyboard preferences without changing the desktop settings.
+# Repeat values are in 1/60-second units: 60 repeats/s after about 167 ms.
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false || exit 1
+defaults write NSGlobalDomain KeyRepeat -int 1 || exit 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10 || exit 1
+echo "Fast keyboard repeat saved. Log out and back in to apply it everywhere."
+
+if [ "${1:-}" = --keyboard-only ]; then
+  exit 0
+fi
+
 echo "Setting preferences"
 
 # Disable the sound effects on boot
@@ -75,9 +86,6 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 defaults write NSGlobalDomain NSUseAnimatedRing -bool false
 defaults write NSGlobalDomain NSToolbarTitleViewRolloverDelay -float 0
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 10
 defaults write com.apple.HIToolbox AppleFnUsageType -int "0"
 defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
 

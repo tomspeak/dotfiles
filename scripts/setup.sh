@@ -8,6 +8,8 @@ case "$(uname -s):$(uname -m)" in
   *) echo "Setup supports Apple Silicon macOS." >&2; exit 1 ;;
 esac
 
+"$dotfiles/scripts/preferences.sh" --keyboard-only
+
 if ! xcode-select -p >/dev/null 2>&1; then
   xcode-select --install || true
   echo "Finish installing the Xcode command line tools, then run setup again." >&2

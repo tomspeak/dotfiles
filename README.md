@@ -26,4 +26,6 @@ Fresh Apple Silicon Mac, starting in Terminal:
 
 Existing configs are backed up beside their destinations as `*.backup.*/original`.
 
+Setup applies fast macOS keyboard repeat: 60 repeats/second after about 167 ms, with press-and-hold accents disabled. Log out and back in once to apply it everywhere. To reapply just these settings, run `~/dotfiles/scripts/preferences.sh --keyboard-only`.
+
 Updates: `nnu` for Neovim. For Node, change `.tool-versions`, then run `~/dotfiles/npm/install.sh`.
