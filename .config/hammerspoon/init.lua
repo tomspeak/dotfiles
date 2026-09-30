@@ -5,7 +5,7 @@
 -- ┃  APPS   left-hand cluster · focusing an app also jumps to its Space
 -- ┃            q editor   w browser   e chat   r Ghostty   t Metamate (work only)
 -- ┃            1 mail     2 calendar  3 Music  4 Zoom
--- ┃     work     = VSCode(FB) / Chrome / GChat / Metamate / Gmail / GCalendar
+-- ┃     work     = VSCode(FB) / Chrome / Slack / Metamate / Gmail / GCalendar
 -- ┃     personal = VSCode / Brave / Signal / Apple Mail / Apple Calendar
 -- ┃     (picked by presence of shell/work in the dotfiles repository)
 -- ┃
@@ -150,8 +150,8 @@ end)
 --   Focusing an app also jumps to the Space where it
 --   lives (AppleSpacesSwitchOnActivate is enabled in
 --   preferences.sh), so each app key doubles as a Space
---   jump. Launched by bundle id — PWA names are unstable
---   ("Google Chat 1") and collide (Calendar vs Apple's).
+--   jump. Launched by bundle id — PWA names can change
+--   and collide (Calendar vs Apple's).
 --
 --   Ergonomic left-hand cluster (Tab held by left hand):
 --   most-used apps on the easiest keys. Positional, not
@@ -164,7 +164,6 @@ end)
 --   the shell environment.
 -- ===================================================
 local CHROME_APPS = {
-    google_chat = 'com.google.Chrome.app.pommaclcbfghclhalboakcipcmmndhcj',
     gmail = 'com.google.Chrome.app.fmgjjmmmlfnkbppncabfkddbjimcfncm',
     calendar = 'com.google.Chrome.app.gihbagcjamhppndmlkgmccomodfodggj',
     metamate = 'com.google.Chrome.app.abdabdhdamlffffgfanggnkkfkdggenn',
@@ -173,7 +172,7 @@ local CHROME_APPS = {
 local WORK_APPS = {
     q = 'com.facebook.fbvscode', -- VS Code (FB build)
     w = 'com.google.Chrome', -- Chrome
-    e = CHROME_APPS.google_chat, -- Google Chat
+    e = 'com.tinyspeck.slackmacgap', -- Slack
     r = 'com.mitchellh.ghostty', -- Ghostty
     t = CHROME_APPS.metamate, -- Metamate 3 / Agent Cloud
     ['1'] = CHROME_APPS.gmail, -- Gmail
