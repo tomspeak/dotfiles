@@ -1,6 +1,6 @@
 {
   "lastChangelogVersion": "1.0.0",
-  "theme": "nano-dark",
+  "theme": "system",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6.1-sol",
   "packages": [
@@ -35,5 +35,5 @@
   "modelThinkingLevels": {
     "openai-codex/gpt-6.1-sol": "high"
   },
-  "tuiMode": "regular"
+  "tuiMode": "fullscreen"
 }
