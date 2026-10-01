@@ -5,13 +5,140 @@
   "defaultModel": "gpt-6.1-sol",
   "packages": [
     "npm:@juicesharp/rpiv-ask-user-question",
-    "npm:pi-web-access"
+    "npm:pi-web-access",
+    "npm:pi-subagents"
   ],
   "defaultTools": [
     "+codemode"
   ],
   "codemode": {
     "mode": "only"
+  },
+  "subagents": {
+    "defaultModel": "openai-codex/gpt-6.1-sol",
+    "modelScope": {
+      "enforce": true,
+      "strict": true,
+      "allow": [
+        "openai-codex/*"
+      ]
+    },
+    "watchdog": {
+      "enabled": false,
+      "main": {
+        "model": "openai-codex/gpt-6.1-sol"
+      },
+      "children": {
+        "enabled": false,
+        "model": "openai-codex/gpt-6.1-sol"
+      }
+    },
+    "agentOverrides": {
+      "delegate": {
+        "tools": [
+          "codemode",
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "edit",
+          "write",
+          "contact_supervisor"
+        ]
+      },
+      "worker": {
+        "tools": [
+          "codemode",
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "edit",
+          "write",
+          "contact_supervisor"
+        ]
+      },
+      "scout": {
+        "tools": [
+          "codemode",
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "write",
+          "contact_supervisor"
+        ]
+      },
+      "reviewer": {
+        "tools": [
+          "codemode",
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "watchdog_diff",
+          "contact_supervisor"
+        ]
+      },
+      "oracle": {
+        "tools": [
+          "codemode",
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash"
+        ]
+      },
+      "researcher": {
+        "tools": [
+          "codemode",
+          "read",
+          "write",
+          "web_search",
+          "fetch_content",
+          "get_search_content",
+          "source_check"
+        ],
+        "subagentOnlyExtensions": [
+          "~/.pi/agent/npm/node_modules/pi-web-access"
+        ]
+      },
+      "evidence-auditor": {
+        "tools": [
+          "codemode",
+          "read",
+          "web_search",
+          "fetch_content",
+          "get_search_content",
+          "source_check"
+        ],
+        "subagentOnlyExtensions": [
+          "~/.pi/agent/npm/node_modules/pi-web-access"
+        ]
+      },
+      "claude-code": {
+        "disabled": true
+      },
+      "claude-code-writer": {
+        "disabled": true
+      },
+      "codex-exec": {
+        "disabled": true
+      },
+      "codex-exec-writer": {
+        "disabled": true
+      },
+      "cursor-agent": {
+        "disabled": true
+      },
+      "cursor-agent-writer": {
+        "disabled": true
+      }
+    }
   },
   "editorPaddingX": 1,
   "outputPad": 1,
