@@ -2,7 +2,7 @@
   "lastChangelogVersion": "1.0.0",
   "theme": "nano-dark",
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.6-sol",
+  "defaultModel": "gpt-6.1-sol",
   "packages": [
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-web-access"
@@ -16,11 +16,9 @@
   "editorPaddingX": 1,
   "outputPad": 1,
   "enabledModels": [
-    "openai-codex/gpt-5.6-luna",
-    "openai-codex/gpt-5.6-sol",
-    "openai-codex/gpt-5.6-terra",
     "openai-codex/gpt-6-astra",
-    "openrouter/~deepseek/deepseek-v4-flash-latest"
+    "openrouter/~deepseek/deepseek-v4-flash-latest",
+    "openai-codex/gpt-6.1-sol"
   ],
   "terminal": {
     "showTerminalProgress": true
@@ -35,7 +33,7 @@
   },
   "defaultProjectTrust": "ask",
   "modelThinkingLevels": {
-    "openai-codex/gpt-5.6-sol": "high"
+    "openai-codex/gpt-6.1-sol": "high"
   },
   "tuiMode": "regular"
 }
