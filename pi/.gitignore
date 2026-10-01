@@ -6,9 +6,9 @@
 !SYSTEM.md
 !APPEND_SYSTEM.md
 !settings.json
+!mcp.json
 !models.json
 !keybindings.json
-!fabric.json
 
 # User-authored resources
 !extensions/
@@ -19,7 +19,3 @@
 !skills/**
 !themes/
 !themes/**
-
-# Package configuration, not runtime state
-!pi-blackhole/
-!pi-blackhole/pi-blackhole-config.json
