@@ -9,7 +9,10 @@
     "npm:pi-subagents"
   ],
   "defaultTools": [
-    "+codemode"
+    "+codemode",
+    "+grep",
+    "+find",
+    "+ls"
   ],
   "codemode": {
     "mode": "only"

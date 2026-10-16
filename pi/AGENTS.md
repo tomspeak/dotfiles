@@ -1,3 +1,12 @@
+# Communication and continuity
+
+- Write concise, plain prose. Preserve code, identifiers, errors, and quotations exactly.
+- Inspect relevant live state and reference implementations before changing files. Avoid unrelated discovery and rereading unchanged context.
+- Finish authorized work. Treat new messages as steering unless they replace or cancel the task; preserve the objective, decisions, constraints, and progress through compaction.
+- Clarify material ambiguities early and continue independent work while waiting. Required answers or approvals must arrive before dependent work; silence is not approval.
+- Preserve unrelated changes. Keep changes focused and commit or amend only exact task-owned files when authorized.
+- Run the smallest meaningful checks on representative inputs. Verify the result of long-running work and report failures or incomplete validation honestly.
+
 # Tools
 
 - `rg`: content search; `fd`: file discovery (Pi's grep/find use these).
