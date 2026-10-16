@@ -1,0 +1,21 @@
+{
+  "webSearch": {
+    "allowedProviders": [
+      "openai",
+      "duckduckgo"
+    ]
+  },
+  "searchRouting": {
+    "providers": [
+      "openai",
+      "duckduckgo"
+    ],
+    "fallbackOn": [
+      "unsupported",
+      "transient",
+      "quota",
+      "network",
+      "invalid-response"
+    ]
+  }
+}

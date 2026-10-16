@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.0.0",
+  "lastChangelogVersion": "1.1.0",
   "theme": "system",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6.1-sol",
@@ -23,8 +23,45 @@
       "enforce": true,
       "strict": true,
       "allow": [
-        "openai-codex/*"
-      ]
+        "scoped"
+      ],
+      "agents": {
+        "delegate": {
+          "allow": [
+            "openai-codex/*"
+          ]
+        },
+        "evidence-auditor": {
+          "allow": [
+            "openai-codex/*"
+          ]
+        },
+        "oracle": {
+          "allow": [
+            "openai-codex/*"
+          ]
+        },
+        "researcher": {
+          "allow": [
+            "openai-codex/*"
+          ]
+        },
+        "reviewer": {
+          "allow": [
+            "openai-codex/*"
+          ]
+        },
+        "scout": {
+          "allow": [
+            "openai-codex/*"
+          ]
+        },
+        "worker": {
+          "allow": [
+            "openai-codex/*"
+          ]
+        }
+      }
     },
     "watchdog": {
       "enabled": false,
@@ -147,7 +184,6 @@
   "outputPad": 1,
   "enabledModels": [
     "openai-codex/gpt-6-astra",
-    "openrouter/~deepseek/deepseek-v4-flash-latest",
     "openai-codex/gpt-6.1-sol"
   ],
   "terminal": {
@@ -165,5 +201,6 @@
   "modelThinkingLevels": {
     "openai-codex/gpt-6.1-sol": "high"
   },
-  "tuiMode": "fullscreen"
+  "tuiMode": "fullscreen",
+  "deviceId": "0ed4cd7c-301b-4873-882b-fd30b83105b5"
 }
