@@ -29,7 +29,7 @@
                         ]
                     },
                     {
-                        "description": "left cmd as tmux prefix (CTRL + A) when alone in Ghostty",
+                        "description": "left cmd as multiplexer prefix (CTRL + A) when alone in Ghostty, Rex or VS Code",
                         "manipulators": [
                             {
                                 "from": {
@@ -47,7 +47,7 @@
                                 "conditions": [
                                     {
                                         "type": "frontmost_application_if",
-                                        "bundle_identifiers": ["^com\\.mitchellh\\.ghostty$", "^com\\.microsoft\\.VSCode$", "com.facebook.fbvscode"]
+                                        "bundle_identifiers": ["^com\\.mitchellh\\.ghostty$", "^com\\.superlogical\\.rex$", "^com\\.microsoft\\.VSCode$", "com.facebook.fbvscode"]
                                     }
                                 ],
                                 "type": "basic"
