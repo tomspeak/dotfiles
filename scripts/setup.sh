@@ -64,6 +64,9 @@ for dir in "$dotfiles"/.config/*/; do
   link_config "$dotfiles/.config/$name" "$HOME/.config/$name"
 done
 
+echo "Setting up Rex preferences"
+"$dotfiles/rex/preferences.sh"
+
 # Keep the XDG config authoritative and ensure Cmd+, opens it.
 rm -f \
   "$HOME/Library/Application Support/com.mitchellh.ghostty/config" \
