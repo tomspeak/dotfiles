@@ -8,23 +8,47 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 10 || exit 1
 echo "Fast keyboard repeat saved. Log out and back in to apply it everywhere."
 
 if [ "${1:-}" = --keyboard-only ]; then
-  exit 0
+	exit 0
 fi
 
 echo "Setting preferences"
+
+# Appearance
+defaults write NSGlobalDomain AppleInterfaceStyle -string Dark
+defaults write NSGlobalDomain AppleAccentColor -int -1
+defaults write NSGlobalDomain AppleAquaColorVariant -int 6
+defaults write NSGlobalDomain AppleHighlightColor -string "1.000000 0.749020 0.823529 Pink"
+defaults write NSGlobalDomain AppleReduceDesktopTinting -bool true
+
+# British English formatting with a U.S. keyboard and 12-hour time
+defaults write NSGlobalDomain AppleLanguages -array en-GB
+defaults write NSGlobalDomain AppleLocale -string en_GB
+defaults write NSGlobalDomain AppleICUForce12HourTime -bool true
+defaults write com.apple.HIToolbox AppleCurrentKeyboardLayoutInputSourceID -string com.apple.keylayout.US
+defaults write com.apple.HIToolbox AppleEnabledInputSources -array \
+	'<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>0</integer><key>KeyboardLayout Name</key><string>U.S.</string></dict>' \
+	'{"Bundle ID"="com.apple.CharacterPaletteIM"; InputSourceKind="Non Keyboard Input Method";}' \
+	'{"Bundle ID"="com.apple.PressAndHold"; InputSourceKind="Non Keyboard Input Method";}'
+defaults write com.apple.HIToolbox AppleSelectedInputSources -array \
+	'<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>0</integer><key>KeyboardLayout Name</key><string>U.S.</string></dict>' \
+	'{"Bundle ID"="com.apple.PressAndHold"; InputSourceKind="Non Keyboard Input Method";}'
+
+# Disable interface sound effects and Siri
+defaults write NSGlobalDomain com.apple.sound.uiaudio.enabled -bool false
+defaults write com.apple.assistant.support "Assistant Enabled" -bool false
 
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
 
 # Own the sparse application list without resetting unrelated Dock settings.
 defaults write com.apple.dock persistent-apps -array \
-  '{"tile-type"="spacer-tile";}' \
-  '{"tile-type"="spacer-tile";}' \
-  '{"tile-type"="spacer-tile";}' \
-  '{"tile-type"="spacer-tile";}' \
-  '{"tile-type"="spacer-tile";}' \
-  '{"tile-type"="spacer-tile";}' \
-  '{"tile-type"="spacer-tile";}'
+	'{"tile-type"="spacer-tile";}' \
+	'{"tile-type"="spacer-tile";}' \
+	'{"tile-type"="spacer-tile";}' \
+	'{"tile-type"="spacer-tile";}' \
+	'{"tile-type"="spacer-tile";}' \
+	'{"tile-type"="spacer-tile";}' \
+	'{"tile-type"="spacer-tile";}'
 defaults write com.apple.dock autohide-time-modifier -int 0
 defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock no-bouncing -bool TRUE
@@ -36,6 +60,17 @@ defaults write com.apple.dock expose-animation-duration -float 0.1
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock "orientation" -string "bottom"
 defaults write com.apple.dock "show-recents" -bool "false"
+defaults write com.apple.dock mineffect -string scale
+
+# Maximize windows by double-clicking their title bars
+defaults write NSGlobalDomain AppleActionOnDoubleClick -string Maximize
+defaults write NSGlobalDomain AppleMiniaturizeOnDoubleClick -bool false
+
+# Keep native tiling and wallpaper clicks out of Hammerspoon's way
+defaults write com.apple.WindowManager EnableTilingByEdgeDrag -bool false
+defaults write com.apple.WindowManager EnableTilingOptionAccelerator -bool false
+defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
+defaults write com.apple.WindowManager GloballyEnabled -bool false
 
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
@@ -49,6 +84,22 @@ defaults write com.apple.AppleMultitouchTrackpad "TrackpadThreeFingerDrag" -bool
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.trackpad.scaling -float 1.5
+# Use four-finger navigation gestures, leaving three fingers for dragging
+for domain in com.apple.AppleMultitouchTrackpad com.apple.driver.AppleBluetoothMultitouch.trackpad; do
+	defaults write "$domain" TrackpadFourFingerHorizSwipeGesture -int 2
+	defaults write "$domain" TrackpadFourFingerVertSwipeGesture -int 2
+	defaults write "$domain" TrackpadFourFingerPinchGesture -int 2
+	defaults write "$domain" TrackpadThreeFingerHorizSwipeGesture -int 0
+	defaults write "$domain" TrackpadThreeFingerVertSwipeGesture -int 0
+	defaults write "$domain" TrackpadThreeFingerTapGesture -int 0
+done
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.fourFingerHorizSwipeGesture -int 2
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.fourFingerVertSwipeGesture -int 2
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.fourFingerPinchSwipeGesture -int 2
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerHorizSwipeGesture -int 0
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerVertSwipeGesture -int 0
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerTapGesture -int 0
 # Enable full keyboard access for all controls
 # (e.g. enable Tab in modal dialogs)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
@@ -76,6 +127,20 @@ defaults write com.apple.helpviewer DevMode -bool true
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
 defaults write com.apple.universalaccess reduceTransparency -bool true
+defaults write com.apple.universalaccess reduceMotion -bool true
+# Zoom with Option + scroll or the trackpad accessibility gesture
+defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
+defaults write com.apple.universalaccess closeViewScrollWheelModifiersInt -int 524288
+defaults write com.apple.universalaccess closeViewTrackpadGestureZoomEnabled -bool true
+
+# Custom green pointer with a dark outline, enlarged to about 1.23x
+defaults write com.apple.universalaccess mouseDriverCursorSize -float 1.2342215776443481
+defaults write com.apple.universalaccess cursorIsCustomized -bool true
+defaults write com.apple.universalaccess cursorFill -dict \
+	alpha -float 1 red -float 0 green -float 0.9396806359291077 blue -float 0.4967997074127197
+defaults write com.apple.universalaccess cursorOutline -dict \
+	alpha -float 1 red -float 0.04842541881443296 green -float 0.04842541881443296 blue -float 0.04842541881443296
+defaults write NSGlobalDomain CGDisableCursorLocationMagnification -bool true
 
 # Disable smart quotes as they’re annoying when typing code
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
@@ -114,12 +179,30 @@ defaults write com.apple.spaces "spans-displays" -bool "true"
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "{enabled = 1; value = { parameters = ( 65535, 123, 262144 ); type = standard; }; }"
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{enabled = 1; value = { parameters = ( 65535, 124, 262144 ); type = standard; }; }"
 
+# Disable Spotlight and input-source switching shortcuts without resetting others
+for shortcut in 60 61 64 65; do
+	defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add "$shortcut" '<dict><key>enabled</key><false/></dict>'
+done
+
+# Ctrl+1 through Ctrl+7 switch directly to desktops 1 through 7.
+# XML preserves boolean and integer types inside the shortcut dictionaries.
+shortcut=118
+for keycode in 18 19 20 21 23 22 26; do
+	defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add "$shortcut" \
+		"<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>${keycode}</integer><integer>262144</integer></array><key>type</key><string>standard</string></dict></dict>"
+	shortcut=$((shortcut + 1))
+done
+
 defaults write com.apple.Finder AppleShowAllFiles true
 # Show the ~/Library folder
 chflags nohidden ~/Library
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
 defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder ShowStatusBar -bool true
+# Open new Finder windows at the current user's home, not a machine-specific path
+defaults write com.apple.finder NewWindowTarget -string PfHm
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
+defaults write com.apple.finder ShowRecentTags -bool false
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
 defaults write com.apple.finder EmptyTrashSecurely -bool true
 defaults write NSGlobalDomain "AppleShowAllExtensions" -bool "true"
@@ -168,6 +251,10 @@ defaults write com.apple.ActivityMonitor IconType -int 5
 defaults write com.apple.ActivityMonitor ShowCategory -int 0
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
+
+# Style border radius
+defaults write -g NSConvolutionOverride1 -float 4
+defaults write -g NSSplitViewItemSidebarDefaultsToFloatingAppearance -bool false
 
 killall Dock
 killall Finder
