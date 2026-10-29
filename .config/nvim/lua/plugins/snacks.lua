@@ -271,7 +271,17 @@ return {
             ignored = true,
             exclude = { 'node_modules', '.DS_Store', '*.o', '*.d' },
             diagnostics = false,
-            layout = { preset = 'sidebar', preview = false, layout = { position = 'right', width = 50 } },
+            layout = {
+              preset = 'sidebar',
+              preview = false,
+              layout = { position = 'right', width = 50 },
+              config = function(layout)
+                for _, win in ipairs(layout.layout) do
+                  win.border = 'none'
+                  win.title = nil
+                end
+              end,
+            },
             icons = { git = { enabled = false } },
           },
           git_log = history,
