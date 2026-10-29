@@ -102,8 +102,6 @@ return {
       select_map('ic', '@class.inner')
       select_map('aa', '@parameter.outer')
       select_map('ia', '@parameter.inner')
-      select_map('al', '@loop.outer')
-      select_map('il', '@loop.inner')
       select_map('aI', '@conditional.outer')
       select_map('iI', '@conditional.inner')
 

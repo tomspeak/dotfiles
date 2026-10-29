@@ -48,10 +48,6 @@ keymap('v', '>', '>gv', { noremap = true, silent = true })
 -- Vertical split
 keymap('n', '<Leader>v', vim.cmd.vsplit, { silent = true })
 
--- Quicker macro playback
-keymap('n', 'Q', '@qj')
-keymap('x', 'Q', ':norm @q<CR>')
-
 -- themes / colors
 keymap('n', '<Leader>td', ':set background=dark<CR>', { desc = 'Set background dark', noremap = true })
 keymap('n', '<Leader>tl', ':set background=light<CR>', { desc = 'Set background light', noremap = true })
