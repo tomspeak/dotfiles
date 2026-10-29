@@ -45,8 +45,12 @@ return {
     init = function()
       -- Snacks owns directory buffers on nightly, which otherwise uses dir.lua.
       vim.g.loaded_nvim_dir_plugin = 1
+      vim.api.nvim_create_user_command('ZenMode', function()
+        Snacks.zen()
+      end, { desc = 'Toggle Zen mode' })
     end,
     keys = {
+      { '<leader>z', '<cmd>ZenMode<CR>', desc = 'Zen mode' },
       {
         '-',
         function()
@@ -248,6 +252,7 @@ return {
     ---@type snacks.Config
     opts = {
       explorer = { enabled = true },
+      zen = require 'config.zen',
       indent = {
         enabled = true,
         indent = { enabled = false }, -- Draw only the current scope, not every indent level.
