@@ -44,6 +44,13 @@ return {
     lazy = false,
     keys = {
       {
+        '<leader>x',
+        function()
+          Snacks.bufdelete()
+        end,
+        desc = 'Close buffer without closing splits',
+      },
+      {
         '<leader>sf',
         function()
           Snacks.picker.files {

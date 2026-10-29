@@ -21,16 +21,10 @@ end, { desc = 'Clear highlights' })
 keymap('n', ';', ':', { desc = 'Enter command mode', nowait = true })
 keymap('v', ';', ':', { desc = 'Enter command mode', nowait = true })
 keymap('n', '<leader>q', ':q<CR>', { desc = 'Close window' })
-keymap('n', '<leader>x', function()
-  Snacks.bufdelete()
-end, { desc = 'Close buffer without closing splits' })
 
 -- NvimTree
 keymap('n', '_', '<cmd> NvimTreeFindFile <CR>', { desc = 'Nvimtree Find File', nowait = true })
 keymap('n', '-', '<cmd> NvimTreeToggle <CR>', { desc = 'Nvimtree Toggle', nowait = true })
-
--- Aerial
-keymap('n', '<C-_>', '<cmd>AerialToggle<CR>', { desc = 'Aerial Toggle' })
 
 -- Search/Replace under current word
 keymap('n', '<Leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Search & replace word under cursor', silent = false })

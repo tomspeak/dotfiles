@@ -2,6 +2,7 @@ return {
   'stevearc/aerial.nvim',
   cmd = { 'AerialOpen', 'AerialToggle' },
   keys = {
+    { '<C-_>', '<cmd>AerialToggle<CR>', desc = 'Aerial Toggle' },
     {
       '<leader>ss',
       function()
