@@ -248,6 +248,16 @@ return {
     ---@type snacks.Config
     opts = {
       explorer = { enabled = true },
+      indent = {
+        enabled = true,
+        indent = { enabled = false }, -- Draw only the current scope, not every indent level.
+        scope = { enabled = true, only_current = true, char = '│' },
+        animate = { enabled = false },
+      },
+      scope = {
+        enabled = true,
+        treesitter = { enabled = false }, -- Preserve indent-based ii/ai and [i/]i behavior.
+      },
       picker = {
         enabled = true,
         sources = {

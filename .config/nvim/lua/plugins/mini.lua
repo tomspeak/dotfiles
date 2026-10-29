@@ -85,30 +85,6 @@ return {
     end,
   },
   {
-    'echasnovski/mini.indentscope',
-    version = false,
-    event = { 'BufReadPost', 'BufNewFile' },
-    opts = {
-      draw = {
-        delay = 0,
-      },
-      symbol = '│',
-      options = { try_as_border = true },
-    },
-    init = function()
-      vim.api.nvim_create_autocmd('FileType', {
-        pattern = {
-          'help',
-          'lazy',
-          'NvimTree',
-        },
-        callback = function()
-          vim.b.miniindentscope_disable = true
-        end,
-      })
-    end,
-  },
-  {
     'echasnovski/mini.surround',
     version = false,
     event = { 'BufReadPost', 'BufNewFile' },
