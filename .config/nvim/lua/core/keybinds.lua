@@ -22,10 +22,6 @@ keymap('n', ';', ':', { desc = 'Enter command mode', nowait = true })
 keymap('v', ';', ':', { desc = 'Enter command mode', nowait = true })
 keymap('n', '<leader>q', ':q<CR>', { desc = 'Close window' })
 
--- NvimTree
-keymap('n', '_', '<cmd> NvimTreeFindFile <CR>', { desc = 'Nvimtree Find File', nowait = true })
-keymap('n', '-', '<cmd> NvimTreeToggle <CR>', { desc = 'Nvimtree Toggle', nowait = true })
-
 -- Search/Replace under current word
 keymap('n', '<Leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Search & replace word under cursor', silent = false })
 keymap(

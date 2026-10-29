@@ -41,7 +41,13 @@ return {
     priority = 1000,
     opts = {
       header = header,
-      items = { name = '', action = ':NvimTreeOpen', section = '' },
+      items = {
+        name = '',
+        action = function()
+          Snacks.explorer()
+        end,
+        section = '',
+      },
       footer = '',
     },
   },

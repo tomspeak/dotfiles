@@ -42,7 +42,32 @@ return {
     'folke/snacks.nvim',
     priority = 1000,
     lazy = false,
+    init = function()
+      -- Snacks owns directory buffers on nightly, which otherwise uses dir.lua.
+      vim.g.loaded_nvim_dir_plugin = 1
+    end,
     keys = {
+      {
+        '-',
+        function()
+          local explorer = Snacks.picker.get({ source = 'explorer' })[1]
+          if explorer then
+            explorer:close()
+          else
+            Snacks.explorer()
+          end
+        end,
+        desc = 'Toggle file explorer',
+        nowait = true,
+      },
+      {
+        '_',
+        function()
+          Snacks.explorer.reveal():focus()
+        end,
+        desc = 'Reveal current file',
+        nowait = true,
+      },
       {
         '<leader>x',
         function()
@@ -222,9 +247,18 @@ return {
     },
     ---@type snacks.Config
     opts = {
+      explorer = { enabled = true },
       picker = {
         enabled = true,
         sources = {
+          explorer = {
+            hidden = true,
+            ignored = true,
+            exclude = { 'node_modules', '.DS_Store', '*.o', '*.d' },
+            diagnostics = false,
+            layout = { preset = 'sidebar', preview = false, layout = { position = 'right', width = 50 } },
+            icons = { git = { enabled = false } },
+          },
           git_log = history,
           git_log_file = history,
         },
